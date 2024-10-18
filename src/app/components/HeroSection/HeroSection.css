@@ -1,0 +1,68 @@
+.searchbox {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    position: absolute; /* Position it over the video */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Offset by half its size */
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white background */
+    border-radius: 5px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+}
+
+.destination-container,
+.dates-container,
+.occupancy-container {
+    margin-right: 10px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px; /* Adjust width as needed */
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button#clear {
+    background-color: red;
+}
+
+button#clear:hover {
+    background-color: darkred;
+}
+
+.date-display {
+    background-color: #f0f0f0; /* Light background for date buttons */
+    color: #333; /* Dark text color */
+}
+
+.date-display:hover {
+    background-color: #e0e0e0; /* Darker on hover */
+}
+
+#search-btn {
+    background-color: #28a745; /* Green for search */
+}
+
+#search-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.justify-center1{
+    margin-top: 10vh !important;
+
+}

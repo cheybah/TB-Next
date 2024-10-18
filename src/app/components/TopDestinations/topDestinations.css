@@ -1,0 +1,139 @@
+
+.hidden1{
+opacity: 0;
+filter: blurr (5px);
+transform: translateX(-100px);
+transition : all 1s; 
+}
+
+
+.show{
+opacity: 1;
+filter: blurr (0px);
+transform: translateX(0px);
+}
+
+@media(prefers-reduced-motion){  //to not loop the animation
+.hidden1{
+    transition : none ;
+}
+}
+
+/* Ensure all destination cards have the same dimensions and layout */
+.destination-card {
+background-color: white;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+border-radius: 12px;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.destination-card:hover {
+transform: scale(1.05);
+box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Image container with fixed size */
+.image-container {
+position: relative;
+height: 200px;
+width: 100%;
+overflow: hidden;
+}
+
+.destination-image {
+object-fit: cover;
+width: 100%;
+height: 100%;
+}
+
+/* Discount badge styling */
+.discount-badge {
+position: absolute;
+top: 8px;
+left: 8px;
+background-color: black;
+color: white;
+padding: 4px 8px;
+border-radius: 9999px;
+font-size: 0.75rem;
+font-weight: 500;
+}
+
+/* Content container with padding */
+.content-container {
+padding: 16px 24px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+flex-grow: 1;
+}
+
+/* Title styling */
+.destination-title {
+font-size: 1.25rem;
+font-weight: 600;
+color: #1e293b; /* Slate-900 */
+margin-bottom: 8px;
+}
+
+/* Price container for aligned prices */
+.price-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-top: 8px;
+margin-bottom: 16px;
+}
+
+.current-price {
+font-size: 1.5rem;
+font-weight: 700;
+color: #1e293b;
+margin-right: 5px;
+}
+
+.original-price {
+font-size: 0.875rem;    
+text-decoration: line-through;
+color: #64748b; /* Slate-500 */
+}
+
+/* Rating container with aligned stars */
+.rating-container {
+display: flex;
+align-items: center;
+}
+
+.star-icon {
+width: 20px;
+height: 20px;
+}
+
+.rating-badge {
+background-color: #fef08a; /* Yellow-200 */
+padding: 2px 6px;
+border-radius: 4px;
+font-size: 0.75rem;
+margin-left: 8px;
+}
+
+/* Reserve button styling */
+.reserve-button {
+background-color: #7EB118;
+color: white;
+padding: 12px;
+width: 100%;
+border-radius: 8px;
+font-size: 1rem;
+transition: background-color 0.3s ease;
+}
+
+.reserve-button:hover {
+background-color: white; /* Blue-700 */
+color: #7EB118; 
+border : solid 2px #7EB118;
+}

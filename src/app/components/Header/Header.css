@@ -1,0 +1,28 @@
+/* custom.css */
+.icon-hover {
+    transition: transform 0.3s ease !important;
+}
+
+.icon-hover:hover {
+    transform: translateX(-10px) !important;
+}
+
+.icon-hover1 {
+    transition: transform 0.3s ease !important;
+}
+
+.icon-hover1:hover {
+    transform: translateX(10px) !important;
+}
+
+@media (min-width: 1024px) {
+    .lg\:px-8 {
+        padding-left: 5rem !important;
+        padding-right: 5rem !important;
+  }
+  }
+
+  .mt-31{
+        margin-top: 1rem !important;
+        z-index: 50;
+  }

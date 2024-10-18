@@ -1,0 +1,41 @@
+.splash-screen {
+position: relative;
+overflow: hidden;
+}
+
+/* Floating logo animation */
+.floating-logo {
+width: 300px; /* Adjust logo size */
+height: 300px;
+animation: floatIn 2.5s ease-in-out forwards, floatOut 1.5s ease-in-out 2.5s forwards;
+}
+
+
+@keyframes floatIn {
+0% {
+transform: translateY(-50px); 
+opacity: 0; 
+}
+75% {
+transform: translateY(0); 
+opacity: 1; 
+}
+100% {
+transform: translateY(0); 
+opacity: 1; 
+}
+}
+
+
+/* Keyframes for floating out to the right, fading away */
+@keyframes floatOut {
+0% {
+    transform: translateY(0) translateX(0);
+    opacity: 1;
+}
+100% {
+    transform: translateX(50px); /* Move slightly to the right */
+    opacity: 0; 
+}
+}
+
