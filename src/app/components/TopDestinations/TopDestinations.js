@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState, useRef } from "react";
 import './topDestinations.css';
 
@@ -63,6 +65,7 @@ const TopDestinations = () => {
 const [isVisible, setIsVisible] = useState(false);
 const sectionRef = useRef(null);
 
+
 useEffect(() => {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -101,6 +104,10 @@ return () => {
 if (sectionRef.current) observer.unobserve(sectionRef.current);
 };
 }, []);
+
+const handleNavigate = (id) => {
+    router.push(`/HotelDetails?id=${id}`); // Navigate to the details page with the hotel ID
+};
 
 return (
 <section ref={sectionRef} className="container mx-auto py-12 px-6">

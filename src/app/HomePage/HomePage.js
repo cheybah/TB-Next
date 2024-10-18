@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Header  from "../components/Header/Header";
 import HeroSection from "../components/HeroSection/HeroSection";
 import Footer from "../components/Footer/Footer";
-import '../pages/SplashScreen.css';
+import './SplashScreen.css';
 import Carousel from "../components/Carousel/Carousel";
 import Separator from "../components/Separator/Separator";
 import Slides from "../components/Slides/Slides";
