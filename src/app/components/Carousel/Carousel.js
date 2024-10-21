@@ -19,14 +19,11 @@ const Carousel = () => {
         });
     
         const hiddenElements = document.querySelectorAll('.hidden1');
-        const hiddenElements1 = document.querySelectorAll('.hidden2');
         hiddenElements.forEach((element) => observer.observe(element));
-        hiddenElements1.forEach((element) => observer.observe(element));
     
         // Cleanup the observer on component unmount
         return () => {
             hiddenElements.forEach((element) => observer.unobserve(element));
-            hiddenElements1.forEach((element) => observer.unobserve(element));
         };
     }, []); // Empty dependency array to run only on mount
 return (

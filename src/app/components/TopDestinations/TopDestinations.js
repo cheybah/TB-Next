@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 import './topDestinations.css';
 
 const destinations = [
@@ -64,6 +65,8 @@ const destinations = [
 const TopDestinations = () => {
 const [isVisible, setIsVisible] = useState(false);
 const sectionRef = useRef(null);
+const router = useRouter();
+
 
 
 useEffect(() => {
@@ -84,7 +87,13 @@ hiddenElements.forEach((element) => observer.observe(element));
 return () => {
     hiddenElements.forEach((element) => observer.unobserve(element));
 };
-}, []); // Empty dependency array to run only on mount
+}, []); 
+
+const handleNavigate = (destination) => {
+    const query = new URLSearchParams(destination).toString();
+    router.push(`/HotelDetails?${query}`);
+};
+
 
 // Fade-in animation on scroll using Intersection Observer
 useEffect(() => {
@@ -105,9 +114,6 @@ if (sectionRef.current) observer.unobserve(sectionRef.current);
 };
 }, []);
 
-const handleNavigate = (id) => {
-    router.push(`/HotelDetails?id=${id}`); // Navigate to the details page with the hotel ID
-};
 
 return (
 <section ref={sectionRef} className="container mx-auto py-12 px-6">
@@ -121,6 +127,7 @@ Les Imbattables du Moment
     className={`destination-card transform transition-all duration-1000 ease-out ${
         isVisible ? "opacity-100" : "opacity-0"
     }`}
+    onClick={() => handleNavigate(destination)} //onClick event to get destination by id 
     >
     <a className="relative image-container" href="#">
         <img
