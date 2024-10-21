@@ -1,0 +1,24 @@
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '../Footer/footer.css';
+
+.copyright-area {
+    background: #202020;
+    padding: 25px 0;
+    position: relative;
+
+}
+
+.copyright-text p {
+    margin: 0;
+    font-size: 14px;
+    color: #878787;
+}
+
+.copyright-text p a {
+    color: #85B919;
+}

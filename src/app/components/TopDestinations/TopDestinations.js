@@ -15,6 +15,8 @@ const destinations = [
     originalPrice: "699 DT",
     rating: 5,
     date: "Available from 20th Oct",
+    tripAdvisor: 4,
+    address :"Zone Touristique Sidi Bakour, 240-4116,  Djerba"
 },
 {   
     id: 2,
@@ -26,6 +28,10 @@ const destinations = [
     originalPrice: "349 DT",
     rating: 4,
     date: "Available from 25th Oct",
+    tripAdvisor: 5,
+    address :"Zone Touristique Sidi Bakour, 240-4116,  Djerba"
+
+
 },
 {   
     id: 3,
@@ -37,6 +43,10 @@ const destinations = [
     originalPrice: "499 DT",
     rating: 4,
     date: "Available from 25th Oct",
+    tripAdvisor: 3,
+    address :"Zone Touristique Sidi Bakour, 240-4116,  Djerba"
+
+
 },
 {   
     id: 4,
@@ -48,6 +58,10 @@ const destinations = [
     originalPrice: "499 DT",
     rating: 5,
     date: "Available from 25th Oct",
+    tripAdvisor: 4,
+    address :"Zone Touristique Sidi Bakour, 240-4116,  Djerba"
+
+
 },
 {   
     id: 5,
@@ -59,6 +73,10 @@ const destinations = [
     originalPrice: "129 DT",
     rating: 4,
     date: "Available from 25th Oct",
+    tripAdvisor: 4,
+    address :"Zone Touristique Sidi Bakour, 240-4116,  Djerba"
+
+
 }
 ];
 
@@ -113,6 +131,7 @@ return () => {
 if (sectionRef.current) observer.unobserve(sectionRef.current);
 };
 }, []);
+
 
 
 return (

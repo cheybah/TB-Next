@@ -28,12 +28,22 @@ return (
 const TestComponent = () => {
 const [loading, setLoading] = useState(true);
 
-// Simulate loading effect for 3 seconds
 useEffect(() => {
-    const timer = setTimeout(() => {
-    setLoading(false);
-    }, 3500);
-    return () => clearTimeout(timer);
+    // Check if the splash screen has been shown before using sessionStorage
+    const hasSeenSplash = sessionStorage.getItem("hasSeenSplash");
+
+    if (hasSeenSplash) {
+        // If the splash screen was already shown, skip the loading state
+        setLoading(false);
+    } else {
+        // Otherwise, show the splash screen for 3.5 seconds
+        const timer = setTimeout(() => {
+            setLoading(false);
+            sessionStorage.setItem("hasSeenSplash", "true"); // Mark as shown
+        }, 3500);
+
+        return () => clearTimeout(timer);
+    }
 }, []);
 
 return (

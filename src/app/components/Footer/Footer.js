@@ -3,9 +3,11 @@ import './Footer.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTelegram, faYoutube, faInstagram} from '@fortawesome/free-brands-svg-icons';
 import { faMapPin, faPhone , faEnvelope, } from '@fortawesome/free-solid-svg-icons';
+import Copyright from '../Copyright/Copyright';
 
 const Footer = () => {
     return (
+        <>
         <div>
             <footer className="footer-section">
                 <div className="container-fluid">
@@ -15,8 +17,8 @@ const Footer = () => {
                                 <div className="single-cta">
                                 <FontAwesomeIcon icon={faMapPin} className="text-lime-500" size='2x' />
                                                                         <div className="cta-text">
-                                        <h4>Find us</h4>
-                                        <span>1010 Avenue, sw 54321, chandigarh</span>
+                                        <h4>Location</h4>
+                                        <span>00 Houmt Souk, Djerba, Tunisie</span>
                                     </div>
                                 </div>
                             </div>
@@ -24,16 +26,16 @@ const Footer = () => {
                                 <div className="single-cta">
                                 <FontAwesomeIcon icon={faPhone}  className="text-lime-500" size='2x' />
                                     <div className="cta-text">
-                                        <h4>Call us</h4>
-                                        <span>9876543210 0</span>
+                                        <h4>Appelez-nous</h4>
+                                        <span>71 124 124</span>
                                     </div>
                                 </div>
                             </div>
                             <div className="col-xl-4 col-md-4 mb-30">
                                 <div className="single-cta">
                                 <FontAwesomeIcon icon={faEnvelope}  className="text-lime-500" size='2x'/>                                    <div className="cta-text">
-                                        <h4>Mail us</h4>
-                                        <span>mail@info.com</span>
+                                        <h4>Envoyez-nous un mail</h4>
+                                        <span>tunisiebooking@info.com</span>
                                     </div>
                                 </div>
                             </div>
@@ -102,31 +104,10 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-                <div className="copyright-area">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-xl-6 col-lg-6 text-center text-lg-left">
-                                <div className="copyright-text">
-                                    <p>Copyright © {new Date().getFullYear()}, All Right Reserved <a href="">TunisieBooking
-                                </a></p>
-                                </div>
-                            </div>
-                            <div className="col-xl-6 col-lg-6 d-none d-lg-block text-right">
-                                <div className="footer-menu">
-                                    <ul>
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="#">Terms</a></li>
-                                        <li><a href="#">Privacy</a></li>
-                                        <li><a href="#">Policy</a></li>
-                                        <li><a href="#">Contact</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </footer>
         </div>
+    <Copyright />
+</>
     );
 };
 
