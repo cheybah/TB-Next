@@ -4,6 +4,11 @@ import Header from "../components/Header/Header";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Copyright from "../components/Copyright/Copyright";
+import React from 'react';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+
 
 const HotelDetails = () => {
     const searchParams = useSearchParams();
@@ -37,7 +42,8 @@ const HotelDetails = () => {
             originalPrice: searchParams.get("originalPrice"),
             rating: searchParams.get("rating"),
             date: searchParams.get("date"),
-            tripAdvisor: parseInt(searchParams.get("tripAdvisor"), 10) // Convert to number
+            tripAdvisor: parseInt(searchParams.get("tripAdvisor"), 10) ,// Convert to number
+            address: searchParams.get("address"),
         };
 
         console.log(
@@ -47,10 +53,17 @@ const HotelDetails = () => {
         setHotel(hotelData);
     }, [searchParams]);
 
-    if (!hotel) {
-        return <div>Loading...</div>;
-    }
-    console.log("this is the hotel object",hotel);  // Check if `tripAdvisor` is present
+if (!hotel) {
+    return (
+        <DotLottieReact
+            src="/loader.json"
+            loop
+            autoplay
+        />
+    );
+}
+
+console.log("this is the hotel object", hotel);  // Check if `tripAdvisor` is present
 
 
     return (
@@ -70,6 +83,12 @@ const HotelDetails = () => {
                             <li className="text-left">
                                 <span className="text-sm font-medium text-gray-800">
                                     Hotel Details
+                                </span>
+                            </li>
+                            <li className="text-left mx-2 text-gray-400">/</li>
+                            <li className="text-left">
+                                <span className="text-sm font-medium text-gray-800">
+                                    {hotel.name}
                                 </span>
                             </li>
                         </ol>
@@ -105,9 +124,42 @@ const HotelDetails = () => {
                             <span className="font-bold" style={{marginLeft: "5px"}}>{getRatingDescription(hotel.tripAdvisor)}</span>
                         </span>
                         </div>
+                        <div className="flex items center">
+                        <FontAwesomeIcon icon={faLocationDot} style={{marginTop:"7px"}} />
+                        <p className="mt-2 text-sm text-zinc-600" style={{marginLeft:"7px"}}>{hotel.address}</p> {/* Add a subtitle */}
+                        </div>
                     <div className="absolute inset-0 flex flex-col justify-center items-center">
-            <p className="mt-2 text-lg text-grey">{hotel.address}</p> {/* Add a subtitle */}
         </div>
+                    <div class="w-2/3 h-auto">
+            <div class="relative right-0">
+                <ul class="relative flex flex-wrap px-1.5 py-1.5 list-none rounded-md bg-slate-100" data-tabs="tabs" role="list">
+                <li class="z-30 flex-auto text-center">
+                    <a class="z-30 flex items-center justify-center w-full px-0 py-2 text-sm mb-0 transition-all ease-in-out border-0 rounded-md cursor-pointer text-slate-600 bg-inherit"
+                    data-tab-target="" role="tab" aria-selected="true">
+                    Photos
+                    </a>
+                </li>
+                <li class="z-30 flex-auto text-center">
+                    <a class="z-30 flex items-center justify-center w-full px-0 py-2 mb-0 text-sm transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-600 bg-inherit"
+                    data-tab-target="" role="tab" aria-selected="false">
+                    Présentation
+                    </a>
+                </li>
+                <li class="z-30 flex-auto text-center">
+                    <a class="z-30 flex items-center justify-center w-full px-0 py-2 text-sm mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
+                    data-tab-target="" role="tab" aria-selected="false">
+                    Equipements
+                    </a>
+                </li>
+                <li class="z-30 flex-auto text-center">
+                    <a class="z-30 flex items-center justify-center w-full px-0 py-2 text-sm mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
+                    data-tab-target="" role="tab" aria-selected="false">
+                    Avis
+                    </a>
+                </li>
+                </ul>
+            </div>
+            </div> 
         <img
             className="w-2/3 h-auto rounded-lg" style={{marginTop: "20px"}} // Set width to two-thirds and auto height
             src={hotel.image}
