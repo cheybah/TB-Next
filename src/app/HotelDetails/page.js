@@ -2,11 +2,11 @@
 
 import Header from "../components/Header/Header";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Copyright from "../components/Copyright/Copyright";
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCommentDots, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faCommentDots, faLocationDot, faQuoteLeft, faQuoteRight, faWifi } from "@fortawesome/free-solid-svg-icons";
 import {
 Tabs,
 TabsHeader,
@@ -18,6 +18,8 @@ const HotelDetails = () => {
     
     const searchParams = useSearchParams();
     const [hotel, setHotel] = useState(null);
+
+
     const getRatingDescription = (tripAdvisor) => {
         switch (tripAdvisor) {
             case 5:
@@ -36,11 +38,22 @@ const HotelDetails = () => {
     };
     
     const data = [
-        { label: "Photos", value: "photos" },
-        { label: "Présentation", value: "presentation" },
-        { label: "Equipements", value: "equipement" },
-        { label: "Avis", value: "avis" },
+        { label: "Photos", value: "photos"  },
+        { label: "Présentation", value: "presentation", id: "presentation" },
+        { label: "Equipements", value: "equipement", id: "equipement" },
+        { label: "Avis", value: "avis" , id: "avis"},
     ];
+
+const scrollToSection = (id) => {
+    console.log("Scrolling to section:", id);
+    const section = document.getElementById(id);
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+    };
+
+
+    
 
     useEffect(() => {
         const hotelData = {
@@ -55,8 +68,8 @@ const HotelDetails = () => {
             date: searchParams.get("date"),
             tripAdvisor: parseInt(searchParams.get("tripAdvisor"), 10) ,// Convert to number
             address: searchParams.get("address"),
+            services: JSON.parse(searchParams.get("services")) // Correctly parse the JSON string
         };
-
         console.log(
             "TripAdvisor rating description:",
             getRatingDescription(hotelData.tripAdvisor)
@@ -70,7 +83,6 @@ if (!hotel) {
     );
 }
 
-console.log("this is the hotel object", hotel);  // Check if `tripAdvisor` is present
 
 
     return (
@@ -140,8 +152,8 @@ console.log("this is the hotel object", hotel);  // Check if `tripAdvisor` is pr
                     <div className="w-2/3 h-auto">
                     <Tabs value="photos">
                     <TabsHeader>
-                        {data.map(({ label, value }) => (
-                        <Tab key={value} value={value}>
+                        {data.map(({ label, value, id }) => (
+                        <Tab key={value} value={value} onClick={() => scrollToSection(id)}>
                             {label}
                         </Tab>
                         ))}
@@ -154,12 +166,43 @@ console.log("this is the hotel object", hotel);  // Check if `tripAdvisor` is pr
             src={hotel.image}
             alt={`Hotel Image ${hotel.id}`}
         />
-  <div className="w-1/3 px-4 text-center">
-  <div className="flex space-x-4">
-  <img src="/avis.svg"></img>
-    <div className="text-xl font-medium">Avis Voyageurs</div>
-    </div>
-  </div>
+        <div className="w-1/3 px-4 text-center" style={{marginTop: "3%"}}>
+        <div className="flex space-x-4">
+        <img src="/avis.svg"></img>
+            <div className="text-xl font-medium">Avis Voyageurs</div>
+            </div>
+            <div className="relative my-6 flex-1 rounded-md p-4" style={{backgroundColor: "#F4F5F7"}}>
+    <div className="absolute left-0 top-0 h-4 w-4 -translate-y-1/2 translate-x-5 rotate-45 transform rounded-sm" style={{backgroundColor: "#F4F5F7" , fontSize: "16px"}}></div>
+    <FontAwesomeIcon icon={faQuoteLeft} style={{marginRight: "2%"}}/>
+	Un bon service, un bon personnel mais a revoir quelques points...
+    <FontAwesomeIcon icon={faQuoteRight} style={{marginLeft: "2%"}} />
+    <div><a href="#">Lire tous les avis</a></div>
+            </div>
+            <div className="text-xl font-medium text-left">Principales Services</div>
+            <div className="relative">
+            {hotel.services.map((service, index) => (
+                <button
+                    key={index}
+                    className="bg-transparent hover:bg-gray-300 text-black font-normal 
+                            hover:text-white py-2 px-4 border border-gray-700 
+                            hover:border-transparent rounded-full mr-2 mt-[4%] 
+                            cursor-pointer relative"
+                >
+                    <div className="flex items-center">
+                        <img src={service.icon} alt={service.name} className="mr-2 w-[20px]" />
+                        {service.name}
+                    </div>
+                </button>
+            ))}
+
+            <div className="text-left mt-4 cursor-pointer relative">
+                <a href="#" className="underline hover:no-underline text-blue-500">
+                    Voir tous les services
+                </a>
+            </div>
+        </div>
+
+        </div>
         </div>
     </div>
     <div className="lg:grid lg:grid-cols-5 gap-16">
@@ -176,11 +219,48 @@ console.log("this is the hotel object", hotel);  // Check if `tripAdvisor` is pr
                         </div>
                     </div>
                     </div>
+
+                    {/*this is the start of the presentation card*/}
+                    <section id="presentation">
+                    <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6"> 
+                    <div className="relative overflow-hidden rounded-lg">
+                    <div className="flex items-center justify-between">
+                    <div className="text-left mt-4">
+                    <h2 className="text-2xl font-bold"> Présentation</h2>
+                    <div className="w-[5rem] h-[4px] bg-black mt-2"></div>
+                    <h3 className="text-left text-lg font-semibold mt-4">Infos Pratiques :</h3>
+                    <p>Pour découvrir et profiter à bon escient de tous les vestiges de Tunis, Vous devez choisir une ville où vous allez axer votre voyage de luxe.
+                        <br /> Dans ce cas, pourquoi ne pas opter pour Hammamet ? C'est l'une des plus belles villes de la Tunisie.
+                    </p>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                </section>
+
+                    {/*this is the start of the equipements card*/}
+                    <section id="equipement">
+                    <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6"> 
+                    <div className="relative overflow-hidden rounded-lg">
+                    <div className="flex items-center justify-between">
+                    <div className="text-left mt-4">
+                    <h2 className="text-2xl font-bold"> Equipements</h2>
+                    <div className="w-[5rem] h-[4px] bg-black mt-2"></div>
+                    <h3 className="text-left text-lg font-semibold mt-4">Infos Pratiques :</h3>
+                    <p>Pour découvrir et profiter à bon escient de tous les vestiges de Tunis, Vous devez choisir une ville où vous allez axer votre voyage de luxe.
+                        <br /> Dans ce cas, pourquoi ne pas opter pour Hammamet ? C'est l'une des plus belles villes de la Tunisie.
+                    </p>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                </section>
                 </div>
             </section>
             </main>
             <Copyright />
         </div>
+
         
     );
 };

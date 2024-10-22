@@ -16,7 +16,13 @@ const destinations = [
     rating: 5,
     date: "Available from 20th Oct",
     tripAdvisor: 4,
-    address :"Zone Touristique Sidi Bakour, 240-4116,  Djerba"
+    address :"Zone Touristique Sidi Bakour, 240-4116,  Djerba",
+    services: [
+        { name: "WiFi", icon: "/wifi.svg" },
+        { name: "Pool", icon: "/piscine.svg" },
+        { name: "Restaurant", icon: "/restauration.svg" },
+        { name: "Parking", icon: "/parking.svg" }
+    ]  
 },
 {   
     id: 2,
@@ -29,9 +35,12 @@ const destinations = [
     rating: 4,
     date: "Available from 25th Oct",
     tripAdvisor: 5,
-    address :"Zone Touristique Sidi Bakour, 240-4116,  Djerba"
-
-
+    address :"Zone Touristique Sidi Bakour, 240-4116,  Djerba",
+    services: [
+        { name: "WiFi", icon: "/wifi.svg" },
+        { name: "Pool", icon: "/piscine.svg" },
+        { name: "Parking", icon: "/parking.svg" }
+    ]
 },
 {   
     id: 3,
@@ -44,9 +53,10 @@ const destinations = [
     rating: 4,
     date: "Available from 25th Oct",
     tripAdvisor: 3,
-    address :"Zone Touristique Sidi Bakour, 240-4116,  Djerba"
+    address :"Zone Touristique Sidi Bakour, 240-4116,  Djerba",
+    services: [
 
-
+    ]
 },
 {   
     id: 4,
@@ -59,9 +69,10 @@ const destinations = [
     rating: 5,
     date: "Available from 25th Oct",
     tripAdvisor: 4,
-    address :"Zone Touristique Sidi Bakour, 240-4116,  Djerba"
-
-
+    address :"Zone Touristique Sidi Bakour, 240-4116,  Djerba",
+    services: [
+        { name: "Parking", icon: "/parking.svg" }
+    ]
 },
 {   
     id: 5,
@@ -74,10 +85,12 @@ const destinations = [
     rating: 4,
     date: "Available from 25th Oct",
     tripAdvisor: 4,
-    address :"Zone Touristique Sidi Bakour, 240-4116,  Djerba"
-
-
-}
+    address :"Zone Touristique Sidi Bakour, 240-4116,  Djerba",
+    services: [
+        { name: "WiFi", icon: "/wifi.svg" },
+        { name: "Parking", icon: "/parking.svg" }
+    ]
+},
 ];
 
 const TopDestinations = () => {
@@ -108,9 +121,15 @@ return () => {
 }, []); 
 
 const handleNavigate = (destination) => {
+    // Stringify the services array
+    if (destination.services) {
+        destination.services = JSON.stringify(destination.services);
+    }
+    
     const query = new URLSearchParams(destination).toString();
     router.push(`/HotelDetails?${query}`);
 };
+
 
 
 // Fade-in animation on scroll using Intersection Observer
