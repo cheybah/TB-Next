@@ -5,12 +5,17 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Copyright from "../components/Copyright/Copyright";
 import React from 'react';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faCommentDots, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import {
+Tabs,
+TabsHeader,
+Tab,
+} from "@material-tailwind/react";
 
 
 const HotelDetails = () => {
+    
     const searchParams = useSearchParams();
     const [hotel, setHotel] = useState(null);
     const getRatingDescription = (tripAdvisor) => {
@@ -30,6 +35,12 @@ const HotelDetails = () => {
         }
     };
     
+    const data = [
+        { label: "Photos", value: "photos" },
+        { label: "Présentation", value: "presentation" },
+        { label: "Equipements", value: "equipement" },
+        { label: "Avis", value: "avis" },
+    ];
 
     useEffect(() => {
         const hotelData = {
@@ -55,11 +66,7 @@ const HotelDetails = () => {
 
 if (!hotel) {
     return (
-        <DotLottieReact
-            src="/loader.json"
-            loop
-            autoplay
-        />
+<div>Loading...</div>
     );
 }
 
@@ -97,7 +104,7 @@ console.log("this is the hotel object", hotel);  // Check if `tripAdvisor` is pr
                     <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg"> 
                     <div className="mt-8 relative overflow-hidden rounded-lg">
                     <div className="flex items-center justify-between">
-                    <h2 className="text-3xl font-bold  " style={{marginRight: "10px"}}>{hotel.name}</h2>
+                    <div className="text-4xl font-bold  " style={{marginRight: "10px"}}>{hotel.name}</div>
                             <div className="rating-container mt-4 flex items-center" style={{marginBottom:"1.5rem", marginRight: "auto"}}>
                                 {[...Array(5)].map((_, index) => (
                                     <svg
@@ -125,46 +132,35 @@ console.log("this is the hotel object", hotel);  // Check if `tripAdvisor` is pr
                         </span>
                         </div>
                         <div className="flex items center">
-                        <FontAwesomeIcon icon={faLocationDot} style={{marginTop:"7px"}} />
-                        <p className="mt-2 text-sm text-zinc-600" style={{marginLeft:"7px"}}>{hotel.address}</p> {/* Add a subtitle */}
+                        <FontAwesomeIcon icon={faLocationDot} style={{marginTop:"7px", color: "#7E8389"}} />
+                        <p className="mt-2 text-sm text-zinc-600" style={{marginLeft:"7px" , color: "#7E8389"}}>{hotel.address}</p> {/* Add a subtitle */}
                         </div>
                     <div className="absolute inset-0 flex flex-col justify-center items-center">
-        </div>
-                    <div class="w-2/3 h-auto">
-            <div class="relative right-0">
-                <ul class="relative flex flex-wrap px-1.5 py-1.5 list-none rounded-md bg-slate-100" data-tabs="tabs" role="list">
-                <li class="z-30 flex-auto text-center">
-                    <a class="z-30 flex items-center justify-center w-full px-0 py-2 text-sm mb-0 transition-all ease-in-out border-0 rounded-md cursor-pointer text-slate-600 bg-inherit"
-                    data-tab-target="" role="tab" aria-selected="true">
-                    Photos
-                    </a>
-                </li>
-                <li class="z-30 flex-auto text-center">
-                    <a class="z-30 flex items-center justify-center w-full px-0 py-2 mb-0 text-sm transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-600 bg-inherit"
-                    data-tab-target="" role="tab" aria-selected="false">
-                    Présentation
-                    </a>
-                </li>
-                <li class="z-30 flex-auto text-center">
-                    <a class="z-30 flex items-center justify-center w-full px-0 py-2 text-sm mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
-                    data-tab-target="" role="tab" aria-selected="false">
-                    Equipements
-                    </a>
-                </li>
-                <li class="z-30 flex-auto text-center">
-                    <a class="z-30 flex items-center justify-center w-full px-0 py-2 text-sm mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
-                    data-tab-target="" role="tab" aria-selected="false">
-                    Avis
-                    </a>
-                </li>
-                </ul>
-            </div>
+                    </div>
+                    <div className="w-2/3 h-auto">
+                    <Tabs value="photos">
+                    <TabsHeader>
+                        {data.map(({ label, value }) => (
+                        <Tab key={value} value={value}>
+                            {label}
+                        </Tab>
+                        ))}
+                    </TabsHeader>
+                    </Tabs>
             </div> 
+            <div className="flex w-full">
         <img
             className="w-2/3 h-auto rounded-lg" style={{marginTop: "20px"}} // Set width to two-thirds and auto height
             src={hotel.image}
             alt={`Hotel Image ${hotel.id}`}
         />
+  <div className="w-1/3 px-4 text-center">
+  <div className="flex space-x-4">
+  <img src="/avis.svg"></img>
+    <div className="text-xl font-medium">Avis Voyageurs</div>
+    </div>
+  </div>
+        </div>
     </div>
     <div className="lg:grid lg:grid-cols-5 gap-16">
         <div className="lg:col-span-3">

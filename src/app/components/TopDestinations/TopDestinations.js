@@ -148,7 +148,7 @@ Les Imbattables du Moment
     }`}
     onClick={() => handleNavigate(destination)} //onClick event to get destination by id 
     >
-    <a className="relative image-container" href="#">
+    <a className="relative image-container">
         <img
         className="destination-image"
         src={destination.image}
