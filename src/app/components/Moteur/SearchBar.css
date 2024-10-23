@@ -1,0 +1,42 @@
+.div_form {
+    position: relative;
+    left: -2px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.34);
+    border-radius: 8px;
+    z-index: 9;
+    /* Remove height for mobile */
+    min-height: unset; /* Ensures no minimum height on mobile */
+    height: auto; /* Allows the height to adjust based on content on mobile */
+}
+
+.v148_1172 {
+    position: relative;
+    height: 60px;
+    left: 0px;
+    top: 1px;
+    background: rgba(255, 255, 255, 1);
+    opacity: 1;
+    border-bottom: 1px solid #DDDDDD;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    /*overflow-y: hidden;*/
+}
+
+.custom-border-hotel {
+    border-bottom: thick solid #ff0097;
+}
+
+.custom-border:hover {
+    border-bottom: thick solid #262626;
+}
+
+.search_destination:hover {
+    border: 2px solid #ff0097;
+}
+
+@media (min-width: 767px) {
+    .div_form {
+        height: 204px; /* Only define height for larger screens */
+    }
+}

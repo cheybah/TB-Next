@@ -10,6 +10,7 @@ import Separator from "../components/Separator/Separator";
 import Slides from "../components/Slides/Slides";
 import TopDestinations from "../components/TopDestinations/TopDestinations";
 import AdTb from "../components/AdTB/AdTB";
+import BackgroundSection from "../components/Moteur/BackgroundSection";
 
 
 // Splash Screen Component
@@ -55,7 +56,8 @@ return (
         // Main content will be shown after loading
         <>
         <Header />
-        <HeroSection />
+        {/*<HeroSection />*/}
+        <BackgroundSection />
         <Slides />
         <Separator />
         <Carousel />
