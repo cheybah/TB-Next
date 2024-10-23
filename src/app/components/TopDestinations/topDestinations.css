@@ -13,7 +13,7 @@ filter: blurr (0px);
 transform: translateX(0px);
 }
 
-@media(prefers-reduced-motion){  //to not loop the animation
+@media(prefers-reduced-motion){  /*to not loop the animation*/
 .hidden1{
     transition : none ;
 }
