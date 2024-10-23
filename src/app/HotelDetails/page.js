@@ -2,26 +2,37 @@
 
 import Header from "../components/Header/Header";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Copyright from "../components/Copyright/Copyright";
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faCheck, faChevronDown, faCommentDots, faLocationDot, faQuoteLeft, faQuoteRight, faWifi } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faCheck, faChevronDown, faLocationDot, faQuoteLeft, faQuoteRight } from "@fortawesome/free-solid-svg-icons";
 import {
     Tabs,
     TabsHeader,
     Tab,
 } from "@material-tailwind/react";
 import { Avatar, Typography } from "@material-tailwind/react";
+import {
+    Accordion,
+    AccordionHeader,
+    AccordionBody,
+} from "@material-tailwind/react";
 
+const CUSTOM_ANIMATION = {
+    mount: { scale: 1 },
+    unmount: { scale: 0.9 },
+};
 
 
 const HotelDetails = () => {
-
+    const [open, setOpen] = React.useState(0);
     const searchParams = useSearchParams();
     const [hotel, setHotel] = useState(null);
 
     const [isExpanded, setIsExpanded] = useState(false);
+    const handleOpen = (value) => setOpen(open === value ? 0 : value);
+
 
     const toggleContent = () => {
         setIsExpanded(!isExpanded);
@@ -319,9 +330,7 @@ const HotelDetails = () => {
                                                 <div className="col-span-1 flex justify-center">
                                                     <img src="/chambre.svg" className="h-8 w-8" alt="Icon" />
                                                 </div>
-                                                <div className="col-span-1">
-                                                    <div className="w-[1px] bg-gray-300 h-full"></div> {/* Vertical Separator */}
-                                                </div>
+                                                <div className="w-[2px] bg-gray-500 h-full self-stretch"></div>
 
                                                 {/* Title and Items */}
                                                 <div className="col-span-10">
@@ -354,9 +363,7 @@ const HotelDetails = () => {
                                                 <div className="col-span-1 flex justify-center">
                                                     <img src="/wifi.svg" className="h-8 w-8" alt="Icon" />
                                                 </div>
-                                                <div className="col-span-1">
-                                                    <div className="w-[1px] bg-gray-300 h-full"></div>
-                                                </div>
+                                                <div className="w-[2px] bg-gray-500 h-full"></div>
 
                                                 <div className="col-span-10">
                                                     <div className="text-xl font-semibold mb-2">Internet</div>
@@ -440,7 +447,7 @@ const HotelDetails = () => {
                                                     </Typography>
                                                 </div>
                                                 <div className="flex items-center justify-start w-2/3"> {/* Include this in the main flex container */}
-                                                    <div className="relative w-3 overflow-hidden -translate-y-6" >
+                                                    <div className="relative w-5 overflow-hidden -translate-y-6" >
                                                         <div className="h-4 bg-green-400 rotate-45 transform origin-bottom-right rounded-sm" style={{ backgroundColor: "#F4F5F7" }}></div>
                                                     </div>
                                                     <div className="bg-[#F4F5F7] p-4 rounded-lg flex flex-col">
@@ -467,6 +474,76 @@ const HotelDetails = () => {
                                                             molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum.
                                                         </p>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/*this is the start of the questions card*/}
+                        <section id="">
+                            <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6">
+                                <div className="relative overflow-hidden rounded-lg">
+                                    <div className="flex items-center justify-between">
+                                        <div className="text-left mt-4">
+                                            <div className="text-2xl font-bold">Les Questions les plus fréquentes sur {hotel.name}</div>
+                                            <div className="w-[5rem] h-[4px] bg-black mt-2"></div>
+                                            <Accordion style={{ marginLeft: '15px', marginRight: '15px' }} open={open === 1} animate={CUSTOM_ANIMATION}>
+                                                <AccordionHeader
+                                                    onClick={() => handleOpen(1)}
+                                                    className="text-md font-regular text-gray-700 flex items-center relative"
+                                                >
+                                                    <span className="flex-grow">Quels sont les équipements de l'établissement {hotel.name} ?</span>
+                                                    <FontAwesomeIcon
+                                                        icon={faChevronDown}
+                                                        className={`transition-transform duration-300 ${open === 1 ? 'rotate-180' : 'rotate-0'
+                                                            }`}
+                                                    /></AccordionHeader>
+                                                <AccordionBody>
+                                                    Avec la révolution internet, il est devenu très facile de faire la réservation de son voyage devant son écran d’ordinateur ou de son Smartphone. <br />                    Ainsi, on peut tout simplement voir les multiples offres en ligne sur la destination voulue et réserver un hôtel, ou Voyages à l'étranger ou quelques activités à faire une fois sur place.
+                                                </AccordionBody>
+                                            </Accordion >
+                                            <Accordion style={{ marginLeft: '15px', marginRight: '15px' }} open={open === 2} animate={CUSTOM_ANIMATION}>
+                                                <AccordionHeader onClick={() => handleOpen(2)} className="text-md font-regular text-gray-700 flex items-center relative">
+                                                    <span className="flex-grow">Quelles sont les activités proposées par {hotel.name} ?</span>
+                                                    <FontAwesomeIcon
+                                                        icon={faChevronDown}
+                                                        className={`transition-transform duration-300 ${open === 2 ? 'rotate-180' : 'rotate-0'
+                                                            }`}
+                                                    /></AccordionHeader>
+                                                <AccordionBody>
+                                                    Un des principaux avantages non négligeables de choisir une agence de voyage pour réserver ses vacances c’est le professionnalisme et l’expérience de celle-ci.
+                                                    <br />  Les professionnels du tourisme sauront vous guider et vous informer sur le pays de destination. Ils vous trouveront aussi des réductions auprès des compagnies aériennes et des hôtels qui ont déjà fait leurs preuves.
+                                                    <br />  Enfin, une agence de voyage peut vous mettre à l'abri des aléas et vous accompagner à votre arrivée si jamais vous rencontrez des problèmes .
+                                                </AccordionBody>
+                                            </Accordion>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/*this is the start of the prix card*/}
+                        <section id="">
+                            <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6">
+                                <div className="relative overflow-hidden rounded-lg">
+                                    <div className="flex items-center justify-between">
+                                        <div className="text-left mt-4">
+                                            <div className="text-2xl font-bold">Avantages Prix {hotel.name}</div>
+                                            <div className="w-[5rem] h-[4px] bg-black mt-2"></div>
+                                            <div className="mt-4 flex">
+                                                <div className="flex items-center w-1/3 mr-[20%]"> {/* First item takes 1/3 width */}
+                                                    <FontAwesomeIcon icon={faCheck} className="text-green-500 mr-2 w-4 h-4" />
+                                                    hi im a ticked word
+                                                </div>
+                                                <div className="w-2/3"> {/* Second item takes remaining 2/3 width */}
+                                                    <ul style={{ listStyleType: 'disc' }}>
+                                                        <li>Coffee</li>
+                                                        <li>Tea</li>
+                                                        <li>Milk</li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
