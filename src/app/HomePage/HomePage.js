@@ -48,38 +48,15 @@ const TestComponent = () => {
         }
     }, []);
 
-<<<<<<< HEAD
-    return (
-        <><Head>
-            <title>Agence de voyage Tunisie Booking : le N° 1 D'Hôtel Tunisie</title>
-            <meta name="keywords" content="agence de voyage, agence de voyage tunisie" />
-            <meta
-                name="description"
-                content="TunisieBooking - Votre agence de voyage pour réservation ☀ : ✓ Hôtels en Tunisie ✓ Hôtels à l’étranger ✓ Voyages organisés ✓ Omra ✓ Billets d’avion - Service client 7j/7 - 27 agences." />
-            <meta name="robots" content="index, follow" />
-        </Head>
-            <div className="text-center">
-                {/* Show Splash Screen while loading */}
-                {loading ? (
-                    <SplashScreen />
-                ) : (
-                    // Main content will be shown after loading
-                    <>
-                        <Header />
-                        <HeroSection />
-                        <Slides />
-                        <Separator />
-                        <Carousel />
-                        <TopDestinations />
-                        <AdTb />
-                        <Separator />
-                        <Footer />
-                    </>
-                )}
-            </div></>
-    );
-=======
 return (
+    <><Head>
+    <title>Agence de voyage Tunisie Booking : le N° 1 D'Hôtel Tunisie</title>
+    <meta name="keywords" content="agence de voyage, agence de voyage tunisie" />
+    <meta
+        name="description"
+        content="TunisieBooking - Votre agence de voyage pour réservation ☀ : ✓ Hôtels en Tunisie ✓ Hôtels à l’étranger ✓ Voyages organisés ✓ Omra ✓ Billets d’avion - Service client 7j/7 - 27 agences." />
+    <meta name="robots" content="index, follow" />
+</Head>
     <div className="text-center">
     {/* Show Splash Screen while loading */}
     {loading ? (
@@ -99,9 +76,8 @@ return (
         <Footer />
         </>
     )}
-    </div>
+    </div></>
 );
->>>>>>> 23dc25137837f6267408f9b29c278a7d54db48fe
 };
 
 export default TestComponent;
