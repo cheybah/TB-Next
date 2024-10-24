@@ -17,6 +17,7 @@
     "@heroicons/react": "^2.1.5",
     "@lottiefiles/dotlottie-react": "^0.9.1",
     "@material-tailwind/react": "^2.1.10",
+    "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "bootstrap-next": "^1.0.5",
     "embla-carousel-autoplay": "^8.3.0",

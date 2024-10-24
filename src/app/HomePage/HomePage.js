@@ -11,6 +11,7 @@ import Separator from "../components/Separator/Separator";
 import Slides from "../components/Slides/Slides";
 import TopDestinations from "../components/TopDestinations/TopDestinations";
 import AdTb from "../components/AdTB/AdTB";
+import BackgroundSection from "../components/Moteur/BackgroundSection";
 
 
 // Splash Screen Component
@@ -47,6 +48,7 @@ const TestComponent = () => {
         }
     }, []);
 
+<<<<<<< HEAD
     return (
         <><Head>
             <title>Agence de voyage Tunisie Booking : le N° 1 D'Hôtel Tunisie</title>
@@ -76,6 +78,30 @@ const TestComponent = () => {
                 )}
             </div></>
     );
+=======
+return (
+    <div className="text-center">
+    {/* Show Splash Screen while loading */}
+    {loading ? (
+        <SplashScreen />
+    ) : (
+        // Main content will be shown after loading
+        <>
+        <Header />
+        {/*<HeroSection />*/}
+        <BackgroundSection />
+        <Slides />
+        <Separator />
+        <Carousel />
+        <TopDestinations />
+        <AdTb />
+        <Separator />
+        <Footer />
+        </>
+    )}
+    </div>
+);
+>>>>>>> 23dc25137837f6267408f9b29c278a7d54db48fe
 };
 
 export default TestComponent;
