@@ -24,7 +24,7 @@ useEffect(() => {
 }, []); // Empty dependency array to run only on mount
 return (
 <div className="slider avantage mt-10 mb-4">
-<p className="text-center font-bold text-2xl antialiased mo ">
+<p className="text-center font-bold text-2xl antialiased mo hidden1">
 Les Bonnes Raisons de faire appel à nous
 </p>
 <div className="flex flex-col lg:flex-row justify-around items-center gap-6">
