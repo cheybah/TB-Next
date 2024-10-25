@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+
+"use client" ; 
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link'
 import { useRouter } from "next/navigation";
+import ReactDOM from 'react-dom';
+
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBed, faCalendar, faUser, faMapPin, faLocationDot } from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +18,6 @@ import './searchBar.css'
 const SearchBar = () => {
     const [inputValue, setInputValue] = useState('');
     const [suggestions, setSuggestions] = useState([]);
-    const [destination, setDestination] = useState(''); //destination useState
     const [destinations, setDestinations] = useState([]);
     const [selectedDestination, setSelectedDestination] = useState(null);
     const [openDate, setOpenDate] = useState(false);
@@ -56,17 +59,30 @@ const SearchBar = () => {
         console.log('Search Parameters:');
         // Here you can implement your API call or any other search logic
     };
-   
-    
-    axios.get('http://api.resabookings.com/api/api/api_hotel/api_destination_test.php').then(res => {
-        const regions = res.data.regions;
-
-        // Get the names of top destinations from the array
-        const destinations = regions.map(dest => dest.libelle_region);
-        setDestinations(destinations);
 
 
-    })
+    useEffect(() => {
+        axios.get('http://api.resabookings.com/api/api/api_hotel/api_destination_test.php')
+            .then(res => {
+                console.log('API response:', res); // Log the entire response for debugging
+                if (res.data && res.data.regions) {
+                    const regions = res.data.regions;
+                    // Check if regions are being fetched
+                    console.log('Regions:', regions);
+                    
+                    // Get the names of top destinations from the array
+                    const destinations = regions.map(dest => dest.libelle_region);
+                    setDestinations(destinations);
+                    console.log('Destinations:', destinations); // Log the destinations array
+                } else {
+                    console.error('Unexpected API response format:', res.data);
+                }
+            })
+            .catch(err => {
+                console.error('Error fetching destinations:', err);
+            });
+    }, []);
+
 
     const router = useRouter(); //initialisation
     const handleNavigate = (destination) => {
@@ -86,7 +102,7 @@ const SearchBar = () => {
             <form>
                 <div className="div_form slider top-2/3    flex flex-wrap items-center justify-between max-w-screen-xl -mt-10 lg:-mt-44 md:-mt-72 ">
                     <div className=" flex  w-full grid grid-cols-5 sm:grid-cols-5 md:grid-cols-5 lg:grid-cols-5 gap-4 -mt-8 lg:-mt-10 md:-mt-10 v148_1172">
-                        <div className=" w-15 lg:w-44 md:w-44  custom-border-hotel justify-self-center relative flex flex-col items-center md:flex-row md:items-center md:space-x-2  ">
+                        <div style={{marginLeft: "15%"}} className=" w-15 lg:w-44 md:w-44  custom-border-hotel justify-self-center relative flex flex-col items-center md:flex-row md:items-center md:space-x-2  ">
                             <div className="flex justify-center md:justify-start">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M5.125 9.9375C5.125 10.3172 4.8172 10.625 4.4375 10.625V10.625C4.0578 10.625 3.75 10.3172 3.75 9.9375V9.9375C3.75 9.5578 4.0578 9.25 4.4375 9.25V9.25C4.8172 9.25 5.125 9.5578 5.125 9.9375V9.9375ZM5.125 18.1875C5.125 17.8078 4.8172 17.5 4.4375 17.5V17.5C4.0578 17.5 3.75 17.8078 3.75 18.1875V18.1875C3.75 18.5672 4.0578 18.875 4.4375 18.875V18.875C4.8172 18.875 5.125 18.5672 5.125 18.1875V18.1875ZM5.125 14.0625C5.125 13.6828 4.8172 13.375 4.4375 13.375V13.375C4.0578 13.375 3.75 13.6828 3.75 14.0625V14.0625C3.75 14.4422 4.0578 14.75 4.4375 14.75V14.75C4.8172 14.75 5.125 14.4422 5.125 14.0625V14.0625ZM14.75 5.8125C14.75 5.4328 14.4422 5.125 14.0625 5.125H9.9375C9.5578 5.125 9.25 5.4328 9.25 5.8125V5.8125C9.25 6.1922 9.5578 6.5 9.9375 6.5H14.0625C14.4422 6.5 14.75 6.1922 14.75 5.8125V5.8125ZM20.25 18.1875C20.25 17.8078 19.9422 17.5 19.5625 17.5V17.5C19.1828 17.5 18.875 17.8078 18.875 18.1875V18.1875C18.875 18.5672 19.1828 18.875 19.5625 18.875V18.875C19.9422 18.875 20.25 18.5672 20.25 18.1875V18.1875ZM22 5.125C22.5523 5.125 23 5.57272 23 6.125V22C23 22.5523 22.5523 23 22 23H2C1.44772 23 1 22.5523 1 22V6.125C1 5.57272 1.44772 5.125 2 5.125H5.5C6.05228 5.125 6.5 4.67728 6.5 4.125V2C6.5 1.44772 6.94772 1 7.5 1H16.5C17.0523 1 17.5 1.44772 17.5 2V4.125C17.5 4.67728 17.9477 5.125 18.5 5.125H22ZM6.5 7.5C6.5 6.94771 6.05228 6.5 5.5 6.5H3.375C2.82272 6.5 2.375 6.94772 2.375 7.5V20.625C2.375 21.1773 2.82272 21.625 3.375 21.625H5.5C6.05228 21.625 6.5 21.1773 6.5 20.625V7.5ZM13.375 19.875C13.375 19.3227 12.9273 18.875 12.375 18.875H11.625C11.0727 18.875 10.625 19.3227 10.625 19.875V20.625C10.625 21.1773 11.0727 21.625 11.625 21.625H12.375C12.9273 21.625 13.375 21.1773 13.375 20.625V19.875ZM16.125 3.375C16.125 2.82272 15.6773 2.375 15.125 2.375H8.875C8.32272 2.375 7.875 2.82272 7.875 3.375V20.9375C7.875 21.3172 8.1828 21.625 8.5625 21.625V21.625C8.9422 21.625 9.25 21.3172 9.25 20.9375V18.5C9.25 17.9477 9.69772 17.5 10.25 17.5H13.75C14.3023 17.5 14.75 17.9477 14.75 18.5V20.9375C14.75 21.3172 15.0578 21.625 15.4375 21.625V21.625C15.8172 21.625 16.125 21.3172 16.125 20.9375V3.375ZM21.625 7.5C21.625 6.94771 21.1773 6.5 20.625 6.5H18.5C17.9477 6.5 17.5 6.94772 17.5 7.5V20.625C17.5 21.1773 17.9477 21.625 18.5 21.625H20.625C21.1773 21.625 21.625 21.1773 21.625 20.625V7.5ZM20.25 14.0625C20.25 13.6828 19.9422 13.375 19.5625 13.375V13.375C19.1828 13.375 18.875 13.6828 18.875 14.0625V14.0625C18.875 14.4422 19.1828 14.75 19.5625 14.75V14.75C19.9422 14.75 20.25 14.4422 20.25 14.0625V14.0625ZM20.25 9.9375C20.25 9.5578 19.9422 9.25 19.5625 9.25V9.25C19.1828 9.25 18.875 9.5578 18.875 9.9375V9.9375C18.875 10.3172 19.1828 10.625 19.5625 10.625V10.625C19.9422 10.625 20.25 10.3172 20.25 9.9375V9.9375ZM14.75 14.0625C14.75 13.6828 14.4422 13.375 14.0625 13.375H9.9375C9.5578 13.375 9.25 13.6828 9.25 14.0625V14.0625C9.25 14.4422 9.5578 14.75 9.9375 14.75H14.0625C14.4422 14.75 14.75 14.4422 14.75 14.0625V14.0625ZM14.75 9.9375C14.75 9.5578 14.4422 9.25 14.0625 9.25H9.9375C9.5578 9.25 9.25 9.5578 9.25 9.9375V9.9375C9.25 10.3172 9.5578 10.625 9.9375 10.625H14.0625C14.4422 10.625 14.75 10.3172 14.75 9.9375V9.9375Z" fill="#FF0097" stroke="#FF0097" strokeWidth="0.3" />
@@ -166,7 +182,6 @@ const SearchBar = () => {
                                                 <ListboxOption key={destination} value={destination}>
                                                     {({ selected }) => (
                                                         <div className={`flex items-center p-2 ${selected ? 'bg-blue-500 text-white' : 'text-black'}`}>
-                                                            <FontAwesomeIcon icon={destination.icon} className="mr-2" />
                                                             {destination}
                                                         </div>
                                                     )}
@@ -186,7 +201,7 @@ const SearchBar = () => {
                                             className="HeaderIcon"
                                         />
                                         <span onClick={() => setOpenDate(!openDate)} className="HeaderSearchText">{`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(date[0].endDate, "dd/MM/yyyy")}`}</span> {/* Format the date using fns*/}
-
+                                            
                                         {openDate && < DateRange
                                             editableDateInputs={true}
                                             onChange={item => setDate([item.selection])}
@@ -214,25 +229,25 @@ const SearchBar = () => {
                                             <div className='optionItem'>
                                                 <span className='optionText'>Adult</span>
                                                 <div className='optionCounter'>
-                                                    <button disabled={options.adult <= 1} className='optionCounterButton' onClick={() => handleOption("adult", "d")}>-</button>
+                                                    <button type="button" disabled={options.adult <= 1} className='optionCounterButton' onClick={() => handleOption("adult", "d")}>-</button>
                                                     <span className='optionCounterNumber'>{options.adult}</span>
-                                                    <button className='optionCounterButton' onClick={() => handleOption("adult", "i")}>+</button>
+                                                    <button type="button" className='optionCounterButton' onClick={() => handleOption("adult", "i")}>+</button>
                                                 </div>
                                             </div>
                                             <div className='optionItem'>
                                                 <span className='optionText'>Children</span>
                                                 <div className='optionCounter'>
-                                                    <button disabled={options.children <= 0} className='optionCounterButton' onClick={() => handleOption("children", "d")}>-</button>
+                                                    <button type="button" disabled={options.children <= 0} className='optionCounterButton' onClick={() => handleOption("children", "d")}>-</button>
                                                     <span className='optionCounterNumber'>{options.children}</span>
-                                                    <button className='optionCounterButton' onClick={() => handleOption("children", "i")}>+</button>
+                                                    <button type="button" className='optionCounterButton' onClick={() => handleOption("children", "i")}>+</button>
                                                 </div>
                                             </div>
                                             <div className='optionItem'>
                                                 <span className='optionText'>Room</span>
                                                 <div className='optionCounter'>
-                                                    <button disabled={options.room <= 1} className='optionCounterButton' onClick={() => handleOption("room", "d")}>-</button>
+                                                    <button type="button" disabled={options.room <= 1} className='optionCounterButton' onClick={() => handleOption("room", "d")}>-</button>
                                                     <span className='optionCounterNumber'>{options.room}</span>
-                                                    <button className='optionCounterButton' onClick={() => handleOption("room", "i")}>+</button>
+                                                    <button  type="button" className='optionCounterButton' onClick={() => handleOption("room", "i")}>+</button>
                                                 </div>
                                             </div>
                                         </div>}
