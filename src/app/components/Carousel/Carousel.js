@@ -8,18 +8,41 @@ import axios from 'axios';
 
 const Carousel = () => {
     const [slides, setSlides] = useState([]);
-
     useEffect(() => {
-        // Fetch data inside useEffect to ensure it runs on component mount
-        axios.get('http://api.resabookings.com/api/api/api_slides/api_slides.php')
-            .then(res => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                } else {
+                    entry.target.classList.remove('show');
+                }
+            });
+        });
+
+        // Observe the hidden elements
+        const hiddenElements = document.querySelectorAll('.hidden2');
+        hiddenElements.forEach((element) => observer.observe(element));
+
+        // Cleanup the observer on component unmount
+        return () => {
+            hiddenElements.forEach((element) => observer.unobserve(element));
+        };
+    }, []); // Run once on mount
+
+    // Fetch slides data
+    useEffect(() => {
+        const fetchSlides = async () => {
+            try {
+                const res = await axios.get('http://api.resabookings.com/api/api/api_slides/api_slides.php');
                 const slidesData = res.data.Slides; // Accessing the "Slides" array
                 setSlides(slidesData);
-            })
-            .catch(err => {
+            } catch (err) {
                 console.error("Error fetching slides:", err);
-            });
-    }, []); // Empty dependency array ensures this only runs once on mount
+            }
+        };
+
+        fetchSlides();
+    }, []); // Run once on mount
 
     if (slides.length === 0) {
         return <div>Loading...</div>; // Loading message while waiting for data
@@ -28,7 +51,7 @@ const Carousel = () => {
     return (
         <>
             <div>
-                <h1 className="text-center font-bold text-2xl antialiased mo hidden1">
+                <h1 className="text-center font-bold text-2xl antialiased mo hidden2">
                     Nos Plus Belles Thématiques
                 </h1>
             </div>
@@ -38,7 +61,7 @@ const Carousel = () => {
                     perPage: 3,
                     focus: 'center',
                     autoplay: true,
-                    interval: 3000, // 3 seconds interval
+                    interval: 2000, // 3 seconds interval
                     speed: 700,
                     pauseOnHover: true,
                     flickMaxPages: 1,
