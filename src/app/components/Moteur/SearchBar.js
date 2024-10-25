@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Link from 'next/link'
+import { useRouter } from "next/navigation";
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBed, faCalendar, faUser, faMapPin, faLocationDot } from '@fortawesome/free-solid-svg-icons';
@@ -54,8 +56,8 @@ const SearchBar = () => {
         console.log('Search Parameters:');
         // Here you can implement your API call or any other search logic
     };
-
-
+   
+    
     axios.get('http://api.resabookings.com/api/api/api_hotel/api_destination_test.php').then(res => {
         const regions = res.data.regions;
 
@@ -66,7 +68,17 @@ const SearchBar = () => {
 
     })
 
+    const router = useRouter(); //initialisation
+    const handleNavigate = (destination) => {
+        const query = new URLSearchParams(destination).toString();
+        router.push(`/HotelsResult?${query}`);
+    };
 
+    
+    const resNavigate = (destination) => {
+        const query = new URLSearchParams(destination).toString();
+        router.push(`/HotelsResult?${query}`);
+    };
 
     return (
 
@@ -237,12 +249,14 @@ const SearchBar = () => {
 
                 </div>
                 <div className="relative z-20 top-40 lg:top-6 md:-top-6 md:col-span-1 md:col-start-2 flex justify-center">
+                <Link href={`/HotelsResult?ville=${selectedDestination}`}>
                     <button
-
                         className="w-72 lg:w-72 md:w-36 py-2 bg-gradient-to-r from-[#FF5555] to-[#F40091] text-white font-semibold rounded-lg transform transition-transform duration-300 hover:bg-lime-600 hover:scale-105 focus:outline-none"
+                        disabled={!selectedDestination} // Disable the button if no destination is selected
                     >
                         Rechercher
                     </button>
+                </Link>
                 </div>
             </form>
         </div>
