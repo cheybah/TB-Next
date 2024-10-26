@@ -28,6 +28,7 @@ return (
     </Head>
 
 );
+}
 
 
 const TestComponent = () => {

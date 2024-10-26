@@ -30,7 +30,7 @@ const MoteurResult = () => {
         children: 0,
         room: 1
     });
-
+    const [isOpen, setIsOpen] = useState(false);
     // Fetch destinations on component mount
     useEffect(() => {
         axios.get('http://api.resabookings.com/api/api/api_hotel/api_destination_test.php').then(res => {
@@ -53,6 +53,19 @@ const MoteurResult = () => {
             [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
         }));
     };
+      // Contrôler overflow-hidden sur <html> en fonction de l'état ouvert/fermé du menu
+      useEffect(() => {
+        if (isOpen) {
+            document.documentElement.style.overflow = 'auto'; // Activer le défilement
+        } else {
+            document.documentElement.style.overflow = ''; // Réinitialiser
+        }
+
+        // Nettoyer l'effet lors du démontage
+        return () => {
+            document.documentElement.style.overflow = '';
+        };
+    }, [isOpen]);
 
     return (
         <div className='flex justify-center -mt-52 lg:mt-16 md:mt-96 mx-2'>
@@ -64,23 +77,30 @@ const MoteurResult = () => {
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Destination</label>
                                 <div className="relative w-full">
-                                    <FontAwesomeIcon icon={faBed} className='HeaderIcon Icon' />
-                                    <Listbox value={selectedDestination} onChange={setSelectedDestination}>
-                                        <Listbox.Button className="HeaderSearchInput" style={{ color: 'grey' }}>
-                                            {selectedDestination || 'Select a destination'}
-                                        </Listbox.Button>
-                                        <Listbox.Options className="absolute w-full bg-white border border-gray-300 mt-1">
-                                            {destinations.map(destination => (
-                                                <Listbox.Option key={destination} value={destination}>
-                                                    {({ selected }) => (
-                                                        <div className={`flex items-center p-2 ${selected ? 'bg-blue-500 text-white' : 'text-black'}`}>
-                                                            <FontAwesomeIcon icon={faLocationDot} className="mr-2" />
-                                                            {destination}
-                                                        </div>
-                                                    )}
-                                                </Listbox.Option>
-                                            ))}
-                                        </Listbox.Options>
+                                    <FontAwesomeIcon icon={faBed} className="HeaderIcon Icon" />
+                                    <Listbox as="div" value={selectedDestination} onChange={setSelectedDestination}>
+                                        {({ open }) => {
+                                            setIsOpen(open); // mettre à jour l'état en fonction de l'ouverture
+                                            return (
+                                                <>
+                                                    <Listbox.Button className="HeaderSearchInput" style={{ color: 'grey' }}>
+                                                        {selectedDestination || 'Select a destination'}
+                                                    </Listbox.Button>
+                                                    <Listbox.Options className="absolute w-full bg-white border border-gray-300 mt-1">
+                                                        {destinations.map(destination => (
+                                                            <Listbox.Option key={destination} value={destination}>
+                                                                {({ selected }) => (
+                                                                    <div className={`flex items-center p-2 ${selected ? 'bg-blue-500 text-white' : 'text-black'}`}>
+                                                                        <FontAwesomeIcon icon={faLocationDot} className="mr-2" />
+                                                                        {destination}
+                                                                    </div>
+                                                                )}
+                                                            </Listbox.Option>
+                                                        ))}
+                                                    </Listbox.Options>
+                                                </>
+                                            );
+                                        }}
                                     </Listbox>
                                 </div>
                             </div>
@@ -118,25 +138,25 @@ const MoteurResult = () => {
                                                 <div className='optionItem'>
                                                     <span className='optionText'>Adult</span>
                                                     <div className='optionCounter'>
-                                                        <button disabled={options.adult <= 1} className='optionCounterButton' onClick={() => handleOption("adult", "d")}>-</button>
+                                                        <button disabled={options.adult <= 1} type="button" className='optionCounterButton' onClick={() => handleOption("adult", "d")}>-</button>
                                                         <span className='optionCounterNumber'>{options.adult}</span>
-                                                        <button className='optionCounterButton' onClick={() => handleOption("adult", "i")}>+</button>
+                                                        <button type="button" className='optionCounterButton' onClick={() => handleOption("adult", "i")}>+</button>
                                                     </div>
                                                 </div>
-                                                <div className='optionItem'>
+                                                <div className='optionItem'> 
                                                     <span className='optionText'>Children</span>
                                                     <div className='optionCounter'>
-                                                        <button disabled={options.children <= 0} className='optionCounterButton' onClick={() => handleOption("children", "d")}>-</button>
+                                                        <button disabled={options.children <= 0} type="button"className='optionCounterButton' onClick={() => handleOption("children", "d")}>-</button>
                                                         <span className='optionCounterNumber'>{options.children}</span>
-                                                        <button className='optionCounterButton' onClick={() => handleOption("children", "i")}>+</button>
+                                                        <button className='optionCounterButton' type="button" onClick={() => handleOption("children", "i")}>+</button>
                                                     </div>
                                                 </div>
                                                 <div className='optionItem'>
                                                     <span className='optionText'>Room</span>
                                                     <div className='optionCounter'>
-                                                        <button disabled={options.room <= 1} className='optionCounterButton' onClick={() => handleOption("room", "d")}>-</button>
+                                                        <button disabled={options.room <= 1} type="button" className='optionCounterButton' onClick={() => handleOption("room", "d")}>-</button>
                                                         <span className='optionCounterNumber'>{options.room}</span>
-                                                        <button className='optionCounterButton' onClick={() => handleOption("room", "i")}>+</button>
+                                                        <button type="button" className='optionCounterButton' onClick={() => handleOption("room", "i")}>+</button>
                                                     </div>
                                                 </div>
                                             </div>

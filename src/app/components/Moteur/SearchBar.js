@@ -21,7 +21,7 @@ const SearchBar = () => {
     const [destinations, setDestinations] = useState([]);
     const [selectedDestination, setSelectedDestination] = useState(null);
     const [openDate, setOpenDate] = useState(false);
-    
+    const [isOpen, setIsOpen] = useState(false);
     const [date, setDate] = useState([          //dateRange useState
         {
             startDate: new Date(),
@@ -95,7 +95,21 @@ const SearchBar = () => {
         const query = new URLSearchParams(destination).toString();
         router.push(`/HotelsResult?${query}`);
     };
+       // Contrôler overflow-hidden sur <html> en fonction de l'état ouvert/fermé du menu
+       useEffect(() => {
+        if (isOpen) {
+            document.documentElement.style.overflow = 'auto'; // Activer le défilement
+            document.documentElement.style.padding = '0px'; 
+        } else {
+            document.documentElement.style.overflow = ''; // Réinitialiser
+            document.documentElement.style.padding = '0px'; 
+        }
 
+        // Nettoyer l'effet lors du démontage
+        return () => {
+            document.documentElement.style.overflow = '';
+        };
+    }, [isOpen]);
     return (
 
         <div className='flex justify-center -mt-52 lg:mt-16 md:mt-96 mx-2'>
@@ -169,28 +183,34 @@ const SearchBar = () => {
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Destination</label>
                                 <div className="relative w-full">
-                                    <FontAwesomeIcon
-                                        icon={faBed}
-                                        className='HeaderIcon Icon'
-                                    />
-                                    <Listbox value={selectedDestination} onChange={setSelectedDestination}>
-                                        <ListboxButton className="HeaderSearchInput" style={{ color: 'grey' }}>
-                                            {selectedDestination ? selectedDestination : 'Select a destination'}
-                                        </ListboxButton>
-                                        <ListboxOptions className="absolute w-full bg-white border border-gray-300 mt-1">
-                                            {destinations.map((destination) => (
-                                                <ListboxOption key={destination} value={destination}>
-                                                    {({ selected }) => (
-                                                        <div className={`flex items-center p-2 ${selected ? 'bg-blue-500 text-white' : 'text-black'}`}>
-                                                            {destination}
-                                                        </div>
-                                                    )}
-                                                </ListboxOption>
-                                            ))}
-                                        </ListboxOptions>
+                                    <FontAwesomeIcon icon={faBed} className="HeaderIcon Icon" />
+                                    <Listbox as="div" value={selectedDestination} onChange={setSelectedDestination}>
+                                        {({ open }) => {
+                                            setIsOpen(open); // mettre à jour l'état en fonction de l'ouverture
+                                            return (
+                                                <>
+                                                    <Listbox.Button className="HeaderSearchInput" style={{ color: 'grey' }}>
+                                                        {selectedDestination || 'Select a destination'}
+                                                    </Listbox.Button>
+                                                    <Listbox.Options className="absolute w-full bg-white border border-gray-300 mt-1">
+                                                        {destinations.map(destination => (
+                                                            <Listbox.Option key={destination} value={destination}>
+                                                                {({ selected }) => (
+                                                                    <div className={`flex items-center p-2 ${selected ? 'bg-blue-500 text-white' : 'text-black'}`}>
+                                                                        <FontAwesomeIcon icon={faLocationDot} className="mr-2" />
+                                                                        {destination}
+                                                                    </div>
+                                                                )}
+                                                            </Listbox.Option>
+                                                        ))}
+                                                    </Listbox.Options>
+                                                </>
+                                            );
+                                        }}
                                     </Listbox>
                                 </div>
                             </div>
+
                             {/* Date Range Picker */}
                             <div className="flex flex-col  md:space-x-4 mx-2">
                                 <div>

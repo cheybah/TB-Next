@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import Link from 'next/link';
 import {
@@ -21,7 +22,7 @@ const ResultHotel = () => {
     const [ListHotels, setListHotels] = useState([]);
     const [ListhotelTripAdv, setListhotelTripAdv] = useState([]);
     const [activeTab, setActiveTab] = useState("Petit dejeuner"); // Initialize with the first tab's value
-
+    const router = useRouter();
     const data = [
         {
             label: "Petit dejeuner",
@@ -68,7 +69,15 @@ const ResultHotel = () => {
                 setListhotelTripAdv(allHotels);
             });
     }, [ville]);
-
+    const handleNavigate = (hotel) => {
+        // Stringify the services array
+        if (hotel.services) {
+            hotel.services = JSON.stringify(hotel.services);
+        }
+        
+        const query = new URLSearchParams(hotel).toString();
+        router.push(`/HotelDetails?${query}`);
+    };
     return (
         <div>
             {/* Start of hotel results */}
@@ -153,17 +162,18 @@ const ResultHotel = () => {
                                     </Card>
                                     
                                 </Typography>
-                                <a href="#" className="inline-block w-full">
+                                <div className="inline-block w-full">
                                     <div className="relative w-full">
-                                        <Link href="">
+                                        
                                             <button
                                                 className="btn_rechercher w-72 lg:w-72 md:w-36 py-2 bg-gradient-to-r from-[#FF5555] to-[#F40091] text-white font-semibold rounded-lg transform transition-transform duration-300 hover:bg-lime-600 hover:scale-105 focus:outline-none"
+                                                onClick={() => handleNavigate(hotel)} 
                                             >
                                                 + De detail
                                             </button>
-                                        </Link>
+                                        
                                     </div>
-                                </a>
+                                </div>
                             </CardBody>
                         </Card>
                     ))}
