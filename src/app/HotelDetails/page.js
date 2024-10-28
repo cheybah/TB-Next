@@ -2,9 +2,9 @@
 
 import Header from "../components/Header/Header";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Copyright from "../components/Copyright/Copyright";
-import React from 'react';
+import React  from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faCheck, faChevronDown, faLocationDot, faQuoteLeft, faQuoteRight } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -25,7 +25,7 @@ const CUSTOM_ANIMATION = {
 };
 
 
-const HotelDetails = () => {
+const HotelDetailsContent  = () => {
     const [open, setOpen] = React.useState(0);
     const searchParams = useSearchParams();
     const [hotel, setHotel] = useState(null);
@@ -255,47 +255,47 @@ const HotelDetails = () => {
                                             <h3 className="text-left text-lg font-semibold mt-4">Infos Pratiques :</h3>
                                             <p>
                                                 Pour découvrir et profiter à bon escient de tous les vestiges de Tunis, Vous devez choisir une ville où vous allez axer votre voyage de luxe.
-                                                <br /> Dans ce cas, pourquoi ne pas opter pour Hammamet ? C'est l'une des plus belles villes de la Tunisie.
+                                                <br /> Dans ce cas, pourquoi ne pas opter pour Hammamet ? C&apos;est l&apos;une des plus belles villes de la Tunisie.
                                             </p>
                                             {isExpanded && (
                                                 <div className="mt-4">
                                                     <p>
-                                                        Elle est accessible et peut vous offrir toute une panoplie d'activités et loisir, de plus, vous pouvez profiter ici de El Mouradi</p>
-                                                    <h3 className="text-left text-lg font-semibold mt-4">Situation de l'hôtel :</h3>
+                                                        Elle est accessible et peut vous offrir toute une panoplie d&apos;activités et loisir, de plus, vous pouvez profiter ici de El Mouradi</p>
+                                                    <h3 className="text-left text-lg font-semibold mt-4">Situation de l&apos;hôtel :</h3>
                                                     <p>Au cœur de la station balnéaire de Yasmine Hammamet, sur une superbe plage de sables fins dorée.<br />
-                                                        A quelques kilomètres au sud de la Ville d'Hammamet, vous découvrirez un grand hôtel 4 étoiles : El Mouradi El Menzeh.<br />
-                                                        C'est une grande bâtisse blanche rénovée, aux airs un peu palais que vous ne pourrez pas rater.<br />
-                                                        Il se trouve qu'à quelques kilomètres à peine des parcs d'attractions de la ville.</p>
-                                                    <h3 className="text-left text-lg font-semibold mt-4">Les types d'hébergements que puis-je réserver à l'établissement :</h3>
-                                                    <p>L'hotel possède 395 chambres, parmi ces derniers, vous avez le choix entre plusieurs types des chambres. <br />
-                                                        El Mouradi El Menzah est aussi l'une des rares à proposer des suites à ses clients. <br />
+                                                        A quelques kilomètres au sud de la Ville d&apos;Hammamet, vous découvrirez un grand hôtel 4 étoiles : El Mouradi El Menzeh.<br />
+                                                        C&apos;est une grande bâtisse blanche rénovée, aux airs un peu palais que vous ne pourrez pas rater.<br />
+                                                        Il se trouve qu&apos;à quelques kilomètres à peine des parcs d&apos;attractions de la ville.</p>
+                                                    <h3 className="text-left text-lg font-semibold mt-4">Les types d&apos;hébergements que puis-je réserver à l&apos;établissement :</h3>
+                                                    <p>L&apos;hotel possède 395 chambres, parmi ces derniers, vous avez le choix entre plusieurs types des chambres. <br />
+                                                        El Mouradi El Menzah est aussi l&apos;une des rares à proposer des suites à ses clients. <br />
                                                         Chaque chambre de cet établissement 4 étoiles a été créée dans un esprit de confort et de modernité. <br />
-                                                        Elles sont dotées d'un matelas confort, qui pour le cas d'une chambre standard avec enfant, peut-être accompagné d'un lit pour petit. <br />
-                                                        Chacune d'entre elles dispose de tous les matériels nécessaires au confort des clients. <br />
-                                                        Une terrasse privative d'où vous pourrez jouir d'une superbe vue sur la mer ou sur le jardin verdoyant.<br />
-                                                        En outre, dans tout l'établissement, vous pouvez profiter d'un Wi-Fi gratuit pendant tout le séjour.</p>
+                                                        Elles sont dotées d&apos;un matelas confort, qui pour le cas d&apos;une chambre standard avec enfant, peut-être accompagné d&apos;un lit pour petit. <br />
+                                                        Chacune d&apos;entre elles dispose de tous les matériels nécessaires au confort des clients. <br />
+                                                        Une terrasse privative d&apos;où vous pourrez jouir d&apos;une superbe vue sur la mer ou sur le jardin verdoyant.<br />
+                                                        En outre, dans tout l&apos;établissement, vous pouvez profiter d&apos;un Wi-Fi gratuit pendant tout le séjour.</p>
                                                     <h3 className="text-left text-lg font-semibold mt-4">Restaurants et Bars sur place :</h3>
                                                     <p>Deux restaurants assurent votre confort pendant toute la durée du votre séjour. <br />
                                                         Les plats typiques de la région, comme des menus internationaux sont servis tous les jours sous forme de buffet. <br />
-                                                        Dans un décor original, traditionnel et moderne, vous aurez l'occasion de gouter aux spécialités culinaires de la Tunisie. <br />
+                                                        Dans un décor original, traditionnel et moderne, vous aurez l&apos;occasion de gouter aux spécialités culinaires de la Tunisie. <br />
                                                         Dans chacune des restaurants, des chefs étoilés et une équipe professionnelle assurent le service.<br />
                                                         Vous pouvez ainsi profiter de la belle vue au bord de la mer et commencer la journée du bon pied. <br />
                                                         Il est à noter que les petits-déjeuners sont compris dans le prix de la chambre.<br />
                                                         Outre les restaurants, vous pouvez aussi gouter aux quelques cocktails locaux avec les deux bars qui sont présents. <br />
-                                                        L'un des bars vous assure un séjour agréable en vous servant de petites collations en tout genre au bord de la piscine. <br />
+                                                        L&apos;un des bars vous assure un séjour agréable en vous servant de petites collations en tout genre au bord de la piscine. <br />
                                                         Boissons alcoolisées ou non, quelques représentations et une ambiance chaleureuse discothèque y est disponibles tous les soirs. <br />
                                                     </p>
                                                     <h3 className="text-left text-lg font-semibold mt-4">Activités et loisirs disponibles :</h3>
                                                     <p>Quand on parle El Mouradi El Menzah 4 étoiles en Tunisie, il est obligatoire de trouver au moins une piscine extérieure. <br />
                                                         Outre cette dernière, vous avez aussi à disposition une piscine couverte ouverte de 09 h à 18 h. <br />
-                                                        Pour les baignades à la plage, profitez de la plage privée de l'hôtel Hammamet . <br />
-                                                        Sachez aussi que l'établissement possède une salle de Fitness. <br />
+                                                        Pour les baignades à la plage, profitez de la plage privée de l&apos;hôtel Hammamet . <br />
+                                                        Sachez aussi que l&apos;établissement possède une salle de Fitness. <br />
                                                         Une salle de sport dont un court de tennis pour ceux qui souhaitent se lancer dans une petite compétition amicale. <br />
-                                                        Pour ceux et celles qui prônent la détente avant tout, profitez du Thalassothérapie et Spa de l'établissement.</p>
-                                                    <h3 className="text-left text-lg font-semibold mt-4">Les plus de l'hotel El Mouradi El Menzah  4*, TunisieBooking :</h3>
-                                                    <p>L'hotel est bien situé, au cœur de la station touristique de Yasmine Hammamet. <br />
-                                                        Avec un rapport qualité luxueux, face à une très belle plage d'eau douce et à proximité du parc “Carthage Land”.<br />
-                                                        Pour plus d'informations, rendez-vous dans l'une de nos agences de voyage les plus proches de chez-vous.</p>
+                                                        Pour ceux et celles qui prônent la détente avant tout, profitez du Thalassothérapie et Spa de l&apos;établissement.</p>
+                                                    <h3 className="text-left text-lg font-semibold mt-4">Les plus de l&apos;hotel El Mouradi El Menzah  4*, TunisieBooking :</h3>
+                                                    <p>L&apos;hotel est bien situé, au cœur de la station touristique de Yasmine Hammamet. <br />
+                                                        Avec un rapport qualité luxueux, face à une très belle plage d&apos;eau douce et à proximité du parc “Carthage Land”.<br />
+                                                        Pour plus d&apos;informations, rendez-vous dans l&apos;une de nos agences de voyage les plus proches de chez-vous.</p>
                                                 </div>
                                             )}
                                             <button
@@ -388,7 +388,7 @@ const HotelDetails = () => {
                                     <div className="text-left mt-4">
                                         <div className="text-2xl font-bold">Mesures de sécurité et de santé</div>
                                         <div className="w-[5rem] h-[4px] bg-black mt-2"></div>
-                                        <p className="mt-4">Cet établissement a renforcé les mesures de santé et d'hygiène pour garantir votre sécurité tout au long de votre séjour.</p>
+                                        <p className="mt-4">Cet établissement a renforcé les mesures de santé et d&apos;hygiène pour garantir votre sécurité tout au long de votre séjour.</p>
                                         {/* Two Column Grid Layout */}
                                         <div className="grid grid-cols-2 gap-8 mt-6">
                                             <div>
@@ -495,14 +495,14 @@ const HotelDetails = () => {
                                                     onClick={() => handleOpen(1)}
                                                     className="text-md font-regular text-gray-700 flex items-center relative"
                                                 >
-                                                    <span className="flex-grow">Quels sont les équipements de l'établissement {hotel.name} ?</span>
+                                                    <span className="flex-grow">Quels sont les équipements de l&apos;établissement {hotel.name} ?</span>
                                                     <FontAwesomeIcon
                                                         icon={faChevronDown}
                                                         className={`transition-transform duration-300 ${open === 1 ? 'rotate-180' : 'rotate-0'
                                                             }`}
                                                     /></AccordionHeader>
                                                 <AccordionBody>
-                                                    Avec la révolution internet, il est devenu très facile de faire la réservation de son voyage devant son écran d’ordinateur ou de son Smartphone. <br />                    Ainsi, on peut tout simplement voir les multiples offres en ligne sur la destination voulue et réserver un hôtel, ou Voyages à l'étranger ou quelques activités à faire une fois sur place.
+                                                    Avec la révolution internet, il est devenu très facile de faire la réservation de son voyage devant son écran d’ordinateur ou de son Smartphone. <br />                    Ainsi, on peut tout simplement voir les multiples offres en ligne sur la destination voulue et réserver un hôtel, ou Voyages à l&apos;étranger ou quelques activités à faire une fois sur place.
                                                 </AccordionBody>
                                             </Accordion >
                                             <Accordion style={{ marginLeft: '15px', marginRight: '15px' }} open={open === 2} animate={CUSTOM_ANIMATION}>
@@ -514,9 +514,9 @@ const HotelDetails = () => {
                                                             }`}
                                                     /></AccordionHeader>
                                                 <AccordionBody>
-                                                    Un des principaux avantages non négligeables de choisir une agence de voyage pour réserver ses vacances c’est le professionnalisme et l’expérience de celle-ci.
+                                                    Un des principaux avantages non négligeables de choisir une agence de voyage pour réserver ses vacances c&apos;est le professionnalisme et l&apos;expérience de celle-ci.
                                                     <br />  Les professionnels du tourisme sauront vous guider et vous informer sur le pays de destination. Ils vous trouveront aussi des réductions auprès des compagnies aériennes et des hôtels qui ont déjà fait leurs preuves.
-                                                    <br />  Enfin, une agence de voyage peut vous mettre à l'abri des aléas et vous accompagner à votre arrivée si jamais vous rencontrez des problèmes .
+                                                    <br />  Enfin, une agence de voyage peut vous mettre à l&apos;abri des aléas et vous accompagner à votre arrivée si jamais vous rencontrez des problèmes .
                                                 </AccordionBody>
                                             </Accordion>
                                         </div>
@@ -557,9 +557,13 @@ const HotelDetails = () => {
             <Copyright />
         </div>
 
-
     );
 };
 
+const HotelDetails = () => (    //to escape suspense queryparams problem
+    <Suspense fallback={<div>Loading...</div>}>
+        <HotelDetailsContent />
+    </Suspense>
+);
 
 export default HotelDetails;

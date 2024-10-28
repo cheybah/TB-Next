@@ -1,9 +1,12 @@
+"use client" ;
+
 import React, { useEffect } from 'react';
 import './slides.css';
 
 
 const Slides = () => {
 useEffect(() => {
+    if (typeof window !== "undefined") {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -21,6 +24,7 @@ useEffect(() => {
     return () => {
         hiddenElements.forEach((element) => observer.unobserve(element));
     };
+}
 }, []); // Empty dependency array to run only on mount
 return (
 <div className="slider avantage mt-10 mb-4">
@@ -35,7 +39,7 @@ Les Bonnes Raisons de faire appel à nous
     src="/prix-garantis.svg"
     />
     <p className="title_avantage text-center">Meilleur Prix Garanti</p>
-    <p className="sous_title_avantage mb-1 font-medium text-center">Hôtel, voyage, Billet d'avion...</p>
+    <p className="sous_title_avantage mb-1 font-medium text-center">Hôtel, voyage, Billet d&apos;avion...</p>
 </div>
 <div className="logo hidden1 flex flex-col items-center w-full max-w-xs">
     <img

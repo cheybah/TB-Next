@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchBar from './SearchBar';
+import ST from './ST';
 
 const BackgroundSection = () => {
     return (
@@ -14,7 +15,7 @@ const BackgroundSection = () => {
                 style={{ top: "13rem", textShadow: '0px 1px 4px rgba(0, 0, 0, 0.2)', fontFamily: '-apple-system, Roboto, Segoe UI, Helvetica, Arial, sans-serif'}}>
                 Retrouvez nos offres d’hôtels en Tunisie, de Voyages à l’étranger, des Billets d’avion, Omra et plus encore …
             </span>
-            <SearchBar />
+            <ST />
         </div>
     </section>
     );

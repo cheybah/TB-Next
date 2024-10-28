@@ -9,6 +9,7 @@ import axios from 'axios';
 const Carousel = () => {
     const [slides, setSlides] = useState([]);
     useEffect(() => {
+        if (typeof window !== "undefined") {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -27,6 +28,7 @@ const Carousel = () => {
         return () => {
             hiddenElements.forEach((element) => observer.unobserve(element));
         };
+    }
     }, []); // Run once on mount
 
     // Fetch slides data

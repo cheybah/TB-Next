@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "module": "esnext",
+    "target": "es6",
+    "jsx": "react",
     "paths": {
       "@/*": ["./src/*"]
     }

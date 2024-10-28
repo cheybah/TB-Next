@@ -28,6 +28,7 @@ return (
     </Head>
 
 );
+};
 
 
 const TestComponent = () => {
@@ -53,11 +54,11 @@ const TestComponent = () => {
 
 return (
     <><Head>
-    <title>Agence de voyage Tunisie Booking : le N° 1 D'Hôtel Tunisie</title>
+    <title>Agence de voyage Tunisie Booking : le N° 1 D&apos;Hôtel Tunisie</title>
     <meta name="keywords" content="agence de voyage, agence de voyage tunisie" />
     <meta
         name="description"
-        content="TunisieBooking - Votre agence de voyage pour réservation ☀ : ✓ Hôtels en Tunisie ✓ Hôtels à l’étranger ✓ Voyages organisés ✓ Omra ✓ Billets d’avion - Service client 7j/7 - 27 agences." />
+        content="TunisieBooking - Votre agence de voyage pour réservation ☀ : ✓ Hôtels en Tunisie ✓ Hôtels à l&apos;étranger ✓ Voyages organisés ✓ Omra ✓ Billets d&apos;avion - Service client 7j/7 - 27 agences." />
     <meta name="robots" content="index, follow" />
 </Head>
     <div className="text-center">

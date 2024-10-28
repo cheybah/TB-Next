@@ -101,6 +101,8 @@ const router = useRouter();
 
 
 useEffect(() => {
+    if (typeof window !== "undefined") {
+
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -118,6 +120,7 @@ hiddenElements.forEach((element) => observer.observe(element));
 return () => {
     hiddenElements.forEach((element) => observer.unobserve(element));
 };
+    }
 }, []); 
 
 const handleNavigate = (destination) => {
@@ -131,28 +134,6 @@ const handleNavigate = (destination) => {
 };
 
 
-
-// Fade-in animation on scroll using Intersection Observer
-useEffect(() => {
-const observer = new IntersectionObserver(
-([entry]) => {
-if (entry.isIntersecting) {
-    setIsVisible(true);
-    observer.disconnect(); // Stop observing after the first intersection
-}
-},
-{ threshold: 0.5 }  //take a look at this later 
-);
-
-if (sectionRef.current) observer.observe(sectionRef.current);
-
-return () => {
-if (sectionRef.current) observer.unobserve(sectionRef.current);
-};
-}, []);
-
-
-
 return (
 <section ref={sectionRef} className="container mx-auto py-12 px-6">
 <h1 className="text-center font-bold text-2xl antialiased mo hidden1">
@@ -161,10 +142,8 @@ Les Imbattables du Moment
 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
 {destinations.map((destination) => (
     <div
-    key={destination.id}
-    className={`destination-card transform transition-all duration-1000 ease-out ${
-        isVisible ? "opacity-100" : "opacity-0"
-    }`}
+    key={destination.id}s
+    className={`destination-card transform transition-all duration-1000 ease-out`}
     onClick={() => handleNavigate(destination)} //onClick event to get destination by id 
     >
     <a className="relative image-container">

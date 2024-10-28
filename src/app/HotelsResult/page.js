@@ -1,11 +1,12 @@
 "use client";
 import React from 'react';
 import Head from 'next/head'; // Import Head from next/head
-import { useSearchParams } from "next/navigation";
-import Header from '../components/Header/Header';
-import MoteurResult from '../components/MoteurResult/MoteurResult';
-import ResultHotel from '../components/ResultHotel/ResultHotel';
-import Footer from '../components/Footer/Footer';
+import dynamic from 'next/dynamic';
+const Header = dynamic(() => import('../components/Header/Header'), { ssr: false });
+const MoteurResult = dynamic(() => import('../components/MoteurResult/MoteurResult'), { ssr: false });
+const ResultHotel = dynamic(() => import('../components/ResultHotel/ResultHotel'), { ssr: false });
+const Footer = dynamic(() => import('../components/Footer/Footer'), { ssr: false });
+
 
 const HotelsResult = () => {
     return (
