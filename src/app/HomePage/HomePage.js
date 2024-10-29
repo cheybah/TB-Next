@@ -16,19 +16,16 @@ import BackgroundSection from "../components/Moteur/BackgroundSection";
 
 // Splash Screen Component
 const SplashScreen = () => {
-return (
-    
-    <Head>
-      <title>Your Page Title</title>
-      <meta name="description" content="A short description of your page's content"/>
-      <meta property="og:title" content="Your Page Title" />
-      <meta property="og:description" content="A detailed description of your page's content" />
-      <meta property="og:image" content="https://example.com/thumbnail.jpg" />
-      <meta name="twitter:card" content="summary_large_image" />
-    </Head>
-
-);
-};
+    return (
+        <div className="splash-screen w-full h-screen flex items-center justify-center bg-white-500">
+        <img 
+            src="https://tn.tunisiebooking.com/images/icons-menu-moteur/logo-TunisieBooking1.svg" 
+            alt="Tunisie Booking Logo" 
+            className="floating-logo"
+        />
+        </div>
+    );
+    };
 
 
 const TestComponent = () => {

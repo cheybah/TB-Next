@@ -15,8 +15,7 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import './SearchBar.css'
 const SearchBar = () => {
-    const [inputValue, setInputValue] = useState('');
-    const [suggestions, setSuggestions] = useState([]);
+
     const [destinations, setDestinations] = useState([]);
     const [selectedDestination, setSelectedDestination] = useState(null);
     const [openDate, setOpenDate] = useState(false);
@@ -133,11 +132,11 @@ const SearchBar = () => {
                                 <ListboxButton className="HeaderSearchInput" style={{ color: 'grey' }}>
                                     {selectedDestination ? selectedDestination : 'Choisir une destination'}
                                 </ListboxButton>
-                                <ListboxOptions className="absolute w-full bg-white border border-gray-300 mt-1">
+                                <ListboxOptions className="absolute w-full bg-white border border-gray-300 mt-1 z-20">
                                     {destinations.map((destination) => (
                                         <ListboxOption key={destination} value={destination}>
                                             {({ selected }) => (
-                                                <div className={`flex items-center p-2 ${selected ? 'bg-blue-500 text-white' : 'text-black'}`}>
+                                                <div className={`flex items-center p-2 ${selected ? 'bg-gray-400 text-white' : 'text-black'}`}>
                                                     {destination}
                                                 </div>
                                             )}
