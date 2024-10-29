@@ -21,6 +21,15 @@ ul {
     margin-top: 8px;
 }
 
+/* Media query for mobile devices */
+@media (max-width: 639px) { 
+    .single-cta  {
+        margin-bottom: 20px;
+        font-size: 10px;
+        float: center;
+    }
+}
+
 .cta-text {
     padding-left: 15px;
     display: inline-block;
@@ -198,5 +207,13 @@ ul {
 .container-fluid {
     padding-left: 8rem !important; 
     padding-right: 8rem !important; 
+}
+
+/* Media query for mobile devices */
+@media (max-width: 639px) { 
+    .container-fluid {
+        padding-left: 1rem !important;  
+        padding-right: 1rem !important;  
+    }
 }
 
