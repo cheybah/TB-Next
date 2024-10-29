@@ -23,7 +23,7 @@ const HotelsResult = () => {
                 <Header />
                 <MoteurResult />
                 <ResultHotel />
-                <Footer/>
+                <Footer />
             </div>
         </>
     );

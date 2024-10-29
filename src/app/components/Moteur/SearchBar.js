@@ -114,7 +114,7 @@ const SearchBar = () => {
                                 }`}
                         >
                             <img src={`/${tab.icon}`} alt={`${tab.label} Icon`} className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-8" />
-                            <span className="text-sm sm:text-base font-medium">{tab.label}</span>
+                            <span className="hidden sm:flex text-sm sm:text-base font-medium">{tab.label}</span>
                         </div>
                     ))}
                 </div>
@@ -132,7 +132,7 @@ const SearchBar = () => {
                                 <ListboxButton className="HeaderSearchInput" style={{ color: 'grey' }}>
                                     {selectedDestination ? selectedDestination : 'Choisir une destination'}
                                 </ListboxButton>
-                                <ListboxOptions className="absolute w-full bg-white border border-gray-300 mt-1 z-20">
+                                <ListboxOptions className="absolute w-full bg-white border border-gray-300 mt-1 z-20 max-h-80 overflow-y-auto">
                                     {destinations.map((destination) => (
                                         <ListboxOption key={destination} value={destination}>
                                             {({ selected }) => (
@@ -161,14 +161,16 @@ const SearchBar = () => {
                             </span>
 
                             {openDate && (
-                                <DateRange
-                                    editableDateInputs
-                                    onChange={(item) => setDate([item.selection])}
-                                    moveRangeOnFirstSelection={false}
-                                    ranges={date}
-                                    locale={enUS}
-                                    className="absolute mt-1 z-20"
-                                />
+                                <div className="absolute z-20 mt-1 w-full bg-white border border-gray-300 shadow-lg">
+                                    <DateRange
+                                        editableDateInputs
+                                        onChange={(item) => setDate([item.selection])}
+                                        moveRangeOnFirstSelection={false}
+                                        ranges={date}
+                                        locale={enUS}
+                                       
+                                    />
+                                </div>
                             )}
                         </div>
                     </div>
@@ -269,10 +271,10 @@ const SearchBar = () => {
             <div className="absolute z-10 flex justify-center absolute bottom-[-2px] left-1/2 transform -translate-x-1/2">
                 <Link href={`/HotelsResult?ville=${selectedDestination}`}>
                     <button
-                    type="submit"
-                    style={{marginBottom:"-5%"}}
-                    className="w-36 sm:w-72 py-2 bg-gradient-to-r from-[#FF5555] to-[#F40091] text-white font-semibold rounded-lg transform transition-transform duration-300 hover:bg-lime-600 hover:scale-105 focus:outline-none"
-                    disabled={!selectedDestination} // Disable the button if no destination is selected
+                        type="submit"
+                        style={{ marginBottom: "-5%", cursor: "pointer" }}
+                        className="w-36 sm:w-72 py-2 bg-gradient-to-r from-[#FF5555] to-[#F40091] text-white font-semibold rounded-lg transform transition-transform duration-300 hover:bg-lime-600 hover:scale-105 focus:outline-none"
+                        disabled={!selectedDestination} // Disable the button if no destination is selected
                     >
                         Rechercher
                     </button>
