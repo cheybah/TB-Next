@@ -56,115 +56,169 @@ const MoteurResult = () => {
 
     return (
         <Suspense>
-        <div className='flex justify-center -mt-52 lg:mt-16 md:mt-96 mx-2'>
-            <form>
-                <div className="div_form1 slider top-2/3 flex flex-wrap items-center justify-between max-w-screen-xl -mt-10 lg:-mt-0 md:-mt-72 ">
-                    <div className="px-6 w-full ">
-                        <div className="w-full grid lg:-mt-20 md:-mt-14 md:grid-cols-4 ml-0 lg:ml-0 md:-ml-2 pb-20 lg:pb-px md:pb-px">
-                            {/* Destination */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Destination</label>
-                                <div className="relative w-full">
-                                    <FontAwesomeIcon icon={faBed} className='HeaderIcon Icon' />
-                                    <Listbox value={selectedDestination} onChange={setSelectedDestination}>
-                                        <Listbox.Button className="HeaderSearchInput" style={{ color: 'grey' }}>
-                                            {selectedDestination || 'Select a destination'}
-                                        </Listbox.Button>
-                                        <Listbox.Options className="absolute w-full bg-white border border-gray-300 mt-1">
-                                            {destinations.map(destination => (
-                                                <Listbox.Option key={destination} value={destination}>
-                                                    {({ selected }) => (
-                                                        <div className={`flex items-center p-2 ${selected ? 'bg-blue-500 text-white' : 'text-black'}`}>
-                                                            <FontAwesomeIcon icon={faLocationDot} className="mr-2" />
-                                                            {destination}
-                                                        </div>
-                                                    )}
-                                                </Listbox.Option>
-                                            ))}
-                                        </Listbox.Options>
-                                    </Listbox>
-                                </div>
-                            </div>
-
-                            {/* Date Range Picker */}
-                            <div className="flex flex-col md:space-x-4 mx-2">
+            <div className='flex justify-center mt-8 mb-8 md:mt-0 md:mb-0 lg:mt-16 lg:mb-0 mx-2'>
+                <form>
+                    <div className="div_form1 slider flex flex-wrap items-center justify-between max-w-screen-xl -mt-10 lg:-mt-0 md:-mt-72">
+                        <div className="px-6 w-full">
+                            <div className="w-full grid lg:-mt-20 md:-mt-14 md:grid-cols-4 ml-0 lg:ml-0 md:-ml-2 lg:pb-px md:pb-px">
+                                {/* Destination */}
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700">Check-In</label>
+                                    <label className="block text-sm font-medium text-gray-700">Destination</label>
                                     <div className="relative w-full">
-                                        <FontAwesomeIcon icon={faCalendar} className="HeaderIcon" />
-                                        <span onClick={() => setOpenDate(!openDate)} className="HeaderSearchText">{`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(date[0].endDate, "dd/MM/yyyy")}`}</span>
-                                        {openDate && (
-                                            <DateRange
-                                                editableDateInputs={true}
-                                                onChange={item => setDate([item.selection])}
-                                                moveRangeOnFirstSelection={false}
-                                                ranges={date}
-                                                locale={enUS}
-                                                className='date'
-                                            />
-                                        )}
+                                        <FontAwesomeIcon icon={faBed} className='HeaderIcon Icon' />
+                                        <Listbox value={selectedDestination} onChange={setSelectedDestination}>
+                                            <Listbox.Button className="HeaderSearchInput" style={{ color: 'grey' }}>
+                                                {selectedDestination || 'Select a destination'}
+                                            </Listbox.Button>
+                                            <Listbox.Options className="absolute w-full bg-white border border-gray-300 mt-1 max-h-80 overflow-y-auto">
+                                                {destinations.map(destination => (
+                                                    <Listbox.Option key={destination} value={destination}>
+                                                        {({ selected }) => (
+                                                            <div className={`flex items-center p-2 ${selected ? 'bg-gray-500 text-white' : 'text-black'}`}>
+                                                                <FontAwesomeIcon icon={faLocationDot} className="mr-2" />
+                                                                {destination}
+                                                            </div>
+                                                        )}
+                                                    </Listbox.Option>
+                                                ))}
+                                            </Listbox.Options>
+                                        </Listbox>
                                     </div>
                                 </div>
-                            </div>
-
-                            {/* Occupancy Dropdown */}
-                            <div className="HeaderSearchItem">
+    
+                                {/* Date Range Picker */}
+                                <div className="relative flex flex-col md:space-x-4 mx-2 z-50">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700">Occupancy</label>
-                                    <div className="relative w-full">
-                                        <FontAwesomeIcon icon={faUser} className="HeaderIcon" />
-                                        <span onClick={() => setOpenOptions(!openOptions)} className="HeaderSearchText">{`${options.adult} adult - ${options.children} children - ${options.room} room`}</span>
-                                        {openOptions && (
-                                            <div className='options'>
-                                                <div className='optionItem'>
-                                                    <span className='optionText'>Adult</span>
-                                                    <div className='optionCounter'>
-                                                        <button disabled={options.adult <= 1} className='optionCounterButton' onClick={() => handleOption("adult", "d")}>-</button>
-                                                        <span className='optionCounterNumber'>{options.adult}</span>
-                                                        <button className='optionCounterButton' onClick={() => handleOption("adult", "i")}>+</button>
-                                                    </div>
-                                                </div>
-                                                <div className='optionItem'>
-                                                    <span className='optionText'>Children</span>
-                                                    <div className='optionCounter'>
-                                                        <button disabled={options.children <= 0} className='optionCounterButton' onClick={() => handleOption("children", "d")}>-</button>
-                                                        <span className='optionCounterNumber'>{options.children}</span>
-                                                        <button className='optionCounterButton' onClick={() => handleOption("children", "i")}>+</button>
-                                                    </div>
-                                                </div>
-                                                <div className='optionItem'>
-                                                    <span className='optionText'>Room</span>
-                                                    <div className='optionCounter'>
-                                                        <button disabled={options.room <= 1} className='optionCounterButton' onClick={() => handleOption("room", "d")}>-</button>
-                                                        <span className='optionCounterNumber'>{options.room}</span>
-                                                        <button className='optionCounterButton' onClick={() => handleOption("room", "i")}>+</button>
-                                                    </div>
-                                                </div>
+                                        <label className="block text-sm font-medium text-gray-700">Check-In</label>
+                                        <div className="relative w-full">
+                                            <FontAwesomeIcon icon={faCalendar} className="HeaderIcon" />
+                                            <span onClick={() => setOpenDate(!openDate)} className="HeaderSearchText">{`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(date[0].endDate, "dd/MM/yyyy")}`}</span>
+                                            {openDate && (
+                                                <DateRange
+                                                    editableDateInputs={true}
+                                                    onChange={item => setDate([item.selection])}
+                                                    moveRangeOnFirstSelection={false}
+                                                    ranges={date}
+                                                    locale={enUS}
+                                                    rangeColors={["#85B919"]}
+                                                    className="absolute top-12 z-50 date bg-white shadow-lg"
+                                                    />
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                {/* Occupancy Dropdown */}
+                                <div className="HeaderSearchItem">
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700">Occupancy</label>
+                                        <div className="relative mt-1">
+                                <FontAwesomeIcon
+                                    icon={faUser}
+                                    className="absolute top-1/2 left-2 -translate-y-1/2 text-gray-500"
+                                />
+                                <span
+                                    onClick={() => setOpenOptions(!openOptions)}
+                                    className="HeaderSearchText block w-full pl-10 py-2 rounded-md border border-gray-300 text-gray-700 cursor-pointer focus:ring-blue-400 focus:border-blue-400"
+                                >
+                                    {`${options.adult} adultes - ${options.children} enfants - ${options.room} chambres`}
+                                </span>
+                                {openOptions && (
+                                    <div className="absolute mt-1 bg-white border border-gray-300 rounded-md shadow-lg p-4 z-20">
+                                        {/* Adult Counter */}
+                                        <div className="optionItem flex items-center justify-between">
+                                            <span className="optionText">Adultes</span>
+                                            <div className="optionCounter flex items-center space-x-2">
+                                                <button
+                                                    type="button"
+                                                    disabled={options.adult <= 1}
+                                                    className="optionCounterButton px-2 py-1 bg-gray-200 rounded"
+                                                    onClick={() => handleOption('adult', 'd')}
+                                                >
+                                                    -
+                                                </button>
+                                                <span className="optionCounterNumber">{options.adult}</span>
+                                                <button
+                                                    type="button"
+                                                    className="optionCounterButton px-2 py-1 bg-gray-200 rounded"
+                                                    onClick={() => handleOption('adult', 'i')}
+                                                >
+                                                    +
+                                                </button>
                                             </div>
-                                        )}
+                                        </div>
+
+                                        {/* Children Counter */}
+                                        <div className="optionItem flex items-center justify-between mt-2">
+                                            <span className="optionText">Enfants</span>
+                                            <div className="optionCounter flex items-center space-x-2">
+                                                <button
+                                                    type="button"
+                                                    disabled={options.children <= 0}
+                                                    className="optionCounterButton px-2 py-1 bg-gray-200 rounded"
+                                                    onClick={() => handleOption('children', 'd')}
+                                                >
+                                                    -
+                                                </button>
+                                                <span className="optionCounterNumber">{options.children}</span>
+                                                <button
+                                                    type="button"
+                                                    className="optionCounterButton px-2 py-1 bg-gray-200 rounded"
+                                                    onClick={() => handleOption('children', 'i')}
+                                                >
+                                                    +
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        {/* Room Counter */}
+                                        <div className="optionItem flex items-center justify-between mt-2">
+                                            <span className="optionText">Chambres</span>
+                                            <div className="optionCounter flex items-center space-x-2">
+                                                <button
+                                                    type="button"
+                                                    disabled={options.room <= 1}
+                                                    className="optionCounterButton px-2 py-1 bg-gray-200 rounded"
+                                                    onClick={() => handleOption('room', 'd')}
+                                                >
+                                                    -
+                                                </button>
+                                                <span className="optionCounterNumber">{options.room}</span>
+                                                <button
+                                                    type="button"
+                                                    className="optionCounterButton px-2 py-1 bg-gray-200 rounded"
+                                                    onClick={() => handleOption('room', 'i')}
+                                                >
+                                                    +
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                                     </div>
                                 </div>
+    
+                                {/* Search Button */}
+                                <div className="relative w-full">
+                                    <Link href={`/HotelsResult?ville=${selectedDestination}`}>
+                                        <button
+                                            className="btn_rechercher w-72 lg:w-72 md:w-36 py-2 bg-gradient-to-r from-[#FF5555] to-[#F40091] text-white font-semibold rounded-lg transform transition-transform duration-300 hover:bg-lime-600 hover:scale-105 focus:outline-none"
+                                            disabled={!selectedDestination} // Disable the button if no destination is selected
+                                        >
+                                            Rechercher
+                                        </button>
+                                    </Link>
+                                </div>
+    
                             </div>
-
-                            {/* Search Button */}
-                            <div className="relative w-full">
-                                <Link href={`/HotelsResult?ville=${selectedDestination}`}>
-                                    <button
-                                        className="btn_rechercher w-72 lg:w-72 md:w-36 py-2 bg-gradient-to-r from-[#FF5555] to-[#F40091] text-white font-semibold rounded-lg transform transition-transform duration-300 hover:bg-lime-600 hover:scale-105 focus:outline-none"
-                                        disabled={!selectedDestination} // Disable the button if no destination is selected
-                                    >
-                                        Rechercher
-                                    </button>
-                                </Link>
-                            </div>
-
                         </div>
                     </div>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
         </Suspense>
     );
+    
 };
 
 export default MoteurResult;

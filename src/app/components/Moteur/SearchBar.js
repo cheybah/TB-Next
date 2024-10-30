@@ -161,15 +161,15 @@ const SearchBar = () => {
                             </span>
 
                             {openDate && (
-                                <div className="absolute z-20 mt-1 w-full bg-white border border-gray-300 shadow-lg">
-                                    <DateRange
-                                        editableDateInputs
-                                        onChange={(item) => setDate([item.selection])}
-                                        moveRangeOnFirstSelection={false}
-                                        ranges={date}
-                                        locale={enUS}
-                                       
-                                    />
+                                            <div className="absolute z-20 mt-1 w-full bg-white border border-gray-300 shadow-lg">
+
+                                <DateRange
+                                    editableDateInputs
+                                    onChange={(item) => setDate([item.selection])}
+                                    moveRangeOnFirstSelection={false}
+                                    ranges={date}
+                                    locale={enUS}
+                                />
                                 </div>
                             )}
                         </div>
