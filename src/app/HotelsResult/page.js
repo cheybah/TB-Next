@@ -9,6 +9,8 @@ const Footer = dynamic(() => import('../components/Footer/Footer'), { ssr: false
 
 
 const HotelsResult = () => {
+
+
     return (
         <>
             <Head>
@@ -22,7 +24,9 @@ const HotelsResult = () => {
             <div className="min-h-screen flex flex-col">
                 <Header />
                 <MoteurResult />
+                <div className="overflow-x-hidden">
                 <ResultHotel />
+                </div>
                 <Footer/>
             </div>
         </>

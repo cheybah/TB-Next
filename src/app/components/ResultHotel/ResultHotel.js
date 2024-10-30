@@ -73,30 +73,30 @@ const ResultHotel = () => {
         <div>
             {/* Start of hotel results */}
             <section id="result">
-                <div className="relative max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6 z-9 w-full">
+                <div className="relative max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6 z-9 w-full mb-12 ">
                     {ListHotels.map((hotel) => (
-                        <Card key={hotel.id_hotel} className="w-full flex-row mb-4">
+                        <Card key={hotel.id_hotel} className="w-full flex flex-col md:flex-row mb-6">
                             <CardHeader
                                 shadow={false}
                                 floated={false}
-                                className="m-0 w-2/5 shrink-0 rounded-r-none"
-                            >
+                                className="m-0 md:w-2/5 w-full rounded-t-md md:rounded-r-none md:rounded-l-md"
+                                >
                                 <img
                                     src={hotel.images.image_principal}
                                     alt="card-image"
                                     className="h-full w-full object-cover"
                                 />
                             </CardHeader>
-                            <CardBody className='w-full'>
-                                <Typography variant="h4" color="blue-gray" className="mb-2 flex items-center space-x-4">
+                            <CardBody className='w-full p-4 z-0'>
+                                <Typography variant="h4" color="blue-gray" className="mb-2 flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-x-4">
                                     <span>{hotel.libelle_hotel}</span>
                                     {ListhotelTripAdv.map((hotelTripAdv) =>
                                         hotel.id_hotel === hotelTripAdv.id_hotel ? (
-                                            <div key={hotelTripAdv.id_hotel} className="flex items-center justify-end space-x-2">
+                                            <div key={hotelTripAdv.id_hotel} className="flex items-center space-x-2">
                                                 <img
                                                     src="/icon_tripadvisor.svg"
                                                     alt="icon_tripadvisor"
-                                                    className="w-15 h-15 mb-2"
+                                                    className="w-15 h-15 md:w-15 md:h-15 mb-2" 
                                                 />
                                                 <span>
                                                     {hotelTripAdv.note_tripad}/5 {hotelTripAdv.text_tripad}
@@ -111,15 +111,18 @@ const ResultHotel = () => {
                                         <table className="w-full min-w-max table-auto text-left">
                                             <thead>
                                                 <tr>
+                                                <div className="overflow-x-auto whitespace-nowrap ">
+
                                                     <Tabs value={activeTab}>
-                                                        <TabsHeader>
+                                                        <TabsHeader className="mb-4">
                                                             {data.map(({ label, value }) => (
-                                                                <Tab key={value} value={value} onClick={() => setActiveTab(value)}>
+                                                                <Tab key={value} value={value} onClick={() => setActiveTab(value)} className="lex-shrink-0 min-w-[120px] px-3 py-2 text-sm text-center">
                                                                     {label}
                                                                 </Tab>
                                                             ))}
                                                         </TabsHeader>
                                                     </Tabs>
+                                                    </div>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -131,27 +134,25 @@ const ResultHotel = () => {
                                                         <tr key={name}>
                                                             <td className={classes}>
                                                                 <Typography variant="small" color="blue-gray" className="font-normal">
-                                                                    <div className="flex items-center space-x-0">
+                                                                    <div className="flex items-center space-x-2">
                                                                         <div className="m-0 p-0">
                                                                             <Checkbox id={`ripple-on-${index}`} ripple={true} />
                                                                         </div>
-                                                                        <div className="m-0 p-0">
                                                                             <span>{name}</span>
-                                                                        </div>
                                                                     </div>
-                                                                   
+
                                                                 </Typography>
                                                             </td>
                                                             <td> <div>{prix}DT</div></td>
                                                         </tr>
                                                     );
-                                                    
+
                                                 })}
-                                               
+
                                             </tbody>
                                         </table>
                                     </Card>
-                                    
+
                                 </Typography>
                                 <a href="#" className="inline-block w-full">
                                     <div className="relative w-full">

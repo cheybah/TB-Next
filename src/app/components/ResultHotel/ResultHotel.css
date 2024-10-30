@@ -1,0 +1,13 @@
+@media (min-width: 768px) {
+    .tabs-container {
+        overflow-x: auto !important; /* Allow horizontal scrolling */
+        white-space: nowrap !important; /* Prevent wrapping of tabs */
+    }
+
+    .tab {
+        flex: 0 0 auto !important; /* Prevent tabs from shrinking */
+        min-width: 120px !important; /* Set a minimum width for each tab */
+        padding: 10px !important; /* Adjust padding as needed */
+    }
+}
+

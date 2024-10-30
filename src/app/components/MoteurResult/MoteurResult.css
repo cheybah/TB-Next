@@ -110,7 +110,7 @@ label{
 .date{
     position: absolute;
     top: 50px;
-    z-index: 10; /* Add this to ensure it's above other elements */
+    z-index: 20; /* Add this to ensure it's above other elements */
 }
 
 .options{

@@ -114,7 +114,7 @@ const SearchBar = () => {
                                 }`}
                         >
                             <img src={`/${tab.icon}`} alt={`${tab.label} Icon`} className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-8" />
-                            <span className="text-sm sm:text-base font-medium">{tab.label}</span>
+                            <span className="hidden sm:flex text-sm sm:text-base font-medium">{tab.label}</span>
                         </div>
                     ))}
                 </div>
@@ -132,7 +132,7 @@ const SearchBar = () => {
                                 <ListboxButton className="HeaderSearchInput" style={{ color: 'grey' }}>
                                     {selectedDestination ? selectedDestination : 'Choisir une destination'}
                                 </ListboxButton>
-                                <ListboxOptions className="absolute w-full bg-white border border-gray-300 mt-1 z-20">
+                                <ListboxOptions className="absolute w-full bg-white border border-gray-300 mt-1 z-20 max-h-80 overflow-y-auto">
                                     {destinations.map((destination) => (
                                         <ListboxOption key={destination} value={destination}>
                                             {({ selected }) => (
@@ -161,14 +161,17 @@ const SearchBar = () => {
                             </span>
 
                             {openDate && (
+                                            <div className="absolute z-20 mt-1 w-full bg-white border border-gray-300 shadow-lg">
+
                                 <DateRange
                                     editableDateInputs
                                     onChange={(item) => setDate([item.selection])}
                                     moveRangeOnFirstSelection={false}
                                     ranges={date}
                                     locale={enUS}
-                                    className="absolute mt-1 z-20"
                                 />
+                                </div>
+
                             )}
                         </div>
                     </div>
