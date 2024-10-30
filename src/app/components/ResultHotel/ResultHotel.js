@@ -74,6 +74,7 @@ const ResultHotel = () => {
             {/* Start of hotel results */}
             <section id="result">
                 <div className="relative max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6 z-9 w-full mb-12 ">
+
                     {ListHotels.map((hotel) => (
                         <Card key={hotel.id_hotel} className="w-full flex flex-col md:flex-row mb-6">
                             <CardHeader

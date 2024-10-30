@@ -171,7 +171,6 @@ const SearchBar = () => {
                                     locale={enUS}
                                 />
                                 </div>
-
                             )}
                         </div>
                     </div>
@@ -272,10 +271,10 @@ const SearchBar = () => {
             <div className="absolute z-10 flex justify-center absolute bottom-[-2px] left-1/2 transform -translate-x-1/2">
                 <Link href={`/HotelsResult?ville=${selectedDestination}`}>
                     <button
-                    type="submit"
-                    style={{marginBottom:"-5%"}}
-                    className="w-36 sm:w-72 py-2 bg-gradient-to-r from-[#FF5555] to-[#F40091] text-white font-semibold rounded-lg transform transition-transform duration-300 hover:bg-lime-600 hover:scale-105 focus:outline-none"
-                    disabled={!selectedDestination} // Disable the button if no destination is selected
+                        type="submit"
+                        style={{ marginBottom: "-5%", cursor: "pointer" }}
+                        className="w-36 sm:w-72 py-2 bg-gradient-to-r from-[#FF5555] to-[#F40091] text-white font-semibold rounded-lg transform transition-transform duration-300 hover:bg-lime-600 hover:scale-105 focus:outline-none"
+                        disabled={!selectedDestination} // Disable the button if no destination is selected
                     >
                         Rechercher
                     </button>
