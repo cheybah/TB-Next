@@ -55,6 +55,7 @@ const destinations = [
     tripAdvisor: 3,
     address :"Zone Touristique Sidi Bakour, 240-4116,  Djerba",
     services: [
+        { name: "Parking", icon: "/parking.svg" }
 
     ]
 },
@@ -124,14 +125,14 @@ return () => {
 }, []); 
 
 const handleNavigate = (destination) => {
-    // Stringify the services array
-    if (destination.services) {
+    // Ensure services is a stringified array
+    if (destination.services && Array.isArray(destination.services)) {
         destination.services = JSON.stringify(destination.services);
     }
-    
     const query = new URLSearchParams(destination).toString();
     router.push(`/HotelDetails?${query}`);
 };
+
 
 
 return (
