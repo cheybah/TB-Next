@@ -1,4 +1,3 @@
-"use client";
 
 import Header from "../Header/Header";
 import { useSearchParams } from "next/navigation";
@@ -23,7 +22,6 @@ const CUSTOM_ANIMATION = {
     mount: { scale: 1 },
     unmount: { scale: 0.9 },
 };
-
 
 const HotelDetailsContent  = () => {
     const [open, setOpen] = React.useState(0);
