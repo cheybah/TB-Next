@@ -200,6 +200,7 @@ const HotelDetailsContent  = () => {
                                         <div className="relative">
                                         {hotel.services.map((service, index) => (
                                                 <button
+                                                aria-label="services"
                                                     key={index}
                                                     className="bg-transparent hover:bg-gray-300 text-black font-normal 
                                                     hover:text-white py-2 px-4 border border-gray-700 
@@ -299,6 +300,7 @@ const HotelDetailsContent  = () => {
                                                 </div>
                                             )}
                                             <button
+                                            aria-label="Toggle content"
                                                 onClick={toggleContent}
                                                 className="mt-4 text-blue-500 hover:no-underline flex items-center space-x-2"
                                             >

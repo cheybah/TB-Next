@@ -46,7 +46,7 @@ const Footer = () => {
                             <div className="col-xl-4 col-lg-4 mb-50">
                                 <div className="footer-widget">
                                     <div className="footer-logo">
-                                        <a href="index.html"><img src="https://tn.tunisiebooking.com/images/icons-menu-moteur/logo-TunisieBooking1.svg" className="img-fluid" alt="logo" /></a>
+                                        <a href="index.html"><img src="/logo-TunisieBooking1.svg" className="img-fluid" alt="lTunisiebooking ogo" /></a>
                                     </div>
                                     <div className="footer-text">
                                         <p>Découvrez les meilleurs séjours en Tunisie avec TunisieBooking. Votre escapade parfaite est à portée de clic.</p>
@@ -96,7 +96,7 @@ const Footer = () => {
                                     <div className="subscribe-form">
                                         <form action="#">
                                             <input type="text" placeholder="Adresse Email" />
-                                            <button><FontAwesomeIcon icon={faTelegram} className='text-stone-50' size='2x'/></button>
+                                            <button aria-label='email address'><FontAwesomeIcon icon={faTelegram} className='text-stone-50' size='2x'/></button>
                                         </form>
                                     </div>
                                 </div>

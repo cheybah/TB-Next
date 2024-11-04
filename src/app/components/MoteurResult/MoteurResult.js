@@ -133,6 +133,7 @@ const MoteurResult = () => {
                                                         <span className="optionText">Adultes</span>
                                                         <div className="optionCounter flex items-center space-x-2">
                                                             <button
+                                                            aria-label="decrement"
                                                                 type="button"
                                                                 disabled={options.adult <= 1}
                                                                 className="optionCounterButton px-2 py-1 bg-gray-200 rounded"
@@ -142,6 +143,7 @@ const MoteurResult = () => {
                                                             </button>
                                                             <span className="optionCounterNumber">{options.adult}</span>
                                                             <button
+                                                            aria-label="increment"
                                                                 type="button"
                                                                 className="optionCounterButton px-2 py-1 bg-gray-200 rounded"
                                                                 onClick={() => handleOption('adult', 'i')}
@@ -156,6 +158,7 @@ const MoteurResult = () => {
                                                         <span className="optionText">Enfants</span>
                                                         <div className="optionCounter flex items-center space-x-2">
                                                             <button
+                                                            aria-label="decrement"
                                                                 type="button"
                                                                 disabled={options.children <= 0}
                                                                 className="optionCounterButton px-2 py-1 bg-gray-200 rounded"
@@ -165,6 +168,7 @@ const MoteurResult = () => {
                                                             </button>
                                                             <span className="optionCounterNumber">{options.children}</span>
                                                             <button
+                                                            aria-label="increment"
                                                                 type="button"
                                                                 className="optionCounterButton px-2 py-1 bg-gray-200 rounded"
                                                                 onClick={() => handleOption('children', 'i')}
@@ -179,6 +183,7 @@ const MoteurResult = () => {
                                                         <span className="optionText">Chambres</span>
                                                         <div className="optionCounter flex items-center space-x-2">
                                                             <button
+                                                            aria-label="decrement"
                                                                 type="button"
                                                                 disabled={options.room <= 1}
                                                                 className="optionCounterButton px-2 py-1 bg-gray-200 rounded"
@@ -188,6 +193,7 @@ const MoteurResult = () => {
                                                             </button>
                                                             <span className="optionCounterNumber">{options.room}</span>
                                                             <button
+                                                            aria-label="increment"
                                                                 type="button"
                                                                 className="optionCounterButton px-2 py-1 bg-gray-200 rounded"
                                                                 onClick={() => handleOption('room', 'i')}

@@ -147,7 +147,7 @@ Les Imbattables du Moment
     className={`destination-card transform transition-all duration-1000 ease-out`}
     onClick={() => handleNavigate(destination)} //onClick event to get destination by id 
     >
-    <a className="relative image-container">
+    <div className="relative image-container">
         <img
         className="destination-image"
         src={destination.image}
@@ -156,11 +156,11 @@ Les Imbattables du Moment
         <span className="discount-badge">
         {destination.discount}
         </span>
-    </a>
+    </div>
     <div className="content-container">
-        <a href="#">
+        <div>
         <h5 className="destination-title">{destination.name}</h5>
-        </a>
+        </div>
         <div className="price-container">
         <p>
             <span className="current-price">{destination.price}</span>

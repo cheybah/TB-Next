@@ -87,7 +87,7 @@ const Carousel = () => {
                         <div className="relative mx-2">
                             <img
                                 src={slide.url_image_p}
-                                alt={`Slide ${index + 1}`}
+                                alt={`Slide no~ ${index + 1}`}
                                 className="carousel-image"
                             />
                             <div className="absolute inset-0 flex flex-col justify-center items-center text-white">

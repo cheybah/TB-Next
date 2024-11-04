@@ -149,25 +149,25 @@ return (
         <div className='optionItem'>
         <span className='optionText'>Adult</span>
         <div className='optionCounter'>
-        <button disabled= {options.adult <= 1} className='optionCounterButton' onClick={()=>handleOption("adult","d")}>-</button>
+        <button disabled= {options.adult <= 1} className='optionCounterButton' aria-label="decrement" onClick={()=>handleOption("adult","d")}>-</button>
         <span className='optionCounterNumber'>{options.adult}</span>
-        <button className='optionCounterButton'onClick={()=>handleOption("adult","i")}>+</button>
+        <button className='optionCounterButton' aria-label="increment" onClick={()=>handleOption("adult","i")}>+</button>
         </div>
         </div> 
         <div className='optionItem'>
         <span className='optionText'>Children</span>
         <div className='optionCounter'>
-        <button disabled= {options.children <= 0} className='optionCounterButton' onClick={()=>handleOption("children","d")}>-</button>
+        <button disabled= {options.children <= 0} className='optionCounterButton' aria-label="decrement" onClick={()=>handleOption("children","d")}>-</button>
         <span className='optionCounterNumber'>{options.children}</span>
-        <button className='optionCounterButton'onClick={()=>handleOption("children","i")}>+</button>
+        <button className='optionCounterButton' aria-label="increment" onClick={()=>handleOption("children","i")}>+</button>
         </div>
         </div>
         <div className='optionItem'>
         <span className='optionText'>Room</span>
         <div className='optionCounter'>
-        <button disabled= {options.room <= 1} className='optionCounterButton' onClick={()=>handleOption("room","d")}>-</button>
+        <button disabled= {options.room <= 1} className='optionCounterButton' aria-label="decrement" onClick={()=>handleOption("room","d")}>-</button>
         <span className='optionCounterNumber'>{options.room}</span>
-        <button className='optionCounterButton' onClick={()=>handleOption("room","i")}>+</button>
+        <button className='optionCounterButton' aria-label="increment" onClick={()=>handleOption("room","i")}>+</button>
         </div>
         </div> 
         </div>}

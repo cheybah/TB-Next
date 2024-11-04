@@ -76,8 +76,8 @@ return (
         <a href="#" className="-m-1.5 p-1.5">
         <span className="sr-only">Your Company</span>
         <img
-            alt=""
-            src="https://tn.tunisiebooking.com/images/icons-menu-moteur/logo-TunisieBooking1.svg"
+            alt="Tunisiebooking logo"
+            src="/logo-TunisieBooking1.svg"
             className="h-8 w-auto"
         />
         </a>
@@ -85,6 +85,7 @@ return (
     <div className="flex lg:hidden">
         <button
         type="button"
+        aria-label='Open main menu'
         onClick={() => setMobileMenuOpen(true)}
         className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
         >
@@ -229,13 +230,14 @@ className="absolute -left-8 top-full z-10 mt-31 w-screen max-w-xl overflow-hidde
         <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <img
-            alt=""
-            src="https://tn.tunisiebooking.com/images/icons-menu-moteur/logo-TunisieBooking1.svg"
+            alt="Tunisiebooking logo"
+            src="/logo-TunisieBooking1.svg"
             className="h-8 w-auto"
             />
         </a>
         <button
             type="button"
+            aria-label='Close main menu'
             onClick={() => setMobileMenuOpen(false)}
             className="-m-2.5 rounded-md p-2.5 text-gray-700"
         >

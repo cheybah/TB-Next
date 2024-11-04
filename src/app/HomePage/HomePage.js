@@ -19,8 +19,8 @@ const SplashScreen = () => {
     return (
         <div className="splash-screen w-full h-screen flex items-center justify-center bg-white-500">
         <img 
-            src="https://tn.tunisiebooking.com/images/icons-menu-moteur/logo-TunisieBooking1.svg" 
-            alt="Tunisie Booking Logo" 
+            src="/logo-TunisieBooking1.svg" 
+            alt="Tunisiebooking logo" 
             className="floating-logo"
         />
         </div>

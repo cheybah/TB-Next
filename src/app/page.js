@@ -1,4 +1,3 @@
-'use client';
 
 import dynamic from 'next/dynamic';
 const TestComponent = dynamic(() => import('./HomePage/HomePage'), { ssr: false });
