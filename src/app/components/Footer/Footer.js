@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTelegram, faYoutube, faInstagram} from '@fortawesome/free-brands-svg-icons';
 import { faMapPin, faPhone , faEnvelope, } from '@fortawesome/free-solid-svg-icons';
 import Copyright from '../Copyright/Copyright';
-
+import Image from 'next/image';
 const Footer = () => {
     return (
         <>
@@ -46,7 +46,16 @@ const Footer = () => {
                             <div className="col-xl-4 col-lg-4 mb-50">
                                 <div className="footer-widget">
                                     <div className="footer-logo">
-                                        <a href="index.html"><img src="https://tn.tunisiebooking.com/images/icons-menu-moteur/logo-TunisieBooking1.svg" className="img-fluid" alt="logo" /></a>
+                                        <a href="index.html">
+                                            <Image
+                                                src="https://tn.tunisiebooking.com/images/icons-menu-moteur/logo-TunisieBooking1.svg" 
+                                                alt="logo"
+                                                width={500}
+                                                height={300}
+                                                loading="lazy"
+                                                className="img-fluid"
+                                            />
+                                        </a>
                                     </div>
                                     <div className="footer-text">
                                         <p>Découvrez les meilleurs séjours en Tunisie avec TunisieBooking. Votre escapade parfaite est à portée de clic.</p>
@@ -59,7 +68,7 @@ const Footer = () => {
                                         </div>
                                     </a>
                                     <a href="https://www.instagram.com/tunisiebooking/" aria-label="Instagram" className="group">
-                                        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-violet-400 text-white transform transition-transform duration-300 group-hover:rotate-180">
+                                        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-violet-400 text-white transform transition-transform duration-300 group-hover:rotate-180"   style={{backgroundColor:"blueviolet"}}>
                                             <FontAwesomeIcon icon={faInstagram} size="lg" />
                                         </div>
                                     </a>
@@ -88,7 +97,7 @@ const Footer = () => {
                             <div className="col-xl-4 col-lg-4 col-md-6 mb-50">
                                 <div className="footer-widget">
                                     <div className="footer-widget-heading">
-                                        <h3>S'abonner</h3>
+                                        <h3>S&apos;abonner</h3>
                                     </div>
                                     <div className="footer-text mb-25">
                                         <p>Ne manquez pas de vous abonner à nos nouveaux flux, merci de bien vouloir remplir le formulaire ci-dessous.</p>

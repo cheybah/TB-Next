@@ -4,7 +4,7 @@ ul {
 }
 
 @import '~bootstrap/dist/css/bootstrap.min.css';
-@import '../Footer/footer.css';
+@import '../Footer/Footer.css';
 
 .copyright-area {
     background: #202020;

@@ -25,7 +25,7 @@ const handleOpen = (value) => setOpen(open === value ? 0 : value);
             </div>
             <div>
                 <h1 className="text-center font-bold text-2xl antialiased  hidden1 mo">
-                    Agence de voyage Tunisie Booking : le N° 1 D'Hôtel Tunisie
+                    Agence de voyage Tunisie Booking : le N° 1 D&apos;Hôtel Tunisie
                 </h1>
                 <p style={{ marginLeft: '80px', marginRight: '80px' }}>
                     La Tunisie, avec ses plages de rêve, son mythique désert du Sahara, ses innombrables souks, ses sites archéologiques, ainsi que bien d’autres encore, a énormément à offrir aux vacanciers. De plus, grâce aux services de Tunisie Booking, organiser un voyage dans ce beau pays n’a jamais été aussi facile. On peut, en effet, y réserver ses séjours en toute sécurité et à un prix alléchant.
@@ -35,7 +35,7 @@ const handleOpen = (value) => setOpen(open === value ? 0 : value);
                 <Accordion style={{marginLeft: '15px' , marginRight: '15px'}} open={open === 1} animate={CUSTOM_ANIMATION}>
                     <AccordionHeader onClick={() => handleOpen(1)}>Pourquoi réserver vos vacances chez TunisieBooking ?</AccordionHeader>
                     <AccordionBody>
-                    Avec la révolution internet, il est devenu très facile de faire la réservation de son voyage devant son écran d’ordinateur ou de son Smartphone. <br />                    Ainsi, on peut tout simplement voir les multiples offres en ligne sur la destination voulue et réserver un hôtel, ou Voyages à l'étranger ou quelques activités à faire une fois sur place.
+                    Avec la révolution internet, il est devenu très facile de faire la réservation de son voyage devant son écran d’ordinateur ou de son Smartphone. <br />                    Ainsi, on peut tout simplement voir les multiples offres en ligne sur la destination voulue et réserver un hôtel, ou Voyages à l&apos;étranger ou quelques activités à faire une fois sur place.
                     </AccordionBody>
                 </Accordion >
                 <Accordion style={{marginLeft: '15px' , marginRight: '15px'}} open={open === 2} animate={CUSTOM_ANIMATION}>
@@ -45,7 +45,7 @@ const handleOpen = (value) => setOpen(open === value ? 0 : value);
                     <AccordionBody>
                     Un des principaux avantages non négligeables de choisir une agence de voyage pour réserver ses vacances c’est le professionnalisme et l’expérience de celle-ci.
                     <br />  Les professionnels du tourisme sauront vous guider et vous informer sur le pays de destination. Ils vous trouveront aussi des réductions auprès des compagnies aériennes et des hôtels qui ont déjà fait leurs preuves.
-                    <br />  Enfin, une agence de voyage peut vous mettre à l'abri des aléas et vous accompagner à votre arrivée si jamais vous rencontrez des problèmes .
+                    <br />  Enfin, une agence de voyage peut vous mettre à l&apos;abri des aléas et vous accompagner à votre arrivée si jamais vous rencontrez des problèmes .
                     </AccordionBody>
                 </Accordion>
                 <Accordion style={{marginLeft: '15px' , marginRight: '15px'}} open={open === 3} animate={CUSTOM_ANIMATION}>

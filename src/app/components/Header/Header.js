@@ -14,8 +14,6 @@ PopoverPanel,
 } from '@headlessui/react'
 import {
 Bars3Icon,
-
-
 XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
@@ -23,7 +21,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnkh, faMosque, faPersonHiking, faPlaceOfWorship, faSun, faPhone, faCircleInfo} from '@fortawesome/free-solid-svg-icons';
 import { Button } from '@headlessui/react'
 import './Header.css'
-
+import Image from 'next/image';
 
 
 const products = [
@@ -75,9 +73,12 @@ return (
     <div className="flex lg:flex-1">
         <a href="#" className="-m-1.5 p-1.5">
         <span className="sr-only">Your Company</span>
-        <img
-            alt=""
+        <Image
             src="https://tn.tunisiebooking.com/images/icons-menu-moteur/logo-TunisieBooking1.svg"
+            alt=""
+            width={500}
+            height={300}
+            loading="lazy"
             className="h-8 w-auto"
         />
         </a>
@@ -228,9 +229,12 @@ className="absolute -left-8 top-full z-10 mt-31 w-screen max-w-xl overflow-hidde
         <div className="flex items-center justify-between">
         <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            <img
-            alt=""
+            <Image
             src="https://tn.tunisiebooking.com/images/icons-menu-moteur/logo-TunisieBooking1.svg"
+            alt=""
+            width={500}
+            height={300}
+            loading="lazy"
             className="h-8 w-auto"
             />
         </a>

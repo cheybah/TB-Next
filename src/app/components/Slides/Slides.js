@@ -1,9 +1,12 @@
+"use client" ;
+
 import React, { useEffect } from 'react';
 import './slides.css';
-
+import Image from 'next/image';
 
 const Slides = () => {
 useEffect(() => {
+    if (typeof window !== "undefined") {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -21,6 +24,7 @@ useEffect(() => {
     return () => {
         hiddenElements.forEach((element) => observer.unobserve(element));
     };
+}
 }, []); // Empty dependency array to run only on mount
 return (
 <div className="slider avantage mt-10 mb-4">
@@ -29,37 +33,49 @@ Les Bonnes Raisons de faire appel à nous
 </p>
 <div className="flex flex-col lg:flex-row justify-around items-center gap-6">
 <div className="logo hidden1 flex flex-col items-center w-full max-w-xs">
-    <img
-    alt="prix-garantis"
-    className="w-24 h-20 mb-2"
-    src="/prix-garantis.svg"
+    <Image
+        src="/prix-garantis.svg"
+        alt="prix-garantis"
+        width={500}
+        height={300}
+        loading="lazy"
+        className="w-24 h-20 mb-2"
     />
     <p className="title_avantage text-center">Meilleur Prix Garanti</p>
-    <p className="sous_title_avantage mb-1 font-medium text-center">Hôtel, voyage, Billet d'avion...</p>
+    <p className="sous_title_avantage mb-1 font-medium text-center">Hôtel, voyage, Billet d&apos;avion...</p>
 </div>
 <div className="logo hidden1 flex flex-col items-center w-full max-w-xs">
-    <img
-    src="/assistance_conseillers.svg"
-    alt="ass_conseillers"
-    className="w-24 h-20 mb-2"
+    <Image
+        src="/assistance_conseillers.svg"
+        alt="ass_conseillers"
+        width={500}
+        height={300}
+        loading="lazy"
+        className="w-24 h-20 mb-2"
     />
     <p className="title_avantage text-center">Service Clients</p>
     <p className="sous_title_avantage mb-1 font-medium text-center">à votre écoute 7/7</p>
 </div>
 <div className="logo hidden1 flex flex-col items-center w-full max-w-xs">
-    <img
-    src="/Combined-Shape.svg"
-    alt="Combined-Shape"
-    className="w-24 h-20 mb-2"
+    <Image
+        src="/Combined-Shape.svg"
+        alt="Combined-Shape"
+        width={500}
+        height={300}
+        loading="lazy"
+        className="w-24 h-20 mb-2"
     />
     <p className="title_avantage text-center">Paiement Sécurisé</p>
     <p className="sous_title_avantage mb-1 font-medium text-center">Réservations Faciles et 100% Sécurisées</p>
 </div>
 <div className="logo hidden1 flex flex-col items-center w-full max-w-xs">
-    <img
-    src="/e-agence.svg"
-    alt="e-agence"
-    className="w-24 h-20 mb-2"
+    <Image
+        src="/e-agence.svg"
+        alt="e-agence"
+        width={500}
+        height={300}
+        loading="lazy"
+        className="w-24 h-20 mb-2"
     />
     <p className="title_avantage text-center">34 Agences</p>
     <p className="sous_title_avantage mb-1 font-medium text-center">à travers la Tunisie</p>

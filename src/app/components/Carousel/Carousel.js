@@ -5,10 +5,12 @@ import { Splide, SplideSlide } from 'splide-nextjs/react-splide';
 import 'splide-nextjs/splide/dist/css/themes/splide-default.min.css';
 import './carousel.css'; 
 import axios from 'axios';
+import Image from 'next/image';
 
 const Carousel = () => {
     const [slides, setSlides] = useState([]);
     useEffect(() => {
+        if (typeof window !== "undefined") {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -27,6 +29,7 @@ const Carousel = () => {
         return () => {
             hiddenElements.forEach((element) => observer.unobserve(element));
         };
+    }
     }, []); // Run once on mount
 
     // Fetch slides data
@@ -83,10 +86,13 @@ const Carousel = () => {
                 {slides.map((slide, index) => (
                     <SplideSlide key={index}>
                         <div className="relative mx-2">
-                            <img
+                            <Image
                                 src={slide.url_image_p}
-                                alt={`Slide ${index + 1}`}
+                                alt={`Slide_${index + 1}`}
                                 className="carousel-image"
+                                width={500}
+                                height={300}
+                                loading="lazy"
                             />
                             <div className="absolute inset-0 flex flex-col justify-center items-center text-white">
                                 <a href={slide.url_redirection} className="text-3xl font-bold mb-4">

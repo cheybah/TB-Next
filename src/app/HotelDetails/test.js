@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-
+import Image from 'next/image';
 
 const Test =() =>{
 
@@ -15,7 +15,14 @@ return(
 <div className="grid grid-cols-8 items-start gap-4">
 {/* Icon and Vertical Separator */}
 <div className="col-span-1 flex items-start space-x-2">
-    <img src="/chambre.svg" className="h-8 w-8" alt="Icon" />
+    <Image
+        src="/chambre.svg"
+        alt="Icon_chambre"
+        className="h-8 w-8"
+        width={500}
+        height={300}
+        loading="lazy"
+    />
 </div>
 <div className="w-[1px] bg-gray-300 h-full"></div> {/* Vertical Separator */}
 
@@ -50,7 +57,14 @@ return(
 <div className="grid grid-cols-8 items-start gap-4">
 {/* Icon and Vertical Separator */}
 <div className="col-span-1 flex items-start space-x-2">
-    <img src="/wifi.svg" className="h-8 w-8" alt="Icon" />
+    <Image
+        src="/wifi.svg" 
+        alt="Icon_wifi"
+        className="h-8 w-8"
+        width={500}
+        height={300}
+        loading="lazy"
+    />
 </div>
 <div className="w-[1px] bg-gray-300 h-full"></div> {/* Vertical Separator */}
 
@@ -73,7 +87,14 @@ return(
 <div className="grid grid-cols-8 items-start gap-4">
 {/* Icon and Vertical Separator */}
 <div className="col-span-1 flex items-start space-x-2">
-    <img src="/restauration.svg" className="h-8 w-8" alt="Icon" />
+    <Image
+        src="/restauration.svg" 
+        alt="Icon_restauration"
+        className="h-8 w-8" 
+        width={500}
+        height={300}
+        loading="lazy"
+    />
 </div>
 <div className="w-[1px] bg-gray-300 h-full"></div> {/* Vertical Separator */}
 

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+"use client"; // This is a client component
+import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from "next/navigation";
 import { Listbox } from '@headlessui/react';
@@ -55,6 +56,7 @@ const MoteurResult = () => {
     };
 
     return (
+        <Suspense>
         <div className='flex justify-center -mt-52 lg:mt-16 md:mt-96 mx-2'>
             <form>
                 <div className="div_form1 slider top-2/3 flex flex-wrap items-center justify-between max-w-screen-xl -mt-10 lg:-mt-0 md:-mt-72 ">
@@ -162,6 +164,7 @@ const MoteurResult = () => {
                 </div>
             </form>
         </div>
+        </Suspense>
     );
 };
 
