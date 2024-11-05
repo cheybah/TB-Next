@@ -7,11 +7,11 @@ export const metadata = {
     description: 'Find the best hotel results here.',
 };
 
-const HotelsResult = () => {  //hydrate data
+const HotelsDetails = () => {  //hydrate data
     return (
 <Nav />
     );
 };
 
 
-export default HotelsResult;        
+export default HotelsDetails;        
