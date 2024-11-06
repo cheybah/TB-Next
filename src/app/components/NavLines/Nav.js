@@ -1,7 +1,8 @@
-"use client";
+"use client" ;
 import Header from "../Header/Header";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense } from "react";
+import { destinations } from "../TopDestinations/Destinations";
 import Copyright from "../Copyright/Copyright";
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,8 +19,18 @@ import PresentationCard from "../Presentation/PresentationCard";
 
 const HotelDetailsContent = () => {
     const searchParams = useSearchParams();
+    const hotelId = searchParams.get("id");
 
-    const [hotel, setHotel] = useState(null);
+    const hotel = destinations.find(dest => dest.id.toString() === hotelId);
+
+    if (!hotel) return <div>Hotel not found.</div>;
+
+    // Ensure `hotel.services` is an array by parsing if necessary
+    const services = Array.isArray(hotel.services)
+        ? hotel.services
+        : hotel.services ? JSON.parse(hotel.services) : [];
+
+
 
 
 
@@ -56,35 +67,6 @@ const HotelDetailsContent = () => {
     };
 
 
-
-
-    useEffect(() => {
-        const hotelData = {
-            id: searchParams.get("id"),
-            image: searchParams.get("image"),
-            discount: searchParams.get("discount"),
-            name: searchParams.get("name"),
-            location: searchParams.get("location"),
-            price: searchParams.get("price"),
-            originalPrice: searchParams.get("originalPrice"),
-            rating: searchParams.get("rating"),
-            date: searchParams.get("date"),
-            tripAdvisor: parseInt(searchParams.get("tripAdvisor"), 10),// Convert to number
-            address: searchParams.get("address"),
-            services: searchParams.get("services") ? JSON.parse(searchParams.get("services")) : [] // Provide a default empty array
-        };
-        console.log(
-            "TripAdvisor rating description:",
-            getRatingDescription(hotelData.tripAdvisor)
-        );
-        setHotel(hotelData);
-    }, [searchParams]);
-
-    if (!hotel) {
-        return (
-            <div>Loading...</div>
-        );
-    }
 
 
 
@@ -182,21 +164,25 @@ const HotelDetailsContent = () => {
                                         </div>
                                         <div className="text-xl font-medium text-left">Principales Services</div>
                                         <div className="relative">
-                                            {hotel.services.map((service, index) => (
-                                                <button
-                                                    aria-label="services"
-                                                    key={index}
-                                                    className="bg-transparent hover:bg-gray-300 text-black font-normal 
-                                                    hover:text-white py-2 px-4 border border-gray-700 
-                                                    hover:border-transparent rounded-full mr-2 mt-[4%] 
-                                                    cursor-pointer relative"
-                                                >
-                                                    <div className="flex items-center">
-                                                        <img src={service.icon} alt={service.name} className="mr-2 w-[20px]" />
-                                                        {service.name}
-                                                    </div>
-                                                </button>
-                                            ))}
+                                            {services.length > 0 ? (
+                                                services.map((service, index) => (
+                                                    <button
+                                                        aria-label="services"
+                                                        key={index}
+                                                        className="bg-transparent hover:bg-gray-300 text-black font-normal 
+                hover:text-white py-2 px-4 border border-gray-700 
+                hover:border-transparent rounded-full mr-2 mt-[4%] 
+                cursor-pointer relative"
+                                                    >
+                                                        <div className="flex items-center">
+                                                            <img src={service.icon} alt={service.name} className="mr-2 w-[20px]" />
+                                                            {service.name}
+                                                        </div>
+                                                    </button>
+                                                ))
+                                            ) : (
+                                                <p className="text-gray-500">No services available</p>
+                                            )}
 
                                             <div className="text-left mt-4 cursor-pointer relative">
                                                 <a
@@ -210,6 +196,7 @@ const HotelDetailsContent = () => {
                                                 </a>
                                             </div>
                                         </div>
+
 
                                     </div>
                                 </div>

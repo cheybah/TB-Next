@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: http://react.tunisiebooking.com
+
+# Sitemaps
+Sitemap: http://react.tunisiebooking.com/sitemap.xml
