@@ -1,3 +1,4 @@
+"use client" ;
 import React, { useState } from 'react';
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,8 +11,8 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 
 const SearchBar = () => {
-const [destination, setDestination] = useState(''); //destination useState
-const [selectedDestination, setSelectedDestination] = useState(null);
+const [destination, setDestination] = useState(false); //destination useState
+const [selectedDestination, setSelectedDestination] = useState(false);
 const [openDate, setOpenDate] = useState(false); 
 const [date, setDate] = useState([          //dateRange useState
     {
