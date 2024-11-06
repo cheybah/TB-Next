@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
@@ -17,26 +15,27 @@ const PresentationCard = () => {
                 <div className="relative overflow-hidden rounded-lg">
                     <div className="flex items-center justify-between">
                         <div className="text-left mt-4">
-                            <div className="text-2xl font-bold"> Présentation</div>
+                            <div className="text-2xl font-bold">Présentation</div>
                             <div className="w-[5rem] h-[4px] bg-black mt-2"></div>
                             <h3 className="text-left text-lg font-semibold mt-4">Infos Pratiques :</h3>
-                            <p>
-                                Pour découvrir et profiter à bon escient de tous les vestiges de Tunis, Vous devez choisir une ville où vous allez axer votre voyage de luxe.
-                                <br /> Dans ce cas, pourquoi ne pas opter pour Hammamet ? C&apos;est l&apos;une des plus belles villes de la Tunisie.
-                            </p>
-                            {isExpanded && (
+                            
+                            <div className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-none' : 'max-h-[6rem]'}`}>
+                                <p>
+                                    Pour découvrir et profiter à bon escient de tous les vestiges de Tunis, Vous devez choisir une ville où vous allez axer votre voyage de luxe.
+                                    <br /> Dans ce cas, pourquoi ne pas opter pour Hammamet ? C'est l'une des plus belles villes de la Tunisie.
+                                </p>
                                 <div className="mt-4">
                                     <p>
-                                        Elle est accessible et peut vous offrir toute une panoplie d&apos;activités et loisir, de plus, vous pouvez profiter ici de El Mouradi
+                                        Elle est accessible et peut vous offrir toute une panoplie d'activités et loisir, de plus, vous pouvez profiter ici de El Mouradi.
                                     </p>
-                                    <h3 className="text-left text-lg font-semibold mt-4">Situation de l&apos;hôtel :</h3>
+                                    <h3 className="text-left text-lg font-semibold mt-4">Situation de l'hôtel :</h3>
                                     <p>
                                         Au cœur de la station balnéaire de Yasmine Hammamet, sur une superbe plage de sables fins dorée.<br />
                                         A quelques kilomètres au sud de la Ville d&apos;Hammamet, vous découvrirez un grand hôtel 4 étoiles : El Mouradi El Menzeh.<br />
                                         C&apos;est une grande bâtisse blanche rénovée, aux airs un peu palais que vous ne pourrez pas rater.<br />
                                         Il se trouve qu&apos;à quelques kilomètres à peine des parcs d&apos;attractions de la ville.
                                     </p>
-                                    <h3 className="text-left text-lg font-semibold mt-4">Les types d&apos;hébergements que puis-je réserver à l&apos;établissement :</h3>
+                                    <h3 className="text-left text-lg font-semibold mt-4">Les types d'hébergements que puis-je réserver à l'établissement :</h3>
                                     <p>
                                         L&apos;hotel possède 395 chambres, parmi ces derniers, vous avez le choix entre plusieurs types des chambres. <br />
                                         El Mouradi El Menzah est aussi l&apos;une des rares à proposer des suites à ses clients. <br />
@@ -74,7 +73,8 @@ const PresentationCard = () => {
                                         Pour plus d&apos;informations, rendez-vous dans l&apos;une de nos agences de voyage les plus proches de chez-vous.
                                     </p>
                                 </div>
-                            )}
+                            </div>
+                            
                             <button
                                 aria-label="Toggle content"
                                 onClick={toggleContent}
