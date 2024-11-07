@@ -123,7 +123,7 @@ const HotelDetailsContent = () => {
                                         </span>
                                     </div>
                                     <span className="text-lg flex">
-                                        <img src="/icon_tripadvisor.svg" style={{ marginRight: "5px" }} alt="trip advisor logo"></img> {hotel.tripAdvisor} / 5{" "}
+                                        <img src="/icon_tripadvisor.svg" style={{ marginRight: "5px" }}></img> {hotel.tripAdvisor} / 5{" "}
                                         <span className="font-bold" style={{ marginLeft: "5px" }}>{getRatingDescription(hotel.tripAdvisor)}</span>
                                     </span>
                                 </div>
@@ -152,7 +152,7 @@ const HotelDetailsContent = () => {
                                     />
                                     <div className="w-1/3 px-4 text-center" style={{ marginTop: "3%" }}>
                                         <div className="flex space-x-4">
-                                            <img src="/avis.svg" alt="bulbe avis"></img>
+                                            <img src="/avis.svg"></img>
                                             <div className="text-xl font-medium">Avis Voyageurs</div>
                                         </div>
                                         <div className="relative my-6 flex-1 rounded-md p-4" style={{ backgroundColor: "#F4F5F7" }}>
@@ -298,7 +298,7 @@ const HotelDetailsContent = () => {
                                         <div className="grid grid-cols-2 gap-8 mt-6">
                                             <div>
                                                 <div className="flex">
-                                                    <img src="/mesures1.svg" className="mr-2" alt="mesures"></img>
+                                                    <img src="/mesures1.svg" className="mr-2"></img>
                                                     <h3 className="text-lg font-semibold">Mesures de sécurité en vigueur</h3>
                                                 </div>
                                                 <ul className="mt-4 space-y-2">
@@ -315,7 +315,7 @@ const HotelDetailsContent = () => {
 
                                             <div>
                                                 <div className="flex">
-                                                    <img src="/mesures2.svg" className="mr-2" alt="mesures santé"></img>
+                                                    <img src="/mesures2.svg" className="mr-2"></img>
                                                     <h3 className="text-lg font-semibold">Autres mesures</h3>
                                                 </div>
                                                 <ul className="mt-4 space-y-2">
