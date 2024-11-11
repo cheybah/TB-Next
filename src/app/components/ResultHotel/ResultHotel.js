@@ -1,4 +1,3 @@
-// components/ResultHotel/ResultHotel.js
 "use client"; // Ensures ResultHotel is treated as a client component
 
 import React, { useState } from 'react';
@@ -20,6 +19,16 @@ const ResultHotel = ({ listHotels, listHotelTripAdv }) => {
     const [activeTab, setActiveTab] = useState("Petit dejeuner");
     const [filterText, setFilterText] = useState(""); // State to hold filter input value
     const [selectedCategories, setSelectedCategories] = useState([]); // State to hold selected star categories
+    const [selectedFormules, setSelectedFormules] = useState([]); // State to hold selected formules
+    const [selectedRatings, setSelectedRatings] = useState([]); // State for selected TripAdvisor ratings
+
+    // Check if we are on the client side by checking for the window object
+    const isClient = typeof window !== "undefined";
+
+    if (!isClient) {
+        return null; // Return nothing during SSR to prevent hydration issues
+    }
+
     const data = [
         {
             label: "Petit dejeuner",
@@ -49,8 +58,9 @@ const ResultHotel = ({ listHotels, listHotelTripAdv }) => {
             ]
         },
     ];
-     // Group hotels by their 'categorie' (star rating)
-     const hotelsByCategory = listHotels.reduce((acc, hotel) => {
+
+    // Group hotels by their 'categorie' (star rating)
+    const hotelsByCategory = listHotels.reduce((acc, hotel) => {
         const category = hotel.categorie;
         if (!acc[category]) {
             acc[category] = [];
@@ -59,31 +69,75 @@ const ResultHotel = ({ listHotels, listHotelTripAdv }) => {
         return acc;
     }, {});
 
-    // Filter hotels based on input and selected categories
-    const filteredHotels = listHotels.filter(hotel => {
+    // Group hotels by their 'categorie' (star rating) for TripAdvisor ratings
+    const hotelsBynoteTripAdv = listHotelTripAdv.reduce((acc, hotel) => {
+        const note = hotel.note_tripad;
+        if (!acc[note]) {
+            acc[note] = [];
+        }
+        acc[note].push(hotel);
+        return acc;
+    }, {});
+
+    // Filter hotels based on input, selected categories, selected formulas, and selected TripAdvisor ratings
+    const filteredHotels = listHotels.filter((hotel) => {
+        // Search filter 
         const matchesSearch = hotel.libelle_hotel.toLowerCase().includes(filterText.toLowerCase());
+
+        // Category filter 
         const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(hotel.categorie);
-        return matchesSearch && matchesCategory;
+
+        // TripAdvisor filter
+        const hotelTripAdvData = listHotelTripAdv.find((hotelTripAdv) => hotelTripAdv.id_hotel === hotel.id_hotel);
+        const matchesRating =
+            selectedRatings.length === 0 || 
+            (hotelTripAdvData && selectedRatings.some((rating) => hotelTripAdvData.note_tripad === rating));
+
+        return matchesSearch && matchesCategory && matchesRating;
     });
 
     // Handle category checkbox change
     const handleCategoryChange = (category) => {
-        setSelectedCategories(prev => {
+        setSelectedCategories((prev) => {
             if (prev.includes(category)) {
-                return prev.filter(cat => cat !== category); // Uncheck
+                return prev.filter((cat) => cat !== category); // Uncheck
             } else {
                 return [...prev, category]; // Check
             }
         });
     };
+
+    // Handle formule checkbox change
+    const handleFormuleChange = (formule) => {
+        setSelectedFormules((prev) => {
+            if (prev.includes(formule)) {
+                return prev.filter((f) => f !== formule); // Uncheck
+            } else {
+                return [...prev, formule]; // Check
+            }
+        });
+    };
+
+    // Handle TripAdvisor rating checkbox change
+    const handleRatingChange = (note_tripad) => {
+        setSelectedRatings((prev) => {
+            if (prev.includes(note_tripad)) {
+                return prev.filter((r) => r !== note_tripad); // Remove rating if already selected
+            } else {
+                return [...prev, note_tripad]; // Add rating if not selected
+            }
+        });
+    };
+
     return (
         <div className="flex flex-col md:flex-row gap-6">
-            {/* Left part - Filter input */}
+            {/* Left part filter */}
             <div className="md:w-1/4 px-4">
                 <div className="border-b border-blue-gray-900 pb-2">
                     <h2 className="text-lg font-semibold mb-4 !text-blue-gray-900">Filtrer Par:</h2>
                 </div>
-                <div className='my-2 border-b border-blue-gray-900 pb-2'>
+                {/* Filter input */}
+                <div className="my-2 border-b border-blue-gray-900 pb-2">
                     <h2 className="text-lg font-semibold mb-4 !text-blue-gray-900">Nom d'hôtel:</h2>
                     <Input
                         label="Rechercher un hôtel"
@@ -91,7 +145,8 @@ const ResultHotel = ({ listHotels, listHotelTripAdv }) => {
                         onChange={(e) => setFilterText(e.target.value)} // Update filterText state
                     />
                 </div>
-                <div className='my-2'>
+                {/* Filter by category */}
+                <div className="my-2 border-b border-blue-gray-900 pb-2">
                     <h2 className="text-lg font-semibold mb-2 !text-blue-gray-900">Catégorie:</h2>
                     {Object.entries(hotelsByCategory).map(([category, hotels]) => (
                         <div key={category} className="flex items-center">
@@ -115,9 +170,46 @@ const ResultHotel = ({ listHotels, listHotelTripAdv }) => {
                         </div>
                     ))}
                 </div>
+                {/* Filter by formule */}
+                <div className="my-2 border-b border-blue-gray-900 pb-2">
+                    <h2 className="text-lg font-semibold mb-2 !text-blue-gray-900">Formule d'hébergement:</h2>
+                    {data.map(({ label, value }) => (
+                        <div key={value} className="flex items-center">
+                            <Checkbox
+                                id={`ripple-on-formule-${value}`}
+                                ripple={true}
+                                checked={selectedFormules.includes(label)} // Check if the formule is selected
+                                onChange={() => handleFormuleChange(label)} // Handle checkbox change
+                            />
+                            <span className="font-semibold">{label}</span>
+                        </div>
+                    ))}
+                </div>
+                {/* Filter by TripAdvisor rating */}
+                <div className="my-2 border-b border-blue-gray-900 pb-2">
+                    <h2 className="text-lg font-semibold mb-2 !text-blue-gray-900">Note Tripadvisor:</h2>
+                    {Object.entries(hotelsBynoteTripAdv).map(([note, hotels]) => (
+                        <div key={note} className="flex items-center">
+                            <Checkbox
+                                id={`ripple-on-${note}`}
+                                ripple={true}
+                                checked={selectedRatings.includes(note)} // Check if the rating is selected
+                                onChange={() => handleRatingChange(note)} // Handle checkbox change
+                            />
+                            <Image
+                                src={`https://tn.tunisiebooking.com/theme/images/ratings/${note}-34546-5.svg`}
+                                alt={`${note} noteTripAdv`}
+                                className="w-24"
+                                width={500}
+                                height={300}
+                                loading="lazy"
+                            />
+                        </div>
+                    ))}
+                </div>
             </div>
+
             {/* Right part - Result Hotels */}
-            {/* Right part - Hotel results */}
             <section id="result" className="md:w-3/4">
                 <div className="relative max-w-6xl p-6 bg-white rounded-lg shadow-lg mt-6 z-9 w-full mb-[3rem]">
                     {filteredHotels.map((hotel) => (
@@ -127,8 +219,7 @@ const ResultHotel = ({ listHotels, listHotelTripAdv }) => {
                                 floated={false}
                                 className="m-0 w-2/5 shrink-0 rounded-r-none"
                             >
-
-                                  <Image
+                                <Image
                                     src={hotel.images.image_principal}
                                     alt="card-image"
                                     className="h-full w-full object-cover"
@@ -137,7 +228,7 @@ const ResultHotel = ({ listHotels, listHotelTripAdv }) => {
                                     loading="lazy"
                                 />
                             </CardHeader>
-                            <CardBody className='w-full'>
+                            <CardBody className="w-full">
                                 <Typography variant="h4" color="blue-gray" className="mb-2 flex items-center space-x-4">
                                     <span>{hotel.libelle_hotel}</span>
                                     {listHotelTripAdv.map((hotelTripAdv) =>
@@ -174,7 +265,11 @@ const ResultHotel = ({ listHotels, listHotelTripAdv }) => {
                                                     <Tabs value={activeTab}>
                                                         <TabsHeader>
                                                             {data.map(({ label, value }) => (
-                                                                <Tab key={value} value={value} onClick={() => setActiveTab(value)}>
+                                                                <Tab
+                                                                    key={value}
+                                                                    value={value}
+                                                                    onClick={() => setActiveTab(value)}
+                                                                >
                                                                     {label}
                                                                 </Tab>
                                                             ))}
@@ -183,54 +278,61 @@ const ResultHotel = ({ listHotels, listHotelTripAdv }) => {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {data.find(tab => tab.value === activeTab)?.TABLE_ROWS.map(({ name, prix }, index) => {
-                                                    const isLast = index === data.find(tab => tab.value === activeTab).TABLE_ROWS.length - 1;
-                                                    const classes = isLast ? "" : "border-b border-blue-gray-50";
+                                                {data
+                                                    .find((tab) => tab.value === activeTab)
+                                                    ?.TABLE_ROWS.map(({ name, prix }, index) => {
+                                                        const isLast =
+                                                            index ===
+                                                            data.find((tab) => tab.value === activeTab)
+                                                                .TABLE_ROWS.length - 1;
+                                                        const classes = isLast ? "" : "border-b border-blue-gray-50";
 
-                                                    return (
-                                                        <tr key={name}>
-                                                            <td className={classes}>
-                                                                <Typography variant="small" color="blue-gray" className="font-normal">
-                                                                    <div className="flex items-center space-x-0">
-                                                                        <div className="m-0 p-0">
-                                                                            <Checkbox id={`ripple-on-${index}`} ripple={true} />
+                                                        return (
+                                                            <tr key={name}>
+                                                                <td className={classes}>
+                                                                    <Typography
+                                                                        variant="small"
+                                                                        color="blue-gray"
+                                                                        className="font-normal"
+                                                                    >
+                                                                        <div className="flex items-center space-x-0">
+                                                                            <div className="m-0 p-0">
+                                                                                <Checkbox
+                                                                                    id={`ripple-on-${index}`}
+                                                                                    ripple={true}
+                                                                                />
+                                                                            </div>
+                                                                            <div className="m-0 p-0">
+                                                                                <span>{name}</span>
+                                                                            </div>
                                                                         </div>
-                                                                        <div className="m-0 p-0">
-                                                                            <span>{name}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                   
-                                                                </Typography>
-                                                            </td>
-                                                            <td> <div>{prix}DT</div></td>
-                                                        </tr>
-                                                    );
-                                                    
-                                                })}
-                                               
+                                                                    </Typography>
+                                                                </td>
+                                                                <td>
+                                                                    <div>{prix}DT</div>
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    })}
                                             </tbody>
                                         </table>
                                     </Card>
-                                    
                                 </Typography>
-                                
-                                    <div className="relative w-full" onClick={() => handleNavigate(hotel)} >
-                                        <Link href="">
-                                            <button
-                                                className="btn_rechercher w-72 lg:w-72 md:w-36 py-2 bg-gradient-to-r from-[#FF5555] to-[#F40091] text-white font-semibold rounded-lg transform transition-transform duration-300 hover:bg-lime-600 hover:scale-105 focus:outline-none"
-                                            >
-                                                + De detail
-                                            </button>
-                                        </Link>
-                                    </div>
-                               
+                                <div className="relative w-full">
+                                    <Link href="">
+                                        <button
+                                            className="btn_rechercher w-72 lg:w-72 md:w-36 py-2 bg-gradient-to-r from-[#FF5555] to-[#F40091] text-white font-semibold rounded-lg transform transition-transform duration-300 hover:bg-lime-600 hover:scale-105 focus:outline-none"
+                                        >
+                                            + De detail
+                                        </button>
+                                    </Link>
+                                </div>
                             </CardBody>
                         </Card>
                     ))}
                 </div>
             </section>
         </div>
-        
     );
 };
 
