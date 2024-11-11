@@ -23,8 +23,16 @@ async function fetchCarouselData() {
   }
 }
 
+
+
+
 const Home = async () => {
   const { slides } = await fetchCarouselData();
+  const res = await fetch('http://127.0.0.1:8000/api/fetchDestinations', {
+    next: { revalidate: 10 }, // Adjust caching as needed
+});
+const destinations = await res.json();
+
 
   return (
     <div className="text-center">
@@ -35,9 +43,8 @@ const Home = async () => {
       {/* If you want to wrap Carousel with Suspense for async loading */}
       
         <Carousel slides={slides} />
-      
-      <TopDestinations />
-      <AdTb />
+        <TopDestinations destinations={destinations} />;
+        <AdTb />
       <Separator />
       <Footer />
     </div>
