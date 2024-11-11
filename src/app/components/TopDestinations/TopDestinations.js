@@ -1,6 +1,6 @@
 "use client";
 
-import React , {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import './topDestinations.css';
 
@@ -9,27 +9,23 @@ const TopDestinations = () => {
     const [destinations, setDestinations] = useState([]);
 
 
-        // Fetch destinations from the backend API
-        useEffect(() => {
-            const fetchDestinations = async () => {
-                try {
-                    const response = await fetch('http://localhost:8000/api/fetchDestinations');
-                    const data = await response.json();
-                    setDestinations(data); // Update state with fetched data
-                } catch (error) {
-                    console.error("Failed to fetch destinations:", error);
-                }
-            };
-            fetchDestinations();
-        }, []);
- 
+    // Fetch destinations from the backend API
+    useEffect(() => {
+        const fetchDestinations = async () => {
+            try {
+                const response = await fetch('http://localhost:8000/api/fetchDestinations');
+                const data = await response.json();
+                setDestinations(data);
+            } catch (error) {
+                console.error("Failed to fetch destinations:", error);
+            }
+        };
+        fetchDestinations();
+    }, []);
+
     // Function to handle navigation when a destination card is clicked
     const handleNavigate = (destination) => {
-        // Ensure services is a stringified array
-        if (destination.services && Array.isArray(destination.services)) {
-            destination.services = JSON.stringify(destination.services);
-        }
-        const query = new URLSearchParams(destination).toString();
+        const query = new URLSearchParams({ id: destination.id }).toString();
         router.push(`/HotelDetails?${query}`);
     };
 
@@ -72,8 +68,8 @@ const TopDestinations = () => {
                                             key={index}
                                             aria-hidden="true"
                                             className={`star-icon ${index < destination.rating
-                                                    ? "text-yellow-300"
-                                                    : "text-gray-300"
+                                                ? "text-yellow-300"
+                                                : "text-gray-300"
                                                 }`}
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
