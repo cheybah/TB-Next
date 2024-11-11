@@ -9,7 +9,6 @@
     "start": "next start",
     "lint": "next lint",
     "postbuild": "next-sitemap"
-
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
@@ -30,7 +29,8 @@
     "react": "^18",
     "react-date-range": "^2.0.1",
     "react-dom": "^18",
-    "splide-nextjs": "^2.4.23"
+    "splide-nextjs": "^2.4.23",
+    "swiper": "^11.1.14"
   },
   "devDependencies": {
     "@babel/plugin-proposal-do-expressions": "^7.25.9",

@@ -1,23 +1,22 @@
 
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import Link from 'next/link'
 import { useRouter } from "next/navigation";
 
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBed, faCalendar, faUser, faMapPin, faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
+import { faBed, faCalendar, faUser } from '@fortawesome/free-solid-svg-icons';
 import { DateRange } from 'react-date-range';
-import { format, compareAsc } from "date-fns";
+import { format } from "date-fns";
 import { enUS } from 'date-fns/locale';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import './SearchBar.css'
-const SearchBar = () => {
+const SearchBar = ({ destinations}) => {
 
-    const [destinations, setDestinations] = useState([]);
-    const [selectedDestination, setSelectedDestination] = useState(null);
+    //const [destinations, setDestinations] = useState([]);
+    const [selectedDestination, setSelectedDestination] = useState(false);
     const [openDate, setOpenDate] = useState(false);
 
     const [date, setDate] = useState([          //dateRange useState
@@ -44,55 +43,6 @@ const SearchBar = () => {
 
 
 
-    const handleSearch = () => {
-        /*Handle the search logic here
-        const params = {
-            destination,
-            startDate,
-            endDate,
-            adult,
-            children,
-            room,
-        };*/
-        console.log('Search Parameters:');
-        // Here you can implement your API call or any other search logic
-    };
-
-
-    useEffect(() => {
-        axios.get('http://api.resabookings.com/api/api/api_hotel/api_destination_test.php')
-            .then(res => {
-                console.log('API response:', res); // Log the entire response for debugging
-                if (res.data && res.data.regions) {
-                    const regions = res.data.regions;
-                    // Check if regions are being fetched
-                    console.log('Regions:', regions);
-
-                    // Get the names of top destinations from the array
-                    const destinations = regions.map(dest => dest.libelle_region);
-                    setDestinations(destinations);
-                    console.log('Destinations:', destinations); // Log the destinations array
-                } else {
-                    console.error('Unexpected API response format:', res.data);
-                }
-            })
-            .catch(err => {
-                console.error('Error fetching destinations:', err);
-            });
-    }, []);
-
-
-    const router = useRouter(); //initialisation
-    const handleNavigate = (destination) => {
-        const query = new URLSearchParams(destination).toString();
-        router.push(`/HotelsResult?${query}`);
-    };
-
-
-    const resNavigate = (destination) => {
-        const query = new URLSearchParams(destination).toString();
-        router.push(`/HotelsResult?${query}`);
-    };
 
     return (
 
@@ -134,10 +84,10 @@ const SearchBar = () => {
                                 </ListboxButton>
                                 <ListboxOptions className="absolute w-full bg-white border border-gray-300 mt-1 z-20 max-h-80 overflow-y-auto">
                                     {destinations.map((destination) => (
-                                        <ListboxOption key={destination} value={destination}>
+                                        <ListboxOption key={destination.id_region} value={destination.libelle_region}>
                                             {({ selected }) => (
                                                 <div className={`flex items-center p-2 ${selected ? 'bg-gray-400 text-white' : 'text-black'}`}>
-                                                    {destination}
+                                                    {destination.libelle_region}
                                                 </div>
                                             )}
                                         </ListboxOption>

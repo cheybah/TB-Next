@@ -1,106 +1,85 @@
 "use client";
+import React, { Component } from 'react';
+import Swiper from 'swiper/bundle';
+import 'swiper/swiper-bundle.css';
+import './carousel.css';
 
-import React, { useEffect, useState } from 'react';
-import { Splide, SplideSlide } from 'splide-nextjs/react-splide';
-import 'splide-nextjs/splide/dist/css/themes/splide-default.min.css';
-import './carousel.css'; 
-import axios from 'axios';
+class Carousel extends Component {
+  componentDidMount() {
+    // Initialize Swiper when the component is mounted
+    const swiper = new Swiper('.swiper-container', {
+      slidesPerView: 1,  // Default to 1 slide for small screens (mobile)
+      spaceBetween: 5,    // Space between slides
+      autoplay: {
+        delay: 3000,      // Auto slide interval (in milliseconds)
+        disableOnInteraction: false, // Keeps autoplay running when interacting
+      },
+      loop: true,         // Enable infinite loop
+      loopAdditionalSlides: 2, // Preload additional slides to avoid gaps
+      centeredSlides: true,  // Ensures the active slide is centered
+      navigation: {
+        nextEl: '.swiper-button-next', // Next button selector
+        prevEl: '.swiper-button-prev', // Previous button selector
+      },
+      touchEventsTarget: 'container', // Make swipe events target the entire container
+      mousewheel: {
+        invert: false,   // Controls mousewheel direction
+      },
+      breakpoints: {
+        768: { // When screen width is 768px or more (md size and above)
+          slidesPerView: 3,  // Show 3 slides at a time
+          spaceBetween: 10,   // Space between slides for larger screens
+        },
+      },
+    });
+    
+    // Add event listener for manual control via mouse wheel (optional)
+    const swiperContainer = document.querySelector('.swiper-container');
+    swiperContainer?.addEventListener('wheel', (event) => {
+      event.preventDefault();
+      if (event.deltaY > 0) {
+        swiper.slideNext();
+      } else {
+        swiper.slidePrev();
+      }
+    });
+  }
 
-const Carousel = () => {
-    const [slides, setSlides] = useState([]);
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                } else {
-                    entry.target.classList.remove('show');
-                }
-            });
-        });
-
-        // Observe the hidden elements
-        const hiddenElements = document.querySelectorAll('.hidden2');
-        hiddenElements.forEach((element) => observer.observe(element));
-
-        // Cleanup the observer on component unmount
-        return () => {
-            hiddenElements.forEach((element) => observer.unobserve(element));
-        };
-    }
-    }, []); // Run once on mount
-
-    // Fetch slides data
-    useEffect(() => {
-        const fetchSlides = async () => {
-            try {
-                const res = await axios.get('http://api.resabookings.com/api/api/api_slides/api_slides.php');
-                const slidesData = res.data.Slides; // Accessing the "Slides" array
-                setSlides(slidesData);
-            } catch (err) {
-                console.error("Error fetching slides:", err);
-            }
-        };
-
-        fetchSlides();
-    }, []); // Run once on mount
-
-    if (slides.length === 0) {
-        return <div>Loading...</div>; // Loading message while waiting for data
-    }
+  render() {
+    const { slides } = this.props;
 
     return (
-        <>
-            <div>
-                <h1 className="text-center font-bold text-2xl antialiased mo hidden2">
-                    Nos Plus Belles Thématiques
-                </h1>
-            </div>
-            <Splide
-                options={{
-                    type: 'loop',
-                    perPage: 3,
-                    focus: 'center',
-                    autoplay: true,
-                    interval: 2000, // 3 seconds interval
-                    speed: 700,
-                    pauseOnHover: true,
-                    flickMaxPages: 1,
-                    updateOnMove: true,
-                    pagination: false,
-                    padding: '10%',
-                    breakpoints: {
-                        1440: {
-                            perPage: 2, // 2 images for medium screens
-                            padding: '10%',
-                        },
-                        1024: {
-                            perPage: 1, // 1 image for smaller screens
-                            padding: '30%',
-                        },
-                    },
-                }}
-            >
-                {slides.map((slide, index) => (
-                    <SplideSlide key={index}>
-                        <div className="relative mx-2">
-                            <img
-                                src={slide.url_image_p}
-                                alt={`Slide no~ ${index + 1}`}
-                                className="carousel-image"
-                            />
-                            <div className="absolute inset-0 flex flex-col justify-center items-center text-white">
-                                <a href={slide.url_redirection} className="text-3xl font-bold mb-4">
-                                    Slide {index + 1}
-                                </a>
-                            </div>
-                        </div>
-                    </SplideSlide>
-                ))}
-            </Splide>
-        </>
+      <div className="grid mx-auto ">
+        <span  className="text-center font-bold text-2xl antialiased">Nos Plus Belles Thématiques</span>
+
+        <div className="swiper-container md:mx-auto mx-1 relative m-5 md:m-3 overflow-hidden md:h-96 md:ml-24 md:mr-24">
+          <div className="swiper-wrapper flex">
+            {slides.map((slide, index) => (
+              <div key={index} className="swiper-slide flex justify-center items-center h-full">
+                <img 
+                  loading="lazy" 
+                  src={slide.url_image_p}
+                  className="brightness-50 w-full h-auto rounded-md" 
+                  alt={`Slide no~ ${index + 1}`}
+                />
+                <span className="absolute top-20 text-white text-2xl">{slide.titre}</span>
+                <hr className="absolute z-50 top-28 w-48 h-0.5 my-4 bg-white border-0 rounded" />
+                <span className="text-sm text-white absolute top-36">à partir de</span>
+                <div className="flex absolute text-white">
+                  <span className="text-5xl">{slide.valeur_pourcentage}</span>
+                  <span className="text-2xl">{slide.pourcentage}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Navigation buttons */}
+          <div className="swiper-button-next hidden md:block text-white"></div>
+          <div className="swiper-button-prev hidden md:block text-white"></div>
+        </div>
+      </div>
     );
-};
+  }
+}
 
 export default Carousel;

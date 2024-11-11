@@ -1,7 +1,23 @@
+
+
 import React from 'react';
 import SearchBar from './SearchBar';
 
-const BackgroundSection = () => {
+// Server-side data fetching within the SearchBar component
+async function fetchDestinationData() {
+    const [DestinationResponse] = await Promise.all([
+        fetch(`http://api.resabookings.com/api/api/api_hotel/api_destination_test.php`, { cache: 'no-store' })
+    ]);
+
+    const DestinationData = await DestinationResponse.json();
+
+    const destinations = DestinationData.regions;
+
+    return { destinations};
+}
+
+const BackgroundSection = async() => {
+    const { destinations = []} = await fetchDestinationData();
     return (
         <section className="w-full bg-no-repeat bg-cover bg-[url('/img_moteur_home2-min.jpg')] bg-blend-multiply lg:h-[328px] sm:h-[500px]" alt="Tunisiebooking background" >
         <div className="px-4 mx-auto max-w-screen-xl py-24 lg:py-56 ">
@@ -14,7 +30,7 @@ const BackgroundSection = () => {
                 style={{ top: "13rem", textShadow: '0px 1px 4px rgba(0, 0, 0, 0.2)', fontFamily: '-apple-system, Roboto, Segoe UI, Helvetica, Arial, sans-serif'}}>
                 Retrouvez nos offres d’hôtels en Tunisie, de Voyages à l’étranger, des Billets d’avion, Omra et plus encore …
             </span>
-            <SearchBar />
+            <SearchBar destinations={destinations} />
         </div>
     </section>
     );
