@@ -1,8 +1,7 @@
 "use client" ;
 import Header from "../Header/Header";
 import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
-import { destinations } from "../TopDestinations/Destinations";
+import { Suspense, useEffect, useState } from "react";
 import Copyright from "../Copyright/Copyright";
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,8 +20,35 @@ const HotelDetailsContent = () => {
     const searchParams = useSearchParams();
     const hotelId = searchParams.get("id");
 
-    const hotel = destinations.find(dest => dest.id.toString() === hotelId);
+    // Set up state for hotel data
+    const [hotel, setHotel] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
+    // Fetch hotel data from API
+    useEffect(() => {
+        const fetchHotel = async () => {
+            try {
+                const response = await fetch(`http://localhost:8000/api/destinations/${hotelId}`);
+                const data = await response.json();
+                
+                // Set fetched data to state
+                setHotel(data);
+                setLoading(false);
+            } catch (error) {
+                console.error("Failed to fetch hotel data:", error);
+                setError(error);
+                setLoading(false);
+            }
+        };
+
+        if (hotelId) {
+            fetchHotel();
+        }
+    }, [hotelId]);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error loading hotel data.</div>;
     if (!hotel) return <div>Hotel not found.</div>;
 
     // Ensure `hotel.services` is an array by parsing if necessary
@@ -32,10 +58,8 @@ const HotelDetailsContent = () => {
 
 
 
-
-
-    const getRatingDescription = (tripAdvisor) => {
-        switch (tripAdvisor) {
+    const getRatingDescription = (trip_advisor) => {
+        switch (trip_advisor) {
             case 5:
                 return "Excellent";
             case 4:
@@ -123,8 +147,8 @@ const HotelDetailsContent = () => {
                                         </span>
                                     </div>
                                     <span className="text-lg flex">
-                                        <img src="/icon_tripadvisor.svg" style={{ marginRight: "5px" }}></img> {hotel.tripAdvisor} / 5{" "}
-                                        <span className="font-bold" style={{ marginLeft: "5px" }}>{getRatingDescription(hotel.tripAdvisor)}</span>
+                                        <img src="/icon_tripadvisor.svg" style={{ marginRight: "5px" }}></img> {hotel.trip_advisor} / 5{" "}
+                                        <span className="font-bold" style={{ marginLeft: "5px" }}>{getRatingDescription(hotel.trip_advisor)}</span>
                                     </span>
                                 </div>
                                 <div className="flex items center">
@@ -147,8 +171,8 @@ const HotelDetailsContent = () => {
                                 <div className="flex w-full">
                                     <img
                                         className="w-2/3 h-auto rounded-lg" style={{ marginTop: "20px" }} // Set width to two-thirds and auto height
-                                        src={hotel.image}
-                                        alt={`Hotel Image ${hotel.id}`}
+                                        src={`http://localhost:8000/storage/${hotel.image}`}
+                                        alt={`Hotel Image of ${hotel.name}`}
                                     />
                                     <div className="w-1/3 px-4 text-center" style={{ marginTop: "3%" }}>
                                         <div className="flex space-x-4">
@@ -175,7 +199,7 @@ const HotelDetailsContent = () => {
                 cursor-pointer relative"
                                                     >
                                                         <div className="flex items-center">
-                                                            <img src={service.icon} alt={service.name} className="mr-2 w-[20px]" />
+                                                            <img src={`http://localhost:8000/storage/${service.icon}`} alt={service.name} className="mr-2 w-[20px]" />
                                                             {service.name}
                                                         </div>
                                                     </button>
