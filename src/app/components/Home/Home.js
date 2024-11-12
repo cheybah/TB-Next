@@ -1,6 +1,5 @@
 
 import Header from "../Header/Header";
-import HeroSection from "../HeroSection/HeroSection";
 import Footer from "../Footer/Footer";
 import Separator from "../Separator/Separator";
 import TopDestinations from "../TopDestinations/TopDestinations";
@@ -24,14 +23,10 @@ async function fetchCarouselData() {
 }
 
 
-
-
 const Home = async () => {
   const { slides } = await fetchCarouselData();
-  const res = await fetch('http://127.0.0.1:8000/api/fetchDestinations', {
-    next: { revalidate: 10 }, // Adjust caching as needed
-});
-const destinations = await res.json();
+  const res = await fetch('http://127.0.0.1:8000/api/fetchDestinations');
+  const destinations = await res.json();
 
 
   return (
@@ -40,11 +35,9 @@ const destinations = await res.json();
       <BackgroundSection />
       <Slides />
       <Separator />
-      {/* If you want to wrap Carousel with Suspense for async loading */}
-      
-        <Carousel slides={slides} />
-        <TopDestinations destinations={destinations} />;
-        <AdTb />
+      <Carousel slides={slides} />
+      <TopDestinations destinations={destinations} />
+      <AdTb />
       <Separator />
       <Footer />
     </div>

@@ -119,7 +119,7 @@ const HotelDetailsContent =  ({ hotel }) => {
                                     </span>
                                 </div>
                                 <div className="flex items center">
-                                    <FontAwesomeIcon icon={faLocationDot} style={{ marginTop: "7px", color: "#7E8389" }} />
+                                    <FontAwesomeIcon icon={faLocationDot} fixedWidth  style={{ marginTop: "7px", color: "#7E8389" }} />
                                     <p className="mt-2 text-sm text-zinc-600" style={{ marginLeft: "7px", color: "#7E8389" }}>{hotel.address}</p> {/* Add a subtitle */}
                                 </div>
                                 <div className="absolute inset-0 flex flex-col justify-center items-center">

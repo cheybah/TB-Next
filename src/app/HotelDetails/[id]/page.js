@@ -9,8 +9,11 @@ export default async function HotelsDetails({ params }) {
     const { id } = params;
 
     try {
-        const res = await fetch(`http://127.0.0.1:8000/api/destinations/${id}`);
-        
+        // Adding revalidation caching here with 300 seconds (5 minutes) as an example.
+        const res = await fetch(`http://127.0.0.1:8000/api/destinations/${id}`, {
+            next: { revalidate: 300 }, // Cache the data for 5 minutes
+        });
+
         if (!res.ok) {
             console.error("Fetch error:", res.status, res.statusText); 
             return <div>Failed to load hotel data (Status: {res.status})</div>;
