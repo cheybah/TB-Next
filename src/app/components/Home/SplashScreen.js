@@ -6,8 +6,7 @@ const SplashScreen = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Check if the splash screen has been shown before using sessionStorage
-        const hasSeenSplash = sessionStorage.getItem("hasSeenSplash");
+         const hasSeenSplash = sessionStorage.getItem("hasSeenSplash");
 
         if (hasSeenSplash) {
             // If the splash screen was already shown, skip the loading state
@@ -16,7 +15,7 @@ const SplashScreen = () => {
             // Otherwise, show the splash screen for 3.5 seconds
             const timer = setTimeout(() => {
                 setLoading(false);
-                sessionStorage.setItem("isLoaded", "true"); // Mark as shown
+                sessionStorage.setItem("isLoaded", "true"); 
             }, 3500);
 
             return () => clearTimeout(timer);
