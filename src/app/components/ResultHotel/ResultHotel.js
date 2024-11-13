@@ -1,6 +1,7 @@
 "use client"; // Ensures ResultHotel is treated as a client component
 
 import React, { useState } from 'react';
+import { decode } from 'he'; // Import decode from he library
 import Link from 'next/link';
 import {
     Card,
@@ -220,7 +221,7 @@ const ResultHotel = ({ listHotels, listHotelTripAdv }) => {
                                 className="m-0 w-2/5 shrink-0 rounded-r-none"
                             >
                                 <Image
-                                    src={hotel.images.image_principal}
+                                    src={decode(hotel.images.image_principal)}
                                     alt="card-image"
                                     className="h-full w-full object-cover"
                                     width={500}
@@ -230,7 +231,7 @@ const ResultHotel = ({ listHotels, listHotelTripAdv }) => {
                             </CardHeader>
                             <CardBody className="w-full">
                                 <Typography variant="h4" color="blue-gray" className="mb-2 flex items-center space-x-4">
-                                    <span>{hotel.libelle_hotel}</span>
+                                    <span>{decode(hotel.libelle_hotel)}</span>
                                     {listHotelTripAdv.map((hotelTripAdv) =>
                                         hotel.id_hotel === hotelTripAdv.id_hotel ? (
                                             <div key={hotelTripAdv.id_hotel} className="flex items-center justify-end space-x-2">
@@ -336,4 +337,4 @@ const ResultHotel = ({ listHotels, listHotelTripAdv }) => {
     );
 };
 
-export default ResultHotel;
+export default ResultHotel;  // Ensure default export is here

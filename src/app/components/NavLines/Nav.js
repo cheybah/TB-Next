@@ -1,7 +1,7 @@
-"use client" ;
+"use client";
+
+
 import Header from "../Header/Header";
-import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
 import Copyright from "../Copyright/Copyright";
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,46 +12,13 @@ import {
     Tab,
 } from "@material-tailwind/react";
 import { Avatar, Typography } from "@material-tailwind/react";
-import AccordionClient from '../Accordion/AccordionClient'; // Import the new Accordion component
-import PresentationCard from "../Presentation/PresentationCard";
+import AccordionClient from '../Accordion/AccordionClient'; // Isolated Accordion component
+import PresentationCard from "../Presentation/PresentationCard"; //Isolated Presentation component
+import MoteurResult from "../MoteurResult/MoteurResult";
 
 
-const HotelDetailsContent = () => {
-    const searchParams = useSearchParams();
-    const hotelId = searchParams.get("id");
-
-    // Set up state for hotel data
-    const [hotel, setHotel] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    // Fetch hotel data from API
-    useEffect(() => {
-        const fetchHotel = async () => {
-            try {
-                const response = await fetch(`http://localhost:8000/api/destinations/${hotelId}`);
-                const data = await response.json();
-                
-                // Set fetched data to state
-                setHotel(data);
-                setLoading(false);
-            } catch (error) {
-                console.error("Failed to fetch hotel data:", error);
-                setError(error);
-                setLoading(false);
-            }
-        };
-
-        if (hotelId) {
-            fetchHotel();
-        }
-    }, [hotelId]);
-
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error loading hotel data.</div>;
+const HotelDetailsContent =  ({ hotel }) => {
     if (!hotel) return <div>Hotel not found.</div>;
-
-    // Ensure `hotel.services` is an array by parsing if necessary
     const services = Array.isArray(hotel.services)
         ? hotel.services
         : hotel.services ? JSON.parse(hotel.services) : [];
@@ -220,24 +187,10 @@ const HotelDetailsContent = () => {
                                                 </a>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
-                            <div className="lg:grid lg:grid-cols-5 gap-16">
-                                <div className="lg:col-span-3">
-                                    <p className="mt-4 text-gray-600">
-                                        {hotel.description}
-                                    </p>
-                                    <p className="mt-4 text-gray-600">
-                                        Price: {hotel.price}
-                                    </p>
-                                    <p className="mt-4 text-gray-600">
-                                        Location: {hotel.location}
-                                    </p>
-                                </div>
-                            </div>
+                            <MoteurResult />
                         </div>
 
                         {/*this is the presentation card*/}
@@ -470,11 +423,17 @@ const HotelDetailsContent = () => {
     );
 };
 
-const Nav = () => (    //to escape suspense queryparams problem
-    <Suspense fallback={<div>Loading...</div>}>
-        <HotelDetailsContent />
-    </Suspense>
-);
+const Nav = ({ hotelData }) => {
+    if (!hotelData) {
+        return <div>Loading...</div>; // Optional: show a loading or fallback UI
+    }
+
+    return (
+        <nav>
+            <HotelDetailsContent hotel={hotelData} />
+        </nav>
+    );
+};
 
 export default Nav;
 

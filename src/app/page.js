@@ -1,12 +1,14 @@
+// src/app/page.js
 import dynamic from 'next/dynamic';
 
-// Dynamically import HomePage/HomePage component (SSR enabled by default)
-const TestComponent = dynamic(() => import('./HomePage/HomePage'));
+// Dynamically import Home component without disabling SSR
+const HomePage = dynamic(() => import('./components/Home/Home'), {
+  ssr: true,  // This will enable SSR for HomePage component
+});
 
-export default function Home() {
+export default function Page() {
   return (
-    <div className="App" style={{ overflowX: 'hidden' }}>
-      <TestComponent />
-    </div>
+    // Wrapping the app with Redux Provider to make the store accessible for SSR
+      <HomePage />
   );
 }

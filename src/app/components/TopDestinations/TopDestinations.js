@@ -1,33 +1,21 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+// src/app/components/TopDestinations/TopDestinations.js
+import React from "react";
 import { useRouter } from "next/navigation";
 import './topDestinations.css';
 
-const TopDestinations = () => {
+const TopDestinations = ({ destinations = [] }) => {  // Default value for destinations to avoid undefined errors
     const router = useRouter();
-    const [destinations, setDestinations] = useState([]);
 
-
-    // Fetch destinations from the backend API
-    useEffect(() => {
-        const fetchDestinations = async () => {
-            try {
-                const response = await fetch('http://localhost:8000/api/fetchDestinations');
-                const data = await response.json();
-                setDestinations(data);
-            } catch (error) {
-                console.error("Failed to fetch destinations:", error);
-            }
-        };
-        fetchDestinations();
-    }, []);
-
-    // Function to handle navigation when a destination card is clicked
     const handleNavigate = (destination) => {
-        const query = new URLSearchParams({ id: destination.id }).toString();
-        router.push(`/HotelDetails?${query}`);
+        router.push(`/HotelDetails/${destination.id}`);  // Use path instead of query
     };
+
+    // If destinations is empty or undefined, show a loading or empty state
+    if (!destinations || destinations.length === 0) {
+        return <div>Loading destinations...</div>;
+    }
 
     return (
         <section className="container mx-auto py-12 px-6">
@@ -38,28 +26,26 @@ const TopDestinations = () => {
                 {destinations.map((destination) => (
                     <div
                         key={destination.id}
-                        className={`destination-card transform transition-all duration-1000 ease-out`}
-                        onClick={() => handleNavigate(destination)} // onClick event to get destination by id
+                        className="destination-card transform transition-all duration-1000 ease-out"
+                        onClick={() => handleNavigate(destination)}
                     >
                         <div className="relative image-container">
                             <img
                                 className="destination-image"
                                 src={`http://localhost:8000/storage/${destination.image}`}
-                                alt="hotel image"
+                                alt={`Image of ${destination.name}`}
                             />
                             <span className="discount-badge">
                                 {destination.discount}
                             </span>
                         </div>
                         <div className="content-container">
-                            <div>
-                                <h5 className="destination-title">{destination.name}</h5>
-                            </div>
+                            <h5 className="destination-title">{destination.name}</h5>
                             <div className="price-container">
                                 <p>
                                     <span className="current-price">{destination.price}</span>
                                     <span className="original-price">
-                                        {destination.originalPrice}
+                                        {destination.original_price}
                                     </span>
                                 </p>
                                 <div className="rating-container">
@@ -67,10 +53,11 @@ const TopDestinations = () => {
                                         <svg
                                             key={index}
                                             aria-hidden="true"
-                                            className={`star-icon ${index < destination.rating
-                                                ? "text-yellow-300"
-                                                : "text-gray-300"
-                                                }`}
+                                            className={`star-icon ${
+                                                index < destination.rating
+                                                    ? "text-yellow-300"
+                                                    : "text-gray-300"
+                                            }`}
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
