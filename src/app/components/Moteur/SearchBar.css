@@ -1,8 +1,8 @@
-.div_form {
+.div_form1 {
     position: relative;
     left: -2px;
-    background: #FFFFFF;
-    box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.34);
+    /*background: #FFFFFF;*/
+    /*box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.34);*/
     border-radius: 8px;
     z-index: 9;
     /* Remove height for mobile */
@@ -39,4 +39,128 @@
     .div_form {
         height: 204px; /* Only define height for larger screens */
     }
+}
+.bg1-white{
+    background-color: rgb(255 255 255 / 36%) !important;
+    border: 1px solid white !important;
+}
+
+h2{
+    color: #fff !important;
+}
+
+label{
+    color: #fff !important;
+}
+
+.Icon{
+    margin-top: 5px !important;
+}
+
+.HeaderIcon {
+    position: absolute;
+    left: 12px; /* Equivalent to Tailwind's left-3 */
+    top: 50%; /* Equivalent to Tailwind's top-1/2 */
+    transform: translateY(-50%); /* Equivalent to Tailwind's transform -translate-y-1/2 */
+    color: #9CA3AF; /* Equivalent to Tailwind's text-gray-400 */
+    margin-top: auto;
+    z-index: 10; /* Add this to ensure it's above other elements */
+
+}
+
+.HeaderSearchInput{
+    width: 100%; /* Equivalent to Tailwind's w-full */
+    padding: 12px; /* Equivalent to Tailwind's p-3 */
+    padding-left: 40px; /* Equivalent to Tailwind's pl-10 (for the icon space) */
+    border: 1px solid #D1D5DB; /* Equivalent to Tailwind's border-gray-300 */
+    border-radius: 0.5rem; /* Equivalent to Tailwind's rounded-lg */
+    outline: none; /* Equivalent to focus:outline-none */
+    margin-top: 9px;
+    background-color: #FFFFFF;
+    height: 49px;
+}
+
+.HeaderSearchInput:focus {
+    box-shadow: 0 0 0 2px #60A5FA; /* Equivalent to Tailwind's focus:ring-2 focus:ring-blue-400 */
+}
+
+.HeaderSearchText{
+    cursor: pointer;
+    width: 100%; /* Equivalent to w-full */
+    padding: 12px; /* Equivalent to p-3 */
+    padding-left: 40px; /* Make room for the icon */
+    border: 1px solid #D1D5DB; /* Equivalent to border border-gray-300 */
+    border-radius: 8px; /* Equivalent to rounded-lg */
+    outline: none; /* Equivalent to focus:outline-none */
+    display: flex; /* Equivalent to flex */
+    height: 48px;
+    align-items: center; /* Center items vertically */
+    margin-top: 10px;
+    background-color: #FFFFFF;
+    color: grey;
+
+
+}
+
+.HeaderSearchText:focus {
+    border-color: #3B82F6; /* Equivalent to focus:ring-blue-400 */
+    box-shadow: 0 0 0 2px #BFDBFE; /* Equivalent to focus:ring-2 focus:ring-blue-400 */
+}
+
+.date{
+    position: absolute;
+    top: 50px;
+    z-index: 20; /* Add this to ensure it's above other elements */
+}
+
+.options{
+    position: absolute;
+    top: 50px;
+    background-color: white;
+    color:gray;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+.optionItem{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.optionCounter{
+    display: flex;
+    align-items: center;
+    gap : 10px;
+    font-size: 15px;
+    color: black ;
+}
+
+.optionCounterButton{
+    width :25px;
+    height: 30px;
+    border : solid 1px black;
+    border-radius : 20px ;
+    cursor: pointer;
+}
+
+.optionCounterButton:active{
+    background-color: rgb(133,185,25, 0.5) !important;
+}
+
+.optionCounterButton:disabled{
+    cursor: not-allowed;
+}
+
+.btn_rechercher{
+    width: 100%; /* Equivalent to Tailwind's w-full */
+    padding: 12px; /* Equivalent to Tailwind's p-3 */
+    margin-left:2%;
+    padding-left: 40px; /* Equivalent to Tailwind's pl-10 (for the icon space) */
+    border-radius: 0.5rem; /* Equivalent to Tailwind's rounded-lg */
+    outline: none; /* Equivalent to focus:outline-none */
+    margin-top: 29px;
+    height: 49px;
 }
