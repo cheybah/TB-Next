@@ -138,7 +138,7 @@ const HotelDetailsContent =  ({ hotel }) => {
                                 <div className="flex w-full">
                                     <img
                                         className="w-2/3 h-auto rounded-lg" style={{ marginTop: "20px" }} // Set width to two-thirds and auto height
-                                        src={`http://localhost:8000/storage/${hotel.image}`}
+                                        src={`http://react.tunisiebooking.com/storage/app/public/${hotel.image}`}
                                         alt={`Hotel Image of ${hotel.name}`}
                                     />
                                     <div className="w-1/3 px-4 text-center" style={{ marginTop: "3%" }}>
@@ -166,7 +166,7 @@ const HotelDetailsContent =  ({ hotel }) => {
                 cursor-pointer relative"
                                                     >
                                                         <div className="flex items-center">
-                                                            <img src={`http://localhost:8000/storage/${service.icon}`} alt={service.name} className="mr-2 w-[20px]" />
+                                                            <img src={`http://react.tunisiebooking.com/storage/app/public/${service.icon}`} alt={service.name} className="mr-2 w-[20px]" />
                                                             {service.name}
                                                         </div>
                                                     </button>

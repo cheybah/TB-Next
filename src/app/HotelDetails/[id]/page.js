@@ -10,7 +10,7 @@ export default async function HotelsDetails({ params }) {
 
     try {
         // Adding revalidation caching here with 300 seconds (5 minutes) as an example.
-        const res = await fetch(`http://127.0.0.1:8000/api/destinations/${id}`, {
+        const res = await fetch(`http://react.tunisiebooking.com/api/destinations/${id}`, {
             next: { revalidate: 300 }, // Cache the data for 5 minutes
         });
 

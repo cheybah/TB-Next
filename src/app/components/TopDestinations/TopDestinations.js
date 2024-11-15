@@ -26,7 +26,7 @@ const TopDestinations = ({ destinations }) => {
                         <div className="relative image-container">
                             <img
                                 className="destination-image"
-                                src={`http://localhost:8000/storage/${destination.image}`}
+                                src={`http://react.tunisiebooking.com/storage/app/public/${destination.image}`}
                                 alt={`Image of ${destination.name}`}
                             />
                             <span className="discount-badge">
