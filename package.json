@@ -24,13 +24,15 @@
     "bootstrap-next": "^1.0.5",
     "embla-carousel-autoplay": "^8.3.0",
     "embla-carousel-react": "^8.3.0",
+    "he": "^1.2.0",
     "next": "14.2.15",
     "next-sitemap": "^4.2.3",
     "react": "^18",
     "react-date-range": "^2.0.1",
     "react-dom": "^18",
     "splide-nextjs": "^2.4.23",
-    "swiper": "^11.1.14"
+    "swiper": "^11.1.14",
+    "zustand": "^5.0.1"
   },
   "devDependencies": {
     "@babel/plugin-proposal-do-expressions": "^7.25.9",

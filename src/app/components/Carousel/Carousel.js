@@ -46,15 +46,18 @@ class Carousel extends Component {
   }
 
   render() {
-    const { slides } = this.props;
-
+    const { carouselSlides } = this.props;
+  
+    if (!carouselSlides || carouselSlides.length === 0) {
+      return <div>Loading...</div>; // or any loading indicator you prefer
+    }
+  
     return (
       <div className="grid mx-auto ">
-        <span  className="text-center font-bold text-2xl antialiased">Nos Plus Belles Thématiques</span>
-
+        <span className="text-center font-bold text-2xl antialiased">Nos Plus Belles Thématiques</span>
         <div className="swiper-container md:mx-auto mx-1 relative m-5 md:m-3 overflow-hidden md:h-96 md:ml-24 md:mr-24">
           <div className="swiper-wrapper flex">
-            {slides.map((slide, index) => (
+            {carouselSlides.map((slide, index) => (
               <div key={index} className="swiper-slide flex justify-center items-center h-full">
                 <img 
                   loading="lazy" 
@@ -72,8 +75,6 @@ class Carousel extends Component {
               </div>
             ))}
           </div>
-
-          {/* Navigation buttons */}
           <div className="swiper-button-next hidden md:block text-white"></div>
           <div className="swiper-button-prev hidden md:block text-white"></div>
         </div>

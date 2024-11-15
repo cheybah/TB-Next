@@ -1,4 +1,3 @@
-
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Separator from "../Separator/Separator";
@@ -7,26 +6,13 @@ import AdTb from "../AdTB/AdTB";
 import Slides from "../Slides/Slides";
 import BackgroundSection from "../Moteur/BackgroundSection";
 import Carousel from "../Carousel/Carousel";
-
-async function fetchCarouselData() {
-  try {
-    const CarouselResponse = await fetch(
-      "http://api.resabookings.com/api/api/api_slides/api_slides.php",
-      { cache: "no-store" }
-    );
-    const CarouselData = await CarouselResponse.json();
-    return { slides: CarouselData.Slides };
-  } catch (error) {
-    console.error("Error fetching carousel data:", error);
-    return { slides: [] }; // Provide fallback empty slides
-  }
-}
-
+import {useDataStore, initializeDataStore} from "../../zustand/dataStore";
 
 const Home = async () => {
-  const { slides } = await fetchCarouselData();
-  const res = await fetch('http://127.0.0.1:8000/api/fetchDestinations');
-  const destinations = await res.json();
+  await initializeDataStore();
+  
+  // Access Zustand store state for server-side rendering
+  const { destinations, carouselSlides } = useDataStore.getState();
 
 
   return (
@@ -35,7 +21,7 @@ const Home = async () => {
       <BackgroundSection />
       <Slides />
       <Separator />
-      <Carousel slides={slides} />
+      <Carousel carouselSlides={carouselSlides} />
       <TopDestinations destinations={destinations} />
       <AdTb />
       <Separator />
