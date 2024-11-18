@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from "next/navigation";
 import { Listbox } from '@headlessui/react';
@@ -14,12 +14,11 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import './MoteurResult.css';
 
-const MoteurResult = () => {
+const MoteurResult = ({ ListDestinations = []}) => {
+    const destinations = ListDestinations?.regions || []; 
     const searchParams = useSearchParams();
     const ville = searchParams.get('ville');
-
-    const [selectedDestination, setSelectedDestination] = useState(null);
-    const [destinations, setDestinations] = useState([]);
+    const [selectedDestination, setSelectedDestination] = useState(ville || null);
     const [openDate, setOpenDate] = useState(false);
     const [date, setDate] = useState([{
         startDate: new Date(),
@@ -33,21 +32,10 @@ const MoteurResult = () => {
         room: 1
     });
 
-    // Fetch destinations on component mount
-    useEffect(() => {
-        axios.get('http://api.resabookings.com/api/api/api_hotel/api_destination_test.php').then(res => {
-            const regions = res.data.regions;
-            const destinationsList = regions.map(dest => dest.libelle_region);
-            setDestinations(destinationsList);
-        });
-    }, []);
+   
 
     // Set the selected destination based on the 'ville' query parameter when the component mounts
-    useEffect(() => {
-        if (ville && destinations.includes(ville)) {
-            setSelectedDestination(ville);
-        }
-    }, [ville, destinations]);
+
 
     const handleOption = (name, operation) => {
         setOptions((prev) => ({
@@ -74,15 +62,14 @@ const MoteurResult = () => {
                                                 {selectedDestination || 'Select a destination'}
                                             </Listbox.Button>
                                             <Listbox.Options className="absolute w-full bg-white border border-gray-300 mt-1 max-h-80 overflow-y-auto">
-                                                {destinations.map(destination => (
-                                                    <Listbox.Option key={destination} value={destination}>
+                                                {destinations.map((destination) => (
+                                                    <Listbox.Option  key={destination.id_region} value={destination.libelle_region}>
                                                         {({ selected }) => (
-                                                            <div className={`flex items-center p-2 ${selected ? 'bg-gray-500 text-white' : 'text-black'}`}>
-                                                                <FontAwesomeIcon icon={faLocationDot} className="mr-2" />
-                                                                {destination}
+                                                            <div className={`flex items-center p-2 ${selected ? 'bg-gray-400 text-white' : 'text-black'}`}>
+                                                                {destination.libelle_region}
                                                             </div>
                                                         )}
-                                                    </Listbox.Option>
+                                                    </Listbox.Option >
                                                 ))}
                                             </Listbox.Options>
                                         </Listbox>

@@ -13,8 +13,8 @@ import { enUS } from 'date-fns/locale';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import './SearchBar.css'
-const SearchBar = ({ destinations}) => {
-
+const SearchBar = ({ ListDestinations = []}) => {
+    const destinations = ListDestinations?.regions || []; 
     //const [destinations, setDestinations] = useState([]);
     const [selectedDestination, setSelectedDestination] = useState(false);
     const [openDate, setOpenDate] = useState(false);

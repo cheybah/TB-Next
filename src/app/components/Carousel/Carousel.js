@@ -46,7 +46,8 @@ class Carousel extends Component {
   }
 
   render() {
-    const { slides } = this.props;
+    const { sliders } = this.props;
+    const slides=sliders.Slides;
 
     return (
       <div className="grid mx-auto ">

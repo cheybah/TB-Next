@@ -1,7 +1,7 @@
-"use client"; // Ensures ResultHotel is treated as a client component
-
-import React, { useState } from 'react';
+"use client";
+import React, { useState} from 'react';
 import Link from 'next/link';
+import { decode } from 'he';
 import {
     Card,
     CardHeader,
@@ -15,20 +15,17 @@ import {
 } from "@material-tailwind/react";
 import Image from 'next/image';
 
-const ResultHotel = ({ listHotels, listHotelTripAdv }) => {
+const ResultHotel = ({ listsHotels = [], listsHotelTripAdv = [] }) => {
+    //console.log(listsHotels);
+    const listHotels = listsHotels?.Hotels_hors_promo || [];  // Fallback to an empty array
+    const listHotelTripAdv = listsHotelTripAdv?.Hotels || [];  // Fallback to an empty array
     const [activeTab, setActiveTab] = useState("Petit dejeuner");
     const [filterText, setFilterText] = useState(""); // State to hold filter input value
     const [selectedCategories, setSelectedCategories] = useState([]); // State to hold selected star categories
     const [selectedFormules, setSelectedFormules] = useState([]); // State to hold selected formules
     const [selectedRatings, setSelectedRatings] = useState([]); // State for selected TripAdvisor ratings
-
-    // Check if we are on the client side by checking for the window object
-    const isClient = typeof window !== "undefined";
-
-    if (!isClient) {
-        return null; // Return nothing during SSR to prevent hydration issues
-    }
-
+    
+    // Formules data (meal plans or accommodation options)
     const data = [
         {
             label: "Petit dejeuner",
@@ -220,7 +217,7 @@ const ResultHotel = ({ listHotels, listHotelTripAdv }) => {
                                 className="m-0 w-2/5 shrink-0 rounded-r-none"
                             >
                                 <Image
-                                    src={hotel.images.image_principal}
+                                    src={decode(hotel.images.image_principal)}
                                     alt="card-image"
                                     className="h-full w-full object-cover"
                                     width={500}
@@ -230,7 +227,7 @@ const ResultHotel = ({ listHotels, listHotelTripAdv }) => {
                             </CardHeader>
                             <CardBody className="w-full">
                                 <Typography variant="h4" color="blue-gray" className="mb-2 flex items-center space-x-4">
-                                    <span>{hotel.libelle_hotel}</span>
+                                    <span>{decode(hotel.libelle_hotel)}</span>
                                     {listHotelTripAdv.map((hotelTripAdv) =>
                                         hotel.id_hotel === hotelTripAdv.id_hotel ? (
                                             <div key={hotelTripAdv.id_hotel} className="flex items-center justify-end space-x-2">
@@ -290,26 +287,18 @@ const ResultHotel = ({ listHotels, listHotelTripAdv }) => {
                                                         return (
                                                             <tr key={name}>
                                                                 <td className={classes}>
-                                                                    <Typography
-                                                                        variant="small"
-                                                                        color="blue-gray"
-                                                                        className="font-normal"
-                                                                    >
+                                                                    <Typography variant="small" color="blue-gray" className="font-normal">
                                                                         <div className="flex items-center space-x-0">
-                                                                            <div className="m-0 p-0">
-                                                                                <Checkbox
-                                                                                    id={`ripple-on-${index}`}
-                                                                                    ripple={true}
-                                                                                />
-                                                                            </div>
-                                                                            <div className="m-0 p-0">
-                                                                                <span>{name}</span>
-                                                                            </div>
+                                                                            <Checkbox
+                                                                                id={`ripple-on-${index}`}
+                                                                                ripple={true}
+                                                                            />
+                                                                            <span>{name}</span>
                                                                         </div>
                                                                     </Typography>
                                                                 </td>
                                                                 <td>
-                                                                    <div>{prix}DT</div>
+                                                                    <span>{prix}DT</span> {/* Change <div> to <span> */}
                                                                 </td>
                                                             </tr>
                                                         );

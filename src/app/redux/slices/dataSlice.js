@@ -1,6 +1,25 @@
 // src/app/redux/slices/dataSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+// Correct async thunks to fetch desstinations data
+export const fetchRegionsData = createAsyncThunk(
+  'fetchRegionsData', // Action type string
+  async () => {
+    try {
+      // Replace with your actual API URL
+      const response = await fetch('http://api.resabookings.com/api/api/api_hotel/api_destination_test.php');
+      // Check if response is ok (status code 200-299)
+      if (!response.ok) {
+        throw new Error(`Error fetching carousel data: ${response.statusText}`);
+      }
+      const data = await response.json(); // Assuming JSON response
+      return data; // Return the fetched data
+    } catch (error) {
+      throw new Error(error.message); // Handle errors
+    }
+  }
+);
+
 // Correct async thunks to fetch Carousel data
 export const fetchCarouselData = createAsyncThunk(
   'fetchCarouselData', // Action type string
@@ -26,12 +45,11 @@ export const fetchDestinations = createAsyncThunk(
     try {
       // Replace with your actual API URL
       const response = await fetch('http://127.0.0.1:8000/api/fetchDestinations');
-      
+
       // Check if response is ok (status code 200-299)
       if (!response.ok) {
         throw new Error(`Error fetching destinations data: ${response.statusText}`);
       }
-
       const data = await response.json(); // Assuming JSON response
       return data; // Return the fetched data
     } catch (error) {
@@ -84,6 +102,7 @@ export const fetchTripadData= createAsyncThunk(
 const dataSlice = createSlice({
   name: 'data',
   initialState: {
+    regions:[],
     slides: [],
     destinations: [],
     listHotels: [],
@@ -94,6 +113,21 @@ const dataSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+
+      // Handling regions data
+      .addCase(fetchRegionsData.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchRegionsData.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.regions = action.payload; // Store fetched regions data
+      })
+      .addCase(fetchRegionsData.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message; // Store error message
+      })
+
+
       // Handling carousel data
       .addCase(fetchCarouselData.pending, (state) => {
         state.status = 'loading';
