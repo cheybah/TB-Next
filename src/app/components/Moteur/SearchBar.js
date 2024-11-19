@@ -13,8 +13,8 @@ import { enUS } from 'date-fns/locale';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import './SearchBar.css'
-const SearchBar = ({ destinations}) => {
-
+const SearchBar = ({ listRegions=[]}) => {
+    const destinations= listRegions.regions;
     //const [destinations, setDestinations] = useState([]);
     const [selectedDestination, setSelectedDestination] = useState(false);
     const [openDate, setOpenDate] = useState(false);
@@ -83,7 +83,7 @@ const SearchBar = ({ destinations}) => {
                                     {selectedDestination ? selectedDestination : 'Choisir une destination'}
                                 </ListboxButton>
                                 <ListboxOptions className="absolute w-full bg-white border border-gray-300 mt-1 z-20 max-h-80 overflow-y-auto">
-                                    {destinations.map((destination) => (
+                                {destinations.map((destination) =>
                                         <ListboxOption key={destination.id_region} value={destination.libelle_region}>
                                             {({ selected }) => (
                                                 <div className={`flex items-center p-2 ${selected ? 'bg-gray-400 text-white' : 'text-black'}`}>
@@ -91,7 +91,7 @@ const SearchBar = ({ destinations}) => {
                                                 </div>
                                             )}
                                         </ListboxOption>
-                                    ))}
+                                    )}
                                 </ListboxOptions>
                             </Listbox>
                         </div>

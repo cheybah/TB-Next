@@ -1,23 +1,35 @@
 
-
+import { fetchRegionsData } from '../../redux/slices/dataSlice';
+import { store } from '../../redux/store';
 import React from 'react';
 import SearchBar from './SearchBar';
 
 // Server-side data fetching within the SearchBar component
-async function fetchDestinationData() {
-    const [DestinationResponse] = await Promise.all([
-        fetch(`http://api.resabookings.com/api/api/api_hotel/api_destination_test.php`, { cache: 'no-store' })
-    ]);
 
-    const DestinationData = await DestinationResponse.json();
+// Fetch data from the API
+export async function fetchData() {
+    const dispatch = store.dispatch;
+    try {
+        const regionsData = await dispatch(fetchRegionsData());
 
-    const destinations = DestinationData.regions;
+        // Log the data here
+        console.log('regions Data:', regionsData);
 
-    return { destinations};
+        return {
+            regionsData: regionsData.payload || [],
+        };
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return { regionsData: [] };
+    }
 }
 
+
+
+
+
 const BackgroundSection = async() => {
-    const { destinations = []} = await fetchDestinationData();
+    const { regionsData } = await fetchData(); 
     return (
         <section className="w-full bg-no-repeat bg-cover bg-[url('/img_moteur_home2-min.jpg')] bg-blend-multiply lg:h-[328px] sm:h-[500px]" alt="Tunisiebooking background" >
         <div className="px-4 mx-auto max-w-screen-xl py-24 lg:py-56 ">
@@ -30,7 +42,7 @@ const BackgroundSection = async() => {
                 style={{ top: "13rem", textShadow: '0px 1px 4px rgba(0, 0, 0, 0.2)', fontFamily: '-apple-system, Roboto, Segoe UI, Helvetica, Arial, sans-serif'}}>
                 Retrouvez nos offres d’hôtels en Tunisie, de Voyages à l’étranger, des Billets d’avion, Omra et plus encore …
             </span>
-            <SearchBar destinations={destinations} />
+            <SearchBar listRegions={regionsData} />
         </div>
     </section>
     );

@@ -10,10 +10,13 @@ export const metadata = { //witout import bcz we're working with jsx not tsx
   title: {
     default: "Agence de voyage Tunisie Booking : le N° 1 D'Hôtel Tunisie",
     template: "%s | TunisieBooking", //for child pages, can be deleted if not needed
+   
   },
   description: "TunisieBooking Votre agence de voyage pour Réservation ☀ : ✓ Hotel Tunisie ✓ Hotel à l’Etranger ✓Voyage Organisé ✓Omra ✓Billets d’avion - Service Clients 7/7 - 27 Agences." ,
   keywords: "agence de voyage, agence de voyage tunisie",
-
+  alternates: {
+    canonical: 'http://v2.springtravelservices.com/',
+  },
   
   verification: {
     google: "V7FnC16cI6u1BcA5JxTXLjE6hl2wCVGrDdLF2e0iyXg",

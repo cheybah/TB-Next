@@ -1,6 +1,7 @@
 "use client";
 
-
+import {fetchRegionsData } from '../../redux/slices/dataSlice';
+import { store } from '../../redux/store';
 import Header from "../Header/Header";
 import Copyright from "../Copyright/Copyright";
 import React from 'react';
@@ -15,9 +16,26 @@ import { Avatar, Typography } from "@material-tailwind/react";
 import AccordionClient from '../Accordion/AccordionClient'; // Isolated Accordion component
 import PresentationCard from "../Presentation/PresentationCard"; //Isolated Presentation component
 import MoteurResult from "../MoteurResult/MoteurResult";
+// Fetch data from the API
+export async function fetchData() {
+    const dispatch = store.dispatch;
+    try {
+        const regionsData = await dispatch(fetchRegionsData());
+        // Log the data here
+        console.log('regions Data:', regionsData);
 
+        return {
+            regionsData: regionsData.payload || [],
+        };
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return { regionsData: []};
+    }
+}
 
-const HotelDetailsContent =  ({ hotel }) => {
+const HotelDetailsContent = async ({ hotel }) => {
+    const { regionsData } = await fetchData();  // Fetch the data using ville
+    console.log("regions"+regionsData);
     if (!hotel) return <div>Hotel not found.</div>;
     const services = Array.isArray(hotel.services)
         ? hotel.services
@@ -138,7 +156,7 @@ const HotelDetailsContent =  ({ hotel }) => {
                                 <div className="flex w-full">
                                     <img
                                         className="w-2/3 h-auto rounded-lg" style={{ marginTop: "20px" }} // Set width to two-thirds and auto height
-                                        src={`http://localhost:8000/storage/${hotel.image}`}
+                                        src={`http://react.tunisiebooking.com/storage/app/public/${hotel.image}`}
                                         alt={`Hotel Image of ${hotel.name}`}
                                     />
                                     <div className="w-1/3 px-4 text-center" style={{ marginTop: "3%" }}>
@@ -161,12 +179,12 @@ const HotelDetailsContent =  ({ hotel }) => {
                                                         aria-label="services"
                                                         key={index}
                                                         className="bg-transparent hover:bg-gray-300 text-black font-normal 
-                hover:text-white py-2 px-4 border border-gray-700 
-                hover:border-transparent rounded-full mr-2 mt-[4%] 
-                cursor-pointer relative"
+                                                        hover:text-white py-2 px-4 border border-gray-700 
+                                                        hover:border-transparent rounded-full mr-2 mt-[4%] 
+                                                        cursor-pointer relative"
                                                     >
                                                         <div className="flex items-center">
-                                                            <img src={`http://localhost:8000/storage/${service.icon}`} alt={service.name} className="mr-2 w-[20px]" />
+                                                            <img src={`http://react.tunisiebooking.com/storage/app/public/${service.icon}`} alt={service.name} className="mr-2 w-[20px]" />
                                                             {service.name}
                                                         </div>
                                                     </button>
@@ -190,7 +208,7 @@ const HotelDetailsContent =  ({ hotel }) => {
                                     </div>
                                 </div>
                             </div>
-                            <MoteurResult />
+                            <MoteurResult listRegions={regionsData} />
                         </div>
 
                         {/*this is the presentation card*/}

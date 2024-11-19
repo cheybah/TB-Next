@@ -1,32 +1,32 @@
+import { fetchCarouselData, fetchDestinations } from '../../redux/slices/dataSlice';
+import { store } from '../../redux/store';
+import Header from '../Header/Header';
+import HeroSection from '../HeroSection/HeroSection';
+import Footer from '../Footer/Footer';
+import Separator from '../Separator/Separator';
+import TopDestinations from '../TopDestinations/TopDestinations';
+import AdTb from '../AdTB/AdTB';
+import Slides from '../Slides/Slides';
+import BackgroundSection from '../Moteur/BackgroundSection';
+import Carousel from '../Carousel/Carousel';
 
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import Separator from "../Separator/Separator";
-import TopDestinations from "../TopDestinations/TopDestinations";
-import AdTb from "../AdTB/AdTB";
-import Slides from "../Slides/Slides";
-import BackgroundSection from "../Moteur/BackgroundSection";
-import Carousel from "../Carousel/Carousel";
-
-async function fetchCarouselData() {
+export async function fetchData() {
+  const dispatch = store.dispatch;
   try {
-    const CarouselResponse = await fetch(
-      "http://api.resabookings.com/api/api/api_slides/api_slides.php",
-      { cache: "no-store" }
-    );
-    const CarouselData = await CarouselResponse.json();
-    return { slides: CarouselData.Slides };
+    const carouselData = await dispatch(fetchCarouselData());
+    const destinationsData = await dispatch(fetchDestinations());
+    console.log("Fetched carousel data:", carouselData.payload);  // Log to check the data
+    return {
+      carouselData: carouselData.payload || [],  // Ensure it's always an array
+      destinationsData: destinationsData.payload || [],  // Ensure it's always an array
+    };
   } catch (error) {
-    console.error("Error fetching carousel data:", error);
-    return { slides: [] }; // Provide fallback empty slides
+    console.error('Error fetching data:', error);
+    return { carouselData: [], destinationsData: [] }; // Return empty arrays in case of error
   }
 }
-
-
 const Home = async () => {
-  const { slides } = await fetchCarouselData();
-  const res = await fetch('http://127.0.0.1:8000/api/fetchDestinations');
-  const destinations = await res.json();
+  const { carouselData, destinationsData } = await fetchData();
 
 
   return (
@@ -34,9 +34,8 @@ const Home = async () => {
       <Header />
       <BackgroundSection />
       <Slides />
-      <Separator />
-      <Carousel slides={slides} />
-      <TopDestinations destinations={destinations} />
+      <Carousel sliders={carouselData} />
+      <TopDestinations destinations={destinationsData} />
       <AdTb />
       <Separator />
       <Footer />
