@@ -63,10 +63,10 @@ export const fetchDestinations = createAsyncThunk(
 // Correct async thunks to fetch hotels data
 export const fetchHotelsData= createAsyncThunk(
   'fetchHotelsData', // Action type string
-  async ({ville}) => {
+  async ({ville,datedep,dateret}) => {
     try {
       // Replace with your actual API URL
-      const url = `http://api.resabookings.com/api/api/api_hotel/api_hotel_detail2_v22_vf.php?id_partenaire=10&id_marche=5&destination=${ville}&date_fin_1=2024-10-18&date_fin_2=2024-10-22&type=not%20all`;
+      const url = `http://api.resabookings.com/api/api/api_hotel/api_hotel_detail2_v22_vf.php?id_partenaire=10&id_marche=5&destination=${ville}&date_fin_1=${datedep}&date_fin_2=${dateret}&type=not%20all`;
       const response = await fetch(url);
       // Check if response is ok (status code 200-299)
       if (!response.ok) {

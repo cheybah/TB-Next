@@ -13,11 +13,11 @@ export const metadata = {
 };
 
 // Fetch data from the API
-export async function fetchData(ville) {
+export async function fetchData(ville,datedep,dateret) {
     const dispatch = store.dispatch;
     try {
         const regionsData = await dispatch(fetchRegionsData());
-        const hotelsData = await dispatch(fetchHotelsData({ville }));
+        const hotelsData = await dispatch(fetchHotelsData({ville,datedep,dateret}));
         const hotelsTripadData = await dispatch(fetchTripadData());
 
         // Log the data here
@@ -39,7 +39,9 @@ export async function fetchData(ville) {
 // Component to display the hotel results
 const HotelsResult = async ({ searchParams }) => {
     const ville = searchParams?.ville || '';  // Get ville from search params
-    const { regionsData,hotelsData, hotelsTripadData } = await fetchData(ville);  // Fetch the data using ville
+    const datedep = searchParams?.datedep || '';  // Get datedep from search params
+    const dateret = searchParams?.dateret || '';  // Get dateret from search params
+    const { regionsData,hotelsData, hotelsTripadData } = await fetchData(ville,datedep,dateret);  // Fetch the data using ville
     return (
         <div className="min-h-screen flex flex-col">
             <Header />

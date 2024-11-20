@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from "next/navigation";
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBed, faCalendar, faUser } from '@fortawesome/free-solid-svg-icons';
 import { DateRange } from 'react-date-range';
 import { format } from "date-fns";
+import { addDays } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
@@ -15,16 +16,30 @@ import './SearchBar.css';
 const SearchBar = ({ listRegions = [] }) => {
   const destinations = listRegions.regions;
   const [selectedDestination, setSelectedDestination] = useState(false);
+  const[startDate, setStartDate] = useState(format(new Date(), "yyyy-MM-dd"));
+  const [endDate, setEndDate] = useState(format(addDays(new Date(), 2), "yyyy-MM-dd"));
   const [openDate, setOpenDate] = useState(false);
 
-  const [date, setDate] = useState([          // dateRange useState
+  const [date, setDate] = useState([// dateRange useState
     {
       startDate: new Date(),
-      endDate: new Date(),
+      endDate: addDays(new Date(), 2), // Default to 7 days apart
       key: 'selection',
     },
   ]);
-  
+  // Function to handle the DateRange change
+  const handleDateChange = (item) => {
+    setDate([item.selection]);
+    // Check if startDate is not equal to endDate and both dates are selected
+    if (item.selection.startDate !== item.selection.endDate) {
+        setOpenDate(false); // Close the date picker when dates are valid
+    }
+    setStartDate(format(item.selection.startDate, "yyyy-MM-dd"));
+    setEndDate(format(item.selection.endDate, "yyyy-MM-dd"));
+    
+   
+  };
+
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({
     adult: 1,
@@ -43,6 +58,24 @@ const SearchBar = ({ listRegions = [] }) => {
 
   // Get the current date (to disable past dates)
   const currentDate = new Date();
+
+  // Ref for DateRange
+  const dateRangeRef = useRef(null);
+
+  // Close DateRange when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dateRangeRef.current && !dateRangeRef.current.contains(event.target)) {
+        setOpenDate(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="relative z-10 flex items-center justify-center h-full px-4">
@@ -97,25 +130,23 @@ const SearchBar = ({ listRegions = [] }) => {
                 icon={faCalendar}
                 className="absolute top-1/2 left-2 -translate-y-1/2 text-gray-500"
               />
-              <span
-                onClick={() => setOpenDate(!openDate)}
-                className="HeaderSearchText block w-full pl-10 py-2 rounded-md border border-gray-300 text-gray-700 cursor-pointer focus:ring-blue-400 focus:border-blue-400"
-              >
-                {`${format(date[0].startDate, 'dd/MM/yyyy')} to ${format(date[0].endDate, 'dd/MM/yyyy')}`}
+              <span onClick={() => setOpenDate(!openDate)} className="HeaderSearchText">
+                {`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(date[0].endDate, "dd/MM/yyyy")}`}
               </span>
 
               {openDate && (
-                <div className="absolute z-20 mt-1 w-full bg-white border border-gray-300 shadow-lg">
+                <div className="absolute z-20 mt-1 bg-white border border-gray-300 shadow-lg" ref={dateRangeRef}>
                   <DateRange
-                    editableDateInputs
-                    onChange={(item) => setDate([item.selection])}
+                    editableDateInputs={true}
+                    onChange={handleDateChange}  // Use the handleDateChange function here
                     moveRangeOnFirstSelection={false}
                     ranges={date}
                     locale={enUS}
                     rangeColors={["#FF0097"]}
                     months={2}  // Display two months in the calendar view
                     direction="horizontal" // Arrange the two months horizontally
-                    minDate={currentDate}  // Disable dates before today
+                    className="absolute  z-50  bg-white shadow-lg"
+                    minDate={currentDate}  // Disable dates before the current date
                   />
                 </div>
               )}
@@ -221,7 +252,7 @@ const SearchBar = ({ listRegions = [] }) => {
       </form>
 
       <div className="absolute z-10 flex justify-center absolute bottom-[-2px] left-1/2 transform -translate-x-1/2">
-        <Link href={`/HotelsResult?ville=${selectedDestination}`}>
+        <Link href={`/HotelsResult?ville=${selectedDestination}&datedep=${startDate}&dateret=${endDate}`}>
           <button
             type="submit"
             style={{ marginBottom: "-5%", cursor: "pointer" }}
