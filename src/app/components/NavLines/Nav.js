@@ -21,8 +21,7 @@ export async function fetchData() {
     const dispatch = store.dispatch;
     try {
         const regionsData = await dispatch(fetchRegionsData());
-        // Log the data here
-        console.log('regions Data:', regionsData);
+
 
         return {
             regionsData: regionsData.payload || [],

@@ -20,10 +20,6 @@ export async function fetchData(ville,datedep,dateret) {
         const hotelsData = await dispatch(fetchHotelsData({ville,datedep,dateret}));
         const hotelsTripadData = await dispatch(fetchTripadData());
 
-        // Log the data here
-        console.log('regions Data:', regionsData);
-        console.log('Hotels Data:', hotelsData);
-        console.log('Hotels Tripad Data:', hotelsTripadData);
 
         return {
             regionsData: regionsData.payload || [],
