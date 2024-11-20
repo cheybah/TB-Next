@@ -155,7 +155,7 @@ label{
 }
 
 .btn_rechercher{
-    width: 100%; /* Equivalent to Tailwind's w-full */
+    /*width: 100%; /* Equivalent to Tailwind's w-full */
     padding: 12px; /* Equivalent to Tailwind's p-3 */
     margin-left:2%;
     padding-left: 40px; /* Equivalent to Tailwind's pl-10 (for the icon space) */

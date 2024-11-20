@@ -207,7 +207,7 @@ const handleRatingChange = (note_tripad) => {
             </div>
 
             {/* Right part - Result Hotels */}
-            <section id="result" className="md:w-3/4">
+            <section id="result" className="md:w-3/4 relative z-1">
                 <div className="relative max-w-6xl p-6 bg-white rounded-lg shadow-lg mt-6 z-9 w-full mb-[3rem]">
                     {filteredHotels.map((hotel) => (
                         <Card key={hotel.id_hotel} className="w-full flex-row mb-4">
@@ -226,30 +226,31 @@ const handleRatingChange = (note_tripad) => {
                                 />
                             </CardHeader>
                             <CardBody className="w-full">
-                                <Typography variant="h4" color="blue-gray" className="mb-2 flex items-center space-x-4">
-                                    <span>{decode(hotel.libelle_hotel)}</span>
+                                <Typography variant="h4" color="blue-gray" className="mb-2 flex flex-wrap items-center space-x-4">
+                                    <span className="w-full sm:w-auto">{decode(hotel.libelle_hotel)}</span>
                                     {listHotelTripAdv.map((hotelTripAdv) =>
                                         hotel.id_hotel === hotelTripAdv.id_hotel ? (
-                                            <div key={hotelTripAdv.id_hotel} className="flex items-center justify-end space-x-2">
+                                            <div key={hotelTripAdv.id_hotel}     className="w-full sm:w-auto flex flex-col sm:flex-row items-start sm:items-center justify-start sm:justify-end space-y-2 sm:space-x-2 sm:space-y-0 mt-2 sm:mt-0">
+                                                {/* Category Image */}
                                                 <Image
                                                     src={`https://tn.tunisiebooking.com/theme/images/star${hotel.categorie}.svg`}
                                                     alt="icon_tripadvisor"
-                                                    className="w-10 h-10 mb-2"
+                                                    className="w-10 h-10 mb-2 sm:mb-0"
                                                     width={500}
                                                     height={300}
                                                     loading="lazy"
                                                 />
+                                                {/* TripAdvisor Icon */}
                                                 <Image
                                                     src="/icon_tripadvisor.svg"
                                                     alt="icon_tripadvisor"
-                                                    className="w-10 h-10 mb-2"
+                                                    className="w-10 h-10 mb-2 sm:mb-0"
                                                     width={500}
                                                     height={300}
                                                     loading="lazy"
                                                 />
-                                                <span>
-                                                    {hotelTripAdv.note_tripad}/5 {hotelTripAdv.text_tripad}
-                                                </span>
+                                                {/* TripAdvisor Rating */}
+                                                <span className="sm:ml-2">{hotelTripAdv.note_tripad}/5 {hotelTripAdv.text_tripad}</span>
                                             </div>
                                         ) : null
                                     )}

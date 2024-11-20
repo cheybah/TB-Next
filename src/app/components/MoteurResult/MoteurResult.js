@@ -32,6 +32,9 @@ const MoteurResult = ({ listRegions = [] }) => {
         room: 1
     });
 
+    // Get the current date (to disable past dates)
+    const currentDate = new Date();
+
     // Update selectedDestination if `ville` is found in the query parameters
     useEffect(() => {
         if (ville && destinations.find(destination => destination.libelle_region === ville)) {
@@ -91,8 +94,11 @@ const MoteurResult = ({ listRegions = [] }) => {
                                                 moveRangeOnFirstSelection={false}
                                                 ranges={date}
                                                 locale={enUS}
-                                                rangeColors={["#85B919"]}
+                                                rangeColors={["#FF0097"]}
+                                                months={2}  // Display two months in the calendar view
+                                                direction="horizontal" // Arrange the two months horizontally
                                                 className="absolute top-12 z-50 date bg-white shadow-lg"
+                                                minDate={currentDate}  // Disable dates before the current date
                                             />
                                         )}
                                     </div>
