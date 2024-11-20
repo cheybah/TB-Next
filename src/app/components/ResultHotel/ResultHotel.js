@@ -206,130 +206,136 @@ const handleRatingChange = (note_tripad) => {
                 </div>
             </div>
 
-            {/* Right part - Result Hotels */}
             <section id="result" className="md:w-3/4 relative z-1">
-                <div className="relative max-w-6xl p-6 bg-white rounded-lg shadow-lg mt-6 z-9 w-full mb-[3rem]">
-                    {filteredHotels.map((hotel) => (
-                        <Card key={hotel.id_hotel} className="w-full flex-row mb-4">
-                            <CardHeader
-                                shadow={false}
-                                floated={false}
-                                className="m-0 w-2/5 shrink-0 rounded-r-none"
-                            >
-                                <Image
-                                    src={decode(hotel.images.image_principal)}
-                                    alt="card-image"
-                                    className="h-full w-full object-cover"
-                                    width={500}
-                                    height={300}
-                                    loading="lazy"
-                                />
-                            </CardHeader>
-                            <CardBody className="w-full">
-                                <Typography variant="h4" color="blue-gray" className="mb-2 flex flex-wrap items-center space-x-4">
-                                    <span className="w-full sm:w-auto">{decode(hotel.libelle_hotel)}</span>
-                                    {listHotelTripAdv.map((hotelTripAdv) =>
-                                        hotel.id_hotel === hotelTripAdv.id_hotel ? (
-                                            <div key={hotelTripAdv.id_hotel}     className="w-full sm:w-auto flex flex-col sm:flex-row items-start sm:items-center justify-start sm:justify-end space-y-2 sm:space-x-2 sm:space-y-0 mt-2 sm:mt-0">
-                                                {/* Category Image */}
-                                                <Image
-                                                    src={`https://tn.tunisiebooking.com/theme/images/star${hotel.categorie}.svg`}
-                                                    alt="icon_tripadvisor"
-                                                    className="w-10 h-10 mb-2 sm:mb-0"
-                                                    width={500}
-                                                    height={300}
-                                                    loading="lazy"
-                                                />
-                                                {/* TripAdvisor Icon */}
-                                                <Image
-                                                    src="/icon_tripadvisor.svg"
-                                                    alt="icon_tripadvisor"
-                                                    className="w-10 h-10 mb-2 sm:mb-0"
-                                                    width={500}
-                                                    height={300}
-                                                    loading="lazy"
-                                                />
-                                                {/* TripAdvisor Rating */}
-                                                <span className="sm:ml-2">{hotelTripAdv.note_tripad}/5 {hotelTripAdv.text_tripad}</span>
-                                            </div>
-                                        ) : null
-                                    )}
-                                </Typography>
-                                <Typography color="gray" className="mb-8 font-normal">
-                                    <Card className="h-full w-full">
-                                        <table className="w-full min-w-max table-auto text-left">
-                                            <thead>
-                                                <tr>
-                                                    <Tabs value={activeTab}>
-                                                        <TabsHeader>
-                                                            {data.map(({ label, value }) => (
-                                                                <Tab
-                                                                    key={value}
-                                                                    value={value}
-                                                                    onClick={() => setActiveTab(value)}
-                                                                >
-                                                                    {label}
-                                                                </Tab>
-                                                            ))}
-                                                        </TabsHeader>
-                                                    </Tabs>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {data
-                                                    .find((tab) => tab.value === activeTab)
-                                                    ?.TABLE_ROWS.map(({ name, prix }, index) => {
-                                                        const isLast =
-                                                            index ===
-                                                            data.find((tab) => tab.value === activeTab)
-                                                                .TABLE_ROWS.length - 1;
-                                                        const classes = isLast ? "" : "border-b border-blue-gray-50";
-
-                                                        return (
-                                                            <tr key={name}>
-                                                                <td className={classes}>
-                                                                    <Typography
-                                                                        variant="small"
-                                                                        color="blue-gray"
-                                                                        className="font-normal"
-                                                                    >
-                                                                        <div className="flex items-center space-x-0">
-                                                                            <div className="m-0 p-0">
-                                                                                <Checkbox
-                                                                                    id={`ripple-on-${index}`}
-                                                                                    ripple={true}
-                                                                                />
-                                                                            </div>
-                                                                            <div className="m-0 p-0">
-                                                                                <span>{name}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </Typography>
-                                                                </td>
-                                                                <td>
-                                                                    <div>{prix}DT</div>
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    })}
-                                            </tbody>
-                                        </table>
-                                    </Card>
-                                </Typography>
-                                <div className="relative w-full">
-                                    <Link href="">
-                                        <button
-                                            className="btn_rechercher w-72 lg:w-72 md:w-36 py-2 bg-gradient-to-r from-[#FF5555] to-[#F40091] text-white font-semibold rounded-lg transform transition-transform duration-300 hover:bg-lime-600 hover:scale-105 focus:outline-none"
-                                        >
-                                            + De detail
-                                        </button>
-                                    </Link>
+    <div className="relative max-w-6xl p-6 bg-white rounded-lg shadow-lg mt-6 z-9 w-full mb-[3rem]">
+        {filteredHotels.map((hotel) => (
+            <Card key={hotel.id_hotel} className="w-full flex-col md:flex-row mb-4">
+                <CardHeader
+                    shadow={false}
+                    floated={false}
+                    className="m-0 w-full md:w-2/5 shrink-0 rounded-r-none"
+                >
+                    <Image
+                        src={decode(hotel.images.image_principal)}
+                        alt="card-image"
+                        className="h-full w-full object-cover"
+                        width={500}
+                        height={300}
+                        loading="lazy"
+                    />
+                </CardHeader>
+                <CardBody className="w-full">
+                    <Typography variant="h4" color="blue-gray" className="mb-2 flex flex-wrap items-center space-x-4">
+                        <span className="w-full sm:w-auto">{decode(hotel.libelle_hotel)}</span>
+                        {listHotelTripAdv.map((hotelTripAdv) =>
+                            hotel.id_hotel === hotelTripAdv.id_hotel ? (
+                                <div key={hotelTripAdv.id_hotel} className="w-full sm:w-auto flex flex-col sm:flex-row items-start sm:items-center justify-start sm:justify-end space-y-2 sm:space-x-2 sm:space-y-0 mt-2 sm:mt-0">
+                                    {/* Category Image */}
+                                    <Image
+                                        src={`https://tn.tunisiebooking.com/theme/images/star${hotel.categorie}.svg`}
+                                        alt="icon_tripadvisor"
+                                        className="w-10 h-10 mb-2 sm:mb-0"
+                                        width={500}
+                                        height={300}
+                                        loading="lazy"
+                                    />
+                                    {/* TripAdvisor Icon */}
+                                    <Image
+                                        src="/icon_tripadvisor.svg"
+                                        alt="icon_tripadvisor"
+                                        className="w-10 h-10 mb-2 sm:mb-0"
+                                        width={500}
+                                        height={300}
+                                        loading="lazy"
+                                    />
+                                    {/* TripAdvisor Rating */}
+                                    <span className="sm:ml-2">{hotelTripAdv.note_tripad}/5 {hotelTripAdv.text_tripad}</span>
                                 </div>
-                            </CardBody>
-                        </Card>
-                    ))}
-                </div>
-            </section>
+                            ) : null
+                        )}
+                    </Typography>
+                    <Typography color="gray" className="mb-8 font-normal">
+                    <Card className="h-full w-full max-w-full"> {/* Card should take full width of container */}
+    <div className="overflow-x-auto w-full"> {/* Ensure the table scrolls horizontally on small screens */}
+        <table className="w-full min-w-max table-auto text-left"> {/* Make sure the table is full width */}
+            <thead>
+                <tr>
+                    <Tabs value={activeTab}>
+                        <TabsHeader className="md:w-full w-8/12"> {/* Adjust this for tab width if necessary */}
+                            <div className="overflow-x-auto sm:overflow-x-auto md:overflow-x-visible w-full">
+                                <div className="flex space-x-4 min-w-max">
+                                    {data.map(({ label, value }) => (
+                                        <Tab
+                                            key={value}
+                                            value={value}
+                                            onClick={() => setActiveTab(value)}
+                                            className="whitespace-nowrap"
+                                        >
+                                            {label}
+                                        </Tab>
+                                    ))}
+                                </div>
+                            </div>
+                        </TabsHeader>
+                    </Tabs>
+                </tr>
+            </thead>
+            <tbody className="md:w-full w-full"> {/* Ensure tbody takes full width */}
+                {data
+                    .find((tab) => tab.value === activeTab)
+                    ?.TABLE_ROWS.map(({ name, prix }, index) => {
+                        const isLast =
+                            index ===
+                            data.find((tab) => tab.value === activeTab)
+                                .TABLE_ROWS.length - 1;
+                        const classes = isLast ? "" : "border-b border-blue-gray-50";
+
+                        return (
+                            <tr key={name} className=" ">
+                                <td className={classes}>
+                                    <Typography
+                                        variant="small"
+                                        color="blue-gray"
+                                        className="font-normal"
+                                    >
+                                        <div className="flex items-center space-x-0">
+                                            <div className="m-0 p-0">
+                                                <Checkbox
+                                                    id={`ripple-on-${index}`}
+                                                    ripple={true}
+                                                />
+                                            </div>
+                                            <div className="m-0 p-0">
+                                                <span>{name}</span>
+                                            </div>
+                                        </div>
+                                    </Typography>
+                                </td>
+                                
+                            </tr>
+                        );
+                    })}
+            </tbody>
+        </table>
+    </div>
+</Card>
+
+                    </Typography>
+                    <div className="relative w-full">
+                        <Link href="">
+                            <button
+                                className="btn_rechercher w-full sm:w-72 py-2 bg-gradient-to-r from-[#FF5555] to-[#F40091] text-white font-semibold rounded-lg transform transition-transform duration-300 hover:bg-lime-600 hover:scale-105 focus:outline-none"
+                            >
+                                + De detail
+                            </button>
+                        </Link>
+                    </div>
+                </CardBody>
+            </Card>
+        ))}
+    </div>
+</section>
+
         </div>
     );
 };

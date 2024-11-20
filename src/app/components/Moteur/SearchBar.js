@@ -19,6 +19,7 @@ const SearchBar = ({ listRegions = [] }) => {
   const[startDate, setStartDate] = useState(format(new Date(), "yyyy-MM-dd"));
   const [endDate, setEndDate] = useState(format(addDays(new Date(), 2), "yyyy-MM-dd"));
   const [openDate, setOpenDate] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false); // Track screen size
 
   const [date, setDate] = useState([// dateRange useState
     {
@@ -77,8 +78,25 @@ const SearchBar = ({ listRegions = [] }) => {
     };
   }, []);
 
+    // Check if the screen is small
+    useEffect(() => {
+      const checkScreenSize = () => {
+        setIsSmallScreen(window.innerWidth < 768); // Adjust the size threshold as needed
+      };
+  
+      // Initial check
+      checkScreenSize();
+  
+      // Update on window resize
+      window.addEventListener("resize", checkScreenSize);
+  
+      return () => {
+        window.removeEventListener("resize", checkScreenSize);
+      };
+    }, []);
+
   return (
-    <div className="relative z-10 flex items-center justify-center h-full px-4">
+    <div className="relative z-10 flex items-center justify-center h-full md:px-4 px-2">
       <form className="w-full max-w-5xl p-6 bg-white bg-opacity-90 rounded-xl shadow-lg -mt-10" style={{ paddingBottom: "3rem", paddingTop: "0.5rem" }}>
         <div className="flex flex-wrap justify-between items-center mb-6 border-b border-gray-300 sm:gap-6">
           {[ 
@@ -124,34 +142,32 @@ const SearchBar = ({ listRegions = [] }) => {
           </div>
 
           {/* Date Range Picker */}
-          <div>
-            <div className="relative mt-1">
-              <FontAwesomeIcon
-                icon={faCalendar}
-                className="absolute top-1/2 left-2 -translate-y-1/2 text-gray-500"
-              />
-              <span onClick={() => setOpenDate(!openDate)} className="HeaderSearchText">
-                {`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(date[0].endDate, "dd/MM/yyyy")}`}
-              </span>
+           {/* Date Range Picker */}
+        <div>
+          <div className="relative mt-1">
+            <span onClick={() => setOpenDate(!openDate)} className="HeaderSearchText">
+              {`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(date[0].endDate, "dd/MM/yyyy")}`}
+            </span>
 
-              {openDate && (
-                <div className="absolute z-20 mt-1 bg-white border border-gray-300 shadow-lg" ref={dateRangeRef}>
-                  <DateRange
-                    editableDateInputs={true}
-                    onChange={handleDateChange}  // Use the handleDateChange function here
-                    moveRangeOnFirstSelection={false}
-                    ranges={date}
-                    locale={enUS}
-                    rangeColors={["#FF0097"]}
-                    months={2}  // Display two months in the calendar view
-                    direction="horizontal" // Arrange the two months horizontally
-                    className="absolute  z-50  bg-white shadow-lg"
-                    minDate={currentDate}  // Disable dates before the current date
-                  />
-                </div>
-              )}
-            </div>
+            {openDate && (
+              <div className="absolute z-20 mt-1 bg-white border border-gray-300 shadow-lg" style={{ width: 'auto' }}> {/* Added margin-left and adjusted width */}
+                <DateRange
+                  editableDateInputs={true}
+                  onChange={handleDateChange}
+                  moveRangeOnFirstSelection={false}
+                  ranges={date}
+                  locale={enUS}
+                  rangeColors={["#FF0097"]}
+                  months={2}
+                  direction={isSmallScreen ? 'vertical' : 'horizontal'} // Change direction based on screen size
+                  className="absolute z-50 bg-white shadow-lg"
+                  minDate={new Date()}  // Disable past dates
+                  style={{ width: '280px' }} // Minimized width for DateRange
+                />
+              </div>
+            )}
           </div>
+        </div>
 
           {/* Occupancy Dropdown */}
           <div className="HeaderSearchItem">
