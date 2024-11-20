@@ -15,7 +15,6 @@ export async function fetchData() {
   try {
     const carouselData = await dispatch(fetchCarouselData());
     const destinationsData = await dispatch(fetchDestinations());
-    console.log("Fetched carousel data:", carouselData.payload);  // Log to check the data
     return {
       carouselData: carouselData.payload || [],  // Ensure it's always an array
       destinationsData: destinationsData.payload || [],  // Ensure it's always an array

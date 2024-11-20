@@ -3,4 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: http://react.tunisiebooking.com
+Host: http://v2.springtravelservices.com
+
+# Sitemaps
+Sitemap: http://v2.springtravelservices.com/sitemap.xml
