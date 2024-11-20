@@ -19,6 +19,7 @@ const MoteurResult = ({ listRegions = [] }) => {
     const datedep=searchParams.get('datedep');
     const dateret=searchParams.get('dateret');
     const destinations = listRegions.regions || []; // Ensure it's an array
+    const [isSmallScreen, setIsSmallScreen] = useState(false); // Track screen size
 
     const [selectedDestination, setSelectedDestination] = useState(null);
     const[startDate, setStartDate] = useState(format(new Date(), "yyyy-MM-dd"));
@@ -62,6 +63,23 @@ const MoteurResult = ({ listRegions = [] }) => {
         }
     }, [ville, destinations]);
 
+     // Check if the screen is small
+     useEffect(() => {
+        const checkScreenSize = () => {
+          setIsSmallScreen(window.innerWidth < 768); // Adjust the size threshold as needed
+        };
+    
+        // Initial check
+        checkScreenSize();
+    
+        // Update on window resize
+        window.addEventListener("resize", checkScreenSize);
+    
+        return () => {
+          window.removeEventListener("resize", checkScreenSize);
+        };
+      }, []);
+
     const handleOption = (name, operation) => {
         setOptions((prev) => ({
             ...prev,
@@ -95,7 +113,7 @@ const MoteurResult = ({ listRegions = [] }) => {
                                         <Listbox.Button className="HeaderSearchInput" style={{ color: 'grey' }}>
                                             {selectedDestination || 'Select a destination'}
                                         </Listbox.Button>
-                                        <Listbox.Options className="absolute w-full bg-white border border-gray-300 mt-1 max-h-80 overflow-y-auto">
+                                        <Listbox.Options className="absolute w-full bg-white border border-gray-300 mt-1 max-h-80 overflow-y-auto z-50">
                                             {destinations.map((destination) => (
                                                 <Listbox.Option key={destination.id_region} value={destination.libelle_region}>
                                                     {({ selected }) => (
@@ -111,7 +129,7 @@ const MoteurResult = ({ listRegions = [] }) => {
                                 </div>
                             </div>
                             {/* Date Range Picker */}
-                            <div className="relative flex flex-col md:space-x-4 mx-2 z-50">
+                            <div className="relative flex flex-col md:space-x-4 mx-2 z-40">
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700">Check-In</label>
                                     <div className="relative w-full">
@@ -124,19 +142,20 @@ const MoteurResult = ({ listRegions = [] }) => {
                                 </span>
 
                                 {openDate && (
-                                    <div className="absolute z-20 mt-1 bg-white border border-gray-300 shadow-lg" ref={dateRangeRef}>
-                                    <DateRange
+                                    <div className="absolute z-20 mt-1 bg-white border border-gray-300 shadow-lg" style={{ width: 'auto' }}> {/* Added margin-left and adjusted width */}
+                                        <DateRange
                                         editableDateInputs={true}
-                                        onChange={handleDateChange}  // Use the handleDateChange function here
+                                        onChange={handleDateChange}
                                         moveRangeOnFirstSelection={false}
                                         ranges={date}
                                         locale={enUS}
                                         rangeColors={["#FF0097"]}
-                                        months={2}  // Display two months in the calendar view
-                                        direction="horizontal" // Arrange the two months horizontally
-                                        className="absolute  z-50  bg-white shadow-lg"
-                                        minDate={currentDate}  // Disable dates before the current date
-                                    />
+                                        months={2}
+                                        direction={isSmallScreen ? 'vertical' : 'horizontal'} // Change direction based on screen size
+                                        className="absolute z-50 bg-white shadow-lg"
+                                        minDate={new Date()}  // Disable past dates
+                                        style={{ width: '280px' }} // Minimized width for DateRange
+                                        />
                                     </div>
                                 )}
                                 </div>
