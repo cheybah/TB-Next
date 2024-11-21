@@ -28,7 +28,7 @@ const AccordionClient = ({ title, content, index }) => {
                     className={`transition-transform duration-300 ${open === index ? 'rotate-180' : 'rotate-0'}`}
                 />
             </AccordionHeader>
-            <AccordionBody>
+            <AccordionBody className="pr-4">
                 {content}
             </AccordionBody>
         </Accordion>
