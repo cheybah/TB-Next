@@ -88,8 +88,8 @@ const MoteurResult = ({ listRegions = [] }) => {
                         <div className="w-full grid lg:-mt-20 md:-mt-14 md:grid-cols-4 ml-0 lg:ml-0 md:-ml-2 lg:pb-px md:pb-px">
                             {/* Destination */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700">Destination</label>
-                                <div className="relative w-full">
+                            <label className="block text-sm font-medium text-gray-700" style={{ visibility: 'hidden' }}>Destination</label>
+                            <div className="relative w-full">
                                     <FontAwesomeIcon icon={faBed} className='HeaderIcon Icon' />
                                     <Listbox value={selectedDestination} onChange={setSelectedDestination}>
                                         <Listbox.Button className="HeaderSearchInput" style={{ color: 'grey' }}>
@@ -113,8 +113,8 @@ const MoteurResult = ({ listRegions = [] }) => {
                             {/* Date Range Picker */}
                             <div className="relative flex flex-col md:space-x-4 mx-2 z-50">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700">Check-In</label>
-                                    <div className="relative w-full">
+                                <label className="block text-sm font-medium text-gray-700" style={{ visibility: 'hidden' }}>Check-In</label>
+                                <div className="relative w-full">
                                 <FontAwesomeIcon
                                     icon={faCalendar}
                                     className="absolute top-1/2 left-2 -translate-y-1/2 text-gray-500"
@@ -148,8 +148,8 @@ const MoteurResult = ({ listRegions = [] }) => {
                             {/* Occupancy Dropdown */}
                             <div className="HeaderSearchItem">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700">Occupancy</label>
-                                    <div className="relative mt-1">
+                                <label className="block text-sm font-medium text-gray-700" style={{ visibility: 'hidden' }}>Occupancy</label>
+                                <div className="relative mt-1">
                                         <FontAwesomeIcon
                                             icon={faUser}
                                             className="absolute top-1/2 left-2 -translate-y-1/2 text-gray-500"
