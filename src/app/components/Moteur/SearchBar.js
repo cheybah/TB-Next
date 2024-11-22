@@ -100,19 +100,24 @@ const SearchBar = ({ listRegions = [] }) => {
       <form className="w-full max-w-5xl p-6 bg-white bg-opacity-90 rounded-xl shadow-lg -mt-10" style={{ paddingBottom: "3rem", paddingTop: "0.5rem" }}>
         <div className="flex flex-wrap justify-between items-center mb-6 border-b border-gray-300 sm:gap-6">
           {[ 
-            { icon: 'hotel.svg', label: 'Hotels Tunisie' }, 
+            { icon: 'hotel.svg', label: 'Hotels Tunisie' , href: '/' }, 
             { icon: 'umrah.svg', label: 'Omra' }, 
-            { icon: 'voyage-organisé.svg', label: 'Voyage Organisé' }, 
+            { icon: 'voyage-organisé.svg', label: 'Voyage Organisé', href: '/voyage_organise/tcheque' }, 
             { icon: 'vols.svg', label: 'Vols' }, 
             { icon: 'circuit.svg', label: 'Circuits' } 
           ].map((tab, index) => (
-            <div 
+            <Link 
               key={index} 
-              className={`flex items-center space-x-2 p-2 cursor-pointer ${index === 0 ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-400 hover:border-b-2 hover:border-pink-400'}`}
+              href={tab.href || '#'} 
+              className={`flex items-center space-x-2 p-2 cursor-pointer ${
+                index === 0 
+                  ? 'text-pink-500 border-b-2 border-pink-500' 
+                  : 'text-gray-700 hover:text-pink-400 hover:border-b-2 hover:border-pink-400'
+              }`}
             >
               <img src={`/${tab.icon}`} alt={`${tab.label} Icon`} className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-8" />
               <span className="hidden sm:flex text-sm sm:text-base font-medium">{tab.label}</span>
-            </div>
+              </Link>
           ))}
         </div>
 
