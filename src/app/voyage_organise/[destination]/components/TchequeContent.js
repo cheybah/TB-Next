@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   Button,
   Dialog,
@@ -6,17 +6,55 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
-
+import {
+  Tabs,
+  TabsHeader,
+  TabsBody,
+  Tab,
+  TabPanel,
+} from "@material-tailwind/react";
+import {
+  Square3Stack3DIcon,
+  UserCircleIcon,
+  Cog6ToothIcon,
+} from "@heroicons/react/24/solid";
 
 
 export default function TchequeContent() {
 
   const [isOpen, setIsOpen] = React.useState(false);
   const [isImageDialogOpen, setIsImageDialogOpen] = React.useState(false);
-  const [activeTab, setActiveTab] = useState("Descriptif");
 
   const handleOpen = () => setIsOpen(!isOpen);
   const handleImageDialogOpen = () => setIsImageDialogOpen(!isImageDialogOpen);
+
+  const handleTabChange = (value) => {
+    if (value === "photos") {
+      setIsOpen(false);
+      setIsImageDialogOpen(true);
+    } else if (value === "descriptif") {
+      setIsImageDialogOpen(false);
+      setIsOpen(true);
+    }
+  };
+
+  const data = [
+    {
+      label: "Date & Prix",
+      value: "date",
+      icon: Square3Stack3DIcon,
+    },
+    {
+      label: "Photos",
+      value: "photos",
+      icon: UserCircleIcon,
+    },
+    {
+      label: "Descriptif",
+      value: "descriptif",
+      icon: Cog6ToothIcon,
+    },
+  ];
 
 
 
@@ -80,10 +118,6 @@ export default function TchequeContent() {
               <div className="w-2/5 mt-2 flex items-center justify-center" >
                 <div
                   className="flex rounded-l-md bg-gradient-to-r from-red-500 to-pink-500 text-white py-[0.7rem] px-4 cursor-pointer "
-                  data-toggle="modal"
-                  style={{ border: "2px solid #E91F62" }}
-                  data-target="#myModal1295"
-                  onClick={() => result_filtre('1295')}
                 >
                   <div>
                     <span className="text-xs font-light">à partir de </span>
@@ -113,9 +147,35 @@ export default function TchequeContent() {
 
       {/* Voir Descriptif Dialog */}
 
-      <Dialog open={isOpen} size="xl" handler={handleOpen} className="backdrop">
-        <DialogHeader className="text-[#F40091] font-semibold text-2xl">Escapade au Cœur de l’Europe</DialogHeader>
+      <Dialog open={isOpen} size="xl" handler={handleOpen}>
+        <DialogHeader className="text-[#F40091] font-semibold text-xl flex justify-center">
+          <Tabs value={isImageDialogOpen ? "photos" : "descriptif"} className="w-full">
+            <TabsHeader className="flex w-full">
+              {data.map(({ label, value, icon }) => (
+                <Tab
+                  key={value}
+                  value={value}
+                  className="flex-1 text-center py-2"
+                  onClick={() => handleTabChange(value)}
+                >
+                  <div className="flex justify-center items-center gap-2">
+                    {React.createElement(icon, { className: "w-5 h-5" })}
+                    {label}
+                  </div>
+                </Tab>
+              ))}
+            </TabsHeader>
+            <TabsBody>
+              {data.map(({ value, desc }) => (
+                <TabPanel key={value} value={value} className="p-4">
+                  {desc}
+                </TabPanel>
+              ))}
+            </TabsBody>
+          </Tabs>
+        </DialogHeader>
         <DialogBody className="overflow-y-auto max-h-[400px] text-gray-800 space-y-4">
+          <div className="text-[#F40091] font-semibold text-2xl">Escapade au Cœur de l’Europe </div>
           <p>
             <strong>Dates : 29-12-2024 au 05-01-2025</strong>
           </p>
@@ -224,31 +284,32 @@ export default function TchequeContent() {
       </Dialog>
 
       {/* Image Click Dialog */}
-      <Dialog open={isImageDialogOpen} size="lg" handler={handleImageDialogOpen} className="backdrop">
-      <DialogHeader className="text-[#F40091] font-semibold text-xl flex justify-center">
-          <div className="flex space-x-4">
-            <button
-              className={`pb-2 ${activeTab === "Image" ? "border-b-2 border-[#F40091] text-[#F40091]" : "text-gray-600"}`}
-              onClick={() => {
-                setActiveTab("Image");
-                handleImageDialogOpen();
-              }}
-            >
-              Image
-            </button>
-            <button
-              className={`pb-2 ${activeTab === "Descriptif" ? "border-b-2 border-[#F40091] text-[#F40091]" : "text-gray-600"}`}
-              onClick={() => setActiveTab("Descriptif")}
-            >
-              Descriptif
-            </button>
-            <button
-              className={`pb-2 ${activeTab === "DatePrix" ? "border-b-2 border-[#F40091] text-[#F40091]" : "text-gray-600"}`}
-              onClick={() => setActiveTab("DatePrix")}
-            >
-              Date & Prix
-            </button>
-          </div>
+      <Dialog open={isImageDialogOpen} size="lg" handler={handleImageDialogOpen}>
+        <DialogHeader className="text-[#F40091] font-semibold text-xl flex justify-center">
+          <Tabs value={isImageDialogOpen ? "photos" : "descriptif"} className="w-full">
+            <TabsHeader className="flex w-full">
+              {data.map(({ label, value, icon }) => (
+                <Tab
+                  key={value}
+                  value={value}
+                  className="flex-1 text-center py-2"
+                  onClick={() => handleTabChange(value)}
+                >
+                  <div className="flex justify-center items-center gap-2">
+                    {React.createElement(icon, { className: "w-5 h-5" })}
+                    {label}
+                  </div>
+                </Tab>
+              ))}
+            </TabsHeader>
+            <TabsBody>
+              {data.map(({ value, desc }) => (
+                <TabPanel key={value} value={value} className="p-4">
+                  {desc}
+                </TabPanel>
+              ))}
+            </TabsBody>
+          </Tabs>
         </DialogHeader>
         <DialogBody className="flex justify-center">
           <img
@@ -267,7 +328,6 @@ export default function TchequeContent() {
           </Button>
         </DialogFooter>
       </Dialog>
-
     </>
   );
 }

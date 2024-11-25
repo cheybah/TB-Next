@@ -53,7 +53,6 @@ export default function DestinationPage() {
             </div>
             <Footer />
         </div>
-
-
     );
 }
+
