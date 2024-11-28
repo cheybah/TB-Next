@@ -29,6 +29,12 @@ a{
   .text-balance {
     text-wrap: balance;
   }
+
+  @media (max-width: 430px) {
+    .no-margin-right {
+      margin-right: 0 !important;
+    }
+  }
 }
 
 .App {
