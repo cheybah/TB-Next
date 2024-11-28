@@ -58,94 +58,87 @@ export default function TchequeContent() {
     },
   ];
 
-
-
   return (
     <>
-      <div className="mb-[3rem]">
-        <h1>Découvrez la beauté de la République Tchèque</h1>
-        <p>
-          Découvrez la magie de Prague, le charme de Český Krumlov et l'histoire de Kutná Hora. Des châteaux médiévaux à la culture moderne, la République tchèque offre une expérience unique à chaque voyageur.
-        </p>
+ <div className="mb-[3rem]">
+    <h1 className="text-lg font-bold text-gray-900 mb-2">Découvrez la beauté de la République Tchèque</h1>
+    <p className="text-gray-700 mb-4">
+        Découvrez la magie de Prague, le charme de Český Krumlov et l'histoire de Kutná Hora. Des châteaux médiévaux à la culture moderne, la République tchèque offre une expérience unique à chaque voyageur.
+    </p>
 
-        <div className="flex p-3 bg-white rounded-md w-full" style={{ fontFamily: "-apple-system, 'Roboto', Helvetica, Arial, sans-serif", boxShadow: "0px 4px 16px 0px rgba(38, 38, 38, 0.17)" }}>
-          <div className="relative h-full max-h-80 w-1/3 mr-5">
+    <div
+        className="flex flex-col lg:flex-row p-3 bg-white rounded-md w-full"
+        style={{
+            fontFamily: "-apple-system, 'Roboto', Helvetica, Arial, sans-serif",
+            boxShadow: "0px 4px 16px 0px rgba(38, 38, 38, 0.17)",
+        }}
+    >
+        {/* Image Section */}
+        <div className="relative h-60 lg:h-full w-full lg:w-1/3 mb-4 lg:mb-0 lg:mr-5">
             <img
-              className="h-full w-full rounded-md object-cover cursor-pointer"
-              src="https://image.resabooking.com/images/images_og/img_p_hotel_og_1295.jpg"
-              alt="Your favorite destination"
-              onClick={handleImageDialogOpen}
-
+                className="h-full w-full rounded-md object-cover cursor-pointer"
+                src="https://image.resabooking.com/images/images_og/img_p_hotel_og_1295.jpg"
+                alt="Your favorite destination"
+                onClick={handleImageDialogOpen}
             />
             <span className="absolute top-2 left-3 p-2 rounded-xl bg-white text-pink-500 font-semibold text-lg" style={{ fontSize: "1rem" }}>
-              Circuit
+                Circuit
             </span>
-          </div>
-
-          <div className="w-3/4">
-            <div className="grid gap-1">
-              <span
-                className="cursor-pointer font-bold text-xl"
-
-              >
-                Escapade au Cœur de l'Europe : Prague &amp; Bratislava &amp; Vienne
-              </span>
-              <span className="text-sm font-normal">
-                8 Jours - Petit déjeuner
-              </span>
-            </div>
-
-            <div id="hotel-container" className="mt-3">
-              <div className="pb-2 flex items-center">
-                <span className="text-gray-900 text-lg font-normal">Hotel Panorama</span>
-                <img className="h-6 ml-4" src="https://tn.tunisiebooking.com/theme/images/star4.svg" alt="rating" />
-              </div>
-              <div className="pb-2 flex items-center">
-                <span className="text-gray-900 text-lg font-normal">Hotel Fleming's Stadhalle</span>
-                <img className="h-6 ml-4" src="https://tn.tunisiebooking.com/theme/images/star4.svg" alt="rating" />
-              </div>
-            </div>
-
-            <div className="flex mt-16 items-center">
-              <div
-                className="w-3/5 flex items-center cursor-pointer"
-                onClick={() => {
-                  handleOpen();
-                }}
-              >
-                <img className="w-6 mr-2" src="https://tn.tunisiebooking.com/voyage_organise/images/voirplus.svg" alt="description" />
-                <span className="underline text-blue-500 font-medium">Voir Descriptif</span>
-              </div>
-
-              <div className="w-2/5 mt-2 flex items-center justify-center" >
-                <div
-                  className="flex rounded-l-md bg-gradient-to-r from-red-500 to-pink-500 text-white py-[0.7rem] px-4 cursor-pointer "
-                >
-                  <div>
-                    <span className="text-xs font-light">à partir de </span>
-                    <span className="text-4xl font-bold">5590 </span>
-                    <span className="text-sm">TND /pers</span>
-                  </div>
-                </div>
-                <div
-                  className="w-1/4 py-1 text-center text-pink-500 rounded-r-md"
-                  style={{
-                    border: "1px solid #E91F62",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <span className="font-light text-sm">Payez en</span>
-                  <span className="text-3xl font-bold">6X</span>
-                </div>
-
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+
+        {/* Content Section */}
+        <div className="w-full lg:w-2/3 flex flex-col">
+            <div className="mb-3">
+                <span className="cursor-pointer font-bold text-lg lg:text-xl">
+                    Escapade au Cœur de l'Europe : Prague &amp; Bratislava &amp; Vienne
+                </span>
+                <span className="block text-sm font-normal text-gray-700">8 Jours - Petit déjeuner</span>
+            </div>
+
+            <div id="hotel-container" className="mt-2">
+                <div className="pb-2 flex items-center">
+                    <span className="text-gray-900 text-base lg:text-lg font-normal">Hotel Panorama</span>
+                    <img className="h-5 lg:h-6 ml-2 lg:ml-4" src="https://tn.tunisiebooking.com/theme/images/star4.svg" alt="rating" />
+                </div>
+                <div className="pb-2 flex items-center">
+                    <span className="text-gray-900 text-base lg:text-lg font-normal">Hotel Fleming's Stadhalle</span>
+                    <img className="h-5 lg:h-6 ml-2 lg:ml-4" src="https://tn.tunisiebooking.com/theme/images/star4.svg" alt="rating" />
+                </div>
+            </div>
+
+            <div className="flex flex-col lg:flex-row mt-24 items-start justify-between  lg:items-center">
+                <div
+                    className="flex items-center mb-4 lg:mb-0 cursor-pointer"
+                    onClick={() => {
+                        handleOpen();
+                    }}
+                >
+                    <img className="w-5 lg:w-6 mr-2" src="https://tn.tunisiebooking.com/voyage_organise/images/voirplus.svg" alt="description" />
+                    <span className="underline text-blue-500 font-medium">Voir Descriptif</span>
+                </div>
+
+                <div className="flex items-center w-full lg:w-auto">
+                    <div
+                        className="flex rounded-l-md bg-gradient-to-r from-red-500 to-pink-500 text-white py-2 px-3 lg:py-[0.7rem] lg:px-4 cursor-pointer"
+                    >
+                        <div>
+                            <span className="text-xs font-light">à partir de </span>
+                            <span className="text-3xl lg:text-4xl font-bold">5590 </span>
+                            <span className="text-sm">TND /pers</span>
+                        </div>
+                    </div>
+                    <div
+                        className="py-1 px-3 lg:px-4 text-center text-pink-500 rounded-r-md border border-pink-500 flex flex-col items-center justify-center"
+                    >
+                        <span className="font-light text-sm">Payez en</span>
+                        <span className="text-2xl lg:text-3xl font-bold">6X</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
       {/* Voir Descriptif Dialog */}
 
