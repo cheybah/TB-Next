@@ -9,6 +9,7 @@ module.exports = withMT({
   ],
   theme: {
     extend: {
+      
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

@@ -97,7 +97,7 @@ const SearchBar = ({ listRegions = [] }) => {
 
   return (
     <div className="relative z-10 flex items-center justify-center h-full md:px-4 px-2">
-      <form className="w-full max-w-5xl p-6 bg-white bg-opacity-90 rounded-xl shadow-lg -mt-10" style={{ paddingBottom: "3rem", paddingTop: "0.5rem" }}>
+      <form className="w-full max-w-7xl p-6 bg-white bg-opacity-90 rounded-xl shadow-lg -mt-10" style={{ paddingBottom: "3rem", paddingTop: "0.5rem" }}>
         <div className="flex flex-wrap justify-between items-center mb-6 border-b border-gray-300 sm:gap-6">
           {[ 
             { icon: 'hotel.svg', label: 'Hotels Tunisie' }, 
