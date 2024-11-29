@@ -1,10 +1,5 @@
 "use client";
 import React, { useState } from 'react';
-import {fetchRegionsData } from '../../redux/slices/dataSlice';
-import { store } from '../../redux/store';
-import Header from "../Header/Header";
-import Copyright from "../Copyright/Copyright";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faCheck, faChevronDown, faLocationDot, faQuoteLeft, faQuoteRight } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -21,11 +16,7 @@ const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }
     
     
     const listHotels = listsHotels?.Hotels_hors_promo || [];  // Ensure this property exists in your data
-
- 
-
-
-
+    
     const listregionsData = regionsData;  // Fetch the data using ville
     const listhotelTripadData=hotelsTripadData?.Hotels || [];
     const data = [
@@ -44,8 +35,7 @@ const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }
     };
 
     return (
-        <div >
-            
+        <div >  
             {listHotels.length > 0 ? (
                 listHotels.map((hotel, index) => (
                     <main className="flex-grow" key={index}>
