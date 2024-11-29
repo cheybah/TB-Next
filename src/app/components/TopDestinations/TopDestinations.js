@@ -3,6 +3,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import './topDestinations.css';
+import Cookies from 'js-cookie';
 
 const TopDestinations = () => {
     const router = useRouter();
@@ -101,33 +102,30 @@ const TopDestinations = () => {
     ];
 
     const handleNavigate = (destination) => {
-        if (typeof window !== "undefined") { // Ensure we're in the browser
+        if (typeof window !== "undefined") {
             const today = new Date();
             const departureDate = new Date(today);
-            departureDate.setDate(today.getDate()); // Set departure date as today
-    
+            departureDate.setDate(today.getDate());
             const returnDate = new Date(today);
-            returnDate.setDate(today.getDate() + 2); // Set return date as today + 2 days
+            returnDate.setDate(today.getDate() + 2);
     
-            // Format dates as YYYY-MM-DD
             const formattedDepartureDate = departureDate.toISOString().split('T')[0];
             const formattedReturnDate = returnDate.toISOString().split('T')[0];
     
-            const { location } = destination; // Use the location as the 'ville'
+            const { location, name , rating } = destination;
     
-            // Store data in sessionStorage
-            if (window.sessionStorage) {
-                sessionStorage.setItem('departureDate', formattedDepartureDate);
-                sessionStorage.setItem('returnDate', formattedReturnDate);
-                sessionStorage.setItem('location', location);
-            }
+            // Enregistrement des cookies avec les informations nécessaires
+            Cookies.set('departureDate', formattedDepartureDate, { expires: 7, path: '' });
+            Cookies.set('returnDate', formattedReturnDate, { expires: 7, path: '' });
+            Cookies.set('location', location, { expires: 7, path: '' });
+            Cookies.set('hotelName', name, { expires: 7, path: '' }); // Enregistre le nom de l'hôtel
+            Cookies.set('rating', rating, { expires: 7, path: '' }); // Enregistre le nom de l'hôtel
+
             
-    
-            // Push to HotelDetails page with only the id in the URL
-           router.push(`/detail_hotel_${destination.id}/`);
+            // Redirection vers la page des détails de l'hôtel
+            router.push(`/detail_hotel_${destination.id}/`);
         }
     };
-
     return (
         <section className="container mx-auto py-12 px-6">
             <h1 className="text-center font-bold text-2xl antialiased">
