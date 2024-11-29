@@ -4,8 +4,15 @@ const nextConfig = {
     images: {
         domains: ['image.resabooking.com'], // Add your domain here
     },
-
-
+    trailingSlash: true, // Add this line to enforce trailing slashes
+    async rewrites() {
+        return [
+            {
+                source: '/detail_hotel_:id',
+                destination: '/HotelDetails/:id', // This will map to /pages/HotelDetails/page.js
+            },
+        ];
+    },
 };
 
 export default nextConfig;

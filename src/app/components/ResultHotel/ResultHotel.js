@@ -255,71 +255,70 @@ const handleRatingChange = (note_tripad) => {
                         )}
                     </Typography>
                     <Typography color="gray" className="mb-8 font-normal">
-                    <Card className="h-full w-full max-w-full"> {/* Card should take full width of container */}
-    <div className="overflow-x-auto w-full"> {/* Ensure the table scrolls horizontally on small screens */}
-        <table className="w-full min-w-max table-auto text-left"> {/* Make sure the table is full width */}
-            <thead>
-                <tr>
-                    <Tabs value={activeTab}>
-                        <TabsHeader className="md:w-full w-8/12"> {/* Adjust this for tab width if necessary */}
-                            <div className="overflow-x-auto sm:overflow-x-auto md:overflow-x-visible w-full">
-                                <div className="flex space-x-4 min-w-max">
-                                    {data.map(({ label, value }) => (
-                                        <Tab
-                                            key={value}
-                                            value={value}
-                                            onClick={() => setActiveTab(value)}
-                                            className="whitespace-nowrap"
-                                        >
-                                            {label}
-                                        </Tab>
-                                    ))}
-                                </div>
+                        <Card className="h-full w-full max-w-full"> {/* Card should take full width of container */}
+                            <div className="overflow-x-auto w-full"> {/* Ensure the table scrolls horizontally on small screens */}
+                                <table className="w-full min-w-max table-auto text-left"> {/* Make sure the table is full width */}
+                                    <thead>
+                                        <tr>
+                                            <Tabs value={activeTab}>
+                                                <TabsHeader className="md:w-full w-8/12"> {/* Adjust this for tab width if necessary */}
+                                                    <div className="overflow-x-auto sm:overflow-x-auto md:overflow-x-visible w-full">
+                                                        <div className="flex space-x-4 min-w-max">
+                                                            {data.map(({ label, value }) => (
+                                                                <Tab
+                                                                    key={value}
+                                                                    value={value}
+                                                                    onClick={() => setActiveTab(value)}
+                                                                    className="whitespace-nowrap"
+                                                                >
+                                                                    {label}
+                                                                </Tab>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                </TabsHeader>
+                                            </Tabs>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="md:w-full w-full"> {/* Ensure tbody takes full width */}
+                                        {data
+                                            .find((tab) => tab.value === activeTab)
+                                            ?.TABLE_ROWS.map(({ name, prix }, index) => {
+                                                const isLast =
+                                                    index ===
+                                                    data.find((tab) => tab.value === activeTab)
+                                                        .TABLE_ROWS.length - 1;
+                                                const classes = isLast ? "" : "border-b border-blue-gray-50";
+
+                                                return (
+                                                    <tr key={name} className=" ">
+                                                        <td className={classes}>
+                                                            <Typography
+                                                                variant="small"
+                                                                color="blue-gray"
+                                                                className="font-normal"
+                                                            >
+                                                                <div className="flex items-center space-x-0">
+                                                                    <div className="m-0 p-0">
+                                                                        <Checkbox
+                                                                            id={`ripple-on-${index}`}
+                                                                            ripple={true}
+                                                                        />
+                                                                    </div>
+                                                                    <div className="m-0 p-0">
+                                                                        <span>{name}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </Typography>
+                                                        </td>
+                                                        
+                                                    </tr>
+                                                );
+                                            })}
+                                    </tbody>
+                                </table>
                             </div>
-                        </TabsHeader>
-                    </Tabs>
-                </tr>
-            </thead>
-            <tbody className="md:w-full w-full"> {/* Ensure tbody takes full width */}
-                {data
-                    .find((tab) => tab.value === activeTab)
-                    ?.TABLE_ROWS.map(({ name, prix }, index) => {
-                        const isLast =
-                            index ===
-                            data.find((tab) => tab.value === activeTab)
-                                .TABLE_ROWS.length - 1;
-                        const classes = isLast ? "" : "border-b border-blue-gray-50";
-
-                        return (
-                            <tr key={name} className=" ">
-                                <td className={classes}>
-                                    <Typography
-                                        variant="small"
-                                        color="blue-gray"
-                                        className="font-normal"
-                                    >
-                                        <div className="flex items-center space-x-0">
-                                            <div className="m-0 p-0">
-                                                <Checkbox
-                                                    id={`ripple-on-${index}`}
-                                                    ripple={true}
-                                                />
-                                            </div>
-                                            <div className="m-0 p-0">
-                                                <span>{name}</span>
-                                            </div>
-                                        </div>
-                                    </Typography>
-                                </td>
-                                
-                            </tr>
-                        );
-                    })}
-            </tbody>
-        </table>
-    </div>
-</Card>
-
+                        </Card>
                     </Typography>
                     <div className="relative w-full">
                         <Link href="">

@@ -34,9 +34,8 @@ const Home = async () => {
       <BackgroundSection />
       <Slides />
       <Carousel sliders={carouselData} />
-      <TopDestinations destinations={destinationsData} />
+      <TopDestinations  />
       <AdTb />
-      <Separator />
       <Footer />
     </div>
   );
