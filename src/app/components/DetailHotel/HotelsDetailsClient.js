@@ -3,52 +3,22 @@ import { useEffect, useState } from "react";
 import Nav from "../../components/NavLines/Nav";
 import { fetchHotelData, fetchTripadHotelData, fetchRegionsData } from "../../redux/slices/dataSlice";
 import { store } from "../../redux/store";
+import Cookies from 'js-cookie'; // Import js-cookie
 
-function HotelsDetailsClient({ id }) {
-    const [regionsData, setRegionsData] = useState([]);
-    const [hotelData, setHotelData] = useState([]);
-    const [hotelTripadData, setHotelTripadData] = useState([]);
-    const [loading, setLoading] = useState(true); // État de chargement
-    const ville = sessionStorage.getItem("location") || "";
-            const datedep = sessionStorage.getItem("departureDate") || "";
-            const dateret = sessionStorage.getItem("returnDate") || "";
-    useEffect(() => {
-        async function fetchData() {
-            
 
-            try {
-                const dispatch = store.dispatch;
-                setLoading(true); // Début du chargement
-
-                // Appels Redux pour récupérer les données
-                const regionsDataResult = await dispatch(fetchRegionsData()).unwrap();
-                const hotelDataResult = await dispatch(fetchHotelData({ id, ville, datedep, dateret })).unwrap();
-                const hotelTripadDataResult = await dispatch(fetchTripadHotelData({ id })).unwrap();
-                setRegionsData(regionsDataResult || []);
-                setHotelData(hotelDataResult?.Hotels[0] || []);
-                setHotelTripadData(hotelTripadDataResult || []);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            } finally {
-                setLoading(false); // Fin du chargement
-            }
-        }
-
-        fetchData();
-    }, [id]);
-    console.log('HotelData',ville);
+function HotelsDetailsClient({ listsHotels = [], regionsData = [], hotelsTripadData = [] }) {
+   
+    
     return (
        
-        <div>
-            {loading ? (
-                <div>Loading data...</div> // Indicateur de chargement
-            ) : (
+        <div class="test">
+          
                 <Nav
-                    listsHotels={hotelData}
+                    listsHotels={listsHotels}
                     regionsData={regionsData}
-                    hotelTripadData={hotelTripadData}
+                    hotelTripadData={hotelsTripadData}
                 />
-            )}
+            
         </div>
     );
 }
