@@ -6,26 +6,20 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 config.autoAddCss = false; 
 
 
-
-export const metadata = { //witout import bcz we're working with jsx not tsx
+export const metadata = {
   title: {
     default: "Agence de voyage Tunisie Booking : le N° 1 D'Hôtel Tunisie",
-    template: "%s | TunisieBooking", //for child pages, can be deleted if not needed
-   
+    template: "%s | TunisieBooking",
   },
-  description: "TunisieBooking Votre agence de voyage pour Réservation ☀ : ✓ Hotel Tunisie ✓ Hotel à l’Etranger ✓Voyage Organisé ✓Omra ✓Billets d’avion - Service Clients 7/7 - 27 Agences." ,
+  description: "TunisieBooking Votre agence de voyage pour Réservation ☀ : ✓ Hotel Tunisie ✓ Hotel à l’Etranger ✓Voyage Organisé ✓Omra ✓Billets d’avion - Service Clients 7/7 - 27 Agences.",
   keywords: "agence de voyage, agence de voyage tunisie",
   alternates: {
-    canonical: 'http://v2.springtravelservices.com/',
+    canonical: 'https://tn.tunisiebooking.com/',
   },
-  
   verification: {
-    google: "V7FnC16cI6u1BcA5JxTXLjE6hl2wCVGrDdLF2e0iyXg",
-    microsoft: "19D37373D59B805C2DFDB120EEEB6964",
+    google: "NuyRXP0B2gIZfxgScNJebdPTiqy7aXuqy2yFjB_opcs",
   },
-  
 };
-
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,14 +32,42 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+// Define the JSON-LD data
+const websiteJsonLd = {
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  "name": "tunisiebooking",
+  "url": "https://tn.tunisiebooking.com/",
+};
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "tunisiebooking",
+  "url": "https://tn.tunisiebooking.com/",
+  "logo": "https://tn.tunisiebooking.com/images/logo31.png",
+  "alternateName": "tunisiebooking",
+};
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <head>
+        
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteJsonLd),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
     </html>

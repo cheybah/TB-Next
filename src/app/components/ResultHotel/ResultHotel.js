@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from 'react';
+import { useRouter } from "next/navigation";
 import { decode } from 'he';
+import Cookies from 'js-cookie'; // Import js-cookie
 import Link from 'next/link';
 import {
     Card,
@@ -15,7 +17,12 @@ import {
 } from "@material-tailwind/react";
 import Image from 'next/image';
 
-const ResultHotel = ({ listsHotels = [], listsHotelTripAdv = [] }) => {
+const ResultHotel = ({ listsHotels = [], listsHotelTripAdv = [] , searchParams  }) => {
+    const Router = useRouter();
+    const datedep = searchParams?.datedep || '';
+    const dateret = searchParams?.dateret || ''; 
+    const ville = searchParams?.ville || '';  // Get ville from search params
+
     const listHotels=listsHotels.Hotels_hors_promo;
     const listHotelTripAdv= listsHotelTripAdv.Hotels;
     const [activeTab, setActiveTab] = useState("Petit dejeuner");
@@ -126,6 +133,44 @@ const handleRatingChange = (note_tripad) => {
 };
 
 
+const handleNavigate = (hotel) => {
+    if (typeof window !== "undefined") { // Vérifier si on est bien dans le navigateur
+        const today = new Date();
+
+        // Utilisation des dates fournies ou valeurs par défaut
+        const departureDate = datedep ? new Date(datedep) : new Date(today);
+        const returnDate = dateret ? new Date(dateret) : new Date(today.setDate(today.getDate() + 2));
+
+        // Formatage des dates en 'YYYY-MM-DD'
+        const formattedDepartureDate = departureDate.toISOString().split('T')[0];
+        const formattedReturnDate = returnDate.toISOString().split('T')[0];
+        const location = ville ? ville : hotel.location;
+
+        // Définition des cookies avec une expiration de 7 jours
+        Cookies.set('departureDate', formattedDepartureDate, { expires: 7, path: '' });
+        Cookies.set('returnDate', formattedReturnDate, { expires: 7, path: '' });
+        Cookies.set('location', hotel.region, { expires: 7, path: '' });
+        Cookies.set('hotelName', hotel.libelle_hotel, { expires: 7, path: '' }); // Nom de l'hôtel
+        Cookies.set('rating', hotel.categorie.toString(), { expires: 7, path: '' }); // Note de l'hôtel
+        // Vérification que les cookies sont bien enregistrés
+        const savedDepartureDate = Cookies.get('departureDate');
+        const savedReturnDate = Cookies.get('returnDate');
+        const savedLocation = Cookies.get('location');
+        const savedHotelName = Cookies.get('hotelName');
+        const savedHotelRating = Cookies.get('rating');
+
+        if (savedDepartureDate && savedReturnDate && savedLocation && savedHotelName && savedHotelRating) {
+            Router.push(`/detail_hotel_${hotel.id_hotel}/`);
+        } else {
+            console.error('Failed to save cookies');
+        }
+    }
+};
+
+
+
+
+
     return (
         <div className="flex flex-col md:flex-row gap-6">
             {/* Left part filter */}
@@ -209,7 +254,8 @@ const handleRatingChange = (note_tripad) => {
             <section id="result" className="md:w-3/4 relative z-1">
     <div className="relative max-w-6xl p-6 bg-white rounded-lg shadow-lg mt-6 z-9 w-full mb-[3rem]">
         {filteredHotels.map((hotel) => (
-            <Card key={hotel.id_hotel} className="w-full flex-col md:flex-row mb-4">
+            
+            <Card key={hotel.id_hotel} className="w-full flex-col md:flex-row mb-4"  onClick={() => handleNavigate(hotel)}> 
                 <CardHeader
                     shadow={false}
                     floated={false}
@@ -255,73 +301,72 @@ const handleRatingChange = (note_tripad) => {
                         )}
                     </Typography>
                     <Typography color="gray" className="mb-8 font-normal">
-                    <Card className="h-full w-full max-w-full"> {/* Card should take full width of container */}
-    <div className="overflow-x-auto w-full"> {/* Ensure the table scrolls horizontally on small screens */}
-        <table className="w-full min-w-max table-auto text-left"> {/* Make sure the table is full width */}
-            <thead>
-                <tr>
-                    <Tabs value={activeTab}>
-                        <TabsHeader className="md:w-full w-8/12"> {/* Adjust this for tab width if necessary */}
-                            <div className="overflow-x-auto sm:overflow-x-auto md:overflow-x-visible w-full">
-                                <div className="flex space-x-4 min-w-max">
-                                    {data.map(({ label, value }) => (
-                                        <Tab
-                                            key={value}
-                                            value={value}
-                                            onClick={() => setActiveTab(value)}
-                                            className="whitespace-nowrap"
-                                        >
-                                            {label}
-                                        </Tab>
-                                    ))}
-                                </div>
+                        <Card className="h-full w-full max-w-full"> {/* Card should take full width of container */}
+                            <div className="overflow-x-auto w-full"> {/* Ensure the table scrolls horizontally on small screens */}
+                                <table className="w-full min-w-max table-auto text-left"> {/* Make sure the table is full width */}
+                                    <thead>
+                                        <tr>
+                                            <Tabs value={activeTab}>
+                                                <TabsHeader className="md:w-full w-8/12"> {/* Adjust this for tab width if necessary */}
+                                                    <div className="overflow-x-auto sm:overflow-x-auto md:overflow-x-visible w-full">
+                                                        <div className="flex space-x-4 min-w-max">
+                                                            {data.map(({ label, value }) => (
+                                                                <Tab
+                                                                    key={value}
+                                                                    value={value}
+                                                                    onClick={() => setActiveTab(value)}
+                                                                    className="whitespace-nowrap"
+                                                                >
+                                                                    {label}
+                                                                </Tab>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                </TabsHeader>
+                                            </Tabs>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="md:w-full w-full"> {/* Ensure tbody takes full width */}
+                                        {data
+                                            .find((tab) => tab.value === activeTab)
+                                            ?.TABLE_ROWS.map(({ name, prix }, index) => {
+                                                const isLast =
+                                                    index ===
+                                                    data.find((tab) => tab.value === activeTab)
+                                                        .TABLE_ROWS.length - 1;
+                                                const classes = isLast ? "" : "border-b border-blue-gray-50";
+
+                                                return (
+                                                    <tr key={name} className=" ">
+                                                        <td className={classes}>
+                                                            <Typography
+                                                                variant="small"
+                                                                color="blue-gray"
+                                                                className="font-normal"
+                                                            >
+                                                                <div className="flex items-center space-x-0">
+                                                                    <div className="m-0 p-0">
+                                                                        <Checkbox
+                                                                            id={`ripple-on-${index}`}
+                                                                            ripple={true}
+                                                                        />
+                                                                    </div>
+                                                                    <div className="m-0 p-0">
+                                                                        <span>{name}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </Typography>
+                                                        </td>
+                                                        
+                                                    </tr>
+                                                );
+                                            })}
+                                    </tbody>
+                                </table>
                             </div>
-                        </TabsHeader>
-                    </Tabs>
-                </tr>
-            </thead>
-            <tbody className="md:w-full w-full"> {/* Ensure tbody takes full width */}
-                {data
-                    .find((tab) => tab.value === activeTab)
-                    ?.TABLE_ROWS.map(({ name, prix }, index) => {
-                        const isLast =
-                            index ===
-                            data.find((tab) => tab.value === activeTab)
-                                .TABLE_ROWS.length - 1;
-                        const classes = isLast ? "" : "border-b border-blue-gray-50";
-
-                        return (
-                            <tr key={name} className=" ">
-                                <td className={classes}>
-                                    <Typography
-                                        variant="small"
-                                        color="blue-gray"
-                                        className="font-normal"
-                                    >
-                                        <div className="flex items-center space-x-0">
-                                            <div className="m-0 p-0">
-                                                <Checkbox
-                                                    id={`ripple-on-${index}`}
-                                                    ripple={true}
-                                                />
-                                            </div>
-                                            <div className="m-0 p-0">
-                                                <span>{name}</span>
-                                            </div>
-                                        </div>
-                                    </Typography>
-                                </td>
-                                
-                            </tr>
-                        );
-                    })}
-            </tbody>
-        </table>
-    </div>
-</Card>
-
+                        </Card>
                     </Typography>
-                    <div className="relative w-full">
+                    <div className="relative w-full" onClick={() => handleNavigate(hotel)}>
                         <Link href="">
                             <button
                                 className="btn_rechercher w-full sm:w-72 py-2 bg-gradient-to-r from-[#FF5555] to-[#F40091] text-white font-semibold rounded-lg transform transition-transform duration-300 hover:bg-lime-600 hover:scale-105 focus:outline-none"

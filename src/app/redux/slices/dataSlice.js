@@ -81,6 +81,27 @@ export const fetchHotelsData= createAsyncThunk(
   }
 );
 
+// Correct async thunks to fetch hotel data id
+export const fetchHotelData= createAsyncThunk(
+  'fetchHotelData', // Action type string
+  async ({id,ville,datedep,dateret}) => {
+    try {
+      // Replace with your actual API URL
+      const url = `http://api.resabookings.com/api/api/api_hotel/api_hotel_detail2_v22_vf.php?id_hotel=${id}&id_partenaire=10&id_marche=5&destination=${ville}&date_fin_1=${datedep}&date_fin_2=${dateret}&type=not%20all`;
+      const response = await fetch(url);
+      // Check if response is ok (status code 200-299)
+      if (!response.ok) {
+        throw new Error(`Error fetching hotels data: ${response.statusText}`);
+      }
+      const data = await response.json(); // Assuming JSON response
+      return data; // Return the fetched data
+    } catch (error) {
+      throw new Error(error.message); // Handle errors
+    }
+  }
+);
+
+
 
 // Correct async thunks to fetch note tripadvisor hotels data
 export const fetchTripadData= createAsyncThunk(
@@ -103,6 +124,28 @@ export const fetchTripadData= createAsyncThunk(
 
 
 
+// Correct async thunks to fetch note tripadvisor hotels data
+export const fetchTripadHotelData= createAsyncThunk(
+  'fetchTripadHotelData', // Action type string
+  async ({id}) => {
+    try {
+      // Replace with your actual API URL
+      const url = `http://api.resabookings.com/api/api/api_hotel/api_tripad.php?id_hotel=${id}`;
+      const response = await fetch(url);
+      // Check if response is ok (status code 200-299)
+      if (!response.ok) {
+        throw new Error(`Error fetching hotels data: ${response.statusText}`);
+      }
+      const data = await response.json(); // Assuming JSON response
+      return data; // Return the fetched data
+    } catch (error) {
+      throw new Error(error.message); // Handle errors
+    }
+  }
+);
+
+
+
 const dataSlice = createSlice({
   name: 'data',
   initialState: {
@@ -111,6 +154,7 @@ const dataSlice = createSlice({
     destinations: [],
     listHotels: [],
     listHotelTripAdv: [],
+    
     status: 'idle',
     error: null,
   },
@@ -170,7 +214,33 @@ const dataSlice = createSlice({
         state.error = action.error.message; // Store error message
       })
 
-      // Handling  note tripadvisor data
+      // Handling hotel data
+      .addCase(fetchHotelData.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchHotelData.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.listHotels = action.payload; // Store fetched destinations data
+      })
+      .addCase(fetchHotelData.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message; // Store error message
+      })
+
+        // Handling  note tripadvisor d'un hotel data
+        .addCase(fetchTripadHotelData.pending, (state) => {
+          state.status = 'loading';
+        })
+        .addCase(fetchTripadHotelData.fulfilled, (state, action) => {
+          state.status = 'succeeded';
+          state.listHotelTripAdv = action.payload; // Store fetched destinations data
+        })
+        .addCase(fetchTripadHotelData.rejected, (state, action) => {
+          state.status = 'failed';
+          state.error = action.error.message; // Store error message
+        })
+
+      // Handling  note tripadvisor all hotels data
       .addCase(fetchTripadData.pending, (state) => {
         state.status = 'loading';
       })
@@ -182,6 +252,8 @@ const dataSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message; // Store error message
       });
+
+      // Handling  note tripadvisor d'un hotel data
   },
 });
 

@@ -19,8 +19,6 @@ export async function fetchData(ville,datedep,dateret) {
         const regionsData = await dispatch(fetchRegionsData());
         const hotelsData = await dispatch(fetchHotelsData({ville,datedep,dateret}));
         const hotelsTripadData = await dispatch(fetchTripadData());
-
-
         return {
             regionsData: regionsData.payload || [],
             hotelsData: hotelsData.payload?.Hotels[0] || [],  // Make sure you're accessing the right property

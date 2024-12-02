@@ -225,3 +225,33 @@ ul {
     }
 }
 
+.footer-cta .single-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Horizontally centers the content */
+    justify-content: center;  /* Vertically centers the content */
+    text-align: center;
+    height: 100%;  /* Ensures that the content fills the height of its container */
+}
+
+.footer-cta .cta-img {
+    width: 100%; 
+    max-width: 100px; /* Adjust this as per your image size */
+    margin-bottom: 10px; /* Space between the image and text */
+}
+
+.footer-cta .cta-text {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers the text vertically if necessary */
+    align-items: center; /* Centers the text horizontally */
+}
+
+.footer-cta .cta-text h4 {
+    margin-bottom: 5px;  /* Spacing between the title and the span */
+}
+
+.footer-cta .cta-text span {
+    font-size: 16px;
+}
