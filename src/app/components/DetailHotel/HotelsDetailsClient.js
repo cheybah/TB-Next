@@ -7,12 +7,8 @@ import Cookies from 'js-cookie'; // Import js-cookie
 
 
 function HotelsDetailsClient({ listsHotels = [], regionsData = [], hotelsTripadData = [] }) {
-   
-    
     return (
-       
         <div class="test">
-          
                 <Nav
                     listsHotels={listsHotels}
                     regionsData={regionsData}
