@@ -13,10 +13,7 @@ import PresentationCard from "../Presentation/PresentationCard"; //Isolated Pres
 import MoteurResult from "../MoteurResult/MoteurResult";
 
 const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }) => {
-    
-    
     const listHotels = listsHotels?.Hotels_hors_promo || [];  // Ensure this property exists in your data
-    
     const listregionsData = regionsData;  // Fetch the data using ville
     const listhotelTripadData=hotelsTripadData?.Hotels || [];
     const data = [
@@ -25,7 +22,6 @@ const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }
         { label: "Equipements", value: "equipement", id: "equipement" },
         { label: "Avis", value: "avis", id: "avis" },
        ];
-    
        const scrollToSection = (id) => {
         console.log("Scrolling to section:", id);
         const section = document.getElementById(id);
@@ -33,7 +29,6 @@ const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }
             section.scrollIntoView({ behavior: 'smooth' });
         }
     };
-
     return (
         <div >  
             {listHotels.length > 0 ? (
@@ -573,5 +568,4 @@ const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }
         </div>
     );
 };
-
 export default DetailHotel;

@@ -50,13 +50,8 @@ const HotelsDetails = async ({ params }) => {
     const ville = villeCookie?.value || '';  // Récupération de la valeur du cookie 'location'
     const datedep = cookies().get('departureDate')?.value || '';  // Départ
     const dateret = cookies().get('returnDate')?.value || '';    // Retour
-
-    // Affichage dans la console pour vérifier la valeur de 'ville'
-    console.log("Ville récupérée depuis le cookie:", ville);
-
     // Récupérer les données en fonction de l'ID et des cookies
     const { regionsData, hotelData, hotelTripadData } = await fetchData(id, ville, datedep, dateret);
-
     // Rendu du composant
     return (
         <div className="min-h-screen flex flex-col">
