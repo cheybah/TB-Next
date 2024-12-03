@@ -352,28 +352,28 @@ export default function HotelAvecTobogganPage() {
             className="w-full h-auto" />
         </div>
         <Tabs id="custom-animation" value={activeTab} className="mt-6">
-        <TabsHeader
-  className="rounded-none border-b border-blue-gray-50 bg-transparent p-0"
-  indicatorProps={{
-    className: "bg-transparent border-b-2 border-gray-200 shadow-none rounded-none",
-  }}
-  style={{
-    overflowX: "auto", // Enable horizontal scrolling
-    whiteSpace: "nowrap", // Prevent wrapping of tab items
-  }}
->
-  {data.map(({ label, sublabel, value }) => (
-    <Tab
-      key={value}
-      value={value}
-      onClick={() => setActiveTab(value)}
-      className={`${activeTab === value ? "text-gray-900 bg-gray-200" : ""} px-4 py-2 rounded-t-md inline-block`}
-    >
-      {label}
-      <div className="text-sm text-gray-700">{sublabel}</div>
-    </Tab>
-  ))}
-</TabsHeader>
+          <TabsHeader
+            className="rounded-none border-b border-blue-gray-50 bg-transparent p-0"
+            indicatorProps={{
+              className: "bg-transparent border-b-2 border-gray-200 shadow-none rounded-none",
+            }}
+            style={{
+              overflowX: "auto", // Enable horizontal scrolling
+              whiteSpace: "nowrap", // Prevent wrapping of tab items
+            }}
+          >
+            {data.map(({ label, sublabel, value }) => (
+              <Tab
+                key={value}
+                value={value}
+                onClick={() => setActiveTab(value)}
+                className={`${activeTab === value ? "text-gray-900 bg-gray-200" : ""} px-4 py-2 rounded-t-md inline-block`}
+              >
+                {label}
+                <div className="text-sm text-gray-700">{sublabel}</div>
+              </Tab>
+            ))}
+          </TabsHeader>
 
           <TabsBody
             animate={{
