@@ -7,11 +7,17 @@ import { Select, Option } from "@material-tailwind/react";
 import { Menu } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { Button } from "@material-tailwind/react";
+// import DatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
+
 
 
 
 
 export default function MoteurVol() {
+
+    //       const [allerDate, setAllerDate] = useState(null);
+    //   const [retourDate, setRetourDate] = useState(null);
 
     const [passengers, setPassengers] = useState({
         adult: 1,
@@ -35,6 +41,13 @@ export default function MoteurVol() {
 
     const totalPassengers =
         passengers.adult + passengers.child + passengers.baby;
+
+
+    const [isRoundTrip, setIsRoundTrip] = useState(true);
+
+    const handleRadioChange = (e) => {
+        setIsRoundTrip(e.target.value === "round-trip");
+    };
 
     return (
         <>
@@ -109,7 +122,7 @@ export default function MoteurVol() {
                                 role="tab"
                                 aria-controls="profile"
                                 aria-selected="false"
-                                
+
                             >
                                 <img src="/Orion_plane-departure.svg" alt="Hotel Icon" className="w-7 h-7" />
                                 Billet d'Avion
@@ -124,96 +137,91 @@ export default function MoteurVol() {
                         <div className="flex gap-6">
                             <Radio
                                 name="type"
+                                value="round-trip"
                                 label="Aller/Retour"
                                 defaultChecked
                                 className="text-white checked:bg-black"
                                 labelProps={{ className: "text-white font-bold" }}
                                 color="yellow"
+                                onChange={handleRadioChange}
 
                             />
                             <Radio
                                 name="type"
+                                value="one-way"
                                 label="Aller/Simple"
                                 className="text-white checked:bg-black"
                                 labelProps={{ className: "text-white font-bold" }}
                                 color="yellow"
+                                onChange={handleRadioChange}
                             />
                         </div>
-                        <div className="w-full">
+                        <div className="w-full relative ">
                             <Input
                                 label="Départ de"
-                                icon={
-                                    <div className="bg-yellow-500 rounded">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 64 64"
-                                            aria-labelledby="title"
-                                            aria-describedby="desc"
-                                            role="img"
-                                            fill="#003581"
-                                            className="w-6 h-6"
-                                        >
-                                            <title>Plane</title>
-                                            <desc>A solid styled icon from Orion Icon Library.</desc>
-                                            <path
-                                                data-name="layer1"
-                                                d="M57.4 38.3L37 22.5v-15a5 5 0 0 0-10 0v15L6.6 38.3S5 39.4 5 40.5v4.2a1.3 1.3 0 0 0 .7 1.3c.5.3 1.9-.3 2.4-.5L27 39.4v11.1L19.7 56a1.6 1.6 0 0 0-.7 1.4v3.1c0 .4.1 1.3 1.4.8L32 56.5l11.6 4.8c1.4.5 1.4-.5 1.4-.8v-3.1a1.6 1.6 0 0 0-.7-1.4L37 50.5V39.4l18.9 6.2c.5.2 1.9.7 2.4.5a1.3 1.3 0 0 0 .7-1.3v-4.3c0-1.1-1.6-2.2-1.6-2.2z"
-                                            />
+                                color="white"
+                                className="pr-12"
+                                containerProps={{
+                                    className: "relative",
+                                }}
+                            />
+                            <div className="absolute top-0 right-0 h-full w-12 bg-yellow-500 flex items-center justify-center rounded-tr-md rounded-br-md">
+                                <img
+                                    src="/Orion_aircraft-climb.svg"
+                                    alt="Icon"
+                                    className="w-7 h-7"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Smaller inputs */}
+                        <div className="flex gap-4 w-full">
+                            {/* First small input */}
+                            <div className="relative" style={{ width: "calc(50% - 0.5rem)" }}>
+                                <Input
+                                    label="Aller"
+                                    color="white"
+                                    className="pr-12"
+                                    containerProps={{
+                                        className: "relative min-w-[auto]",
+                                    }}
+                                />
+                                <div className="absolute top-0 right-0 h-full w-12 bg-yellow-500 flex items-center justify-center rounded-tr-md rounded-br-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#003581" className="bi bi-calendar-week" viewBox="0 0 16 16">
+                                        <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
+                                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            {/* Second small input */}
+                            {isRoundTrip && (
+                                <div className="relative" style={{ width: "calc(50% - 0.5rem)" }}>
+                                    <Input
+                                        label="Retour"
+                                        color="white"
+                                        className="pr-12"
+                                        containerProps={{
+                                            className: "relative min-w-[auto]",
+                                        }}
+                                    />
+                                    <div className="absolute top-0 right-0 h-full w-12 bg-yellow-500 flex items-center justify-center rounded-tr-md rounded-br-md">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#003581" className="bi bi-calendar-week" viewBox="0 0 16 16">
+                                            <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
+                                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
                                         </svg>
                                     </div>
-                                }
-                                color="white"
-                            />
+                                </div>
+                            )}
                         </div>
-                        {/* this is the input i want to be small*/}
-                        <div className="flex gap-4 w-full">
-                            <div className="w-[37%]">
-                                <Input
-                                    label="Départ de"
-                                    icon={
-                                        <div className="bg-yellow-500 rounded">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 64 64"
-                                                fill="#003581"
-                                                className="w-6 h-6"
-                                            >
-                                                <path
-                                                    d="M57.4 38.3L37 22.5v-15a5 5 0 0 0-10 0v15L6.6 38.3S5 39.4 5 40.5v4.2a1.3 1.3 0 0 0 .7 1.3c.5.3 1.9-.3 2.4-.5L27 39.4v11.1L19.7 56a1.6 1.6 0 0 0-.7 1.4v3.1c0 .4.1 1.3 1.4.8L32 56.5l11.6 4.8c1.4.5 1.4-.5 1.4-.8v-3.1a1.6 1.6 0 0 0-.7-1.4L37 50.5V39.4l18.9 6.2c.5.2 1.9.7 2.4.5a1.3 1.3 0 0 0 .7-1.3v-4.3c0-1.1-1.6-2.2-1.6-2.2z"
-                                                />
-                                            </svg>
-                                        </div>
-                                    }
-                                    color="white"
-                                />
-                            </div>
-                            <div className="w-[37%] ml-[2.6rem]">
-                                <Input
-                                    label="Départ de"
-                                    icon={
-                                        <div className="bg-yellow-500 rounded">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 64 64"
-                                                fill="#003581"
-                                                className="w-6 h-6"
-                                            >
-                                                <path
-                                                    d="M57.4 38.3L37 22.5v-15a5 5 0 0 0-10 0v15L6.6 38.3S5 39.4 5 40.5v4.2a1.3 1.3 0 0 0 .7 1.3c.5.3 1.9-.3 2.4-.5L27 39.4v11.1L19.7 56a1.6 1.6 0 0 0-.7 1.4v3.1c0 .4.1 1.3 1.4.8L32 56.5l11.6 4.8c1.4.5 1.4-.5 1.4-.8v-3.1a1.6 1.6 0 0 0-.7-1.4L37 50.5V39.4l18.9 6.2c.5.2 1.9.7 2.4.5a1.3 1.3 0 0 0 .7-1.3v-4.3c0-1.1-1.6-2.2-1.6-2.2z"
-                                                />
-                                            </svg>
-                                        </div>
-                                    }
-                                    color="white"
-                                />
-                            </div>
-                        </div>
+
                         <div className="flex mt-4">
                             <div className="w-1/3 text-white font-normal text-md mt-3">
                                 Classe :
                             </div>
                             <div className="w-2/3">
-                                <Select variant="standard" label="Choisir votre classe" color="yellow">
+                                <Select variant="standard" label="Choisir votre classe" color="yellow" className="text-white"
+                                >
                                     <Option>Economique</Option>
                                     <Option>Premium</Option>
                                     <Option>Première</Option>
@@ -222,49 +230,55 @@ export default function MoteurVol() {
                             </div>
                         </div>
                     </div>
-                    {/*Middle Section*/}
+                    {/* Middle Section with Arrows */}
                     <div className="w-[10%] flex items-center justify-center">
                         <div className="flex sm:flex-row flex-col items-center">
                             {/* Arrow for Mobile */}
-                            <i
-                                className="bi bi-arrow-down-up text-2xl sm:hidden"
-                                style={{ color: "yellow" }}
-                            ></i>
+                            {isRoundTrip ? (
+                                <i
+                                    className="bi bi-arrow-down-up text-2xl sm:hidden"
+                                    style={{ color: "yellow" }}
+                                ></i>
+                            ) : (
+                                <i
+                                    className="bi bi-arrow-down text-2xl sm:hidden"
+                                    style={{ color: "yellow" }}
+                                ></i>
+                            )}
                             {/* Arrow for Larger Screens */}
-                            <i
-                                className="bi bi-arrow-left-right text-2xl hidden sm:block"
-                                style={{ color: "yellow" }}
-                            ></i>
+                            {isRoundTrip ? (
+                                <i
+                                    className="bi bi-arrow-left-right text-2xl hidden sm:block"
+                                    style={{ color: "yellow" }}
+                                ></i>
+                            ) : (
+                                <i
+                                    className="bi bi-arrow-right text-2xl hidden sm:block"
+                                    style={{ color: "yellow" }}
+                                ></i>
+                            )}
                         </div>
                     </div>
 
                     {/*Right Section*/}
                     <div className="w-[45%] flex flex-col mt-[59px]">
-                        <div className="w-[90%]">
+                        <div className="w-[90%] relative">
                             <Input
                                 label="Arrivé à"
-                                icon={
-                                    <div className="bg-yellow-500 rounded">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 64 64"
-                                            aria-labelledby="title"
-                                            aria-describedby="desc"
-                                            role="img"
-                                            fill="#003581"
-                                            className="w-6 h-6"
-                                        >
-                                            <title>Plane</title>
-                                            <desc>A solid styled icon from Orion Icon Library.</desc>
-                                            <path
-                                                data-name="layer1"
-                                                d="M57.4 38.3L37 22.5v-15a5 5 0 0 0-10 0v15L6.6 38.3S5 39.4 5 40.5v4.2a1.3 1.3 0 0 0 .7 1.3c.5.3 1.9-.3 2.4-.5L27 39.4v11.1L19.7 56a1.6 1.6 0 0 0-.7 1.4v3.1c0 .4.1 1.3 1.4.8L32 56.5l11.6 4.8c1.4.5 1.4-.5 1.4-.8v-3.1a1.6 1.6 0 0 0-.7-1.4L37 50.5V39.4l18.9 6.2c.5.2 1.9.7 2.4.5a1.3 1.3 0 0 0 .7-1.3v-4.3c0-1.1-1.6-2.2-1.6-2.2z"
-                                            />
-                                        </svg>
-                                    </div>
-                                }
                                 color="white"
+
+                                className="pr-12"
+                                containerProps={{
+                                    className: "relative",
+                                }}
                             />
+                            <div className="absolute top-0 right-0 h-full w-12 bg-yellow-500 flex items-center justify-center rounded-tr-md rounded-br-md">
+                                <img
+                                    src="/Orion_aircraft-landing.svg"
+                                    alt="Icon"
+                                    className="w-7 h-7"
+                                />
+                            </div>
                         </div>
                         <div className="relative w-[90%] mt-4">
                             <Menu>
@@ -301,14 +315,29 @@ export default function MoteurVol() {
                                 </Menu.Items>
                             </Menu>
                         </div>
-                        <Button variant="gradient" color="yellow" className="flex items-center gap-3 w-[90%] h-[5rem] mt-10 text-[#003581] text-xl">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        <Button
+                            variant="gradient"
+                            color="yellow"
+                            className="flex items-center justify-center gap-3 w-[90%] h-[5rem] mt-10 text-[#003581] text-xl"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth="1.5"
+                                stroke="currentColor"
+                                className="w-6 h-6"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                                />
                             </svg>
                             RECHERCHER
                         </Button>
-                    </div>
 
+                    </div>
                 </div>
             </main></>
     );
