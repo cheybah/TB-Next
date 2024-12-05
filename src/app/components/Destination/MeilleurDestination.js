@@ -12,6 +12,7 @@ const hotelsByRegion = [
     ]
   },
   {
+
     region: "Monastir",
     hotels: [
       { name: "Delphin EL Habib",img:"/Delphin_EL_Habib_2.jpg", categorie: 4, note_trip: 3.5, text_trip: "Bien" },
@@ -20,6 +21,7 @@ const hotelsByRegion = [
     ]
   },
   {
+
     region: "Sousse",
     hotels: [
       { name: "Marhaba Royal Salem",img:"/Marhaba_Royal_Salem_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" },
@@ -95,11 +97,13 @@ const MeilleurhotelsByRegion = [
         { name: "Occidental Sfax Centre",img:"/Concorde_Sfax_Centre_2.jpg", categorie: 4, note_trip: 3.5, text_trip: "Bien" }
       ]
     },
+
     {
       region: "El jem",
       hotels: [
         { name: "Julius",img:"/Julius_.jpg", categorie: 3, note_trip: 4.0, text_trip: "Très Bien" },
       ]
+
     },
     {
       region: "Monastir",
@@ -108,6 +112,7 @@ const MeilleurhotelsByRegion = [
         { name: "Skanes Serail & Aquapark",img:"/Skanes_Serail_&_Aquapark_2.jpg", categorie: 4, note_trip: 3.5, text_trip: "Bien" },
         { name: "Regency Hotel & Spa Monastir",img:"/Regency_Hotel_&_Spa_Monastir_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" }
       ]
+
     }
     // Add more regions here as needed
   ];

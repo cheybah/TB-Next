@@ -21,7 +21,9 @@ import DestinationAllInclusive from "./DestinationAllInclusive";
 import DestinationPlage from "./DestinationPlage";
 import ListQuestions from "./ListQuestions";
 import MeilleurDestination from "./MeilleurDestination";
+
 import DestinationDescription from "./DestinationDescription";
+
 const destinationSimilaires = [
   {name: "Djerba", image: "/djerba.jpg"},
   {name: "Sousse", image: "/sousse.jpg"},
@@ -168,7 +170,9 @@ const Questions =  ({ region ,slides=[]}) => {
                 </button>                           
             </div>
           </div>
+
           <DestinationDescription region={region}/>
+
            <ListQuestions region={region}/>
         </div>
     );
