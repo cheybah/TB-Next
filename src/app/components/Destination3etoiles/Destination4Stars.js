@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import './Destination3Stars.css';
+import '../Destination/Destination3Stars.css';
 
 const hotelsByRegion = [
   {
@@ -26,8 +26,8 @@ const hotelsByRegion = [
       { name: "Bel Azur Thalasso & Bungalows",img:"/Bel_Azur_Thalasso_&_Bungalows_2.jpg", categorie: 4, note_trip: 4.5, text_trip: "Excellent" },
       { name: "Eden Yasmine Resort & Spa", img:"/Eden_Yasmine_Resort_Meeting_&_Spa_2.jpg",categorie: 4, note_trip: 4.0, text_trip: "Très Bien" }
     ]
-
-  },
+  }
+  ,
   {
     region: "Monastir",
     hotels: [
@@ -35,7 +35,6 @@ const hotelsByRegion = [
       { name: "Blue Beach Golf & Spa",img:"/Blue_Beach_Golf_&_Spa_2.jpg", categorie: 4, note_trip: 4.5, text_trip: "Excellent" },
       { name: "Delphin EL Habib",img:"/Delphin_EL_Habib_2.jpg", categorie: 4, note_trip: 3.5, text_trip: "Bien" }
     ]
-
   }
   // Add more regions here as needed
 ];

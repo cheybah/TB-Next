@@ -1,32 +1,24 @@
 "use client";
 import React from "react";
-import './Destination3Stars.css';
+import '../Destination/Destination3Stars.css';
 
 const hotelsByRegion = [
   {
     region: "Djerba",
     hotels: [
-      { name: "Caribbean World Djerba",img:"/Caribbean_World_Djerba_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" },
-      { name: "Cesar Thalasso",img:"/Cesar_Thalasso_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" },
-      { name: "Club Calimera Yati Beach",img:"/Club_Calimera_Yati_Beach_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" }
+      { name: "Diar Yassine",img:"/Diar_Yassine_2.jpg", categorie: 3, note_trip: 3.5, text_trip: "Bien" },
+      { name: "Djerba Saray",img:"/Djerba_Saray_2.jpg", categorie: 3, note_trip: 3.5, text_trip: "Bien" },
+      { name: "Rodes",img:"/rodes_2.jpg", categorie: 3, note_trip: 2.5, text_trip: "Moyen" }
     ]
   },
-  {
-    region: "Sousse",
-    hotels: [
-      { name: "Abou Sofiane Hotel & Aquapark",img:"/Abou_Sofiane_Hotel_&_Aquapark_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" },
-      { name: "cesar palace Sousse",img:"/cesar_palace_et_casino_2.jpg", categorie: 4, note_trip: 3.0, text_trip: "Moyen" },
-      { name: "EL Ksar Resort & Thalasso Sousse", img:"/EL_Ksar_Resort_&_Thalasso_Sousse_2.jpg",categorie: 4, note_trip: 4.0, text_trip: "Très Bien" }
-    ]
-  },
+ 
   {
     region: "Hammamet",
     hotels: [
-      { name: "Aziza Thalasso & Golf",img:"/Aziza_Thalasso_&_Golf_2.jpg", categorie: 4, note_trip: 4.5, text_trip: "Excellent" },
-      { name: "Bel Azur Thalasso & Bungalows",img:"/Bel_Azur_Thalasso_&_Bungalows_2.jpg", categorie: 4, note_trip: 4.5, text_trip: "Excellent" },
-      { name: "Eden Yasmine Resort & Spa", img:"/Eden_Yasmine_Resort_Meeting_&_Spa_2.jpg",categorie: 4, note_trip: 4.0, text_trip: "Très Bien" }
+      { name: "Dar Khayam",img:"/Dar_Khayam_2.jpg", categorie: 3, note_trip: 3.5, text_trip: "Bien" },
+      { name: "La Playa Hotel Club",img:"/La_Playa_Hotel_Club_.jpg", categorie: 3, note_trip: 2.5, text_trip: "Moyen" },
+      { name: "Residence Romane", img:"/residence_romane_2.jpg",categorie: 3, note_trip: 4.0, text_trip: "Très Bien" }
     ]
-
   },
   {
     region: "Monastir",
@@ -35,12 +27,11 @@ const hotelsByRegion = [
       { name: "Blue Beach Golf & Spa",img:"/Blue_Beach_Golf_&_Spa_2.jpg", categorie: 4, note_trip: 4.5, text_trip: "Excellent" },
       { name: "Delphin EL Habib",img:"/Delphin_EL_Habib_2.jpg", categorie: 4, note_trip: 3.5, text_trip: "Bien" }
     ]
-
   }
   // Add more regions here as needed
 ];
 
-const Destination4Stars = async({ region }) => {
+const DestinationPlage =async ({ region }) => {
   // Find the region from the hotelsByRegion array
   const regionHotels = hotelsByRegion.find((r) => r.region === region);
   if (!regionHotels) {
@@ -50,10 +41,9 @@ const Destination4Stars = async({ region }) => {
 
   return (
     <div className="my-6 px-4 mx-auto max-w-screen-xl">
-        <div className="my-6text-xl font-medium text-left">Hôtel {region} 4 étoile</div>
+      <div className="my-6 text-xl font-medium text-left">Hotel 3 étoiles de Plage à {region}</div>
         <p className="my-6 mt-4 text-sm sm:text-base md:text-lg">
-        À la recherche d'un hôtel {region} de quatre étoiles qui répond exactement à vos critères ?
-        Vous êtes à la bonne adresse pour explorer nos offres les plus séduisantes !
+        Notre site propose une variété d'hotels à proximité de la plage à {region}. Quelle est la meilleure façon de passer vos vacances de rêve ? Voici les hôtels de plage préféré de nos voyageurs.
         </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {regionHotels.hotels.map((hotel, index) => (
@@ -105,4 +95,4 @@ const Destination4Stars = async({ region }) => {
   );
 };
 
-export default Destination4Stars;
+export default DestinationPlage;

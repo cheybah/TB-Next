@@ -217,9 +217,7 @@ className="absolute -left-8 top-full z-10 mt-31 w-screen max-w-xl overflow-hidde
         </PopoverPanel>
         </Popover>
 
-        <a href="#" className="text-md font-semibold leading-6 text-gray-900">
-        Demande de Groupe
-        </a>
+       
     </PopoverGroup>
     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
     <button className="flex items-center justify-center gap-2 rounded bg-[#FFFFFF] py-3 px-6 text-xl text-black transition-all hover:bg-[#FFFFF] hover:gap-4 active:bg-[#6a940f]">

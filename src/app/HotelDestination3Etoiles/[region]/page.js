@@ -1,17 +1,17 @@
-import Destination from '../../components/Destination/Destination';
 import { cookies } from 'next/headers'; 
 import { store } from '../../redux/store';// Importer l'API cookies de Next.js
 import { fetchCarouselData } from '../../redux/slices/dataSlice';
+import Destination from '@/app/components/Destination3etoiles/Destination';
 
-export async function generateMetadata({ params }) {
+export  function generateMetadata({ params }) {
     const cookieStore = cookies();
-    const region = cookieStore.get('region')?.value || 'Tunisie'; // Lire le cookie région, avec fallback à "Tunisie" si non défini
+    const region = cookieStore.get('region')?.value || 'Tunisie'; 
     return {
-        title: `Hotel ${region}`,
-        description: `Trouvez votre hôtel ${region} pas cher en ligne sur Tunisiebooking.com !`,
-        keywords: `Hotel ${region}`,
+        title: `Hotel ${region} 3 étoiles`,
+        description: `Supers Promos sur Hotel ${region} 3 étoiles chez TunisieBooking.com ! Meilleur Prix GARANTI. Tarifs et disponibilité en temps réel des hotels 3* à ${region} . `,
+        keywords: `hotel 3 étoiles ${region} , ${region} 3 étoiles, hotels ${region} 3 étoiles , hotel 3 étoiles ${region} , ${region} 3 étoiles, hotel ${region} 3 étoiles  pas cher, prix hotel  3 étoiles ${region}, promo hotel  3 étoiles ${region}`,
         alternates: {
-          canonical: `https://tn.tunisiebooking.com/hotels_${region}.html`,
+          canonical: `https://tn.tunisiebooking.com/hotel_${region}_3_etoiles.html`,
         },
     };
 }
@@ -31,11 +31,11 @@ export async function fetchData() {
 // The component renders the page for a specific region
 const HotelsDestination = async({ params }) => {
     const region = params.region || 'Tunisie'; // Get region from URL params
+    
     const { carouselData } = await fetchData();
-
     return (
         <div>
-            <Destination region={region} sliders={carouselData}/>
+            <Destination region={region} sliders={carouselData} />
         </div>
     );
 };

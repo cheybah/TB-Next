@@ -17,7 +17,7 @@ export const metadata = {
     canonical: 'https://tn.tunisiebooking.com/',
   },
   verification: {
-    google: "NuyRXP0B2gIZfxgScNJebdPTiqy7aXuqy2yFjB_opcs",
+    google: "ESafU5e_DTr8jQ2_oAtAuIKMP13Cum3trojsmL-5TDs",
   },
 };
 

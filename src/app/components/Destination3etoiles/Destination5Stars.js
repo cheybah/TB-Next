@@ -1,46 +1,44 @@
 "use client";
 import React from "react";
-import './Destination3Stars.css';
+import '../Destination/Destination3Stars.css';
 
 const hotelsByRegion = [
   {
     region: "Djerba",
     hotels: [
-      { name: "Caribbean World Djerba",img:"/Caribbean_World_Djerba_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" },
-      { name: "Cesar Thalasso",img:"/Cesar_Thalasso_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" },
-      { name: "Club Calimera Yati Beach",img:"/Club_Calimera_Yati_Beach_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" }
+      { name: "Hasdrubal Prestige Thalassa et Spa",img:"/Hasdrubal_Prestige_Thalassa_et_Spa_2.jpg", categorie: 5, note_trip: 4.5, text_trip: "Excellent" },
+      { name: "Iberostar Selection Eolia Djerba",img:"/Iberostar_Selection_Eolia_Djerba_2.jpg", categorie: 5, note_trip: 4.0, text_trip: "Excellent" },
+      { name: "Radisson Blu Palace Resort et Thalasso",img:"/Radisson_Blu_Palace_Resort_et_Thalasso_2.jpg", categorie: 5, note_trip: 4.0, text_trip: "Très Bien" }
     ]
   },
   {
     region: "Sousse",
     hotels: [
-      { name: "Abou Sofiane Hotel & Aquapark",img:"/Abou_Sofiane_Hotel_&_Aquapark_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" },
-      { name: "cesar palace Sousse",img:"/cesar_palace_et_casino_2.jpg", categorie: 4, note_trip: 3.0, text_trip: "Moyen" },
-      { name: "EL Ksar Resort & Thalasso Sousse", img:"/EL_Ksar_Resort_&_Thalasso_Sousse_2.jpg",categorie: 4, note_trip: 4.0, text_trip: "Très Bien" }
+      { name: "Barcelo Concorde Green Park Palace",img:"/Barcelo_Concorde_Green_Park_Palace_2.jpg", categorie: 5, note_trip: 4.5, text_trip: "Excellent" },
+      { name: "El Mouradi Palace",img:"/El_Mouradi_Palace_2.jpg", categorie: 5, note_trip: 3.5, text_trip: "Bien" },
+      { name: "El Mouradi Palm Marina", img:"/El_Mouradi_Palm_Marina_.jpg",categorie: 5, note_trip: 4.0, text_trip: "Très Bien" }
     ]
   },
   {
     region: "Hammamet",
     hotels: [
-      { name: "Aziza Thalasso & Golf",img:"/Aziza_Thalasso_&_Golf_2.jpg", categorie: 4, note_trip: 4.5, text_trip: "Excellent" },
-      { name: "Bel Azur Thalasso & Bungalows",img:"/Bel_Azur_Thalasso_&_Bungalows_2.jpg", categorie: 4, note_trip: 4.5, text_trip: "Excellent" },
-      { name: "Eden Yasmine Resort & Spa", img:"/Eden_Yasmine_Resort_Meeting_&_Spa_2.jpg",categorie: 4, note_trip: 4.0, text_trip: "Très Bien" }
+      { name: "Alhambra Thalasso",img:"/Alhambra_Thalasso_2.jpg", categorie: 5, note_trip: 4.0, text_trip: "Très Bien" },
+      { name: "Golden Yasmine Mehari Hammamet",img:"/Golden_Yasmine_Mehari_Hammamet_.jpg", categorie: 5, note_trip: 4.0, text_trip: "Très Bien" },
+      { name: "Laico", img:"/Laico_2.jpg",categorie: 5, note_trip: 4.0, text_trip: "Très Bien" }
     ]
-
   },
   {
-    region: "Monastir",
+    region: "Tunis",
     hotels: [
-      { name: "Amir Palace",img:"/Amir_Palace_2.jpg", categorie: 4, note_trip: 3.5, text_trip: "Bien" },
-      { name: "Blue Beach Golf & Spa",img:"/Blue_Beach_Golf_&_Spa_2.jpg", categorie: 4, note_trip: 4.5, text_trip: "Excellent" },
-      { name: "Delphin EL Habib",img:"/Delphin_EL_Habib_2.jpg", categorie: 4, note_trip: 3.5, text_trip: "Bien" }
+      { name: "Africa Tunis",img:"africa_tunis_2.jpg", categorie:5, note_trip: 3.4, text_trip: "Bien" },
+      { name: "Radisson Blu Hotel & Conference Center",img:"Laico_Tunis_2.jpg", categorie: 5, note_trip: 4.0, text_trip: "Très Bien" },
+      { name: "Samarons",img:"samarons_2.jpg", categorie: 5, note_trip: 4.0, text_trip: "Très Bien" }
     ]
-
   }
   // Add more regions here as needed
 ];
 
-const Destination4Stars = async({ region }) => {
+const Destination5Stars = async({ region }) => {
   // Find the region from the hotelsByRegion array
   const regionHotels = hotelsByRegion.find((r) => r.region === region);
   if (!regionHotels) {
@@ -50,10 +48,10 @@ const Destination4Stars = async({ region }) => {
 
   return (
     <div className="my-6 px-4 mx-auto max-w-screen-xl">
-        <div className="my-6text-xl font-medium text-left">Hôtel {region} 4 étoile</div>
+        <div className="my-6text-xl font-medium text-left">Hôtel {region} 5 étoile</div>
         <p className="my-6 mt-4 text-sm sm:text-base md:text-lg">
-        À la recherche d'un hôtel {region} de quatre étoiles qui répond exactement à vos critères ?
-        Vous êtes à la bonne adresse pour explorer nos offres les plus séduisantes !
+            Si vous cherchez des hôtels {region} de luxe cinq étoiles rendez-vous sur notre plateforme.
+            Voici notre sélection des hôtels les plus recommandés !
         </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {regionHotels.hotels.map((hotel, index) => (
@@ -105,4 +103,4 @@ const Destination4Stars = async({ region }) => {
   );
 };
 
-export default Destination4Stars;
+export default Destination5Stars;

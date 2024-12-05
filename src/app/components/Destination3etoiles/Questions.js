@@ -9,19 +9,10 @@ import "swiper/swiper-bundle.css";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import './swiper-custom.css';
 import { useRouter } from "next/navigation";
-import {
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
-} from "@material-tailwind/react";
-import Destination3Stars from "./Destination3Stars";
-import Destination4Stars from "./Destination4Stars";
-import Destination5Stars from "./Destination5Stars";
-import DestinationAllInclusive from "./DestinationAllInclusive";
-import DestinationPlage from "./DestinationPlage";
-import ListQuestions from "./ListQuestions";
 import MeilleurDestination from "./MeilleurDestination";
-
+import Destination5Stars from "./Destination5Stars";
+import Destination4Stars from "./Destination4Stars";
+import DestinationPlage from "./DestinationPlage";
 import DestinationDescription from "./DestinationDescription";
 
 const destinationSimilaires = [
@@ -43,7 +34,8 @@ const destinationSimilaires = [
 ];
 
 // Component to display the hotel results
-const Questions =  ({ region ,slides=[]}) => {   
+const Questions = async ({ region ,slides=[]}) => {   
+
   const sliders = slides?.Slides || []; 
   const router = useRouter();
 
@@ -78,11 +70,10 @@ const Questions =  ({ region ,slides=[]}) => {
     return (
         <div >
           <MeilleurDestination region={region}/>
-          <Destination5Stars region={region} />
-          <Destination4Stars region={region} />
-          <Destination3Stars  region={region}/>
-          <DestinationAllInclusive  region={region}/>
+          <Destination5Stars region={region}/>
+          <Destination4Stars region={region}/>
           <DestinationPlage region={region}/>
+          
           {/*** destinations similaire***/}
           <div className="my-6 px-4 mx-auto max-w-screen-xl">
             <div className="text-xl font-medium text-left">Destinations Similaire</div>
@@ -119,7 +110,7 @@ const Questions =  ({ region ,slides=[]}) => {
                           className="w-full h-48 object-cover rounded-lg"
                         />
                         <div className="mt-2 text-center text-lg font-semibold">
-                          {destination.name}
+                          {destination.name} 3 étoiles
                         </div>
                       </div>
                     </SwiperSlide>
@@ -170,10 +161,8 @@ const Questions =  ({ region ,slides=[]}) => {
                 </button>                           
             </div>
           </div>
-
           <DestinationDescription region={region}/>
 
-           <ListQuestions region={region}/>
         </div>
     );
 };

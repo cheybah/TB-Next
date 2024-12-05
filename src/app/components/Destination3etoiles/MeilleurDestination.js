@@ -1,58 +1,32 @@
 "use client";
 import React from "react";
-import './Destination3Stars.css';
+import '../Destination/Destination3Stars.css';
 
 const hotelsByRegion = [
   {
     region: "Djerba",
     hotels: [
-      { name: "Vincci Helios Beach",img:"/Vincci_Helios_Beach_2.jpg", categorie: 4, note_trip: 4.5, text_trip: "Excellent" },
-      { name: "Radisson Blu Palace Resort et Thalasso",img:"/Radisson_Blu_Palace_Resort_et_Thalasso_2.jpg", categorie: 5, note_trip: 4.0, text_trip: "Très Bien" },
-      { name: "The Ksar",img:"/The_Ksar_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" }
-    ]
-  },
-  {
-
-    region: "Monastir",
-    hotels: [
-      { name: "Delphin EL Habib",img:"/Delphin_EL_Habib_2.jpg", categorie: 4, note_trip: 3.5, text_trip: "Bien" },
-      { name: "Skanes Serail & Aquapark",img:"/Skanes_Serail_&_Aquapark_2.jpg", categorie: 4, note_trip: 3.5, text_trip: "Bien" },
-      { name: "Regency Hotel & Spa Monastir",img:"/Regency_Hotel_&_Spa_Monastir_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" }
-    ]
-  },
-  {
-
-    region: "Sousse",
-    hotels: [
-      { name: "Marhaba Royal Salem",img:"/Marhaba_Royal_Salem_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" },
-      { name: "Marhaba Palace",img:"/Marhaba_Palace_2.jpg", categorie: 5, note_trip: 4.0, text_trip: "Très Bien" },
-      { name: "Marhaba Salem Resort", img:"/Marhaba_Salem_Resort_2.jpg",categorie: 4, note_trip: 4.0, text_trip: "Très Bien" }
+      { name: "Djerba Saray",img:"/Djerba_Saray_2.jpg", categorie: 3, note_trip: 3.5, text_trip: "Bien" },
+      { name: "Diar Yassine",img:"/Diar_Yassine_2.jpg", categorie: 3, note_trip: 3.5, text_trip: "Bien" },
+      { name: "Mizwar",img:"/Mizwar_Djerba_2.jpg", categorie: 3, note_trip: 4.5, text_trip: "Excellent" }
     ]
   },
   {
     region: "Hammamet",
     hotels: [
-      { name: "Sol Azur Beach Congres",img:"/Sol_Azur_Beach_Congres_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" },
-      { name: "Royal Azur Thalassa",img:"/Royal_Azur_Thalassa_2.jpg", categorie: 5, note_trip: 4.0, text_trip: "Très Bien" },
-      { name: "Royal Tulip Taj Sultan", img:"/Royal_Tulip_Taj_Sultan_2.jpg",categorie: 5, note_trip: 4.0, text_trip: "Très Bien" }
+      { name: "Dar Khayam",img:"/Dar_Khayam_2.jpg", categorie: 3, note_trip: 3.5, text_trip: "Bien" },
+      { name: "Zenith",img:"/Zenith_2.jpg", categorie: 3, note_trip: 3.0, text_trip: "Moyen" },
+      { name: "La Playa Hotel Club", img:"/La_Playa_Hotel_Club_.jpg",categorie: 3, note_trip: 2.5, text_trip: "Moyen" }
     ]
   },
   {
     region: "Tunis",
     hotels: [
       { name: "Ibn khaldoun Tunis",img:"/Ibn_khaldoun_Tunis_.jpg", categorie: 3, note_trip: 3.5, text_trip: "Bien" },
-      { name: "Ezzahra Dar Tunis",img:"/Ezzahra_Dar_Tunis_.jpg", categorie: 4, note_trip: 2.5, text_trip: "Moyen" },
-      { name: "Africa Tunis",img:"/africa_tunis_2.jpg", categorie: 5, note_trip: 3.5, text_trip: "Bien" }
+      { name: "Ambassadeurs Hotel",img:"/Ambassadeurs_Hotel_2.jpg", categorie: 3, note_trip: 3.0, text_trip: "Moyen" },
+      { name: "AL KARMEL",img:"/al_karmel_2.jpg", categorie: 3, note_trip: 3.5, text_trip: "Moyen" }
     ]
-  },
-  {
-    region: "Sfax",
-    hotels: [
-      { name: "Pacha Hotel",img:"/pacha_hotel_2.jpg", categorie: 2, note_trip: 3.0, text_trip: "Moyen" },
-      { name: "Dar El Hana",img:"/dar_el_hana_2.jpg", categorie: 3, note_trip: 5.0, text_trip: "Excellent" },
-      { name: "Golden Yasmin Les Oliviers Palace",img:"/golden_yasmin_les_oliviers_palace_2.jpg", categorie: 4, note_trip: 3.5, text_trip: "Bien" }
-    ]
-  },
+  }
   // Add more regions here as needed
 ];
 
@@ -60,60 +34,36 @@ const MeilleurhotelsByRegion = [
     {
       region: "Djerba",
       hotels: [
-        { name: "El Mouradi Djerba Menzel",img:"/El_Mouradi_Djerba_Menzel_2.jpg", categorie: 4, note_trip: 3.5, text_trip: "Bien" },
-        { name: "Cesar Thalasso",img:"/Cesar_Thalasso_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" },
-        { name: "Djerba Aqua Resort",img:"/Djerba_Aqua_Resort_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" }
+        { name: "Rodes",img:"/rodes_2.jpg", categorie: 3, note_trip: 2.5, text_trip: "Moyen" },
+        { name: "Le Grand Hotel",img:"/Le_Grand_Hotel_2.jpg", categorie: 3, note_trip: 4.0, text_trip: "Très Bien" },
+        { name: "Djerba Saray",img:"/Djerba_Saray_2.jpg", categorie: 3, note_trip: 3.5, text_trip: "Bien" }
       ]
     },
     {
       region: "Sousse",
       hotels: [
-        { name: "Hotel KANTA",img:"/Hotel_KANTA_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" },
-        { name: "Marhaba Palace",img:"/Marhaba_Beach_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" },
-        { name: "El Mouradi Palace", img:"/El_Mouradi_Palace_2.jpg",categorie: 5, note_trip: 3.5, text_trip: "Bien" }
+        { name: "Sol palmeras Beach",img:"/sol_palmeras_beach_2.jpg", categorie: 3, note_trip: 4.0, text_trip: "" },
+        { name: "Jinene",img:"/Jinene_2.jpg", categorie: 3, note_trip: 3.0, text_trip: "Moyen" },
+        { name: "Soviva Resort & Aquapark", img:"/Soviva_Resort_.jpg",categorie: 3, note_trip: 3.0, text_trip: "Moyen" }
       ]
     },
     {
       region: "Hammamet",
       hotels: [
-        { name: "El Mouradi Hammamet",img:"/El_Mouradi_Hammamet_2.jpg", categorie: 4, note_trip: 3.5, text_trip: "Bien" },
-        { name: "El Mouradi El Menzah",img:"/El_Mouradi_El_Menzah_2.jpg", categorie: 4, note_trip: 3.5, text_trip: "Bien" },
-        { name: "Zodiac Hotel & Aqua Park", img:"/Zodiac_Hotel_&_Aqua_Park_2.jpg",categorie: 4, note_trip: 4.0, text_trip: "Très Bien" }
+        { name: "Dar Khayam",img:"/Dar_Khayam_2.jpg", categorie: 3, note_trip: 3.5, text_trip: "Bien" },
+        { name: "La Playa Hotel Club",img:"/La_Playa_Hotel_Club_.jpg", categorie: 3, note_trip: 2.5, text_trip: "Moyen" },
+        { name: "Zenith", img:"/Zenith_2.jpg",categorie: 3, note_trip: 3.0, text_trip: "Moyen" }
       ]
     },
     {
       region: "Tunis",
       hotels: [
-        { name: "The Penthouse Suites Hotel",img:"/Penthouse_Suites_Hotel_2.jpg", categorie: 5, note_trip: 4.0, text_trip: "Très Bien" },
-        { name: "Samarons",img:"/samarons_2.jpg", categorie: 5, note_trip: 4.0, text_trip: "Très Bien" },
-        { name: "Ibn khaldoun Tunis",img:"/Ibn_khaldoun_Tunis_ .jpg", categorie: 3, note_trip: 3.5, text_trip: "Bien" }
+        { name: "Ibn khaldoun Tunis",img:"/Ibn_khaldoun_Tunis_.jpg", categorie: 3, note_trip: 3.5, text_trip: "Bien" },
+        { name: "Ambassadeurs Hotel",img:"/Ambassadeurs_Hotel_2.jpg", categorie: 3, note_trip: 3.0, text_trip: "Moyen" },
+        { name: "AL KARMEL",img:"/al_karmel_2.jpg", categorie: 3, note_trip: 3.5, text_trip: "Moyen" }
       ]
     },
-    {
-      region: "Sfax",
-      hotels: [
-        { name: "Pacha Hotel",img:"/pacha_hotel_2.jpg", categorie: 2, note_trip: 3.0, text_trip: "Moyen" },
-        { name: "Dar El Hana",img:"/dar_el_hana_2.jpg", categorie: 3, note_trip: 5.0, text_trip: "Excellent" },
-        { name: "Occidental Sfax Centre",img:"/Concorde_Sfax_Centre_2.jpg", categorie: 4, note_trip: 3.5, text_trip: "Bien" }
-      ]
-    },
-
-    {
-      region: "El jem",
-      hotels: [
-        { name: "Julius",img:"/Julius_.jpg", categorie: 3, note_trip: 4.0, text_trip: "Très Bien" },
-      ]
-
-    },
-    {
-      region: "Monastir",
-      hotels: [
-        { name: "City Busines Hotels",img:"/Monastir_center_2.jpg", categorie: 3, note_trip: 3.5, text_trip: "Bien" },
-        { name: "Skanes Serail & Aquapark",img:"/Skanes_Serail_&_Aquapark_2.jpg", categorie: 4, note_trip: 3.5, text_trip: "Bien" },
-        { name: "Regency Hotel & Spa Monastir",img:"/Regency_Hotel_&_Spa_Monastir_2.jpg", categorie: 4, note_trip: 4.0, text_trip: "Très Bien" }
-      ]
-
-    }
+    
     // Add more regions here as needed
   ];
 
@@ -136,7 +86,7 @@ const MeilleurDestination =async ({ region }) => {
   return (
     <div>
         <div className="my-16 px-4 mx-auto max-w-screen-xl">
-      <div className="my-6 text-xl font-medium text-left">Meilleur Hotel {region} à partir de 102 DT</div>
+      <div className="my-6 text-xl font-medium text-left">Hôtel 3 étoiles {region} à partir de 102 DT</div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {MeilleurregionHotels.hotels.map((hotel, index) => (
           <div key={index} className="destination-card transform transition-all duration-1000 ease-out cursor-pointer">
@@ -204,7 +154,7 @@ const MeilleurDestination =async ({ region }) => {
       </div>
     </div>
     <div className="my-6 px-4 mx-auto max-w-screen-xl">
-      <div className="my-6 text-xl font-medium text-left">Les hotels {region} les plus réservés</div>
+      <div className="my-6 text-xl font-medium text-left">Nos meilleures offres d'hotel 3 étoiles à {region}</div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {regionHotels.hotels.map((hotel, index) => (
           <div key={index} className="destination-card transform transition-all duration-1000 ease-out cursor-pointer">

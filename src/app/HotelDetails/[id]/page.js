@@ -18,6 +18,9 @@ export async function generateMetadata({ params }) {
         title: `${hotelName}`,
         description: `Hôtel ${hotelName} + ${hotelRating} * ${hotelLocation} sur Tunisiebooking ! Profitez des meilleures Prix 2025.`,
         keywords: `${hotelName}`,
+        alternates: {
+            canonical: `https://tn.tunisiebooking.com/detail_hotel_${id}/`,
+        },
     };
 }
 
