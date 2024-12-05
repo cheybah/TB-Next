@@ -21,8 +21,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnkh, faMosque, faPersonHiking, faPlaceOfWorship, faSun, faPhone, faCircleInfo} from '@fortawesome/free-solid-svg-icons';
 import { Button } from '@headlessui/react'
 import './Header.css'
-
-
+import Cookies from 'js-cookie';
 
 const products = [
 { name: 'Omra', description: 'Voyage spirituel pour accomplir le pèlerinage en toute sérénité', href: '#', icon: faMosque },
@@ -37,22 +36,21 @@ const callsToAction = [
 ]
 
 const topDestinations = [
-{ name: "Hôtel Tunisie", href: "#"},
-{ name: "Hôtel Hammamet", href: "#" },
-{ name: "Hôtel Tabarka", href: "#" },
-{ name: "Hôtel Monastir", href: "#" },
-{ name: "Hôtel Mahdia", href: "#" },
-{ name: "Hôtel Djerba", href: "#" },
-{ name: "Hôtel Tunis", href: "#" },
-{ name: "Hôtel Tozeur", href: "#" },
-{ name: "Hôtel Korbous", href: "#" },
-
-// Add more items as needed
-];
+    { name: "Hôtel Tunisie", region: "Tunisie" },
+    { name: "Hôtel Hammamet", region: "Hammamet" },
+    { name: "Hôtel Sfax", region: "Sfax" },
+    { name: "Hôtel Monastir", region: "Monastir" },
+    { name: "Hôtel Mahdia", region: "Mahdia" },
+    { name: "Hôtel Djerba", region: "Djerba" },
+    { name: "Hôtel Tunis", region: "Tunis" },
+    { name: "Hôtel Tozeur", region: "Tozeur" },
+    { name: "Hôtel Korbous", region: "Korbous" },
+  ];
 const autresHotels = [
-{ name : "Hotel kelibia", href : "#"},
-{ name : "Hotel Bizerte", href : "#"},
-{ name : "Hotel Nabeul", href : "#"},
+{ name : "Hotel kelibia",region: "Kelibia"},
+{ name : "Hotel Bizerte",region: "Bizerte"},
+{ name : "Hotel Nabeul",region: "Nabeul" },
+{ name : "Hotel El Jem",region: "El Jem" },
 ];
 
 const offresSpeciales = [
@@ -66,7 +64,10 @@ const offresSpeciales = [
 
 export default function Header() {
 const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
+// Fonction pour définir le cookie avec js-cookie
+const handleSetCookie = (region) => {
+    Cookies.set('region', region, { expires: 7, path: '/' }); // Expires dans 7 jours
+  };
 return (
 <header className="bg-white">
     <nav aria-label="Global" className="mx-auto flex items-center justify-between p-6 lg:px-8">
@@ -113,7 +114,11 @@ className="absolute -left-8 top-full z-10 mt-31 w-screen max-w-xl overflow-hidde
         className="relative flex items-start gap-x-4 rounded-lg pt-4 pl-4 pr-4 text-sm hover:bg-gray-50"
         >
         <div className="flex-auto">
-            <a href={item.href} className="block font-normal text-gray-900">
+            <a 
+            key={item.region}
+            href={`/hotels_${encodeURIComponent(item.region)}`}
+            onClick={() => handleSetCookie(item.region)} // Utilisation de js-cookie
+             className="block font-normal text-gray-900">
             {item.name}
             <span className="absolute inset-0" />
             </a>
@@ -129,10 +134,14 @@ className="absolute -left-8 top-full z-10 mt-31 w-screen max-w-xl overflow-hidde
     {autresHotels.map((item) => (
         <div
         key={item.name}
+         // Utilisation de js-cookie
         className="relative flex items-start gap-x-4 rounded-lg pt-4 pl-4 pr-4 text-sm hover:bg-gray-50"
         >
         <div className="flex-auto">
-            <a href={item.href} className="block font-normal text-gray-900">
+            <a 
+            key={item.name}
+            href={`/hotels_${encodeURIComponent(item.name.replace(/\s+/g, '_'))}`}
+            onClick={() => handleSetCookie(item.name)} className="block font-normal text-gray-900">
             {item.name}
             <span className="absolute inset-0" />
             </a>
@@ -208,9 +217,7 @@ className="absolute -left-8 top-full z-10 mt-31 w-screen max-w-xl overflow-hidde
         </PopoverPanel>
         </Popover>
 
-        <a href="#" className="text-md font-semibold leading-6 text-gray-900">
-        Demande de Groupe
-        </a>
+       
     </PopoverGroup>
     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
     <button className="flex items-center justify-center gap-2 rounded bg-[#FFFFFF] py-3 px-6 text-xl text-black transition-all hover:bg-[#FFFFF] hover:gap-4 active:bg-[#6a940f]">

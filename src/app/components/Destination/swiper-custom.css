@@ -1,0 +1,24 @@
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: #007bff; /* Blue background */
+  color: white;             /* White icon */
+  width: 50px;              /* Button width */
+  height: 50px;             /* Button height */
+  border-radius: 50%;       /* Circular buttons */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  transition: background-color 0.3s ease;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+.swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {
+    content: '';
+}
+.swiper-button-next:after, .swiper-rtl .swiper-button-prev:after {
+    content: '';
+}
