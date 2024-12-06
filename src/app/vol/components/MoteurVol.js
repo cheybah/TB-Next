@@ -7,17 +7,22 @@ import { Select, Option } from "@material-tailwind/react";
 import { Menu } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { Button } from "@material-tailwind/react";
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
-
-
+import {
+    Popover,
+    PopoverHandler,
+    PopoverContent,
+} from "@material-tailwind/react";
+import { format } from "date-fns";
+import { DayPicker } from "react-day-picker";
+import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 
 
 
 export default function MoteurVol() {
 
-    //       const [allerDate, setAllerDate] = useState(null);
-    //   const [retourDate, setRetourDate] = useState(null);
+    const [startDate, setStartDate] = React.useState();
+    const [endDate, setEndDate] = React.useState();
+
 
     const [passengers, setPassengers] = useState({
         adult: 1,
@@ -173,45 +178,140 @@ export default function MoteurVol() {
                                 />
                             </div>
                         </div>
-
                         {/* Smaller inputs */}
                         <div className="flex gap-4 w-full">
                             {/* First small input */}
                             <div className="relative" style={{ width: "calc(50% - 0.5rem)" }}>
-                                <Input
-                                    label="Aller"
-                                    color="white"
-                                    className="pr-12"
-                                    containerProps={{
-                                        className: "relative min-w-[auto]",
-                                    }}
-                                />
-                                <div className="absolute top-0 right-0 h-full w-12 bg-yellow-500 flex items-center justify-center rounded-tr-md rounded-br-md">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#003581" className="bi bi-calendar-week" viewBox="0 0 16 16">
-                                        <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
-                                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-                                    </svg>
-                                </div>
+                                <Popover placement="bottom">
+                                    <PopoverHandler>
+                                        <div className="relative">
+                                            <Input
+                                                label="Aller"
+                                                color="white"
+                                                className="pr-12"
+                                                containerProps={{
+                                                    className: "relative min-w-[auto]",
+                                                }}
+                                                onChange={() => null}
+                                                value={startDate ? format(startDate, "PPP") : ""}
+                                            />
+                                            <div className="absolute top-0 right-0 h-full w-12 bg-yellow-500 flex items-center justify-center rounded-tr-md rounded-br-md">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#003581" className="bi bi-calendar-week" viewBox="0 0 16 16">
+                                                    <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
+                                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </PopoverHandler>
+                                    <PopoverContent>
+                                        <DayPicker
+                                            mode="single"
+                                            selected={startDate}
+                                            onSelect={setStartDate}
+                                            showOutsideDays
+                                            className="border-0"
+                                            classNames={{
+                                                caption: "flex justify-center py-2 mb-4 relative items-center",
+                                                caption_label: "text-sm font-medium text-gray-900",
+                                                nav: "flex items-center",
+                                                nav_button:
+                                                    "h-6 w-6 bg-transparent hover:bg-blue-gray-50 p-1 rounded-md transition-colors duration-300",
+                                                nav_button_previous: "absolute left-1.5",
+                                                nav_button_next: "absolute right-1.5",
+                                                table: "w-full border-collapse",
+                                                head_row: "flex font-medium text-gray-900",
+                                                head_cell: "m-0.5 w-9 font-normal text-sm",
+                                                row: "flex w-full mt-2",
+                                                cell: "text-gray-600 rounded-md h-9 w-9 text-center text-sm p-0 m-0.5 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-gray-900/20 [&:has([aria-selected].day-outside)]:text-white [&:has([aria-selected])]:bg-gray-900/50 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
+                                                day: "h-9 w-9 p-0 font-normal",
+                                                day_range_end: "day-range-end",
+                                                day_selected:
+                                                    "rounded-md bg-gray-900 text-white hover:bg-gray-900 hover:text-white focus:bg-gray-900 focus:text-white",
+                                                day_today: "rounded-md bg-gray-200 text-gray-900",
+                                                day_outside:
+                                                    "day-outside text-gray-500 opacity-50 aria-selected:bg-gray-500 aria-selected:text-gray-900 aria-selected:bg-opacity-10",
+                                                day_disabled: "text-gray-500 opacity-50",
+                                                day_hidden: "invisible",
+                                            }}
+                                            components={{
+                                                IconLeft: ({ ...props }) => (
+                                                    <ChevronLeftIcon {...props} className="h-4 w-4 stroke-2" />
+                                                ),
+                                                IconRight: ({ ...props }) => (
+                                                    <ChevronRightIcon {...props} className="h-4 w-4 stroke-2" />
+                                                ),
+                                            }}
+                                        />
+                                    </PopoverContent>
+                                </Popover>
                             </div>
 
                             {/* Second small input */}
                             {isRoundTrip && (
-                                <div className="relative" style={{ width: "calc(50% - 0.5rem)" }}>
-                                    <Input
-                                        label="Retour"
-                                        color="white"
-                                        className="pr-12"
-                                        containerProps={{
-                                            className: "relative min-w-[auto]",
+                            <div className="relative" style={{ width: "calc(50% - 0.5rem)" }}>
+                            <Popover placement="bottom">
+                                <PopoverHandler>
+                                    <div className="relative">
+                                        <Input
+                                            label="Retour"
+                                            color="white"
+                                            className="pr-12"
+                                            containerProps={{
+                                                className: "relative min-w-[auto]",
+                                            }}
+                                            onChange={() => null}
+                                            value={endDate ? format(endDate, "PPP") : ""}
+                                        />
+                                        <div className="absolute top-0 right-0 h-full w-12 bg-yellow-500 flex items-center justify-center rounded-tr-md rounded-br-md">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#003581" className="bi bi-calendar-week" viewBox="0 0 16 16">
+                                                <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
+                                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </PopoverHandler>
+                                <PopoverContent>
+                                    <DayPicker
+                                        mode="single"
+                                        selected={endDate}
+                                        onSelect={setEndDate}
+                                        showOutsideDays
+                                        className="border-0"
+                                        classNames={{
+                                            caption: "flex justify-center py-2 mb-4 relative items-center",
+                                            caption_label: "text-sm font-medium text-gray-900",
+                                            nav: "flex items-center",
+                                            nav_button:
+                                                "h-6 w-6 bg-transparent hover:bg-blue-gray-50 p-1 rounded-md transition-colors duration-300",
+                                            nav_button_previous: "absolute left-1.5",
+                                            nav_button_next: "absolute right-1.5",
+                                            table: "w-full border-collapse",
+                                            head_row: "flex font-medium text-gray-900",
+                                            head_cell: "m-0.5 w-9 font-normal text-sm",
+                                            row: "flex w-full mt-2",
+                                            cell: "text-gray-600 rounded-md h-9 w-9 text-center text-sm p-0 m-0.5 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-gray-900/20 [&:has([aria-selected].day-outside)]:text-white [&:has([aria-selected])]:bg-gray-900/50 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
+                                            day: "h-9 w-9 p-0 font-normal",
+                                            day_range_end: "day-range-end",
+                                            day_selected:
+                                                "rounded-md bg-gray-900 text-white hover:bg-gray-900 hover:text-white focus:bg-gray-900 focus:text-white",
+                                            day_today: "rounded-md bg-gray-200 text-gray-900",
+                                            day_outside:
+                                                "day-outside text-gray-500 opacity-50 aria-selected:bg-gray-500 aria-selected:text-gray-900 aria-selected:bg-opacity-10",
+                                            day_disabled: "text-gray-500 opacity-50",
+                                            day_hidden: "invisible",
+                                        }}
+                                        components={{
+                                            IconLeft: ({ ...props }) => (
+                                                <ChevronLeftIcon {...props} className="h-4 w-4 stroke-2" />
+                                            ),
+                                            IconRight: ({ ...props }) => (
+                                                <ChevronRightIcon {...props} className="h-4 w-4 stroke-2" />
+                                            ),
                                         }}
                                     />
-                                    <div className="absolute top-0 right-0 h-full w-12 bg-yellow-500 flex items-center justify-center rounded-tr-md rounded-br-md">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#003581" className="bi bi-calendar-week" viewBox="0 0 16 16">
-                                            <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
-                                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-                                        </svg>
-                                    </div>
-                                </div>
+                                </PopoverContent>
+                            </Popover>
+                        </div>
                             )}
                         </div>
 
