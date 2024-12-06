@@ -50,7 +50,11 @@ const Destination3Stars =async ({ region }) => {
     <div className="my-6 px-4 mx-auto max-w-screen-xl">
       <div className="my-6 text-xl font-medium text-left">Hôtel {region} 3 étoile</div>
         <p className="my-6 mt-4 text-sm sm:text-base md:text-lg">
+
+
           Vous êtes à la recherche <a  href={`/HotelDestination3Etoiles/${encodeURIComponent(region.replace(/\s+/g, '_'))}`}>un hôtel {region} 3 étoile</a> qui correspond parfaitement à vos besoins ?
+
+
           Vous êtes au bon endroit pour découvrir nos offres les plus attractives !
         </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">

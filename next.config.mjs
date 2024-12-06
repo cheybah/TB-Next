@@ -14,8 +14,10 @@ const nextConfig = {
             {
                 source: '/hotels_:region',
                 destination: '/Hoteldestination/:region',
-            }
-            
+
+            },
+
+
         ];
     },
 };

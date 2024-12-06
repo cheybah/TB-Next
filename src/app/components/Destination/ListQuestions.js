@@ -15,6 +15,13 @@ import {
   AccordionBody,
 } from "@material-tailwind/react";
 
+import Destination3Stars from "./Destination3Stars";
+import Destination4Stars from "./Destination4Stars";
+import Destination5Stars from "./Destination5Stars";
+import DestinationAllInclusive from "./DestinationAllInclusive";
+import DestinationPlage from "./DestinationPlage";
+import Questions from "./Questions";
+
 
 
 const listQuestions = [
@@ -100,6 +107,7 @@ const listQuestions = [
 ];
 // Component to display the hotel results
 const ListQuestions =  ({ region}) => {   
+
  const [open, setOpen] = React.useState(1);
     const handleOpen = (value) => setOpen(open === value ? 0 : value);
 
@@ -111,6 +119,7 @@ const ListQuestions =  ({ region}) => {
       });
     
 
+
   const selectedRegion = listQuestions.find((item) => item.region === region);
   if (!selectedRegion) {
     return <div></div>;
@@ -118,7 +127,7 @@ const ListQuestions =  ({ region}) => {
  // Pour vérifier les données récupérées
   const questions = selectedRegion ? selectedRegion.questions : [];
   console.log(questions); 
-    /** Questions***/
+
     
       const toggleContent = (section) => {
         setExpandedSections(prev => ({

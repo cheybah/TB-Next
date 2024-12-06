@@ -7,8 +7,10 @@ import BackgroundSection from "../MoteurDestination/BackgroundSection";
 import Footer from "../Footer/Footer";
 import Questions from "./Questions";
 
+
 // Component to display the hotel results
 const Destination = ({ region, sliders = [] }) => {
+
     const router = useRouter();
     
     // Replace underscores with spaces
@@ -16,10 +18,12 @@ const Destination = ({ region, sliders = [] }) => {
 
     return (
         <div className="min-h-screen flex flex-col">
+l
             <Header />
             <BackgroundSection region={formattedRegion} customSpanContent={`Hôtels ${formattedRegion} 3 étoiles`} />
             <Questions region={formattedRegion} slides={sliders} />
             <Footer />
+
         </div>
     );
 };

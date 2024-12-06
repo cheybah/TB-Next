@@ -34,6 +34,7 @@ const destinationSimilaires = [
 ];
 
 // Component to display the hotel results
+
 const Questions =  ({ region ,slides=[]}) => {   
  /** Questions***/
  const [open, setOpen] = React.useState(1);
@@ -45,6 +46,7 @@ const Questions =  ({ region ,slides=[]}) => {
      section2: false,
      section3: false,
    });
+
   const sliders = slides?.Slides || []; 
   const router = useRouter();
 
@@ -53,7 +55,7 @@ const Questions =  ({ region ,slides=[]}) => {
   };
   
   
-   
+
     
       const toggleContent = (section) => {
         setExpandedSections(prev => ({
