@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import React from 'react';
 
 import DetailHotel from '../DetailHotel/DetailHotel';
+import Footer from "../Footer/Footer";
 // Fetch data from the API
 const HotelDetailsContent =  ({ listsHotels = [], regionsData = [], hotelsTripadData=[]}) => {
     const listHotels=listsHotels;
@@ -15,6 +16,7 @@ const HotelDetailsContent =  ({ listsHotels = [], regionsData = [], hotelsTripad
         <div className="min-h-screen flex flex-col">
             <Header />
             <DetailHotel listsHotels={listHotels} regionsData={listregionsData} hotelsTripadData={hotelTripadData}/>
+            <Footer/>
         </div>
 
     );

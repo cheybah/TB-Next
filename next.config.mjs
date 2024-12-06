@@ -11,6 +11,11 @@ const nextConfig = {
                 source: '/detail_hotel_:id',
                 destination: '/HotelDetails/:id', // This will map to /pages/HotelDetails/page.js
             },
+            {
+                source: '/hotels_:region',
+                destination: '/Hoteldestination/:region',
+            }
+            
         ];
     },
 };

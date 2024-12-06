@@ -18,6 +18,9 @@ export async function generateMetadata({ params }) {
         title: `${hotelName}`,
         description: `Hôtel ${hotelName} + ${hotelRating} * ${hotelLocation} sur Tunisiebooking ! Profitez des meilleures Prix 2025.`,
         keywords: `${hotelName}`,
+        alternates: {
+            canonical: `https://tn.tunisiebooking.com/detail_hotel_${id}/`,
+        },
     };
 }
 
@@ -50,13 +53,8 @@ const HotelsDetails = async ({ params }) => {
     const ville = villeCookie?.value || '';  // Récupération de la valeur du cookie 'location'
     const datedep = cookies().get('departureDate')?.value || '';  // Départ
     const dateret = cookies().get('returnDate')?.value || '';    // Retour
-
-    // Affichage dans la console pour vérifier la valeur de 'ville'
-    console.log("Ville récupérée depuis le cookie:", ville);
-
     // Récupérer les données en fonction de l'ID et des cookies
     const { regionsData, hotelData, hotelTripadData } = await fetchData(id, ville, datedep, dateret);
-
     // Rendu du composant
     return (
         <div className="min-h-screen flex flex-col">
