@@ -36,7 +36,7 @@ const Slides = () => {
   }
 
   return (
-    <div className="slider avantage mt-10 mb-4">
+    <div className="slider avantage mt-10 mb-4 hidden sm:block">
       <p className="text-center font-bold text-2xl antialiased mo ">
         Les Bonnes Raisons de faire appel à nous
       </p>

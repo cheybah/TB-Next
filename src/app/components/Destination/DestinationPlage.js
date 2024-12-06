@@ -27,7 +27,6 @@ const hotelsByRegion = [
       { name: "Bel Azur Thalasso & Bungalows", img:"/Bel_Azur_Thalasso_&_Bungalows_2.jpg",categorie: 4, note_trip: 4.5, text_trip: "Excellent" }
     ]
   },
-
   {
     region: "Monastir",
     hotels: [
@@ -36,7 +35,6 @@ const hotelsByRegion = [
       { name: "Delphin EL Habib",img:"/Delphin_EL_Habib_2.jpg", categorie: 4, note_trip: 3.5, text_trip: "Bien" }
     ]
   }
-
   // Add more regions here as needed
 ];
 
