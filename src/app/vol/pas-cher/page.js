@@ -35,10 +35,10 @@ const VolsPasCher = () => {
             <div className="bg-gray-300">
                 <Header />
                 <MoteurVol />
-                <div className="p-6 lg:px-[20rem] flex flex-col items-center">
+                <div className="p-6 lg:px-[20rem] flex flex-col items-center text-center">
                     <h1 className="text-[41px] text-black font-normal mb-4">Réserver votre vol pas cher !</h1>
-                    <div className="max-w-sm w-full lg:max-w-full border-2 border-[white] rounded-md bg-[white] py-4 px-6">
-                        {/* Paragraph */}
+                    <div className="max-w-sm w-full lg:max-w-full border-2 border-[white] rounded-md bg-[white] py-4 px-2 sm:px-6">
+                    {/* Paragraph */}
                         <p className="text-base text-center">
                             Que vous soyez un voyageur aguerri ou occasionnel, vous êtes surement sans savoir que le prix d’un billet d’avion peut être ce qui coute le plus dans le devis. Il semble donc nécessaire de trouver un moyen afin de profiter d’un vol pas cher. Et ce n’est pas le genre de chose qui se fait au petit bonheur la chance.
                             Voici notamment quelques conditions pour y prétendre.
@@ -126,13 +126,24 @@ const VolsPasCher = () => {
                         </div>
                         {/* Dividerrrr */}
                         <div className="flex items-center mt-8">
-                            <hr className="flex-grow border-t border-[#003581]" />
-                            <img src="/icon_clock_vol.jpg" className="ml-2" />
-                            <span className="px-3 text-2xl text-bold text-[#003581]"> Dernières recherches Vols Pas Chers</span>
-                            <hr className="flex-grow border-t border-[#003581]" />
+                            <hr className="hidden sm:block flex-grow border-t border-[#003581]" />
+                            <img
+                                src="/icon_clock_vol.jpg"
+                                alt="star"
+                                className="ml-2"
+                            />
+                            <span className="px-3 text-2xl sm:text-2xl font-normal text-[#003581] text-center">
+                                Dernières recherches Vols Pas Chers
+                            </span>
+                            <img
+                                src="/icon_clock_vol_mir.jpg"
+                                alt="star"
+                                className="block sm:hidden ml-2"
+                            />
+                            <hr className="hidden sm:block flex-grow border-t border-[#003581]" />
                         </div>
                         {/* 1st set of buttons */}
-                        <div className="mx-16 mt-4 mb-6">
+                        <div className="mx-4 sm:mx-16 mt-4 mb-6">
                             <div className="grid grid-cols-3 gap-4">
                                 <button className="bg-transparent hover:bg-[#003581] text-[#003581] font-semibold hover:text-white py-2 px-4 border-2 border-[#003581] hover:border-transparent rounded w-full flex items-center justify-center">
                                     Vols Tunis Djerba
@@ -156,7 +167,7 @@ const VolsPasCher = () => {
                         </div>
 
                         {/* 2nd set of buttons */}
-                        <div className="mx-16 my-2">
+                        <div className="mx-4 sm:mx-16 my-2">
                             <div className="grid grid-cols-3 gap-4">
                                 <button className="bg-transparent hover:bg-[#003581] text-[#003581] font-semibold hover:text-white py-2 px-4 border-2 border-[#003581] hover:border-transparent rounded w-full flex items-center justify-center">
                                     Vols Monastir Paris

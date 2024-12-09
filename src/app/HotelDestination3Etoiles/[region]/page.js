@@ -1,7 +1,8 @@
 import { cookies } from 'next/headers'; 
-import { store } from '../../redux/store';// Importer l'API cookies de Next.js
+import { store } from '../../redux/store';
 import { fetchCarouselData } from '../../redux/slices/dataSlice';
 import Destination from '@/app/components/Destination3etoiles/Destination';
+
 
 export  function generateMetadata({ params }) {
     const cookieStore = cookies();

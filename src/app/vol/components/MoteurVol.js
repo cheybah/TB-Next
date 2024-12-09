@@ -84,8 +84,8 @@ export default function MoteurVol() {
                                         d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"
                                     />
                                 </svg>
-                                Hôtels Tunisie
-                            </button>
+                                <span className="hidden sm:inline">Hôtels Tunisie</span>
+                                </button>
                         </li>
 
                         <li className="flex-1 border border-white bg-white mr-1" role="presentation">
@@ -99,7 +99,8 @@ export default function MoteurVol() {
                                 aria-selected="false"
                             >
                                 <img src="/globe.png" alt="Hotel Icon" className="w-7 h-7" />
-                                Voyage Organisé
+                                <span className="hidden sm:inline">Voyage Organisé</span>
+                                
                             </button>
                         </li>
                         <li className="flex-1 border border-white bg-white mr-1" role="presentation">
@@ -115,7 +116,7 @@ export default function MoteurVol() {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 0 1-.657.643 48.39 48.39 0 0 1-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 0 1-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 0 0-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 0 1-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 0 0 .657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 0 1-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 0 0 5.427-.63 48.05 48.05 0 0 0 .582-4.717.532.532 0 0 0-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 0 0 .658-.663 48.422 48.422 0 0 0-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 0 1-.61-.58v0Z" />
                                 </svg>
-                                Thématique
+                                <span className="hidden sm:inline">Thématique</span>
                             </button>
                         </li>
                         <li className="flex-1 border border-[#003581] bg-[#003581]" role="presentation">
@@ -130,7 +131,8 @@ export default function MoteurVol() {
 
                             >
                                 <img src="/Orion_plane-departure.svg" alt="Hotel Icon" className="w-7 h-7" />
-                                Billet d'Avion
+                                <span className="hidden sm:inline">Billet d'Avion</span>
+                                
                             </button>
                         </li>
                     </ul>
@@ -138,8 +140,8 @@ export default function MoteurVol() {
                 {/*tabs body (just the moteur ;) )*/}
                 <div className="max-w-sm w-full lg:max-w-full lg:flex border-2 border-[#003581] rounded-b-md bg-[#003581] text-white p-6">
                     {/*Left Section*/}
-                    <div className="w-[45%] flex flex-col gap-4 ">
-                        <div className="flex gap-6">
+                    <div className="w-full lg:w-[45%] flex flex-col gap-4">
+                    <div className="flex gap-6">
                             <Radio
                                 name="type"
                                 value="round-trip"
@@ -331,8 +333,8 @@ export default function MoteurVol() {
                         </div>
                     </div>
                     {/* Middle Section with Arrows */}
-                    <div className="w-[10%] flex items-center justify-center">
-                        <div className="flex sm:flex-row flex-col items-center">
+                    <div className="w-full sm:w-[10%] flex items-center justify-center sm:mt-0 mt-6">
+                    <div className="flex sm:flex-row flex-col items-center">
                             {/* Arrow for Mobile */}
                             {isRoundTrip ? (
                                 <i
@@ -361,8 +363,8 @@ export default function MoteurVol() {
                     </div>
 
                     {/*Right Section*/}
-                    <div className="w-[45%] flex flex-col mt-[59px]">
-                        <div className="w-[90%] relative">
+                    <div className="w-full lg:w-[45%] flex flex-col lg:mt-[59px] mt-4 lg:px-4 px-0">
+                    <div className="relative w-full sm:w-[90%]">
                             <Input
                                 label="Arrivé à"
                                 color="white"
@@ -380,8 +382,8 @@ export default function MoteurVol() {
                                 />
                             </div>
                         </div>
-                        <div className="relative w-[90%] mt-4">
-                            <Menu>
+                        <div className="relative w-full sm:w-[90%] mt-4">
+                        <Menu>
                                 <Menu.Button className="flex items-center justify-between w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg shadow-sm text-yellow-400">
                                     {`${totalPassengers} ${totalPassengers === 1 ? "Passager" : "Passagers"}`}
                                     <ChevronDownIcon className="w-5 h-5 text-gray-500" />
@@ -436,9 +438,9 @@ export default function MoteurVol() {
                             </svg>
                             RECHERCHER
                         </Button>
-
                     </div>
                 </div>
-            </main></>
+            </main>
+            </>
     );
 }
