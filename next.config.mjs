@@ -9,7 +9,7 @@ const nextConfig = {
         return [
             {
                 source: '/detail_hotel_:id',
-                destination: '/HotelDetails/:id', // This will map to /pages/HotelDetails/page.js
+                destination: '/HotelDetails/:id', 
             },
             {
                 source: '/hotels_:region',
