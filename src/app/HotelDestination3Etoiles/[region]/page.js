@@ -10,7 +10,7 @@ export  function generateMetadata({ params }) {
     return {
         title: `Hotel ${region} 3 étoiles`,
         description: `Supers Promos sur Hotel ${region} 3 étoiles chez TunisieBooking.com ! Meilleur Prix GARANTI. Tarifs et disponibilité en temps réel des hotels 3* à ${region} . `,
-        keywords: `hotel 3 étoiles ${region} , ${region} 3 étoiles, hotels ${region} 3 étoiles , hotel 3 étoiles ${region} , ${region} 3 étoiles, hotel ${region} 3 étoiles  pas cher, prix hotel  3 étoiles ${region}, promo hotel  3 étoiles ${region}`,
+        keywords: `Hotel 3 étoiles ${region} `,
         alternates: {
           canonical: `https://tn.tunisiebooking.com/hotel_${region}_3_etoiles.html`,
         },

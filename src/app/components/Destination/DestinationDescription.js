@@ -98,7 +98,7 @@ const DestinationDescription =  ({ region}) => {
             <div className="w-[5rem] h-[4px] bg-black mt-2"></div>
   
             {/* Collapsible Section */}
-            <div className={`overflow-hidden transition-all duration-300 ${expandedSections.section1 ? 'max-h-none' : 'max-h-[6rem]'}`}>
+            <div className={`overflow-hidden transition-all duration-300 ${expandedSections.section2 ? 'max-h-none' : 'max-h-[6rem]'}`}>
               <p className="mt-4 text-sm sm:text-base md:text-lg">
               Ville située dans le Nord-est de la Tunisie, {region} est l’une des régions les plus touristiques de ce pays.
               Depuis des années, elle attire le curieux du monde entier.
@@ -127,7 +127,7 @@ const DestinationDescription =  ({ region}) => {
   
             {/* Toggle Button */}
             <button
-              onClick={() => toggleContent('section1')}
+              onClick={() => toggleContent('section2')}
               className="mt-2 text-blue-500 flex items-center space-x-2"
             >
               <span>{expandedSections.section1 ? "Afficher moins" : "Afficher plus"}</span>
