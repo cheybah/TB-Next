@@ -6,13 +6,13 @@ import { store } from "../../redux/store";
 import Cookies from 'js-cookie'; // Import js-cookie
 
 
-function HotelsDetailsClient({ listsHotels = [], regionsData = [], hotelsTripadData = [] }) {
+function HotelsDetailsClient({ listsHotels = [], regionsData = [], hotelTripadData = [] }) {
     return (
-        <div class="test">
+        <div >
                 <Nav
                     listsHotels={listsHotels}
                     regionsData={regionsData}
-                    hotelTripadData={hotelsTripadData}
+                    hotelsTripadData={hotelTripadData}
                 />
             
         </div>

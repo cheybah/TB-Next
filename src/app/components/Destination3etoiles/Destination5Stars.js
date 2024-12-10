@@ -34,6 +34,14 @@ const hotelsByRegion = [
       { name: "Radisson Blu Hotel & Conference Center",img:"Laico_Tunis_2.jpg", categorie: 5, note_trip: 4.0, text_trip: "Très Bien" },
       { name: "Samarons",img:"samarons_2.jpg", categorie: 5, note_trip: 4.0, text_trip: "Très Bien" }
     ]
+  },
+  {
+    region: "Monastir",
+    hotels: [
+      { name: "Hilton Skanes Monastir Beach Resort",img:"https://image.resabooking.com/images/image_panoramique/Hilton_Skanes_Monastir_Beach_Resort_2.jpg", categorie:5, note_trip: 4.5, text_trip: "Excellent" },
+      { name: "Iberostar Kuriat Palace",img:"https://image.resabooking.com/images/image_panoramique/Iberostar_Kuriat_Palace_2.jpg", categorie: 5, note_trip: 4.5, text_trip: "Excellent" },
+      { name: "Royal Thalassa",img:"https://image.resabooking.com/images/image_panoramique/Royal_Thalassa_2.jpg", categorie: 5, note_trip: 4.0, text_trip: "Très Bien" }
+    ]
   }
   // Add more regions here as needed
 ];

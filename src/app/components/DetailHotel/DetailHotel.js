@@ -15,7 +15,11 @@ import MoteurResult from "../MoteurResult/MoteurResult";
 const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }) => {
     const listHotels = listsHotels?.Hotels_hors_promo || [];  // Ensure this property exists in your data
     const listregionsData = regionsData;  // Fetch the data using ville
-    const listhotelTripadData=hotelsTripadData?.Hotels || [];
+    console.log(hotelsTripadData); // Check the actual structure of hotelsTripadData
+//const listhotelTripadData = hotelsTripadData?.Hotels || [];
+const listhotelTripadData = [hotelsTripadData];
+console.log(listhotelTripadData);
+
     const data = [
         { label: "Photos", value: "photos" },
         { label: "Présentation", value: "presentation", id: "presentation" },
@@ -60,8 +64,8 @@ const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }
                                 {/*this is the start of the detail card*/}
                                 <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg">
                                     <div className="mt-8 relative overflow-hidden rounded-lg">
-                                        <div className="flex items-center justify-between">
-                                            <div className="text-4xl font-bold  " style={{ marginRight: "10px" }}>{hotel.libelle_hotel}</div>
+                                        <div className="flex flex-wrap items-center justify-between gap-4 md:gap-6">
+                                            <h1 className="text-4xl font-bold  " style={{ marginRight: "10px" }}>{hotel.libelle_hotel}</h1>
                                             <div className="rating-container mt-4 flex items-center" style={{ marginBottom: "1.5rem", marginRight: "auto" }}>
                                                 {[...Array(5)].map((_, index) => (
                                                     <svg
@@ -80,13 +84,17 @@ const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }
                                                 ))}
                                                 
                                             </div>
+                                            <div className='flex items-center space-x-2 text-md md:text-xl'>
                                             {listhotelTripadData.map((notehotel, index) => (
+
                                                 <span className="text-lg flex" key={index}>
+
                                                 <img src="/icon_tripadvisor.svg" style={{ marginRight: "5px" }}></img> {notehotel.note_tripad} / 5{" "}
                                                 <span className="font-bold" style={{ marginLeft: "5px" }}>{notehotel.text_tripad}</span>
                                             </span>
-
                                             ))}
+                                            </div>
+                                           
 
                                         </div>
                                         <div className="flex items center">

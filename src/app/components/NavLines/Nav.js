@@ -10,6 +10,9 @@ const HotelDetailsContent =  ({ listsHotels = [], regionsData = [], hotelsTripad
     const listHotels=listsHotels;
     const listregionsData = regionsData; 
     const hotelTripadData=hotelsTripadData;
+    
+ 
+    
     // Log to check the final value of listHotels
 
     return (
