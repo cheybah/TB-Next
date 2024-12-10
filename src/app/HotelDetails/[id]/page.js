@@ -36,7 +36,7 @@ export async function fetchData(id, ville, datedep, dateret) {
         return {
             regionsData: regionsDataResult || [],
             hotelData: hotelDataResult?.Hotels[0] || [], // Adaptez en fonction de la structure des données
-            hotelTripadData: hotelTripadDataResult || [],
+            hotelTripadData: hotelTripadDataResult?.Hotels[0] || [],
         };
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -47,7 +47,7 @@ export async function fetchData(id, ville, datedep, dateret) {
 // Composant principal pour afficher les détails de l'hôtel
 const HotelsDetails = async ({ params }) => {
     const { id } = params;
-
+    
     // Récupération des cookies côté serveur
     const villeCookie = cookies().get('location');
     const ville = villeCookie?.value || '';  // Récupération de la valeur du cookie 'location'
@@ -55,6 +55,8 @@ const HotelsDetails = async ({ params }) => {
     const dateret = cookies().get('returnDate')?.value || '';    // Retour
     // Récupérer les données en fonction de l'ID et des cookies
     const { regionsData, hotelData, hotelTripadData } = await fetchData(id, ville, datedep, dateret);
+
+   
     // Rendu du composant
     return (
         <div className="min-h-screen flex flex-col">
