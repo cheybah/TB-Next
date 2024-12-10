@@ -34,8 +34,17 @@ const destinationSimilaires = [
 ];
 
 // Component to display the hotel results
-const Questions = async ({ region ,slides=[]}) => {   
+const Questions =  ({ region ,slides=[]}) => {   
+ /** Questions***/
+ const [open, setOpen] = React.useState(1);
+ const handleOpen = (value) => setOpen(open === value ? 0 : value);
 
+ /**hotel pas cher**/
+ const [expandedSections, setExpandedSections] = useState({
+     section1: false,
+     section2: false,
+     section3: false,
+   });
   const sliders = slides?.Slides || []; 
   const router = useRouter();
 
@@ -44,16 +53,7 @@ const Questions = async ({ region ,slides=[]}) => {
   };
   
   
-    /** Questions***/
-    const [open, setOpen] = React.useState(1);
-    const handleOpen = (value) => setOpen(open === value ? 0 : value);
-
-    /**hotel pas cher**/
-    const [expandedSections, setExpandedSections] = useState({
-        section1: false,
-        section2: false,
-        section3: false,
-      });
+   
     
       const toggleContent = (section) => {
         setExpandedSections(prev => ({

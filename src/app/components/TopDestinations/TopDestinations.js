@@ -127,7 +127,7 @@ const TopDestinations = () => {
         }
     };
     return (
-        <section className="container mx-auto py-12 px-6">
+        <section className="container mx-auto py-12 px-6 hidden sm:block">
             <h1 className="text-center font-bold text-2xl antialiased">
                 Les Imbattables du Moment
             </h1>

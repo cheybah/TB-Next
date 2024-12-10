@@ -15,7 +15,11 @@ import MoteurResult from "../MoteurResult/MoteurResult";
 const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }) => {
     const listHotels = listsHotels?.Hotels_hors_promo || [];  // Ensure this property exists in your data
     const listregionsData = regionsData;  // Fetch the data using ville
-    const listhotelTripadData=hotelsTripadData?.Hotels || [];
+    console.log(hotelsTripadData); // Check the actual structure of hotelsTripadData
+//const listhotelTripadData = hotelsTripadData?.Hotels || [];
+const listhotelTripadData = [hotelsTripadData];
+console.log(listhotelTripadData);
+
     const data = [
         { label: "Photos", value: "photos" },
         { label: "Présentation", value: "presentation", id: "presentation" },
@@ -60,8 +64,8 @@ const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }
                                 {/*this is the start of the detail card*/}
                                 <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg">
                                     <div className="mt-8 relative overflow-hidden rounded-lg">
-                                        <div className="flex items-center justify-between">
-                                            <div className="text-4xl font-bold  " style={{ marginRight: "10px" }}>{hotel.libelle_hotel}</div>
+                                        <div className="flex flex-wrap items-center justify-between gap-4 md:gap-6">
+                                            <h1 className="text-4xl font-bold  " style={{ marginRight: "10px" }}>{hotel.libelle_hotel}</h1>
                                             <div className="rating-container mt-4 flex items-center" style={{ marginBottom: "1.5rem", marginRight: "auto" }}>
                                                 {[...Array(5)].map((_, index) => (
                                                     <svg
@@ -80,13 +84,15 @@ const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }
                                                 ))}
                                                 
                                             </div>
+                                            <div className='flex items-center space-x-2 text-md md:text-xl'>
                                             {listhotelTripadData.map((notehotel, index) => (
-                                                <span className="text-lg flex">
+                                                <span className="text-lg flex " key={index}>
                                                 <img src="/icon_tripadvisor.svg" style={{ marginRight: "5px" }}></img> {notehotel.note_tripad} / 5{" "}
                                                 <span className="font-bold" style={{ marginLeft: "5px" }}>{notehotel.text_tripad}</span>
                                             </span>
-
                                             ))}
+                                            </div>
+                                           
 
                                         </div>
                                         <div className="flex items center">
@@ -95,73 +101,72 @@ const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }
                                         </div>
                                         <div className="absolute inset-0 flex flex-col justify-center items-center">
                                         </div>
-                                        <div className="w-2/3 h-auto">
-                                            <Tabs value="photos">
-                                                <TabsHeader>
+                                        <div className="w-full md:w-2/3 h-auto">
+                                            <Tabs value="photos" className="overflow-x-auto">
+                                                <TabsHeader className="flex space-x-2 overflow-x-auto scrollbar-hide whitespace-nowrap">
                                                     {data.map(({ label, value, id }) => (
-                                                        <Tab key={value} value={value} onClick={() => scrollToSection(id)}>
+                                                        <Tab 
+                                                            key={value} 
+                                                            value={value} 
+                                                            onClick={() => scrollToSection(id)}
+                                                            className="py-2 px-4 text-sm md:text-base rounded-md hover:bg-gray-200 cursor-pointer"
+                                                        >
                                                             {label}
                                                         </Tab>
                                                     ))}
                                                 </TabsHeader>
                                             </Tabs>
                                         </div>
-                                        <div className="flex w-full">
+
+                                        <div className="flex flex-col md:flex-row w-full">
                                             <img 
                                                 src={hotel.images?.image_principal} 
                                                 alt={`Image principale de ${hotel.libelle_hotel}`} 
-                                                className="w-2/3 h-auto rounded-lg" style={{ marginTop: "20px" }} 
+                                                className="w-full md:w-2/3 h-auto rounded-lg mt-4 md:mt-5" 
                                             />
-                                            <div className="w-1/3 px-4 text-center" style={{ marginTop: "3%" }}>
-                                                <div className="flex space-x-4">
-                                                    <img src="/avis.svg"></img>
+                                            <div className="w-full md:w-1/3 px-4 text-center mt-4 md:mt-0">
+                                                <div className="flex space-x-4 justify-center md:justify-start">
+                                                    <img src="/avis.svg" alt="Avis" />
                                                     <div className="text-xl font-medium">Avis Voyageurs</div>
                                                 </div>
                                                 <div className="relative my-6 flex-1 rounded-md p-4" style={{ backgroundColor: "#F4F5F7" }}>
-                                                    <div className="absolute left-0 top-0 h-4 w-4 -translate-y-1/2 translate-x-5 rotate-45 transform rounded-sm" style={{ backgroundColor: "#F4F5F7", fontSize: "16px" }}></div>
-                                                    <FontAwesomeIcon icon={faQuoteLeft} style={{ marginRight: "2%" }} />
+                                                    <div className="absolute left-0 top-0 h-4 w-4 -translate-y-1/2 translate-x-5 rotate-45 transform rounded-sm" style={{ backgroundColor: "#F4F5F7" }}></div>
+                                                    <FontAwesomeIcon icon={faQuoteLeft} className="mr-2" />
                                                     Un bon service, un bon personnel mais a revoir quelques points...
-                                                    <FontAwesomeIcon icon={faQuoteRight} style={{ marginLeft: "2%" }} />
+                                                    <FontAwesomeIcon icon={faQuoteRight} className="ml-2" />
                                                     <div><a href="#">Lire tous les avis</a></div>
                                                 </div>
                                                 <div className="text-xl font-medium text-left">Principales Services</div>
                                                 <div className="relative">
                                                     {hotel.services && Object.keys(hotel.services).length > 0 ? (
                                                         Object.entries(hotel.services)
-                                                            .slice(0, 5) // Limit to the first 3 services
+                                                            .slice(0, 5)
                                                             .map(([category, details], categoryIndex) => (
-                                                                <button  aria-label="services"
-                                                                        key={categoryIndex}
-                                                                        className="bg-transparent hover:bg-gray-300 text-black font-normal 
-                                                                        hover:text-white py-2 px-4 border border-gray-700 
-                                                                        hover:border-transparent rounded-full mr-2 mt-[4%] 
-                                                                        cursor-pointer relative">
-                                                                    {/* Afficher le nom de la catégorie */}
-                                                                    {category !== "icon_categorie" && (
-                                                                       
-                                                                            <div className="flex items-center">
-                                                                            {details.icon_categorie && (
-
-                                                                                <img
-                                                                                    src={`https://www.resabooking.com/${details.icon_categorie}`}
-                                                                                    alt={category}
-                                                                                    className="w-[20px] h-[20px] mr-2"
-                                                                                />
-                                                                                )}
-                                                                                {category}
-                                                                            </div>
-                                                                          
-                                                                        
-                                                                    )}
+                                                                <button
+                                                                    aria-label="services"
+                                                                    key={categoryIndex}
+                                                                    className="bg-transparent hover:bg-gray-300 text-black font-normal hover:text-white py-2 px-4 border border-gray-700 hover:border-transparent rounded-full mr-2 mt-2 cursor-pointer"
+                                                                >
+                                                                    <div className="flex items-center">
+                                                                        {details.icon_categorie && (
+                                                                            <img
+                                                                                src={`https://www.resabooking.com/${details.icon_categorie}`}
+                                                                                alt={category}
+                                                                                className="w-[20px] h-[20px] mr-2"
+                                                                            />
+                                                                        )}
+                                                                        {category}
+                                                                    </div>
                                                                 </button>
                                                             ))
                                                     ) : (
                                                         <p className="text-gray-500">Aucun service disponible</p>
                                                     )}
-                                                    <div className="text-left mt-4 cursor-pointer relative">
+                                                    <div className="text-left mt-4 cursor-pointer">
                                                         <a
-                                                            href=""
-                                                            className="text-blue-500 flex items-center group space-x-2">
+                                                            href="#"
+                                                            className="text-blue-500 flex items-center group space-x-2"
+                                                        >
                                                             <span>Voir tous les services</span>
                                                             <FontAwesomeIcon
                                                                 icon={faArrowRight}
@@ -172,6 +177,7 @@ const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                     <MoteurResult listRegions={regionsData} />               
                                 </div>
@@ -198,7 +204,7 @@ const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }
                                                         {/* Title and Items */}
                                                         <div className="col-span-10">
                                                             <div className="text-xl font-semibold mb-3">Chambres</div>
-                                                            <ul className="grid grid-cols-3 gap-x-8 gap-y-2">
+                                                            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                                                 <li className="flex items-center">
                                                                     <FontAwesomeIcon icon={faCheck} className="text-black mr-2 w-4 h-4" />
                                                                     Chauffage
@@ -217,6 +223,7 @@ const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }
                                                                 </li>
                                                             </ul>
                                                         </div>
+
                                                     </div>
 
                                                     <div className="w-full h-[2px] bg-gray-500 mt-4"></div>
@@ -292,56 +299,61 @@ const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }
                                     </div>
                                 </div>
                                 {/*this is the start of the avis card*/}
-                                <section id="avis">
-                                    <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6">
+                                <section id="avis" className="">
+                                    <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-lg mt-6 p-4 sm:p-6">
                                         <div className="relative overflow-hidden rounded-lg">
-                                            <div className="flex items-center justify-between">
-                                                <div className="text-left mt-4">
-                                                    <div className="text-2xl font-bold"> {hotel.libelle_hotel} Avis</div>
+                                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                                                <div className="w-full sm:w-auto text-left mt-4">
+                                                    <div className="text-2xl font-bold">{hotel.libelle_hotel} Avis</div>
                                                     <div className="w-[5rem] h-[4px] bg-black mt-2"></div>
-                                                    <div className="flex gap-4 mt-4 items-start"> {/* Ensure items align at the start */}
-                                                        <Avatar src="/no-avatar.png" alt="avatar" />
-                                                        <div className="flex flex-col justify-start"> {/* Make this a column to stack text vertically */}
-                                                            <Typography variant="h6">Foulen Fouleni</Typography>
-                                                            <Typography variant="small" color="gray" className="font-normal">
-                                                                Client TunisieBooking
-                                                            </Typography>
-                                                        </div>
-                                                        <div className="flex items-center justify-start w-2/3"> {/* Include this in the main flex container */}
-                                                            <div className="relative w-5 overflow-hidden -translate-y-6" >
-                                                                <div className="h-4 bg-green-400 rotate-45 transform origin-bottom-right rounded-sm" style={{ backgroundColor: "#F4F5F7" }}></div>
-                                                            </div>
-                                                            <div className="bg-[#F4F5F7] p-4 rounded-lg flex flex-col">
-                                                                <div className="flex items-center mb-2"> {/* Container for title and rating */}
-                                                                    <h4 className="text-lg font-semibold">Good</h4> {/* Feedback title */}
-                                                                    <div className="flex ml-4">
-                                                                        {/* Rating Circles */}
-                                                                        {Array.from({ length: 5 }).map((_, index) => (
-                                                                            <svg
-                                                                                key={index}
-                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                className="h-4 w-4 mx-0.3"
-                                                                                fill={index < 3 ? "currentColor" : "none"} // Change this to manage filled and empty states
-                                                                                viewBox="0 0 24 24"
-                                                                                stroke="currentColor"
-                                                                            >
-                                                                                <circle cx="12" cy="12" r="10" className={`border-2 ${index < 3 ? 'bg-blue-500' : 'border-gray-400'}`} />
-                                                                            </svg>
-                                                                        ))}
-                                                                    </div>
-                                                                </div>
-                                                                <p>
-                                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                                                                    molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum.
-                                                                </p>
-                                                            </div>
+                                                </div>
+                                            </div>
+                                            <div className="flex flex-col sm:flex-row gap-4 mt-4">
+                                                {/* Avatar and Info Section */}
+                                                <div className="flex gap-4 items-start">
+                                                    <Avatar src="/no-avatar.png" alt="avatar" className="w-12 h-12 sm:w-16 sm:h-16" />
+                                                    <div className="flex flex-col justify-start">
+                                                        <Typography variant="h6">Foulen Fouleni</Typography>
+                                                        <Typography variant="small" color="gray" className="font-normal">
+                                                            Client TunisieBooking
+                                                        </Typography>
+                                                    </div>
+                                                </div>
+                                                {/* Feedback Section */}
+                                                <div className="w-full sm:w-2/3 bg-[#F4F5F7] p-4 rounded-lg flex flex-col">
+                                                    <div className="flex flex-col sm:flex-row items-start sm:items-center mb-2">
+                                                        <h4 className="text-lg font-semibold">Good</h4>
+                                                        <div className="flex ml-0 sm:ml-4">
+                                                            {/* Rating Circles */}
+                                                            {Array.from({ length: 5 }).map((_, index) => (
+                                                                <svg
+                                                                    key={index}
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    className="h-4 w-4 mx-0.5"
+                                                                    fill={index < 3 ? "currentColor" : "none"}
+                                                                    viewBox="0 0 24 24"
+                                                                    stroke="currentColor"
+                                                                >
+                                                                    <circle
+                                                                        cx="12"
+                                                                        cy="12"
+                                                                        r="10"
+                                                                        className={`border-2 ${index < 3 ? 'bg-blue-500' : 'border-gray-400'}`}
+                                                                    />
+                                                                </svg>
+                                                            ))}
                                                         </div>
                                                     </div>
+                                                    <p className="text-sm sm:text-base">
+                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                                                        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum.
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </section>
+
                                  {/*this is the start of the questions card*/}
                                 <section>
                                     <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6">

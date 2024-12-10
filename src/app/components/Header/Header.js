@@ -24,16 +24,29 @@ import './Header.css'
 import Cookies from 'js-cookie';
 
 const products = [
-{ name: 'Omra', description: 'Voyage spirituel pour accomplir le pèlerinage en toute sérénité', href: '#', icon: faMosque },
-{ name: 'Circuit Sud', description: 'Découvrez les trésors du désert tunisien, entre dunes et oasis', href: '#', icon: faSun },
-{ name: 'Circuit Nord', description: 'Explorez les sites historiques et côtiers du nord de la Tunisie', href: '#', icon: faPersonHiking },
-{ name: 'Turquie', description: 'Plongez dans la richesse culturelle et historique de la Turquie', href: '#', icon: faPlaceOfWorship },
-{ name: 'Egypte', description: 'Partez à la découverte des merveilles antiques de l`Égypte', href: '#', icon: faAnkh },
-]
-const callsToAction = [
-{ name: 'Réservez', href: '#', icon: PlayCircleIcon },
-{ name: 'Voir plus d`offres', href: '#', icon: PhoneIcon },
-]
+    { name: 'Omra',href: '/voyage_organise/omra' },
+    { name: 'Turquie', href: '/voyage_organise/turquie' },
+    { name: 'Iran',href: '/voyage_organise/iran' },
+    { name: 'France',href: '/voyage_organise/france' },
+    { name: 'Italie',href: '/voyage_organise/italie' },
+    { name: 'Tunisie',href: '/voyage_organise/tunisie' },
+    { name: 'Grece',href: '/voyage_organise/grece' },
+    { name: 'Egypte',href: '/voyage_organise/egypte' },
+    { name: 'Espagne', href: '/voyage_organise/espagne' },
+    { name: 'Maroc', href: '/voyage_organise/maroc' },
+    { name: 'Tcheque',href: '/voyage_organise/tcheque' },
+    { name: 'Autriche', href: '/voyage_organise/autriche' },
+    { name: 'Portugal', href: '/voyage_organise/portugal' },
+    { name: 'Dubai',href: '/voyage_organise/dubai' },
+    { name: 'Malaise', href: '#/voyage_organise/malaise' },
+    { name: 'Liban', href: '/voyage_organise/liban' },
+    { name: 'Pays Bas',href: '/voyage_organise/pays-bas' },
+    { name: 'Thailande', href: '/voyage_organise/thailande' },
+    { name: 'Serbie',href: '/voyage_organise/serbie' },
+    { name: 'Bresil', href: '/voyage_organise/bresil' },
+    { name: 'Etas Unis',href: '/voyage_organise/etas-unis' },
+    ]
+
 
 const topDestinations = [
     { name: "Hôtel Tunisie", region: "Tunisie" },
@@ -180,41 +193,26 @@ className="absolute -left-8 top-full z-10 mt-31 w-screen max-w-xl overflow-hidde
         </PopoverButton>
 
         <PopoverPanel
-            transition
-            className="absolute -left-8 top-full z-10 mt-31 w-screen max-w-xl overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
-        >
-            <div className="p-4">
-            {products.map((item) => (
-                <div
+    transition
+    className="absolute -left-8 top-full z-10 mt-31 w-screen max-w-xl overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
+>
+    <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {products.map((item) => (
+            <div
                 key={item.name}
-                className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
-                >
-                <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                    <FontAwesomeIcon icon={item.icon} aria-hidden="true" className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" />
-                </div>
+                className="group relative flex flex-col items-start gap-x-6 rounded-lg p-2 text-sm leading-6 hover:bg-gray-50"
+            >
                 <div className="flex-auto">
                     <a href={item.href} className="block font-semibold text-gray-900">
-                    {item.name}
-                    <span className="absolute inset-0" />
+                        {item.name}
+                        <span className="absolute inset-0" />
                     </a>
                     <p className="mt-1 text-gray-600">{item.description}</p>
                 </div>
-                </div>
-            ))}
             </div>
-            <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-            {callsToAction.map((item) => (
-                <a
-                key={item.name}
-                href={item.href}
-                className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
-                >
-                <FontAwesomeIcon icon={item.icon} aria-hidden="true" className="h-5 w-5 flex-none text-gray-400" />
-                {item.name}
-                </a>
-            ))}
-            </div>
-        </PopoverPanel>
+        ))}
+    </div>
+</PopoverPanel>
         </Popover>
 
        
@@ -259,7 +257,7 @@ className="absolute -left-8 top-full z-10 mt-31 w-screen max-w-xl overflow-hidde
                 <ChevronDownIcon aria-hidden="true" className="h-5 w-5 flex-none group-data-[open]:rotate-180" />
                 </DisclosureButton>
                 <DisclosurePanel className="mt-2 space-y-2">
-                {[...topDestinations, ...callsToAction].map((item) => (
+                {[...topDestinations].map((item) => (
                     <DisclosureButton
                     key={item.name}
                     as="a"
