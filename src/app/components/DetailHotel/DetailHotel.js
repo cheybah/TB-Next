@@ -86,7 +86,7 @@ console.log(listhotelTripadData);
                                             </div>
                                             <div className='flex items-center space-x-2 text-md md:text-xl'>
                                             {listhotelTripadData.map((notehotel, index) => (
-                                                <span className="text-lg flex " key={index}>
+                                                <span className="text-lg flex" key={index}>
                                                 <img src="/icon_tripadvisor.svg" style={{ marginRight: "5px" }}></img> {notehotel.note_tripad} / 5{" "}
                                                 <span className="font-bold" style={{ marginLeft: "5px" }}>{notehotel.text_tripad}</span>
                                             </span>

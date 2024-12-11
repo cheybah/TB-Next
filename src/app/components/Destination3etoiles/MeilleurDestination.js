@@ -63,14 +63,6 @@ const MeilleurhotelsByRegion = [
         { name: "AL KARMEL",img:"/al_karmel_2.jpg", categorie: 3, note_trip: 3.5, text_trip: "Moyen" }
       ]
     },
-    {
-      region: "Monastir",
-      hotels: [
-        { name: "City Busines Hotels",img:"https://image.resabooking.com/images/image_panoramique/Monastir_center_2.jpg", categorie: 3, note_trip: 3.5, text_trip: "Bien" },
-        
-        
-      ]
-    }
     
     // Add more regions here as needed
   ];
