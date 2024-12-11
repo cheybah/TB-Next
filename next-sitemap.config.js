@@ -3,60 +3,131 @@
 import fetch from 'node-fetch';
 
 export default {
-    siteUrl: 'http://v2.springtravelservices.com',
-    exclude: ['/icon.ico'], // Exclude useless paths from the sitemap
-    generateRobotsTxt: true,
+    siteUrl: 'http://v2.springtravelservices.com', 
+    exclude: ['/icon.ico'], 
+    generateRobotsTxt: true, 
     generateIndexSitemap: false, 
     robotsTxtOptions: {
         policies: [
             {
                 userAgent: '*',
-                allow: '/',
+                allow: '/', 
             },
         ],
     },
     async additionalPaths() {
-        const hotelDetailsPaths = await fetchHotelDetailsPaths();
-        const hotelsResultPaths = await fetchHotelsResultPaths();
-        return [...hotelDetailsPaths, ...hotelsResultPaths];
+        const manualPaths = [
+            { loc: '/', lastmod: new Date().toISOString(), priority: 1.0, changefreq: 'daily' }, 
+            { loc: '/voyage_organise/tcheque/', lastmod: new Date().toISOString(), priority: 0.8, changefreq: 'weekly' }, 
+        ];
+        const hotelDetailPaths = await fetchHotelDetailPaths();
+        const regionPaths = await fetchRegionPaths(); 
+        const destinationPaths = await fetchDestinationPaths(); 
+
+        return [ ...manualPaths, ...hotelDetailPaths, ...regionPaths, ...destinationPaths];
     },
 };
 
-// Fetch dynamic routes for `HotelDetails`
-async function fetchHotelDetailsPaths() {
+async function fetchHotelDetailPaths() {
     try {
-        const response = await fetch('http://react.tunisiebooking.com/api/fetchDestinations');
-        if (!response.ok) {
-            console.error(`Error fetching destinations: ${response.statusText}`);
-            return [];
+        // Define static filters for destinations and dates
+        const destinations = ['hammamet', 'nabeul', 'sousse', 'djerba', 'monastir', 'Monastir', 'tunis', 'Sfax', 'sfax', 'el jem'];
+        const dateCombinations = [
+            { datedep: '2024-12-06', dateret: '2024-12-12' },
+            { datedep: '2024-12-13', dateret: '2024-12-19' },
+        ];
+        const paths = [];
+        // Iterate through destinations and dates to fetch hotels
+        for (const ville of destinations) {
+            for (const dates of dateCombinations) {
+                const { datedep, dateret } = dates;
+
+                const url = `http://api.resabookings.com/api/api/api_hotel/api_hotel_detail2_v22_vf.php?id_partenaire=10&id_marche=5&destination=${ville}&date_fin_1=${datedep}&date_fin_2=${dateret}&type=not%20all`;
+                const response = await fetch(url);
+
+                if (!response.ok) continue;
+                const data = await response.json();
+
+                const hotels = data.Hotels[0]?.Hotels_hors_promo || [];
+                for (const hotel of hotels) {
+                    const id_hotel = hotel.id_hotel;
+                    if (!id_hotel) continue;
+
+                    paths.push({
+                        loc: `/detail_hotel_${id_hotel}/`,
+                        lastmod: new Date().toISOString(),
+                        priority: 0.8, 
+                        changefreq: 'weekly',
+                    });
+                }
+            }
         }
-        const destinations = await response.json();
-        return destinations.map((destination) => ({
-            loc: `/HotelDetails/${destination.id}`,
-            lastmod: new Date().toISOString(),
-        }));
+
+        return paths;
     } catch (error) {
-        console.error('Error fetching hotel details paths:', error);
+        console.error('Error fetching hotel detail paths:', error);
         return [];
     }
 }
 
-// Fetch dynamic routes for `HotelsResult`
-async function fetchHotelsResultPaths() {
+// Fetch dynamic routes for `Region` pages
+async function fetchRegionPaths() {
     try {
         const response = await fetch('http://api.resabookings.com/api/api/api_hotel/api_destination_test.php');
-        if (!response.ok) {
-            console.error(`Error fetching regions: ${response.statusText}`);
-            return [];
-        }
         const data = await response.json();
-        const regions = data.regions || [];
-        return regions.map((region) => ({
-            loc: `/HotelsResult?ville=${encodeURIComponent(region.libelle_region)}`,
-            lastmod: new Date().toISOString(),
-        }));
+
+        if (!data.status || !data.regions) return []; 
+
+        const paths = [];
+
+        // Iterate through each region to create the dynamic paths
+        for (const region of data.regions) {
+            const { libelle_region } = region;
+            const regionPath = `/hotels_${libelle_region}`;
+
+            // Add the region URL to paths
+            paths.push({
+                loc: regionPath, 
+                lastmod: new Date().toISOString(), 
+                priority: 0.8, 
+                changefreq: 'weekly',
+            });
+        }
+
+        return paths; // Return all region paths
     } catch (error) {
-        console.error('Error fetching hotels result paths:', error);
+        console.error('Error fetching region paths:', error);
+        return [];
+    }
+}
+
+// Fetch dynamic routes for `HotelDestination3Etoiles` pages
+async function fetchDestinationPaths() {
+    try {
+        const response = await fetch('http://api.resabookings.com/api/api/api_hotel/api_destination_test.php');
+        const data = await response.json();
+
+        if (!data.status || !data.regions) return [];
+
+        const paths = [];
+
+        // Iterate through each region to create the dynamic paths for HotelDestination3Etoiles
+        for (const region of data.regions) {
+            const { libelle_region } = region;
+            const destinationPath = `/HotelDestination3Etoiles/${libelle_region}`;
+
+            // Add the destination URL to paths
+            paths.push({
+                loc: destinationPath, 
+                lastmod: new Date().toISOString(), 
+                priority: 0.8, 
+                changefreq: 'weekly',
+            });
+        }
+
+        return paths; 
+    } catch (error) {
+        console.error('Error fetching destination paths:', error);
         return [];
     }
 }

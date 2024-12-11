@@ -9,12 +9,17 @@ import Mosaic from "../components/Mosaic";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
+import VolFooter from "../components/VolFooter";
+
+
 
 const VolsPasCherPage = () => {
 
     const [expandedSections, setExpandedSections] = useState({
         section1: false,
-        sections1: false,
+
+        sections11: false,
+
         section2: false,
     });
 
@@ -36,6 +41,7 @@ const VolsPasCherPage = () => {
                     <div className="max-w-sm w-full lg:max-w-full border-2 border-[white] rounded-md bg-[white] py-4 px-2 sm:px-6">
                     {/* Paragraph */}
                         <p className="text-base text-center">
+
                         Pour trouver les meilleurs plans pour visiter les villes de la Tunisie, une seule adresse : TunisieBooking.com. Peu importe votre destination tunisienne, 
                         que ce soit l’ile de Djerba ou la capitale historique Tunis. Peut être aussi vous avez envie de passer par sa capitale économique Sfax et Tozeur,
                         un petit oasis paradisiaque situé à la porte du désert. TunisieBooking.com vous permet de voyager dans toutes les villes
@@ -91,6 +97,7 @@ const VolsPasCherPage = () => {
                         </div>
                     {/* Paragraph */}
                         <p className="text-base text-center">
+
                             Que vous soyez un voyageur aguerri ou occasionnel, vous êtes surement sans savoir que le prix d’un billet d’avion peut être ce qui coute le plus dans le devis. Il semble donc nécessaire de trouver un moyen afin de profiter d’un vol pas cher. Et ce n’est pas le genre de chose qui se fait au petit bonheur la chance.
                             Voici notamment quelques conditions pour y prétendre.
                         </p>
@@ -242,6 +249,9 @@ const VolsPasCherPage = () => {
                         </div>
                     </div>
                 </div>
+
+                <VolFooter />
+
             </div>
         </>
     );
