@@ -125,6 +125,7 @@ const VolsNouvelair = () => {
     return (
         <>
             <VolsNouvelairPage />
+
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{

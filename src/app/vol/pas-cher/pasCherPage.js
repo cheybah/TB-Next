@@ -8,13 +8,18 @@ import Header from "@/app/components/Header/Header";
 import Mosaic from "../components/Mosaic";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+
 import VolFooter from "../components/VolFooter";
+
 
 
 const VolsPasCherPage = () => {
 
     const [expandedSections, setExpandedSections] = useState({
         section1: false,
+
+        sections11: false,
+
         section2: false,
     });
 
@@ -36,6 +41,63 @@ const VolsPasCherPage = () => {
                     <div className="max-w-sm w-full lg:max-w-full border-2 border-[white] rounded-md bg-[white] py-4 px-2 sm:px-6">
                     {/* Paragraph */}
                         <p className="text-base text-center">
+
+                        Pour trouver les meilleurs plans pour visiter les villes de la Tunisie, une seule adresse : TunisieBooking.com. Peu importe votre destination tunisienne, 
+                        que ce soit l’ile de Djerba ou la capitale historique Tunis. Peut être aussi vous avez envie de passer par sa capitale économique Sfax et Tozeur,
+                        un petit oasis paradisiaque situé à la porte du désert. TunisieBooking.com vous permet de voyager dans toutes les villes
+                         tunisiennes et vous propose les meilleures offres.
+                        </p>
+                    {/* Second Paragraph and Toggling Content */}
+                        <div className={`overflow-hidden transition-all duration-300 text-base text-center ${expandedSections.section11 ? 'max-h-none' : 'max-h-[6rem]'}`}>
+                            <p className="text-center">              
+	                            Pour votre vol Tunisie, il vous suffit d’entrer toutes les informations requises par le site et valider.  Apres quoi, vous aurez automatiquement toutes les listes des vols disponibles : vol direct, vol low cost, vol charter ou encore vol régulier. Vous n’aurez plus qu’à choisir.
+                            </p>
+                            <h3 className="text-left text-lg font-semibold mt-4 text-center">  Offre spéciale vol Tunisie </h3>
+                            <p className="text-center">
+                                TunisieBooking  a pour but de rassembler en un seul site tous les vols Tunisie. Ce qui facilite énormément vos recherches de vol low cost Tunisie. Le principe est simple, nous vous proposons sur notre site  tous les vols adéquats à votre demande. Il ne vous reste donc qu’à comparer toutes les offres. Vous trouvez seulement en quelques minutes le vol qui correspond le mieux à votre budget.  Votre choix étant fait, nous vous conseillons de faire directement votre réservation sur TunisieBooking. La transaction pour l’achat du billet d’avion Tunisie est hautement sécurisée. Cela vous permet d’éviter toute perte de temps inutile.                             </p>
+                            <h3 className="text-left text-lg font-semibold mt-4 text-center">  Vol Tunisie : infos pratiques   </h3>
+                            <p className="text-center">
+                                La Tunisie est reliée régulièrement aux principales grandes villes du monde par un grand nombre de compagnies aériennes 
+                            </p>
+                            <h3 className="text-left text-lg font-semibold mt-4 text-center">  Billet d'avion Tunisie : Top compagnies aériennes :   </h3>
+                            <p className="text-center">
+                                Pour visiter la Tunisie, il est possible d’opter pour une compagnie régulière ou profiter d’une promo vol Tunisie proposée par les quelques compagnies low cost desservant les villes du pays. Pour visiter la Tunisie, il est possible d’opter pour une compagnie régulière ou profiter d’une promo vol Tunisie proposée par les quelques compagnies low cost desservant les villes du pays. 
+                            </p>
+
+                            <h4 className="text-left text-lg font-semibold mt-4 text-center">  Compagnies régulières  :  </h4>
+                            <p className="text-center">
+                                Pour visiter La Tunisie est reliée journalièrement à d’autres pays par des compagnies régulières telles qu’Air France,Tunisair,<a href="/vol/vols-Nouvelair/">Nouvelair</a>, Air Algeria, Turkish Airlines...   
+                            </p>
+                            <h4 className="text-left text-lg font-semibold mt-4 text-center"> Compagnies Low Cost   : </h4>
+                            <p className="text-center">
+                                Parmi les compagnies proposant un vol pas cher Tunisie qui relie les principales villes de la Tunisie au reste du monde, on peut citer : Transavia France, Vueling Airlines... 
+                            </p>
+                            <h4 className="text-left text-lg font-semibold mt-4 text-center"> Quand réserver votre billet d’avion Tunisie : </h4>
+                            <p className="text-center">
+                                Parmi les Il est vrai que trouver un vol Tunisie moins cher est parfaitement faisable tout au long de l’année. Cependant, il est conseillé d’opter pour la basse saison touristique pour effectuer son petit voyage puisque c’est durant ce temps qu’on y trouve très facilement un billet d’avion Tunisie moins cher.  
+                            </p>
+                            <h4 className="text-left text-lg font-semibold mt-4 text-center">   Durée du vol Tunisie :  </h4>
+                            <p className="text-center">
+                                Pour un départ dans une ville française, la durée moyenne d’un vol sans escale est de 2h30.    
+                            </p>
+                        </div>
+                         {/* Toggle Button */}
+                         <div className="flex justify-center mt-4">
+                            <button
+                                aria-label="Toggle content"
+                                onClick={() => toggleContent('section11')}
+                                className="text-[#003581] hover:no-underline flex items-center space-x-2"
+                            >
+                                <span>{expandedSections.section11 ? "Afficher moins" : "Afficher plus"}</span>
+                                <FontAwesomeIcon
+                                    icon={faChevronDown}
+                                    className={`transition-transform duration-300 ${expandedSections.section11 ? 'rotate-180' : 'rotate-0'}`}
+                                />
+                            </button>
+                        </div>
+                    {/* Paragraph */}
+                        <p className="text-base text-center">
+
                             Que vous soyez un voyageur aguerri ou occasionnel, vous êtes surement sans savoir que le prix d’un billet d’avion peut être ce qui coute le plus dans le devis. Il semble donc nécessaire de trouver un moyen afin de profiter d’un vol pas cher. Et ce n’est pas le genre de chose qui se fait au petit bonheur la chance.
                             Voici notamment quelques conditions pour y prétendre.
                         </p>
@@ -187,7 +249,9 @@ const VolsPasCherPage = () => {
                         </div>
                     </div>
                 </div>
+
                 <VolFooter />
+
             </div>
         </>
     );

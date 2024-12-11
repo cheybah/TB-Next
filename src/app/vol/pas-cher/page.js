@@ -31,6 +31,7 @@ const VolsPasCher = () => {
     return (
         <>
             <VolsPasCherPage />
+
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
