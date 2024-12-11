@@ -17,15 +17,14 @@ export default {
     },
     async additionalPaths() {
         const manualPaths = [
-            { loc: '/', lastmod: new Date().toISOString() }, 
-            { loc: '/voyage_organise/tcheque/', lastmod: new Date().toISOString() }, 
+            { loc: '/', lastmod: new Date().toISOString(), priority: 1.0, changefreq: 'daily' }, 
+            { loc: '/voyage_organise/tcheque/', lastmod: new Date().toISOString(), priority: 0.8, changefreq: 'weekly' }, 
         ];
         const hotelDetailPaths = await fetchHotelDetailPaths();
-        const regionPaths = await fetchRegionPaths(); // Fetch region paths
-        const destinationPaths = await fetchDestinationPaths(); // Fetch HotelDestination3Etoiles paths
+        const regionPaths = await fetchRegionPaths(); 
+        const destinationPaths = await fetchDestinationPaths(); 
 
-
-        return [ ...manualPaths, ...hotelDetailPaths, ...regionPaths, ...destinationPaths]; // Merge all paths, including manual ones
+        return [ ...manualPaths, ...hotelDetailPaths, ...regionPaths, ...destinationPaths];
     },
 };
 
@@ -57,6 +56,8 @@ async function fetchHotelDetailPaths() {
                     paths.push({
                         loc: `/detail_hotel_${id_hotel}/`,
                         lastmod: new Date().toISOString(),
+                        priority: 0.8, 
+                        changefreq: 'weekly',
                     });
                 }
             }
@@ -88,6 +89,8 @@ async function fetchRegionPaths() {
             paths.push({
                 loc: regionPath, 
                 lastmod: new Date().toISOString(), 
+                priority: 0.8, 
+                changefreq: 'weekly',
             });
         }
 
@@ -104,7 +107,7 @@ async function fetchDestinationPaths() {
         const response = await fetch('http://api.resabookings.com/api/api/api_hotel/api_destination_test.php');
         const data = await response.json();
 
-        if (!data.status || !data.regions) return []; // Return empty if no valid regions are found
+        if (!data.status || !data.regions) return [];
 
         const paths = [];
 
@@ -115,12 +118,14 @@ async function fetchDestinationPaths() {
 
             // Add the destination URL to paths
             paths.push({
-                loc: destinationPath, // Destination path like `/HotelDestination3Etoiles/Ain Draham`
-                lastmod: new Date().toISOString(), // Set the last modified date
+                loc: destinationPath, 
+                lastmod: new Date().toISOString(), 
+                priority: 0.8, 
+                changefreq: 'weekly',
             });
         }
 
-        return paths; // Return all destination paths
+        return paths; 
     } catch (error) {
         console.error('Error fetching destination paths:', error);
         return [];
