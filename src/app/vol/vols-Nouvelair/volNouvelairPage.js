@@ -8,6 +8,7 @@ import Header from "@/app/components/Header/Header";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import AccordionClient from "@/app/components/Accordion/AccordionClient";
+import VolFooter from "../components/VolFooter";
 
 
 
@@ -260,6 +261,7 @@ const VolsNouvelairPage = () => {
                         </div>
                     </div>
                 </div>
+                <VolFooter />
             </div>
         </>
     );

@@ -8,6 +8,7 @@ import Header from "@/app/components/Header/Header";
 import Mosaic from "../components/Mosaic";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import VolFooter from "../components/VolFooter";
 
 
 const VolsPasCherPage = () => {
@@ -186,6 +187,7 @@ const VolsPasCherPage = () => {
                         </div>
                     </div>
                 </div>
+                <VolFooter />
             </div>
         </>
     );
