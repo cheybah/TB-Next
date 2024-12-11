@@ -125,7 +125,6 @@ const VolsNouvelair = () => {
     return (
         <>
             <VolsNouvelairPage />
-            {/* JSON-LD Script for SEO */}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{

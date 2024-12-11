@@ -31,7 +31,6 @@ const VolsPasCher = () => {
     return (
         <>
             <VolsPasCherPage />
-            {/* JSON-LD Script for SEO */}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
