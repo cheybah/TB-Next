@@ -21,6 +21,9 @@ const AdTb = () => {
   return (
     <>
       <div className="hidden sm:block">
+      <p className=" items-center" style={{ marginLeft: '80px', marginRight: '80px' }}>
+      * : Les prix affichés ci-dessus étant les tarifs les moins chers de la saison. Veuillez noter svp que les prix varient selon les dates d’arrivée.
+          </p>
         {/* Header section */}
         <div className="flex items-center">
           <hr className="flex-grow border-t border-gray-500" />

@@ -103,7 +103,7 @@ const SearchBar = ({ listRegions = [] }) => {
             { icon: 'hotel.svg', label: 'Hotels Tunisie' , href: '/' }, 
             { icon: 'umrah.svg', label: 'Omra' }, 
             { icon: 'voyage-organisé.svg', label: 'Voyage Organisé', href: '/voyage_organise/tcheque' }, 
-            { icon: 'vols.svg', label: 'Vols' }, 
+            { icon: 'vols.svg', label: 'Vols', href: '/vol/pas-cher' }, 
             { icon: 'circuit.svg', label: 'Circuits' } 
           ].map((tab, index) => (
             <Link 

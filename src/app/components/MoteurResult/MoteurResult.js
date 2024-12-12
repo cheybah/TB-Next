@@ -102,7 +102,7 @@ const MoteurResult = ({ listRegions = [] }) => {
         <div className='flex justify-center mt-8 mb-8 md:mt-0 md:mb-0 lg:mt-16 lg:mb-0 mx-2'>
             <form>
                 <div className="div_form1 slider flex flex-wrap items-center justify-between max-w-screen-xl -mt-10 lg:-mt-0 md:-mt-72">
-                    <div className="px-6 w-full">
+                    <div className=" w-full">
                         <div className="w-full grid lg:-mt-20 md:-mt-14 md:grid-cols-4 ml-0 lg:ml-0 md:-ml-2 lg:pb-px md:pb-px">
                             {/* Destination */}
                             <div>
