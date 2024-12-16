@@ -67,10 +67,10 @@ const autresHotels = [
 ];
 
 const offresSpeciales = [
-{ name: "Early Booking", href: "#"},
+{ name: "Early Booking"},
 { name: "Hôtel avec Toboggan", href: "/hotel_avec_toboggan"},
-{ name: "Spécial Couple", href: "#"},
-{ name: "Spécial ÉTÉ", href: "#"},
+{ name: "Spécial Couple"},
+{ name: "Spécial ÉTÉ"},
 // Add more items as needed
 ];
 
