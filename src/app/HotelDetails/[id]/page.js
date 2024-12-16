@@ -66,7 +66,6 @@ const HotelsDetails = async ({ params }) => {
     console.log("all of cookies",cookies().getAll());
 
 
-    // JSON-LD structured data for SEO
     const faqJsonLd = {
         "microdata": null,
         "jsonld": [

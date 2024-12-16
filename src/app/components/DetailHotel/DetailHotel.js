@@ -12,21 +12,21 @@ import AccordionClient from '../Accordion/AccordionClient'; // Isolated Accordio
 import PresentationCard from "../Presentation/PresentationCard"; //Isolated Presentation component
 import MoteurResult from "../MoteurResult/MoteurResult";
 
-const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData=[] }) => {
+const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData = [] }) => {
     const listHotels = listsHotels?.Hotels_hors_promo || [];  // Ensure this property exists in your data
     const listregionsData = regionsData;  // Fetch the data using ville
     console.log(hotelsTripadData); // Check the actual structure of hotelsTripadData
-//const listhotelTripadData = hotelsTripadData?.Hotels || [];
-const listhotelTripadData = [hotelsTripadData];
-console.log(listhotelTripadData);
+    //const listhotelTripadData = hotelsTripadData?.Hotels || [];
+    const listhotelTripadData = [hotelsTripadData];
+    console.log(listhotelTripadData);
 
     const data = [
         { label: "Photos", value: "photos" },
         { label: "Présentation", value: "presentation", id: "presentation" },
         { label: "Equipements", value: "equipement", id: "equipement" },
         { label: "Avis", value: "avis", id: "avis" },
-       ];
-       const scrollToSection = (id) => {
+    ];
+    const scrollToSection = (id) => {
         console.log("Scrolling to section:", id);
         const section = document.getElementById(id);
         if (section) {
@@ -34,7 +34,7 @@ console.log(listhotelTripadData);
         }
     };
     return (
-        <div >  
+        <div >
             {listHotels.length > 0 ? (
                 listHotels.map((hotel, index) => (
                     <main className="flex-grow" key={index}>
@@ -82,24 +82,24 @@ console.log(listhotelTripadData);
                                                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                                                     </svg>
                                                 ))}
-                                                
+
                                             </div>
                                             <div className='flex items-center space-x-2 text-md md:text-xl'>
-                                            {listhotelTripadData.map((notehotel, index) => (
+                                                {listhotelTripadData.map((notehotel, index) => (
 
 
-                                                <span className="text-lg flex" key={index}>
+                                                    <span className="text-lg flex" key={index}>
 
-                                                <img src="/icon_tripadvisor.svg" style={{ marginRight: "5px" }}></img> {notehotel.note_tripad} / 5{" "}
-                                                <span className="font-bold" style={{ marginLeft: "5px" }}>{notehotel.text_tripad}</span>
-                                            </span>
-                                            ))}
+                                                        <img src="/icon_tripadvisor.svg" style={{ marginRight: "5px" }}></img> {notehotel.note_tripad} / 5{" "}
+                                                        <span className="font-bold" style={{ marginLeft: "5px" }}>{notehotel.text_tripad}</span>
+                                                    </span>
+                                                ))}
                                             </div>
-                                           
+
 
                                         </div>
                                         <div className="flex items center">
-                                            <FontAwesomeIcon icon={faLocationDot} fixedWidth  style={{ marginTop: "7px", color: "#7E8389" }} />
+                                            <FontAwesomeIcon icon={faLocationDot} fixedWidth style={{ marginTop: "7px", color: "#7E8389" }} />
                                             <p className="mt-2 text-sm text-zinc-600" style={{ marginLeft: "7px", color: "#7E8389" }}>{hotel.zone},{hotel.region}</p> {/* Add a subtitle */}
                                         </div>
                                         <div className="absolute inset-0 flex flex-col justify-center items-center">
@@ -108,9 +108,9 @@ console.log(listhotelTripadData);
                                             <Tabs value="photos" className="overflow-x-auto">
                                                 <TabsHeader className="flex space-x-2 overflow-x-auto scrollbar-hide whitespace-nowrap">
                                                     {data.map(({ label, value, id }) => (
-                                                        <Tab 
-                                                            key={value} 
-                                                            value={value} 
+                                                        <Tab
+                                                            key={value}
+                                                            value={value}
                                                             onClick={() => scrollToSection(id)}
                                                             className="py-2 px-4 text-sm md:text-base rounded-md hover:bg-gray-200 cursor-pointer"
                                                         >
@@ -122,13 +122,13 @@ console.log(listhotelTripadData);
                                         </div>
 
                                         <div className="flex flex-col md:flex-row w-full">
-                                            <img 
-                                                src={hotel.images?.image_principal} 
-                                                alt={`Image principale de ${hotel.libelle_hotel}`} 
-                                                className="w-full md:w-2/3 h-auto rounded-lg mt-4 md:mt-5" 
+                                            <img
+                                                src={hotel.images?.image_principal}
+                                                alt={`Image principale de ${hotel.libelle_hotel}`}
+                                                className="w-full md:w-2/3 h-auto rounded-lg mt-4 md:mt-5"
                                             />
-                                            <div className="w-full md:w-1/3 px-4 text-center mt-4 md:mt-0">
-                                                <div className="flex space-x-4 justify-center md:justify-start">
+<div className="w-full md:w-1/3 md:px-4 text-center mt-4 md:mt-0">
+<div className="flex space-x-4 justify-center md:justify-start">
                                                     <img src="/avis.svg" alt="Avis" />
                                                     <div className="text-xl font-medium">Avis Voyageurs</div>
                                                 </div>
@@ -139,7 +139,7 @@ console.log(listhotelTripadData);
                                                     <FontAwesomeIcon icon={faQuoteRight} className="ml-2" />
                                                     <div><a href="#">Lire tous les avis</a></div>
                                                 </div>
-                                                <div className="text-xl font-medium text-left">Principales Services</div>
+                                                <div className="text-xl font-medium mb-2">Principales Services</div>
                                                 <div className="relative">
                                                     {hotel.services && Object.keys(hotel.services).length > 0 ? (
                                                         Object.entries(hotel.services)
@@ -182,32 +182,32 @@ console.log(listhotelTripadData);
                                         </div>
 
                                     </div>
-                                    <MoteurResult listRegions={regionsData} />               
+                                    <MoteurResult listRegions={regionsData} />
                                 </div>
                                 {/*this is the presentation card*/}
                                 <PresentationCard />
 
-                                 {/* Equipements Section */}
+                                {/* Equipements Section */}
                                 <section id="equipement">
-                                    <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6">
+                                    <div className="max-w-6xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-lg mt-6">
                                         <div className="relative overflow-hidden rounded-lg">
                                             <div className="text-left mt-4">
-                                                <div className="text-2xl font-bold">Equipements</div>
-                                                <div className="w-[5rem] h-[4px] bg-black mt-2"></div>
+                                                <div className="text-xl sm:text-2xl font-bold">Equipements</div>
+                                                <div className="w-20 sm:w-[5rem] h-[4px] bg-black mt-2"></div>
 
-                                                <div className="space-y-8 mt-4">
+                                                <div className="space-y-6 sm:space-y-8 mt-4">
                                                     {/* Section: Chambres */}
-                                                    <div className="grid grid-cols-12 items-start gap-4">
+                                                    <div className="grid grid-cols-1 sm:grid-cols-12 items-start gap-4">
                                                         {/* Icon and Vertical Separator */}
-                                                        <div className="col-span-1 flex justify-center">
-                                                            <img src="/chambre.svg" className="h-8 w-8" alt="Icon" />
+                                                        <div className="sm:col-span-1 flex justify-center">
+                                                            <img src="/chambre.svg" className="h-6 w-6 sm:h-8 sm:w-8" alt="Chambres Icon" />
                                                         </div>
-                                                        <div className="w-[2px] bg-gray-500 h-full self-stretch"></div>
+                                                        <div className="hidden sm:block w-[2px] bg-gray-500 h-full"></div>
 
                                                         {/* Title and Items */}
-                                                        <div className="col-span-10">
-                                                            <div className="text-xl font-semibold mb-3">Chambres</div>
-                                                            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                                                        <div className="sm:col-span-10">
+                                                            <div className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Chambres</div>
+                                                            <ul className="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-2">
                                                                 <li className="flex items-center">
                                                                     <FontAwesomeIcon icon={faCheck} className="text-black mr-2 w-4 h-4" />
                                                                     Chauffage
@@ -226,21 +226,20 @@ console.log(listhotelTripadData);
                                                                 </li>
                                                             </ul>
                                                         </div>
-
                                                     </div>
 
-                                                    <div className="w-full h-[2px] bg-gray-500 mt-4"></div>
+                                                    <div className="w-full h-[1px] bg-gray-300 sm:h-[2px] mt-4"></div>
 
                                                     {/* Section: Internet */}
-                                                    <div className="grid grid-cols-12 items-start gap-4">
-                                                        <div className="col-span-1 flex justify-center">
-                                                            <img src="/wifi.svg" className="h-8 w-8" alt="Icon" />
+                                                    <div className="grid grid-cols-1 sm:grid-cols-12 items-start gap-4">
+                                                        <div className="sm:col-span-1 flex justify-center">
+                                                            <img src="/wifi.svg" className="h-6 w-6 sm:h-8 sm:w-8" alt="Internet Icon" />
                                                         </div>
-                                                        <div className="w-[2px] bg-gray-500 h-full"></div>
+                                                        <div className="hidden sm:block w-[2px] bg-gray-500 h-full"></div>
 
-                                                        <div className="col-span-10">
-                                                            <div className="text-xl font-semibold mb-2">Internet</div>
-                                                            <ul className="grid grid-cols-3 gap-x-8 gap-y-2">
+                                                        <div className="sm:col-span-10">
+                                                            <div className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Internet</div>
+                                                            <ul className="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-2">
                                                                 <li className="flex items-center">
                                                                     <FontAwesomeIcon icon={faCheck} className="text-black mr-2 w-4 h-4" />
                                                                     Wi-Fi gratuit
@@ -254,45 +253,55 @@ console.log(listhotelTripadData);
                                     </div>
                                 </section>
                                 {/*this is the start of the mesures securités card*/}
-                                <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6">
+                                <div className="max-w-6xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-lg mt-6">
                                     <div className="relative overflow-hidden rounded-lg">
-                                        <div className="flex items-center justify-between">
+                                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                                             <div className="text-left mt-4">
-                                                <div className="text-2xl font-bold">Mesures de sécurité et de santé</div>
-                                                <div className="w-[5rem] h-[4px] bg-black mt-2"></div>
-                                                <p className="mt-4">Cet établissement a renforcé les mesures de santé et d&apos;hygiène pour garantir votre sécurité tout au long de votre séjour.</p>
-                                                {/* Two Column Grid Layout */}
-                                                <div className="grid grid-cols-2 gap-8 mt-6">
+                                                <div className="text-xl sm:text-2xl font-bold">Mesures de sécurité et de santé</div>
+                                                <div className="w-20 sm:w-[5rem] h-[4px] bg-black mt-2"></div>
+                                                <p className="mt-4 text-sm sm:text-base">
+                                                    Cet établissement a renforcé les mesures de santé et d&apos;hygiène pour garantir votre sécurité tout au long de votre séjour.
+                                                </p>
+                                                {/* Responsive Grid Layout */}
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 mt-6">
                                                     <div>
-                                                        <div className="flex">
-                                                            <img src="/mesures1.svg" className="mr-2"></img>
-                                                            <h3 className="text-lg font-semibold">Mesures de sécurité en vigueur</h3>
+                                                        <div className="flex items-start">
+                                                            <img src="/mesures1.svg" className="mr-2 h-6 w-6 sm:h-8 sm:w-8" alt="Mesures Icon 1" />
+                                                            <h3 className="text-base sm:text-lg font-semibold">Mesures de sécurité en vigueur</h3>
                                                         </div>
-                                                        <ul className="mt-4 space-y-2">
+                                                        <ul className="mt-4 space-y-3">
                                                             <li className="flex items-start">
-                                                                <FontAwesomeIcon icon={faCheck} className="text-green-500 mr-2 mt-1" />
-                                                                Le personnel respecte les protocoles de sécurité établis par les autorités locales.
+                                                                <FontAwesomeIcon icon={faCheck} className="text-green-500 mr-2 w-4 h-4 mt-1" />
+                                                                <span className="text-sm sm:text-base">
+                                                                    Le personnel respecte les protocoles de sécurité établis par les autorités locales.
+                                                                </span>
                                                             </li>
                                                             <li className="flex items-start">
-                                                                <FontAwesomeIcon icon={faCheck} className="text-green-500 mr-2 mt-1" />
-                                                                Les accessoires partagés tels que: les magazines, les menus, le papier et les stylos ont été retirés.
+                                                                <FontAwesomeIcon icon={faCheck} className="text-green-500 mr-2 w-4 h-4 mt-1" />
+                                                                <span className="text-sm sm:text-base">
+                                                                    Les accessoires partagés tels que: les magazines, les menus, le papier et les stylos ont été retirés.
+                                                                </span>
                                                             </li>
                                                         </ul>
                                                     </div>
 
                                                     <div>
-                                                        <div className="flex">
-                                                            <img src="/mesures2.svg" className="mr-2"></img>
-                                                            <h3 className="text-lg font-semibold">Autres mesures</h3>
+                                                        <div className="flex items-start">
+                                                            <img src="/mesures2.svg" className="mr-2 h-6 w-6 sm:h-8 sm:w-8" alt="Mesures Icon 2" />
+                                                            <h3 className="text-base sm:text-lg font-semibold">Autres mesures</h3>
                                                         </div>
-                                                        <ul className="mt-4 space-y-2">
+                                                        <ul className="mt-4 space-y-3">
                                                             <li className="flex items-start">
-                                                                <FontAwesomeIcon icon={faCheck} className="text-green-500 mr-2 mt-1" />
-                                                                Nettoyage renforcé et désinfection des surfaces de contact.
+                                                                <FontAwesomeIcon icon={faCheck} className="text-green-500 mr-2 w-4 h-4 mt-1" />
+                                                                <span className="text-sm sm:text-base">
+                                                                    Nettoyage renforcé et désinfection des surfaces de contact.
+                                                                </span>
                                                             </li>
                                                             <li className="flex items-start">
-                                                                <FontAwesomeIcon icon={faCheck} className="text-green-500 mr-2 mt-1" />
-                                                                Mise à disposition de gel hydroalcoolique aux endroits clés.
+                                                                <FontAwesomeIcon icon={faCheck} className="text-green-500 mr-2 w-4 h-4 mt-1" />
+                                                                <span className="text-sm sm:text-base">
+                                                                    Mise à disposition de gel hydroalcoolique aux endroits clés.
+                                                                </span>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -302,68 +311,75 @@ console.log(listhotelTripadData);
                                     </div>
                                 </div>
                                 {/*this is the start of the avis card*/}
-                                <section id="avis" className="">
-                                    <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-lg mt-6 p-4 sm:p-6">
+                                <section id="avis">
+                                    <div className="max-w-6xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-lg mt-6">
                                         <div className="relative overflow-hidden rounded-lg">
-                                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
-                                                <div className="w-full sm:w-auto text-left mt-4">
-                                                    <div className="text-2xl font-bold">{hotel.libelle_hotel} Avis</div>
-                                                    <div className="w-[5rem] h-[4px] bg-black mt-2"></div>
-                                                </div>
-                                            </div>
-                                            <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                                                {/* Avatar and Info Section */}
-                                                <div className="flex gap-4 items-start">
-                                                    <Avatar src="/no-avatar.png" alt="avatar" className="w-12 h-12 sm:w-16 sm:h-16" />
-                                                    <div className="flex flex-col justify-start">
-                                                        <Typography variant="h6">Foulen Fouleni</Typography>
-                                                        <Typography variant="small" color="gray" className="font-normal">
-                                                            Client TunisieBooking
-                                                        </Typography>
-                                                    </div>
-                                                </div>
-                                                {/* Feedback Section */}
-                                                <div className="w-full sm:w-2/3 bg-[#F4F5F7] p-4 rounded-lg flex flex-col">
-                                                    <div className="flex flex-col sm:flex-row items-start sm:items-center mb-2">
-                                                        <h4 className="text-lg font-semibold">Good</h4>
-                                                        <div className="flex ml-0 sm:ml-4">
-                                                            {/* Rating Circles */}
-                                                            {Array.from({ length: 5 }).map((_, index) => (
-                                                                <svg
-                                                                    key={index}
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    className="h-4 w-4 mx-0.5"
-                                                                    fill={index < 3 ? "currentColor" : "none"}
-                                                                    viewBox="0 0 24 24"
-                                                                    stroke="currentColor"
-                                                                >
-                                                                    <circle
-                                                                        cx="12"
-                                                                        cy="12"
-                                                                        r="10"
-                                                                        className={`border-2 ${index < 3 ? 'bg-blue-500' : 'border-gray-400'}`}
-                                                                    />
-                                                                </svg>
-                                                            ))}
+                                            <div className="text-left mt-4">
+                                                <div className="text-xl sm:text-2xl font-bold">{hotel.name} Avis</div>
+                                                <div className="w-20 sm:w-[5rem] h-[4px] bg-black mt-2"></div>
+
+                                                {/* Container for User Info and Feedback */}
+                                                <div className="flex flex-col sm:flex-row sm:items-start gap-2 mt-4 text-center sm:text-left">
+                                                    {/* User Info Section */}
+                                                    <div className="flex flex-col gap-4 items-center sm:flex-row sm:items-start">
+                                                        {/* Avatar */}
+                                                        <Avatar src="/no-avatar.png" alt="avatar" className="w-12 h-12 sm:w-16 sm:h-16" />
+                                                        {/* User Info */}
+                                                        <div className="flex flex-col items-center sm:items-start">
+                                                            <Typography variant="h6" className="text-sm sm:text-base">
+                                                                Foulen Fouleni
+                                                            </Typography>
+                                                            <Typography variant="small" color="gray" className="font-normal text-xs sm:text-sm">
+                                                                Client TunisieBooking
+                                                            </Typography>
                                                         </div>
                                                     </div>
-                                                    <p className="text-sm sm:text-base">
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                                                        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum.
-                                                    </p>
+
+                                                    {/* Feedback Card */}
+                                                    <div className="bg-[#F4F5F7] p-4 rounded-lg w-full sm:w-2/3 sm:ml-[5%]">
+                                                        <div className="flex flex-col sm:flex-row items-center sm:items-start mb-2">
+                                                            {/* Feedback Title */}
+                                                            <h4 className="text-base sm:text-lg font-semibold">Good</h4>
+                                                            {/* Rating Circles */}
+                                                            <div className="flex mt-2 sm:mt-0 sm:ml-4">
+                                                                {Array.from({ length: 5 }).map((_, index) => (
+                                                                    <svg
+                                                                        key={index}
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        className="h-4 w-4 mx-1"
+                                                                        fill={index < 3 ? "currentColor" : "none"}
+                                                                        viewBox="0 0 24 24"
+                                                                        stroke="currentColor"
+                                                                    >
+                                                                        <circle
+                                                                            cx="12"
+                                                                            cy="12"
+                                                                            r="10"
+                                                                            className={`border-2 ${index < 3 ? "bg-blue-500" : "border-gray-400"}`}
+                                                                        />
+                                                                    </svg>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                        {/* Feedback Text */}
+                                                        <p className="text-sm sm:text-base leading-relaxed">
+                                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi
+                                                            repudiandae consequuntur voluptatum laborum.
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </section>
 
-                                 {/*this is the start of the questions card*/}
+                                {/*this is the start of the questions card*/}
                                 <section>
-                                    <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6">
-                                        <div className="relative overflow-hidden rounded-lg">
+                                <div className="max-w-6xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-lg mt-6">
+                                <div className="relative overflow-hidden rounded-lg">
                                             <div className="flex items-center justify-between">
                                                 <div className="text-left mt-4">
-                                                    <div className="text-2xl font-bold">Les Questions les plus fréquentes sur {hotel.libelle_hotel}</div>
+                                                    <div className="text-xl sm:text-2xl font-bold">Les Questions les plus fréquentes sur {hotel.libelle_hotel}</div>
                                                     <div className="w-[5rem] h-[4px] bg-black mt-2"></div>
                                                     <AccordionClient
                                                         title={`Quels sont les équipements de l'établissement ${hotel.libelle_hotel} ?`}
@@ -379,14 +395,13 @@ console.log(listhotelTripadData);
                                             </div>
                                         </div>
                                     </div>
-                                </section>                                           
+                                </section>
                                 {/*this is the start of the prix card*/}
-                                 {/*this is the start of the prix card*/}
                                 <section>
-                                    <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6">
+                                <div className="max-w-6xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-lg mt-6">
                                         <div className="relative overflow-hidden rounded-lg">
                                             <div className="text-left mt-4">
-                                                <div className="text-2xl font-bold">Avantages Prix {hotel.libelle_hotel}</div>
+                                                <div className="text-xl sm:text-2xl font-bold">Avantages Prix {hotel.libelle_hotel}</div>
                                                 <div className="w-[5rem] h-[4px] bg-black mt-2"></div>
                                                 <div className="mt-4 space-y-4"> {/* Space between list items */}
 
@@ -440,14 +455,14 @@ console.log(listhotelTripadData);
                                         <div className="w-full max-w-sm bg-white m-2 md:m-4 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                                             <a href="#">
                                                 <img loading="lazy" className="rounded-t-lg"
-                                                src="https://image.resabooking.com/images/image_panoramique/Aziza_Thalasso_&_Golf_2.jpg"
-                                                alt="hotel aziza thalasso et golf" />
+                                                    src="https://image.resabooking.com/images/image_panoramique/Aziza_Thalasso_&_Golf_2.jpg"
+                                                    alt="hotel aziza thalasso et golf" />
                                             </a>
                                             <div className="px-5 pb-5">
                                                 <a  >
                                                     <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                                                         Aziza Thalasso & Golf </h5>
-                                                </a>   
+                                                </a>
                                                 <div className="flex justify-between">
                                                     <div>
                                                         <div className="flex items-center mt-2.5 mb-5">
@@ -476,7 +491,7 @@ console.log(listhotelTripadData);
                                                         </div>
                                                         <span className="text-xs text-gerytnb">prix du 02/11/24</span>
                                                     </div>
-                                                </div>                     
+                                                </div>
                                             </div>
                                         </div>
 
@@ -489,7 +504,7 @@ console.log(listhotelTripadData);
                                             <div className="px-5 pb-5">
                                                 <a >
                                                     <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                                                        El Mouradi El Menzah 
+                                                        El Mouradi El Menzah
                                                     </h5>
                                                 </a>
                                                 <div className="flex justify-between">
@@ -526,9 +541,9 @@ console.log(listhotelTripadData);
                                         <div className="w-full max-w-sm bg-white md:m-4 m-2 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                                             <a href="#">
                                                 <img loading="lazy" className="rounded-t-lg"
-                                                src="https://image.resabooking.com/images/image_panoramique/Orient_Palace_&_Spa_2.jpg"
-                                                alt="hotel orient palace et spa" />
-                                            </a>      
+                                                    src="https://image.resabooking.com/images/image_panoramique/Orient_Palace_&_Spa_2.jpg"
+                                                    alt="hotel orient palace et spa" />
+                                            </a>
                                             <div className="px-5 pb-5">
                                                 <a>
                                                     <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
@@ -543,11 +558,11 @@ console.log(listhotelTripadData);
                                                                     alt="les hotles 4 etoiles a sousse" />
                                                             </div>
                                                         </div>
-                                                        <div className="flex items-center mt-2.5 mb-5">    
+                                                        <div className="flex items-center mt-2.5 mb-5">
                                                             <img loading="lazy" src="https://tn.tunisiebooking.com/images/localisation.svg"
-                                                            className="h-4" alt="ville sousse" />
+                                                                className="h-4" alt="ville sousse" />
                                                             <span className="text-gerytnb mx-2 text-sm">
-                                                             Sousse
+                                                                Sousse
                                                             </span>
                                                         </div>
                                                     </div>
@@ -564,17 +579,17 @@ console.log(listhotelTripadData);
                                                         <span className="text-xs text-gerytnb">prix du 11/11/24</span>
                                                     </div>
                                                 </div>
-                                            </div>                         
+                                            </div>
                                         </div>
 
                                     </div>
                                 </div>
 
-                                
+
                             </div>
                         </section>
                     </main>
-                    
+
                 ))
             ) : (
                 <p>Aucun hôtel disponible.</p>
