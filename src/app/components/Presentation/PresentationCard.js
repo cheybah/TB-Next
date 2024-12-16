@@ -12,14 +12,14 @@ const PresentationCard = () => {
 
     return (
         <section id="presentation">
-            <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6">
+            <div className="max-w-6xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-lg mt-6">
                 <div className="relative overflow-hidden rounded-lg">
                     <div className="flex items-center justify-between">
                         <div className="text-left mt-4">
-                            <div className="text-2xl font-bold">Présentation</div>
+                            <div className="text-xl sm:text-2xl font-bold">Présentation</div>
                             <div className="w-[5rem] h-[4px] bg-black mt-2"></div>
                             <h3 className="text-left text-lg font-semibold mt-4">Infos Pratiques :</h3>
-                            
+
                             <div className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-none' : 'max-h-[6rem]'}`}>
                                 <p>
                                     Pour découvrir et profiter à bon escient de tous les vestiges de Tunis, Vous devez choisir une ville où vous allez axer votre voyage de luxe.
@@ -75,7 +75,7 @@ const PresentationCard = () => {
                                     </p>
                                 </div>
                             </div>
-                            
+
                             <button
                                 aria-label="Toggle content"
                                 onClick={toggleContent}
