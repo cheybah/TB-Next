@@ -66,12 +66,13 @@ const autresHotels = [
     { name: "Hotel El Jem", region: "El Jem" },
 ];
 
+
 const offresSpeciales = [
-    { name: "Early Booking" },
-    { name: "Hôtel avec Toboggan", href: "/hotel_avec_toboggan" },
-    { name: "Spécial Couple" },
-    { name: "Spécial ÉTÉ" },
-    // Add more items as needed
+{ name: "Early Booking"},
+{ name: "Hôtel avec Toboggan", href: "/hotel_avec_toboggan"},
+{ name: "Spécial Couple"},
+{ name: "Spécial ÉTÉ"},
+// Add more items as needed
 ];
 
 

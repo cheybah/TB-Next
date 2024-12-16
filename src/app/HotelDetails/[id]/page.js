@@ -63,6 +63,9 @@ const HotelsDetails = async ({ params }) => {
     const hotelLocation = hotelLocationCookie?.value || "Détails de l'hôtel";
     const { regionsData, hotelData, hotelTripadData } = await fetchData(id, ville, datedep, dateret);
 
+    console.log("all of cookies",cookies().getAll());
+
+
     const faqJsonLd = {
         "microdata": null,
         "jsonld": [
