@@ -150,9 +150,13 @@ const SearchBar = ({ listRegions = [] }) => {
            {/* Date Range Picker */}
         <div>
           <div className="relative mt-1">
-            <span onClick={() => setOpenDate(!openDate)} className="HeaderSearchText">
-              {`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(date[0].endDate, "dd/MM/yyyy")}`}
-            </span>
+          <FontAwesomeIcon
+                icon={faCalendar}
+                className="absolute top-1/2 left-2 -translate-y-1/2 text-gray-500"
+              />
+              <span onClick={() => setOpenDate(!openDate)} className="HeaderSearchText">
+                {`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(date[0].endDate, "dd/MM/yyyy")}`}
+              </span>
 
             {openDate && (
               <div className="absolute z-20 mt-1 bg-white border border-gray-300 shadow-lg" style={{ width: 'auto' }}> {/* Added margin-left and adjusted width */}
