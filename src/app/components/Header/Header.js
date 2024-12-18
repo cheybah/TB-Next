@@ -68,11 +68,11 @@ const autresHotels = [
 
 
 const offresSpeciales = [
-{ name: "Early Booking"},
-{ name: "Hôtel avec Toboggan", href: "/hotel_avec_toboggan"},
-{ name: "Spécial Couple"},
-{ name: "Spécial ÉTÉ"},
-// Add more items as needed
+    { name: "Early Booking" },
+    { name: "Hôtel avec Toboggan", href: "/hotel_avec_toboggan" },
+    { name: "Spécial Couple" },
+    { name: "Spécial ÉTÉ" },
+    // Add more items as needed
 ];
 
 
@@ -131,7 +131,7 @@ export default function Header() {
                                                 <a
                                                     key={item.region}
                                                     href={`/hotels_${encodeURIComponent(item.region)}`}
-                                                    onClick={() => handleSetCookie(item.region)} // Utilisation de js-cookie
+                                                    onClick={() => handleSetCookie(item.region)}
                                                     className="block font-normal text-gray-900">
                                                     {item.name}
                                                     <span className="absolute inset-0" />
@@ -232,7 +232,7 @@ export default function Header() {
                 <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                     <div className="flex items-center justify-between">
                         <a href="#" className="-m-1.5 p-1.5">
-                            <span className="sr-only">Your Company</span>
+                            <span className="sr-only">TunisieBooking</span>
                             <img
                                 alt="Tunisiebooking logo"
                                 src="/logo-TunisieBooking1.svg"
@@ -253,23 +253,86 @@ export default function Header() {
                         <div className="-my-6 divide-y divide-gray-500/10">
                             <div className="space-y-2 py-6">
                                 <Disclosure as="div" className="-mx-3">
-                                    <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                                    <Disclosure.Button className="group flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                                         Hôtels Tunisie
-                                        <ChevronDownIcon aria-hidden="true" className="h-5 w-5 flex-none group-data-[open]:rotate-180" />
-                                    </DisclosureButton>
-                                    <DisclosurePanel className="mt-2 space-y-2">
-                                        {[...topDestinations].map((item) => (
-                                            <DisclosureButton
-                                                key={item.name}
-                                                as="a"
-                                                href={item.href}
-                                                className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                            >
-                                                {item.name}
-                                            </DisclosureButton>
-                                        ))}
-                                    </DisclosurePanel>
+                                        <ChevronDownIcon
+                                            aria-hidden="true"
+                                            className="h-5 w-5 flex-none group-data-[open]:rotate-180"
+                                        />
+                                    </Disclosure.Button>
+                                    <Disclosure.Panel className="mt-2 space-y-2">
+                                        {/* Nested Disclosure for Top Destinations */}
+                                        <Disclosure as="div" className="ml-[15px]">
+                                            <Disclosure.Button className="group flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-sm font-semibold leading-7 text-gray-700 hover:bg-gray-50">
+                                                Top Destinations
+                                                <ChevronDownIcon
+                                                    aria-hidden="true"
+                                                    className="h-5 w-5 flex-none group-data-[open]:rotate-180"
+                                                />
+                                            </Disclosure.Button>
+                                            <Disclosure.Panel className="mt-2 space-y-2">
+                                                {[...topDestinations].map((item) => (
+                                                    <a
+                                                        key={item.region}
+                                                        href={`/hotels_${encodeURIComponent(item.region)}`}
+                                                        onClick={() => handleSetCookie(item.region)}
+                                                        className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                                    >
+                                                        {item.name}
+                                                    </a>
+                                                ))}
+                                            </Disclosure.Panel>
+                                        </Disclosure>
+
+                                        {/* Nested Disclosure for Autres */}
+                                        <Disclosure as="div" className="ml-[15px]">
+                                            <Disclosure.Button className="group flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-sm font-semibold leading-7 text-gray-700 hover:bg-gray-50">
+                                                Autres Hôtels Tunisie
+                                                <ChevronDownIcon
+                                                    aria-hidden="true"
+                                                    className="h-5 w-5 flex-none group-data-[open]:rotate-180"
+                                                />
+                                            </Disclosure.Button>
+                                            <Disclosure.Panel className="mt-2 space-y-2">
+                                                {/* Add your items here */}
+                                                {[...autresHotels].map((item) => (
+                                                    <a
+                                                        key={item.name}
+                                                        href={`/hotels_${encodeURIComponent(item.name.replace(/\s+/g, '_'))}`}
+                                                        onClick={() => handleSetCookie(item.name)}
+                                                        className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                                    >
+                                                        {item.name}
+                                                    </a>
+                                                ))}                                            </Disclosure.Panel>
+                                        </Disclosure>
+
+                                        {/* Nested Disclosure for Nos Offres Spéciales */}
+                                        <Disclosure as="div" className="ml-[15px]">
+                                            <Disclosure.Button className="group flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-sm font-semibold leading-7 text-gray-700 hover:bg-gray-50">
+                                                Nos Offres Spéciales
+                                                <ChevronDownIcon
+                                                    aria-hidden="true"
+                                                    className="h-5 w-5 flex-none group-data-[open]:rotate-180"
+                                                />
+                                            </Disclosure.Button>
+                                            <Disclosure.Panel className="mt-2 space-y-2">
+                                                {/* Add your items here */}
+                                                {[...offresSpeciales].map((item) => (
+                                                    <a
+                                                        key={item.name}
+                                                        href={item.href} onClick={() => handleSetCookie(item.name)}
+                                                        className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                                    >
+                                                        {item.name}
+                                                    </a>
+                                                ))}
+                                            </Disclosure.Panel>
+                                        </Disclosure>
+                                    </Disclosure.Panel>
                                 </Disclosure>
+
+
                                 <Disclosure as="div" className="-mx-3">
                                     <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                                         Voyages Organisés
@@ -288,12 +351,6 @@ export default function Header() {
                                         ))}
                                     </DisclosurePanel>
                                 </Disclosure>
-                                <a
-                                    href="#"
-                                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                >
-                                    Demande de Groupe
-                                </a>
                             </div>
                             <div className="py-6">
                                 <a
