@@ -127,8 +127,8 @@ const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData = []
                                                 alt={`Image principale de ${hotel.libelle_hotel}`}
                                                 className="w-full md:w-2/3 h-auto rounded-lg mt-4 md:mt-5"
                                             />
-<div className="w-full md:w-1/3 md:px-4 text-center mt-4 md:mt-0">
-<div className="flex space-x-4 justify-center md:justify-start">
+                                            <div className="w-full md:w-1/3 md:px-4 text-center mt-4 md:mt-0">
+                                                <div className="flex space-x-4 justify-center md:justify-start">
                                                     <img src="/avis.svg" alt="Avis" />
                                                     <div className="text-xl font-medium">Avis Voyageurs</div>
                                                 </div>
@@ -375,8 +375,8 @@ const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData = []
 
                                 {/*this is the start of the questions card*/}
                                 <section>
-                                <div className="max-w-6xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-lg mt-6">
-                                <div className="relative overflow-hidden rounded-lg">
+                                    <div className="max-w-6xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-lg mt-6">
+                                        <div className="relative overflow-hidden rounded-lg">
                                             <div className="flex items-center justify-between">
                                                 <div className="text-left mt-4">
                                                     <div className="text-xl sm:text-2xl font-bold">Les Questions les plus fréquentes sur {hotel.libelle_hotel}</div>
@@ -398,7 +398,7 @@ const DetailHotel = ({ listsHotels = [], regionsData = [], hotelsTripadData = []
                                 </section>
                                 {/*this is the start of the prix card*/}
                                 <section>
-                                <div className="max-w-6xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-lg mt-6">
+                                    <div className="max-w-6xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-lg mt-6">
                                         <div className="relative overflow-hidden rounded-lg">
                                             <div className="text-left mt-4">
                                                 <div className="text-xl sm:text-2xl font-bold">Avantages Prix {hotel.libelle_hotel}</div>
