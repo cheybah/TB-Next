@@ -52,7 +52,7 @@ const AdTb = () => {
           <AccordionHeader onClick={() => handleOpen(1)}>
             Pourquoi réserver vos vacances chez TunisieBooking ?
           </AccordionHeader>
-          <AccordionBody>
+          <AccordionBody style={{ textAlign: "left", "!important": "" }}>
             Avec la révolution internet, il est devenu très facile de faire la
             réservation de son voyage devant son écran d’ordinateur ou de son
             Smartphone. <br />
@@ -68,7 +68,7 @@ const AdTb = () => {
           <AccordionHeader onClick={() => handleOpen(2)}>
             Pourquoi choisir une agence de voyage ?
           </AccordionHeader>
-          <AccordionBody>
+          <AccordionBody style={{ textAlign: "left", "!important": "" }}>
             Un des principaux avantages non négligeables de choisir une agence de
             voyage pour réserver ses vacances c’est le professionnalisme et
             l’expérience de celle-ci. <br />
@@ -85,7 +85,7 @@ const AdTb = () => {
           <AccordionHeader onClick={() => handleOpen(3)}>
             Pourquoi choisir notre agence de voyage TunisieBooking ?
           </AccordionHeader>
-          <AccordionBody>
+          <AccordionBody style={{ textAlign: "left", "!important": "" }}>
             Notre agence Tunisie Booking est une agence de voyage en ligne. Donc,
             inutile de vous déplacer, vous pouvez réserver votre hôtel en Tunisie
             où que vous soyez, du moment que vous avez une connexion internet.
@@ -121,7 +121,7 @@ const AdTb = () => {
           <AccordionHeader onClick={() => handleOpen(4)}>
             Vos vacances de rêve soigneusement sélectionnées
           </AccordionHeader>
-          <AccordionBody>
+          <AccordionBody style={{ textAlign: "left", "!important": "" }}>
             <b> <a href="https://tn.tunisiebooking.com/sejour-tunisie.html" className="text-black">Un séjour </a></b> à prix réduit dans un hôtel 3,4 ou 5 étoiles, un hôtel all-inclusive à prix chétif, etc.
             Vous trouverez sur notre site Tunisiebooking.com toutes les formules possibles pour bénéficier d’un voyage inoubliable pas cher.
             <br />
