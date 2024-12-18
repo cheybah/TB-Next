@@ -13,10 +13,10 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import './SearchBar.css';
 
-const SearchBar = ({ listRegions = [] ,region}) => {
+const SearchBar = ({ listRegions = [], region }) => {
   const destinations = listRegions.regions;
   const [selectedDestination, setSelectedDestination] = useState(false);
-  const[startDate, setStartDate] = useState(format(new Date(), "yyyy-MM-dd"));
+  const [startDate, setStartDate] = useState(format(new Date(), "yyyy-MM-dd"));
   const [endDate, setEndDate] = useState(format(addDays(new Date(), 2), "yyyy-MM-dd"));
   const [openDate, setOpenDate] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false); // Track screen size
@@ -33,7 +33,7 @@ const SearchBar = ({ listRegions = [] ,region}) => {
     setDate([item.selection]);
     // Check if startDate is not equal to endDate and both dates are selected
     if (item.selection.startDate !== item.selection.endDate) {
-        setOpenDate(false); // Close the date picker when dates are valid
+      setOpenDate(false); // Close the date picker when dates are valid
     }
     setStartDate(format(item.selection.startDate, "yyyy-MM-dd"));
     setEndDate(format(item.selection.endDate, "yyyy-MM-dd"));
@@ -57,9 +57,9 @@ const SearchBar = ({ listRegions = [] ,region}) => {
   // Update selectedDestination if `ville` is found in the query parameters
   useEffect(() => {
     if (region && destinations.find(destination => destination.libelle_region === region)) {
-        setSelectedDestination(region);
+      setSelectedDestination(region);
     }
-}, [region, destinations]);
+  }, [region, destinations]);
 
   // Get the current date (to disable past dates)
   const currentDate = new Date();
@@ -82,46 +82,45 @@ const SearchBar = ({ listRegions = [] ,region}) => {
     };
   }, []);
 
-    // Check if the screen is small
-    useEffect(() => {
-      const checkScreenSize = () => {
-        setIsSmallScreen(window.innerWidth < 768); // Adjust the size threshold as needed
-      };
-  
-      // Initial check
-      checkScreenSize();
-  
-      // Update on window resize
-      window.addEventListener("resize", checkScreenSize);
-  
-      return () => {
-        window.removeEventListener("resize", checkScreenSize);
-      };
-    }, []);
+  // Check if the screen is small
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 768); // Adjust the size threshold as needed
+    };
+
+    // Initial check
+    checkScreenSize();
+
+    // Update on window resize
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => {
+      window.removeEventListener("resize", checkScreenSize);
+    };
+  }, []);
 
   return (
     <div className="relative z-10 flex items-center justify-center h-full md:px-4 px-2">
       <form className="w-full max-w-7xl p-6 bg-white bg-opacity-90 rounded-xl shadow-lg -mt-10" style={{ paddingBottom: "3rem", paddingTop: "0.5rem" }}>
         <div className="flex flex-wrap justify-between items-center mb-6 border-b border-gray-300 sm:gap-6">
-          {[ 
-            { icon: 'hotel.svg', label: 'Hotels Tunisie' , href: '/' }, 
-            { icon: 'umrah.svg', label: 'Omra' }, 
-            { icon: 'voyage-organisé.svg', label: 'Voyage Organisé', href: '/voyage_organise/tcheque' }, 
-            { icon: 'vols.svg', label: 'Vols', href: '/vol/pas-cher'}, 
-            { icon: 'circuit.svg', label: 'Circuits' } 
+          {[
+            { icon: 'hotel.svg', label: 'Hotels Tunisie', href: '/' },
+            { icon: 'umrah.svg', label: 'Omra' },
+            { icon: 'voyage-organisé.svg', label: 'Voyage Organisé', href: '/voyage_organise/tcheque' },
+            { icon: 'vols.svg', label: 'Vols', href: '/vol/pas-cher' },
+            { icon: 'circuit.svg', label: 'Circuits' }
           ].map((tab, index) => (
-            <Link 
-              key={index} 
-              href={tab.href || '#'} 
-              className={`flex items-center space-x-2 p-2 cursor-pointer ${
-                index === 0 
-                  ? 'text-pink-500 border-b-2 border-pink-500' 
+            <Link
+              key={index}
+              href={tab.href || '#'}
+              className={`flex items-center space-x-2 p-2 cursor-pointer ${index === 0
+                  ? 'text-pink-500 border-b-2 border-pink-500'
                   : 'text-gray-700 hover:text-pink-400 hover:border-b-2 hover:border-pink-400'
-              }`}
+                }`}
             >
               <img src={`/${tab.icon}`} alt={`${tab.label} Icon`} className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-8" />
               <span className="hidden sm:flex text-sm sm:text-base font-medium">{tab.label}</span>
-              </Link>
+            </Link>
           ))}
         </div>
 
@@ -151,32 +150,35 @@ const SearchBar = ({ listRegions = [] ,region}) => {
           </div>
 
           {/* Date Range Picker */}
-           {/* Date Range Picker */}
-        <div>
-          <div className="relative mt-1">
-            <span onClick={() => setOpenDate(!openDate)} className="HeaderSearchText">
-              {`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(date[0].endDate, "dd/MM/yyyy")}`}
-            </span>
+          <div>
+            <div className="relative mt-1">
+              <FontAwesomeIcon
+                icon={faCalendar}
+                className="absolute top-1/2 left-2 -translate-y-1/2 text-gray-500"
+              />
+              <span onClick={() => setOpenDate(!openDate)} className="HeaderSearchText">
+                {`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(date[0].endDate, "dd/MM/yyyy")}`}
+              </span>
 
-            {openDate && (
-              <div className="absolute z-20 mt-1 bg-white border border-gray-300 shadow-lg" style={{ width: 'auto' }}> {/* Added margin-left and adjusted width */}
-                <DateRange
-                  editableDateInputs={true}
-                  onChange={handleDateChange}
-                  moveRangeOnFirstSelection={false}
-                  ranges={date}
-                  locale={enUS}
-                  rangeColors={["#FF0097"]}
-                  months={2}
-                  direction={isSmallScreen ? 'vertical' : 'horizontal'} // Change direction based on screen size
-                  className="absolute z-50 bg-white shadow-lg"
-                  minDate={new Date()}  // Disable past dates
-                  style={{ width: '280px' }} // Minimized width for DateRange
-                />
-              </div>
-            )}
+              {openDate && (
+                <div className="absolute z-20 mt-1 bg-white border border-gray-300 shadow-lg" style={{ width: 'auto' }}> {/* Added margin-left and adjusted width */}
+                  <DateRange
+                    editableDateInputs={true}
+                    onChange={handleDateChange}
+                    moveRangeOnFirstSelection={false}
+                    ranges={date}
+                    locale={enUS}
+                    rangeColors={["#FF0097"]}
+                    months={2}
+                    direction={isSmallScreen ? 'vertical' : 'horizontal'} // Change direction based on screen size
+                    className="absolute z-50 bg-white shadow-lg"
+                    minDate={new Date()}  // Disable past dates
+                    style={{ width: '280px' }} // Minimized width for DateRange
+                  />
+                </div>
+              )}
+            </div>
           </div>
-        </div>
 
           {/* Occupancy Dropdown */}
           <div className="HeaderSearchItem">
