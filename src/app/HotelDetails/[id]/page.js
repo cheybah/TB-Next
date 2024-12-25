@@ -1,30 +1,27 @@
 import { fetchHotelData, fetchTripadHotelData, fetchRegionsData } from '../../redux/slices/dataSlice';
 import { store } from '../../redux/store';
 import HotelsDetailsClient from '../../components/DetailHotel/HotelsDetailsClient';
+import { fetchMetadataAndData } from './fetchData';
 
 import { cookies } from 'next/headers'; // Pour récupérer les cookies côté serveur
 import { decode } from 'he';
 
 export async function generateMetadata({ params }) {
     const { id } = params;
-    const hotelNameCookie = cookies().get('hotelName'); // Récupération du cookie 'hotelName'
-    const hotelRatingCookie = cookies().get('rating'); // Récupération du cookie 'nb etoiles'
-    const hotelLocationCookie = cookies().get('location'); // Récupération du cookie 'localisation'
-    const hotelName = decode(hotelNameCookie?.value) || "Détails de l'hôtel";
-    const hotelRating = hotelRatingCookie?.value || "Détails de l'hôtel";
-    const hotelLocation = hotelLocationCookie?.value || "Détails de l'hôtel";
+    const cookiesInstance = cookies();
+
+    const { hotelName, hotelRating, ville } = await fetchMetadataAndData(id, cookiesInstance);
 
     return {
         title: `${hotelName}`,
-        description: `Hôtel ${hotelName} + ${hotelRating} * ${hotelLocation} sur Tunisiebooking ! Profitez des meilleures Prix 2025.`,
-        keywords: `${hotelName}`,
+        description: `Hôtel ${hotelName} ${hotelRating} * à ${ville} sur Tunisiebooking ! Profitez des meilleures Prix 2025.`,
+        keywords: `${hotelName}, ${ville}, hotel Tunisie`,
         alternates: {
             canonical: `https://tn.tunisiebooking.com/detail_hotel_${id}/`,
         },
     };
 }
 
-// Fonction pour récupérer les données nécessaires
 export async function fetchData(id, ville, datedep, dateret) {
     const dispatch = store.dispatch;
     try {
@@ -32,6 +29,9 @@ export async function fetchData(id, ville, datedep, dateret) {
         const regionsDataResult = await dispatch(fetchRegionsData()).unwrap();
         const hotelDataResult = await dispatch(fetchHotelData({ id, ville, datedep, dateret })).unwrap();
         const hotelTripadDataResult = await dispatch(fetchTripadHotelData({ id })).unwrap();
+
+        // Log the hotelData before returning
+        console.log("This is hotelData", hotelDataResult?.Hotels[0]);
 
         return {
             regionsData: regionsDataResult || [],
@@ -48,20 +48,18 @@ export async function fetchData(id, ville, datedep, dateret) {
 const HotelsDetails = async ({ params }) => {
     const { id } = params;
 
-    // Récupération des cookies côté serveur
-    const villeCookie = cookies().get('location');
-    const ville = villeCookie?.value || '';  // Récupération de la valeur du cookie 'location'
-    const datedep = cookies().get('departureDate')?.value || '';  // Départ
-    const dateret = cookies().get('returnDate')?.value || '';    // Retour
-    // Récupérer les données en fonction de l'ID et des cookies
+    const ville = cookies().get('location')?.value || 'Hammamet';
+    const datedep = cookies().get('departureDate')?.value || '2024-12-26';
+    const dateret = cookies().get('returnDate')?.value || '2024-12-30';
     
-    const hotelNameCookie = cookies().get('hotelName'); // Récupération du cookie 'hotelName'
-    const hotelRatingCookie = cookies().get('rating'); // Récupération du cookie 'nb etoiles'
-    const hotelLocationCookie = cookies().get('location'); // Récupération du cookie 'localisation'
-    const hotelName = decode(hotelNameCookie?.value) || "Détails de l'hôtel";
-    const hotelTripAdvisorCookie = cookies().get('note_tripad');
-    const hotelLocation = hotelLocationCookie?.value || "Détails de l'hôtel";
-    const { regionsData, hotelData, hotelTripadData } = await fetchData(id, ville, datedep, dateret);
+
+     // Fetch data dynamically
+     const { regionsData, hotelData, hotelTripadData } = await fetchData(id, ville, datedep, dateret);
+
+     // Fallback values in case data is missing
+     const hotelName = hotelData?.Hotels_hors_promo?.[0]?.libelle_hotel || "Détails de l'hôtel";
+     const hotelLocation = regionsData?.region_name || "Tunisie";
+     const hotelTripAdvisorRating = hotelTripadData?.rating || "4.0";
 
     console.log("all of cookies",cookies().getAll());
 
@@ -73,7 +71,7 @@ const HotelsDetails = async ({ params }) => {
                 "telephone": "+216 71 124 124",
                 "@context": "http://schema.org",
                 "description": `Découvrez ${hotelName} à ${hotelLocation} sur Tunisiebooking ! Profitez des avis fiables, photos récentes et des meilleurs prix garantis pour réserver votre hôtel en toute confiance.`,
-                "hasMap": "",
+                "hasMapoo": "",
                 "address": {
                     "addressRegion": hotelLocation,
                     "addressCountry": "Tunisie",
@@ -85,7 +83,7 @@ const HotelsDetails = async ({ params }) => {
                 "aggregateRating": {
                     "reviewCount": "",
                     "@type": "AggregateRating",
-                    "ratingValue": `${hotelTripAdvisorCookie?.value}`,
+                    "ratingValue": `${hotelTripAdvisorRating?.value}`,
                     "ratingCount": "1",
                     "bestRating": "5"
                 },
@@ -116,7 +114,7 @@ const HotelsDetails = async ({ params }) => {
                     "@type": "Review",
                     "reviewRating": {
                         "@type": "Rating",
-                        "ratingValue":`${hotelTripAdvisorCookie?.value}`,
+                        "ratingValue":`${hotelTripAdvisorRating?.value}`,
                         "bestRating": "5"
                     },
                     "author": {
@@ -126,7 +124,7 @@ const HotelsDetails = async ({ params }) => {
                 },
                 "aggregateRating": {
                     "@type": "AggregateRating",
-                    "ratingValue": `${hotelTripAdvisorCookie?.value}`,
+                    "ratingValue": `${hotelTripAdvisorRating?.value}`,
                     "reviewCount": "1"
                 },
                 "offers": {
