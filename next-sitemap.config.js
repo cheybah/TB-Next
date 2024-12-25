@@ -31,7 +31,7 @@ export default {
 export async function fetchHotelDetailPaths() {
     try {
         // Define static filters for destinations and dates
-        const destinations = ['hammamet', 'nabeul', 'sousse', 'djerba', 'monastir', 'Monastir', 'tunis', 'Sfax', 'sfax', 'el jem'];
+        const destinations = ['hammamet'];
         const dateCombinations = [
             { datedep: '2024-12-06', dateret: '2024-12-12' },
             { datedep: '2024-12-13', dateret: '2024-12-19' },
