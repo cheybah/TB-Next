@@ -28,7 +28,7 @@ export default {
     },
 };
 
-async function fetchHotelDetailPaths() {
+export async function fetchHotelDetailPaths() {
     try {
         // Define static filters for destinations and dates
         const destinations = ['hammamet', 'nabeul', 'sousse', 'djerba', 'monastir', 'Monastir', 'tunis', 'Sfax', 'sfax', 'el jem'];
@@ -69,6 +69,7 @@ async function fetchHotelDetailPaths() {
         return [];
     }
 }
+
 
 // Fetch dynamic routes for `Region` pages
 async function fetchRegionPaths() {
